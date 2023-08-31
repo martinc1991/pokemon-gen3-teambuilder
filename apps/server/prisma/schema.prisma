@@ -1,0 +1,170 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Enums
+enum StatName {
+  hp
+  attack
+  defense
+  spattack
+  spdefense
+  speed
+}
+
+enum NatureNames {
+  hardy
+  bold
+  modest
+  calm
+  timid
+  lonely
+  docile
+  mild
+  gentle
+  hasty
+  adamant
+  impish
+  bashful
+  careful
+  rash
+  jolly
+  naughty
+  lax
+  quirky
+  naive
+}
+
+enum TypeNames {
+  normal
+  ice
+  ghost
+  dark
+  grass
+  electric
+  steel
+  ground
+  fighting
+  bug
+  poison
+  rock
+  water
+  flying
+  fire
+  dragon
+  psychic
+  empty
+}
+
+enum DamageClass {
+  physical
+  special
+  none
+}
+
+enum Gender {
+  male
+  female
+  genderless
+}
+
+// Enums
+
+// Basic entities (types, abilities, moves, items)
+model Type {
+  id               String      @id @default(uuid())
+  name             TypeNames   @unique
+  damageClass      DamageClass
+  noDamageTo       TypeNames[]
+  halfDamageTo     TypeNames[]
+  doubleDamageTo   TypeNames[]
+  noDamageFrom     TypeNames[]
+  halfDamageFrom   TypeNames[]
+  doubleDamageFrom TypeNames[]
+  pokemonTypeOne   Pokemon[]   @relation("TypeToPokemonTypeOne")
+  pokemonTypeTwo   Pokemon[]   @relation("TypeToPokemonTypeTwo")
+}
+
+model Ability {
+  id               String    @id @default(uuid())
+  name             String    @unique
+  shortDescription String
+  longDescription  String
+  Pokemon          Pokemon[]
+  slots            Slot[]
+}
+
+model Nature {
+  id        String      @id @default(uuid())
+  name      NatureNames @unique
+  increased StatName?
+  decreased StatName?
+  Slot      Slot[]
+}
+
+model Item {
+  id          String  @id @default(uuid())
+  name        String  @unique
+  effect      String
+  flingEffect String?
+  flingPower  Int?
+  sprite      String
+  slot        Slot[]
+}
+
+// Pokemons
+model Pokemon {
+  id                    String    @id @default(uuid())
+  name                  String    @unique
+  nationalPokedexNumber Int       @unique
+  sprite                String    @unique
+  height                Int
+  weight                Int
+  typeOne               Type      @relation("TypeToPokemonTypeOne", fields: [typeOneName], references: [name])
+  typeOneName           TypeNames
+  typeTwo               Type?     @relation("TypeToPokemonTypeTwo", fields: [typeTwoName], references: [name])
+  typeTwoName           TypeNames
+  slot                  Slot[]
+  abilities             Ability[]
+  genders               Gender[]
+}
+
+// Teams
+model Team {
+  id    String  @id @default(uuid())
+  name  String? @default("no-name")
+  slots Slot[]
+}
+
+model Slot {
+  id                    String       @id @default(uuid())
+  name                  String?      @default("no-name")
+  team                  Team         @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  teamId                String
+  pokemon               Pokemon      @relation(fields: [nationalPokedexNumber], references: [nationalPokedexNumber])
+  nationalPokedexNumber Int
+  order                 Int
+  ability               Ability?     @relation(fields: [abilityName], references: [name])
+  abilityName           String?
+  nature                Nature?      @relation(fields: [natureName], references: [name])
+  natureName            NatureNames?
+  evHp                  Int          @default(0)
+  evAttack              Int          @default(0)
+  evDefense             Int          @default(0)
+  evSpAttack            Int          @default(0)
+  evSpDefense           Int          @default(0)
+  evSpeed               Int          @default(0)
+  item                  Item?        @relation(fields: [itemName], references: [name])
+  itemName              String?
+  shiny                 Boolean?     @default(false)
+
+  @@unique([teamId, order])
+}
