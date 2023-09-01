@@ -44,9 +44,6 @@ importers:
       '@prisma/client':
         specifier: ^5.1.1
         version: 5.1.1(prisma@5.2.0)
-      '@trpc/server':
-        specifier: ^10.38.0
-        version: 10.38.0
       class-transformer:
         specifier: ^0.5.1
         version: 0.5.1
@@ -1589,10 +1586,6 @@ packages:
     resolution: {integrity: sha512-sJ902EfIzn1Fa+qYmjdQqh8tPsoxyBz+8yBKC2HKUxyezKJFwPGOn7pv4WY6QuQW//ySQi5lJjA/ZT9sNWWNTg==}
     dependencies:
       tslib: 2.6.2
-    dev: false
-
-  /@trpc/server@10.38.0:
-    resolution: {integrity: sha512-uMjWTMhqOPVmdiqPFOYwsdQ6Vzy8FtRcgM+ld3OrHsD88NiwZ1BWNIC6KwffjgrgLG/uKBFzNNKntLryv0NamQ==}
     dev: false
 
   /@tsconfig/node10@1.0.9:
