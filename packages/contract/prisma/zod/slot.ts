@@ -1,17 +1,5 @@
 import { NatureNames } from '@prisma/client';
 import * as z from 'zod';
-import {
-  CompleteAbility,
-  CompleteItem,
-  CompleteNature,
-  CompletePokemon,
-  CompleteTeam,
-  RelatedAbilityModel,
-  RelatedItemModel,
-  RelatedNatureModel,
-  RelatedPokemonModel,
-  RelatedTeamModel,
-} from './index';
 
 export const SlotModel = z.object({
   id: z.string(),
@@ -30,26 +18,3 @@ export const SlotModel = z.object({
   itemName: z.string().nullish(),
   shiny: z.boolean().nullish(),
 });
-
-export interface CompleteSlot extends z.infer<typeof SlotModel> {
-  team: CompleteTeam;
-  pokemon: CompletePokemon;
-  ability?: CompleteAbility | null;
-  nature?: CompleteNature | null;
-  item?: CompleteItem | null;
-}
-
-/**
- * RelatedSlotModel contains all relations on your model in addition to the scalars
- *
- * NOTE: Lazy required in case of potential circular dependencies within schema
- */
-export const RelatedSlotModel: z.ZodSchema<CompleteSlot> = z.lazy(() =>
-  SlotModel.extend({
-    team: RelatedTeamModel,
-    pokemon: RelatedPokemonModel,
-    ability: RelatedAbilityModel.nullish(),
-    nature: RelatedNatureModel.nullish(),
-    item: RelatedItemModel.nullish(),
-  })
-);

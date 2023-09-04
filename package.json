@@ -6,7 +6,7 @@
     "lint": "turbo lint",
     "clean": "turbo clean",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "studio": "prisma studio"
+    "studio": "turbo studio"
   },
   "devDependencies": {
     "eslint": "^8.48.0",

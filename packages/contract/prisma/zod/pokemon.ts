@@ -1,6 +1,5 @@
 import { Gender, TypeNames } from '@prisma/client';
 import * as z from 'zod';
-import { CompleteAbility, CompleteSlot, CompleteType, RelatedAbilityModel, RelatedSlotModel, RelatedTypeModel } from './index';
 
 export const PokemonModel = z.object({
   id: z.string(),
@@ -13,24 +12,3 @@ export const PokemonModel = z.object({
   typeTwoName: z.nativeEnum(TypeNames),
   genders: z.nativeEnum(Gender).array(),
 });
-
-export interface CompletePokemon extends z.infer<typeof PokemonModel> {
-  typeOne: CompleteType;
-  typeTwo?: CompleteType | null;
-  slot: CompleteSlot[];
-  abilities: CompleteAbility[];
-}
-
-/**
- * RelatedPokemonModel contains all relations on your model in addition to the scalars
- *
- * NOTE: Lazy required in case of potential circular dependencies within schema
- */
-export const RelatedPokemonModel: z.ZodSchema<CompletePokemon> = z.lazy(() =>
-  PokemonModel.extend({
-    typeOne: RelatedTypeModel,
-    typeTwo: RelatedTypeModel.nullish(),
-    slot: RelatedSlotModel.array(),
-    abilities: RelatedAbilityModel.array(),
-  })
-);

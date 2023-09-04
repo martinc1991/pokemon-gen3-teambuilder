@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '@providers/prisma/prisma.service';
 import { TypeNames } from '@prisma/client';
 
@@ -9,11 +9,15 @@ export class TypesService {
     return this.prisma.type.findMany();
   }
 
-  findOneByName(typeName: TypeNames) {
-    return this.prisma.type.findUniqueOrThrow({
+  async findOneByName(typeName: TypeNames) {
+    const type = await this.prisma.type.findUnique({
       where: {
         name: typeName,
       },
     });
+
+    if (!type) throw new NotFoundException();
+
+    return type;
   }
 }

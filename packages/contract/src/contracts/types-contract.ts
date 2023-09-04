@@ -24,3 +24,5 @@ export const typesContract = c.router({
 });
 
 export type ITypesContract = typeof typesContract;
+
+export const TESSSST = 'TESTSDSS';
