@@ -19,7 +19,7 @@ export const itemsContract = c.router({
     responses: {
       200: ItemModel,
     },
-    summary: 'Get a type by name',
+    summary: 'Get a item by name',
   },
 });
 

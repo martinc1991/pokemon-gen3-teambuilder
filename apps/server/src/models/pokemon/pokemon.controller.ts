@@ -1,22 +1,39 @@
+import { NationalPokedexNumberPipe } from '@common/pipes/nationalPokedexNumber.pipe';
 import { Controller, Get, Param, Query } from '@nestjs/common';
+import {
+  NestControllerInterface,
+  TsRest,
+  nestControllerContract,
+} from '@ts-rest/nest';
+import { IPokemonContract, pokemonContract } from 'contract';
 import { PokemonPaginationDto } from './dto';
 import { PokemonService } from './pokemon.service';
-import { NationalPokedexNumberPipe } from '@common/pipes/nationalPokedexNumber.pipe';
 
-@Controller('pokemon')
-export class PokemonController {
+const c: IPokemonContract = nestControllerContract(pokemonContract);
+
+@Controller('')
+export class PokemonController implements NestControllerInterface<typeof c> {
   constructor(private pokemonService: PokemonService) {}
 
+  @TsRest(c.getAll)
   @Get()
-  getAll(@Query() pagination: PokemonPaginationDto) {
-    return this.pokemonService.getAll(pagination);
+  async getAll(@Query() pagination: PokemonPaginationDto) {
+    const pokemon = await this.pokemonService.getAll(pagination);
+
+    return { status: 200 as const, body: pokemon };
   }
 
+  @TsRest(c.getOne)
   @Get(':nationalDexNumber')
-  getOne(
+  async getOne(
     @Param('nationalDexNumber', NationalPokedexNumberPipe)
     nationalDexNumber: number,
   ) {
-    return this.pokemonService.getOne(nationalDexNumber);
+    const pokemon = await this.pokemonService.getOne(nationalDexNumber);
+
+    return {
+      status: 200 as const,
+      body: pokemon,
+    };
   }
 }
