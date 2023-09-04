@@ -1,11 +1,11 @@
 import { Controller, Get, Param } from '@nestjs/common';
-import { ItemsService } from './items.service';
 import {
   NestControllerInterface,
   TsRest,
   nestControllerContract,
 } from '@ts-rest/nest';
 import { IItemsContract, itemsContract } from 'contract';
+import { ItemsService } from './items.service';
 
 const c: IItemsContract = nestControllerContract(itemsContract);
 
@@ -23,8 +23,6 @@ export class ItemsController implements NestControllerInterface<typeof c> {
   @TsRest(c.getOne)
   @Get(':itemName')
   async getOne(@Param('itemName') itemName: string) {
-    console.log({ itemName });
-
     const item = await this.itemsService.findOne(itemName);
 
     return { status: 200 as const, body: item };
