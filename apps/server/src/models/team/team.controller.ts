@@ -11,32 +11,51 @@ import {
 } from '@nestjs/common';
 import { CreateTeamDto, EditTeamDto } from './dto';
 import { TeamService } from './team.service';
+import {
+  NestControllerInterface,
+  TsRest,
+  nestControllerContract,
+} from '@ts-rest/nest';
+import { ITeamsContract, teamsContract } from 'contract';
 
-@Controller('team')
-export class TeamController {
+const c: ITeamsContract = nestControllerContract(teamsContract);
+
+@Controller('')
+export class TeamController implements NestControllerInterface<typeof c> {
   constructor(private teamService: TeamService) {}
+
+  @TsRest(c.getAll)
   @Get()
-  getAll(@Query() pagination: BasicPaginationDto) {
-    return this.teamService.getAll(pagination);
+  async getAll(@Query() pagination: BasicPaginationDto) {
+    const teams = await this.teamService.getAll(pagination);
+    return { status: 200 as const, body: teams };
   }
 
-  @Get(':id')
-  getOne(@Param('id') teamId: string) {
-    return this.teamService.getOneById(teamId);
+  @TsRest(c.getOne)
+  @Get(':teamId')
+  async getOne(@Param('teamId') teamId: string) {
+    const team = await this.teamService.getOneById(teamId);
+    return { status: 200 as const, body: team };
   }
 
+  @TsRest(c.create)
   @Post()
-  create(@Body() dto: CreateTeamDto) {
-    return this.teamService.create(dto);
+  async create(@Body() dto: CreateTeamDto) {
+    const createdTeam = await this.teamService.create(dto);
+    return { status: 201 as const, body: createdTeam };
   }
 
+  @TsRest(c.delete)
   @Delete()
-  delete(@Body('id') id: string) {
-    return this.teamService.delete(id);
+  async delete(@Body('id') id: string) {
+    const deletedTeam = await this.teamService.delete(id);
+    return { status: 200 as const, body: deletedTeam };
   }
 
+  @TsRest(c.edit)
   @Patch()
-  edit(@Body() dto: EditTeamDto) {
-    return this.teamService.edit(dto);
+  async edit(@Body() dto: EditTeamDto) {
+    const editedTeam = await this.teamService.edit(dto);
+    return { status: 200 as const, body: editedTeam };
   }
 }
