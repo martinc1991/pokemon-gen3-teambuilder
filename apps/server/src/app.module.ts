@@ -1,7 +1,6 @@
 import { ItemsModule } from '@models/items/items.module';
 import { NaturesModule } from '@models/natures/natures.module';
 import { PokemonModule } from '@models/pokemon/pokemon.module';
-import { PostsModule } from '@models/posts/posts.module';
 import { TeamModule } from '@models/team/team.module';
 import { TypesModule } from '@models/types/types.module';
 import { Module } from '@nestjs/common';
@@ -21,7 +20,6 @@ import { AppService } from './app.service';
     TypesModule,
     NaturesModule,
     ItemsModule,
-    PostsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
