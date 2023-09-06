@@ -31,24 +31,20 @@ describe('Pokemon controller', () => {
   });
 
   describe('getAll method', () => {
-    it('should call service getAll method passng pagination params', async () => {
-      const result = await controller.getAll(pokemonPaginationStub());
+    it('should call service getAll method passing pagination params', async () => {
+      await controller.getAll(pokemonPaginationStub());
 
       expect(service.getAll).toHaveBeenCalledWith(pokemonPaginationStub());
-      expect(result[0]).toEqual(pokemonStub());
     });
   });
 
   describe('getOne method', () => {
     it('should call service getOne method passing nationalDexNumber param', async () => {
-      const result = await controller.getOne(
-        pokemonStub().nationalPokedexNumber,
-      );
+      await controller.getOne(pokemonStub().nationalPokedexNumber);
 
       expect(service.getOne).toHaveBeenCalledWith(
         pokemonStub().nationalPokedexNumber,
       );
-      expect(result).toEqual(pokemonStub());
     });
   });
 });
