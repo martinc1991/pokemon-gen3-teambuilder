@@ -1,14 +1,10 @@
-import "../styles/globals.css";
+import '../styles/globals.css';
 // include styles from the ui package
-import "ui/styles.css";
+import 'ui/style';
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}): JSX.Element {
+export default function RootLayout({ children }: { children: React.ReactNode }): JSX.Element {
   return (
-    <html className="bg-zinc-900" lang="en">
+    <html className='bg-zinc-900' lang='en'>
       <body>{children}</body>
     </html>
   );

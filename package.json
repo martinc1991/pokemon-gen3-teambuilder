@@ -6,7 +6,8 @@
     "lint": "turbo lint",
     "clean": "turbo clean",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "studio": "turbo studio"
+    "studio": "turbo studio",
+    "ui:add": "pnpm --filter ui ui:add"
   },
   "devDependencies": {
     "eslint": "^8.48.0",
