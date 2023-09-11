@@ -1,6 +1,7 @@
-import { initContract } from '@ts-rest/core';
+import { ClientInferResponseBody, initContract } from '@ts-rest/core';
 import { z } from 'zod';
 import { PokemonModel } from '../../prisma/zod';
+import { ArrayElementType } from '../utils/types/array-element-type';
 
 const c = initContract();
 
@@ -29,4 +30,9 @@ export const pokemonContract = c.router({
   },
 });
 
+// Contract type
 export type IPokemonContract = typeof pokemonContract;
+
+// Responses types
+export type IPokemonGetAllResponse = ClientInferResponseBody<typeof pokemonContract.getAll, 200>;
+export type IPokemonGetAllResponseElement = ArrayElementType<IPokemonGetAllResponse>;

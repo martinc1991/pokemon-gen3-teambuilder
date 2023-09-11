@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-type TextChildren = string | boolean | undefined | null;
+type TextChildren = string | number | undefined | null;
 
 function makeTextWhite(classname: string): string {
   return clsx(classname, 'text-white');
