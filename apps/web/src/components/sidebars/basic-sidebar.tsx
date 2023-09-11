@@ -8,7 +8,12 @@ interface BasicSideBarProps {
 
 export default function BasicSidebar({ children, side }: BasicSideBarProps): JSX.Element {
   return (
-    <section className={clsx(`min-w-[100px] p-2 flex flex-col items-center gap-2`, side === 'right' ? 'border-l-[1px]' : 'border-r-[1px]')}>
+    <section
+      className={clsx(
+        `min-w-[100px] p-2 flex flex-col items-center gap-2 border-gray-400/50`,
+        side === 'right' ? 'border-l-[1px]' : 'border-r-[1px]'
+      )}
+    >
       {children}
     </section>
   );
