@@ -156,6 +156,9 @@ importers:
       '@ts-rest/react-query':
         specifier: ^3.30.1
         version: 3.30.1(@tanstack/react-query@4.33.0)(@ts-rest/core@3.30.1)(react@18.2.0)
+      clsx:
+        specifier: ^2.0.0
+        version: 2.0.0
       contract:
         specifier: workspace:*
         version: link:../../packages/contract
