@@ -1,23 +1,15 @@
-'use client';
-
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import type { Metadata } from 'next';
 import { Button } from 'ui';
-import Querier from './querier';
 
 export const metadata: Metadata = {
-  title: 'Web - Turborepo Example',
+  title: 'Pokemon Gen 3 TeamBuilder',
 };
 
-export const queryClient = new QueryClient();
-
-export default function Home(): JSX.Element {
+export default function Builder(): JSX.Element {
   return (
-    <QueryClientProvider client={queryClient}>
-      <div className='flex min-h-screen flex-col items-center justify-center py-2'>
-        <Button>Hi</Button>
-        <Querier />
-      </div>
-    </QueryClientProvider>
+    <div className='flex flex-col items-center min-h-screen p-2'>
+      <h1>Home</h1>
+      <Button>Hi</Button>
+    </div>
   );
 }
