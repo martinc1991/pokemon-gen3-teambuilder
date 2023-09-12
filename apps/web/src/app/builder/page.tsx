@@ -1,7 +1,7 @@
 'use client';
 
 import { Typography } from 'ui';
-import PokemonTable from '../../components/pokemon-table';
+import { PokemonTable } from '../../components/pokemon-table';
 import { client } from '../../rq-client';
 
 export default function Builder(): JSX.Element {
@@ -15,12 +15,12 @@ export default function Builder(): JSX.Element {
   if (isError) return <p>error...</p>;
 
   return (
-    <div className='flex flex-col items-center min-h-screen py-2'>
+    <>
       <Typography.H1>Builder</Typography.H1>
 
       <Typography.P>This is where you can build your team. Start by giving it a name, then add some pokemon.</Typography.P>
 
       <PokemonTable pokemon={data.body} />
-    </div>
+    </>
   );
 }
