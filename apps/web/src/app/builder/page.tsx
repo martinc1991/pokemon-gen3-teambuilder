@@ -1,5 +1,6 @@
 'use client';
 
+import type { IPokemonGetAllQueryParams } from 'contract';
 import { useEffect } from 'react';
 import { Typography } from 'ui';
 import { PokemonTable } from '../../components/pokemon-table';
@@ -11,27 +12,34 @@ export default function Builder(): JSX.Element {
   const { isLoading, data, hasNextPage, fetchNextPage, isError, fetchStatus } = client.pokemon.getAll.useInfiniteQuery(
     ['pokemon-infinite'],
     (context) => {
-      return { query: { skip: context.pageParam?.skip || '0', take: context.pageParam?.take || PAGE_SIZE.toString() } };
+      // INFO: had to cast because ts-rest has some any in its typings but I know how this works
+      const pageParam = context.pageParam as IPokemonGetAllQueryParams;
+      return {
+        query: {
+          skip: pageParam?.skip ?? 0,
+          take: pageParam?.take ?? PAGE_SIZE,
+        },
+      };
     },
     {
-      getNextPageParam: (lastPage, allPages) => {
+      getNextPageParam: (lastPage, allPages): IPokemonGetAllQueryParams | undefined => {
         if (lastPage.body.length < PAGE_SIZE) return undefined;
-        return { skip: (allPages.length * PAGE_SIZE).toString(), take: PAGE_SIZE.toString() };
+        return { skip: allPages.length * PAGE_SIZE, take: PAGE_SIZE };
       },
     }
   );
 
   useEffect(() => {
     // Whenever fetching a batch finishes, load next one
-    if (fetchStatus === 'idle' && hasNextPage) {
-      void fetchNextPage();
-    }
+    if (fetchStatus === 'idle' && hasNextPage) void fetchNextPage();
   }, [fetchStatus, hasNextPage]);
 
   if (isLoading) return <Typography.P>loading...</Typography.P>;
-  if (isError) return <Typography.P>error...</Typography.P>;
+  if (isError) {
+    return <Typography.P>error...</Typography.P>;
+  }
 
-  const pokemon = data.pages.flatMap((page) => (page.status === 200 ? page.body : []));
+  const pokemon = data.pages.flatMap((page) => page.body);
 
   return (
     <>

@@ -5,6 +5,13 @@ import { ArrayElementType } from '../utils/types/array-element-type';
 
 const c = initContract();
 
+const queryParamsSchema = z.object({
+  take: z.number().optional(),
+  skip: z.number().optional(),
+  orderBy: z.string().optional(),
+  sortOrder: z.string().optional(),
+});
+
 export const pokemonContract = c.router({
   getAll: {
     method: 'GET',
@@ -12,12 +19,7 @@ export const pokemonContract = c.router({
     responses: {
       200: z.array(PokemonModel),
     },
-    query: z.object({
-      take: z.string().transform(Number).optional(),
-      skip: z.string().transform(Number).optional(),
-      orderBy: z.string().optional(),
-      sortOrder: z.string().optional(),
-    }),
+    query: queryParamsSchema,
     summary: 'Get all pokemon',
   },
   getOne: {
@@ -32,6 +34,7 @@ export const pokemonContract = c.router({
 
 // Contract type
 export type IPokemonContract = typeof pokemonContract;
+export type IPokemonGetAllQueryParams = z.infer<Required<typeof queryParamsSchema>>;
 
 // Responses types
 export type IPokemonGetAllResponse = ClientInferResponseBody<typeof pokemonContract.getAll, 200>;
