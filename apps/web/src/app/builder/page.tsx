@@ -8,12 +8,14 @@ import { client } from '../../rq-client';
 
 const PAGE_SIZE = 50;
 
+type PageParam = IPokemonGetAllQueryParams | undefined;
+
 export default function Builder(): JSX.Element {
   const { isLoading, data, hasNextPage, fetchNextPage, isError, fetchStatus } = client.pokemon.getAll.useInfiniteQuery(
     ['pokemon-infinite'],
     (context) => {
       // INFO: had to cast because ts-rest has some any in its typings but I know how this works
-      const pageParam = context.pageParam as IPokemonGetAllQueryParams;
+      const pageParam = context.pageParam as PageParam;
       return {
         query: {
           skip: pageParam?.skip ?? 0,
@@ -22,10 +24,13 @@ export default function Builder(): JSX.Element {
       };
     },
     {
-      getNextPageParam: (lastPage, allPages): IPokemonGetAllQueryParams | undefined => {
+      getNextPageParam: (lastPage, allPages): PageParam => {
         if (lastPage.body.length < PAGE_SIZE) return undefined;
         return { skip: allPages.length * PAGE_SIZE, take: PAGE_SIZE };
       },
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
     }
   );
 
