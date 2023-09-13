@@ -39,58 +39,52 @@ const enum TypeNames {
   empty = 'empty',
 }
 
+const imgSources: { [key in TypeNames]: string } = {
+  normal,
+  ice,
+  ghost,
+  dark,
+  grass,
+  electric,
+  steel,
+  ground,
+  fighting,
+  bug,
+  poison,
+  rock,
+  water,
+  flying,
+  fire,
+  dragon,
+  psychic,
+  empty: unknown, // TODO: fix the empty-unknown mismatch
+};
+
 interface TypeBadgeProps extends Omit<ImageProps, 'src' | 'alt'> {
-  type: string;
+  type: TypeNames;
 }
 
 const DEFAULT_HEIGHT = 14;
 const DEFAULT_WIDTH = 32;
+const DEFAULT_IMG_PRIORITY = false;
 
 export function TypeBadge({
-  type = 'unknown',
+  type = TypeNames.empty,
   height = DEFAULT_HEIGHT,
   width = DEFAULT_WIDTH,
-  priority = false,
-  ...props
+  priority = DEFAULT_IMG_PRIORITY,
+  ...otherProps
 }: TypeBadgeProps) {
-  switch (type) {
-    case TypeNames.bug:
-      return <Image src={bug} height={height} width={width} alt='badge-bug' priority={priority} {...props} />;
-    case TypeNames.dark:
-      return <Image src={dark} height={height} width={width} alt='badge-dark' priority={priority} {...props} />;
-    case TypeNames.dragon:
-      return <Image src={dragon} height={height} width={width} alt='badge-dragon' priority={priority} {...props} />;
-    case TypeNames.electric:
-      return <Image src={electric} height={height} width={width} alt='badge-electric' priority={priority} {...props} />;
-    case TypeNames.fighting:
-      return <Image src={fighting} height={height} width={width} alt='badge-fighting' priority={priority} {...props} />;
-    case TypeNames.fire:
-      return <Image src={fire} height={height} width={width} alt='badge-fire' priority={priority} {...props} />;
-    case TypeNames.flying:
-      return <Image src={flying} height={height} width={width} alt='badge-flying' priority={priority} {...props} />;
-    case TypeNames.ghost:
-      return <Image src={ghost} height={height} width={width} alt='badge-ghost' priority={priority} {...props} />;
-    case TypeNames.grass:
-      return <Image src={grass} height={height} width={width} alt='badge-grass' priority={priority} {...props} />;
-    case TypeNames.ground:
-      return <Image src={ground} height={height} width={width} alt='badge-ground' priority={priority} {...props} />;
-    case TypeNames.ice:
-      return <Image src={ice} height={height} width={width} alt='badge-ice' priority={priority} {...props} />;
-    case TypeNames.normal:
-      return <Image src={normal} height={height} width={width} alt='badge-normal' priority={priority} {...props} />;
-    case TypeNames.poison:
-      return <Image src={poison} height={height} width={width} alt='badge-poison' priority={priority} {...props} />;
-    case TypeNames.psychic:
-      return <Image src={psychic} height={height} width={width} alt='badge-psychic' priority={priority} {...props} />;
-    case TypeNames.rock:
-      return <Image src={rock} height={height} width={width} alt='badge-rock' priority={priority} {...props} />;
-    case TypeNames.steel:
-      return <Image src={steel} height={height} width={width} alt='badge-steel' priority={priority} {...props} />;
-    case TypeNames.water:
-      return <Image src={water} height={height} width={width} alt='badge-water' priority={priority} {...props} />;
+  const alt = `Type badge ${type}`;
+  const props = {
+    height,
+    width,
+    priority,
+    alt,
+    title: alt,
+    src: imgSources[type],
+    ...otherProps,
+  };
 
-    // case TypeNames.UNKNOWN:
-    default:
-      return <Image src={unknown} height={height} width={width} alt='' priority={priority} {...props} />;
-  }
+  return <Image {...props} />;
 }
