@@ -1,3 +1,5 @@
+'use client';
+
 import LeftSidebar from '../components/sidebars/left-siderbar';
 import RightSidebar from '../components/sidebars/right-sidebar';
 import '../styles/globals.css';
