@@ -2,7 +2,7 @@
 
 import { createColumnHelper, type ColumnDef } from '@tanstack/react-table';
 import type { IPokemonGetAllResponseElement } from 'contract';
-import { Typography } from 'ui';
+import { PokemonIcon, TypeBadge, Typography } from 'ui';
 import RowDropdownMenu from './dropdown-menu';
 
 const columnHelper = createColumnHelper<IPokemonGetAllResponseElement>();
@@ -21,17 +21,18 @@ const nameColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.access
   cell: ({ row }) => <Typography.P>{row.getValue('name')}</Typography.P>,
 });
 
-// TODO: add pokemon icons
-const spriteColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor('sprite', {
+const spriteColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor((row) => row.nationalPokedexNumber, {
   id: 'sprite',
   header: () => {
     return <div />;
   },
-  cell: 'to-do',
-  // cell: (info) => info.getValue().slice(0, 8),
+  cell: (info) => (
+    <div>
+      <PokemonIcon inputId={info.getValue()} name={info.row.getValue('name')} />
+    </div>
+  ),
 });
 
-// TODO: add types badges
 const typesColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor(
   (row) => [row.typeOneName, row.typeTwoName].join(' - '),
   {
@@ -39,7 +40,15 @@ const typesColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.acces
     header: () => {
       return <div>Type</div>;
     },
-    cell: (info) => info.getValue(),
+    cell: (info) => {
+      const [typeOne, typeTwo] = info.getValue().split(' - ');
+      return (
+        <div className='flex flex-row justify-center gap-3'>
+          <TypeBadge type={typeOne} />
+          {typeTwo !== 'empty' && <TypeBadge type={typeTwo} />}
+        </div>
+      );
+    },
   }
 );
 
