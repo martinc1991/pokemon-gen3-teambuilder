@@ -22,7 +22,7 @@ const nameColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.access
 });
 
 // TODO: add pokemon icons
-const spriteColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor((row) => row.sprite, {
+const spriteColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor('sprite', {
   id: 'sprite',
   header: () => {
     return <div />;
@@ -32,36 +32,39 @@ const spriteColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.acce
 });
 
 // TODO: add types badges
-const typesColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor((row) => [row.typeOneName, row.typeTwoName], {
-  id: 'types',
-  header: () => {
-    return <div>Type</div>;
-  },
-  cell: (info) => info.getValue().join(' - '),
-});
+const typesColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor(
+  (row) => [row.typeOneName, row.typeTwoName].join(' - '),
+  {
+    id: 'types',
+    header: () => {
+      return <div>Type</div>;
+    },
+    cell: (info) => info.getValue(),
+  }
+);
 
-const gendersColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor('genders', {
+const gendersColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor((row) => row.genders.join(' - '), {
   id: 'genders',
   header: () => {
     return <div>Genders</div>;
   },
-  cell: (info) => info.getValue().join(' - '),
+  cell: (info) => info.getValue(),
 });
 
-const heightColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor('height', {
+const heightColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor((row) => row.height / 10, {
   id: 'height',
   header: () => {
     return <div>Height (m)</div>;
   },
-  cell: (info) => info.getValue() / 10,
+  cell: (info) => info.getValue(),
 });
 
-const weightColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor('weight', {
+const weightColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor((row) => row.weight / 10, {
   id: 'weight',
   header: () => {
     return <div>Weight (kg)</div>;
   },
-  cell: (info) => info.getValue() / 10,
+  cell: (info) => info.getValue(),
 });
 
 const actionsColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.display({
