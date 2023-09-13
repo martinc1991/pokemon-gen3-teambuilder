@@ -2,7 +2,7 @@
 
 import { createColumnHelper, type ColumnDef } from '@tanstack/react-table';
 import type { IPokemonGetAllResponseElement } from 'contract';
-import { PokemonIcon, Typography } from 'ui';
+import { PokemonIcon, TypeBadge, Typography } from 'ui';
 import RowDropdownMenu from './dropdown-menu';
 
 const columnHelper = createColumnHelper<IPokemonGetAllResponseElement>();
@@ -33,7 +33,6 @@ const spriteColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.acce
   ),
 });
 
-// TODO: add types badges
 const typesColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor(
   (row) => [row.typeOneName, row.typeTwoName].join(' - '),
   {
@@ -41,7 +40,15 @@ const typesColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.acces
     header: () => {
       return <div>Type</div>;
     },
-    cell: (info) => info.getValue(),
+    cell: (info) => {
+      const [typeOne, typeTwo] = info.getValue().split(' - ');
+      return (
+        <div className='flex flex-row justify-center gap-3'>
+          <TypeBadge type={typeOne} />
+          {typeTwo !== 'empty' && <TypeBadge type={typeTwo} />}
+        </div>
+      );
+    },
   }
 );
 
