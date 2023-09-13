@@ -35,7 +35,7 @@ export function P({ children }: { children: React.ReactNode }) {
 
 // Muted paragraph
 export function Muted({ children }: { children: React.ReactNode }) {
-  return <p className={makeTextWhite('text-sm text-muted-foreground')}>{children}</p>;
+  return <p className={'text-sm text-muted-foreground'}>{children}</p>;
 }
 
 // Small
