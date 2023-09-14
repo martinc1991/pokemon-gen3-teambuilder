@@ -3,6 +3,7 @@
 import type { IPokemonGetAllQueryParams } from 'contract';
 import { useEffect } from 'react';
 import { Typography } from 'ui';
+import LoadingState from '../../components/loading-state';
 import { PokemonTable } from '../../components/pokemon-table';
 import { client } from '../../rq-client';
 
@@ -39,7 +40,7 @@ export default function Builder(): JSX.Element {
     if (fetchStatus === 'idle' && hasNextPage) void fetchNextPage();
   }, [fetchStatus, hasNextPage]);
 
-  if (isLoading) return <Typography.P>loading...</Typography.P>;
+  if (isLoading) return <LoadingState />;
   if (isError) {
     return <Typography.P>error...</Typography.P>;
   }
