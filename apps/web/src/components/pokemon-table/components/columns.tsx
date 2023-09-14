@@ -33,24 +33,21 @@ const spriteColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.acce
   ),
 });
 
-const typesColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor(
-  (row) => [row.typeOneName, row.typeTwoName].join(' - '),
-  {
-    id: 'types',
-    header: () => {
-      return <div>Type</div>;
-    },
-    cell: (info) => {
-      const [typeOne, typeTwo] = info.getValue().split(' - ');
-      return (
-        <div className='flex flex-row justify-center gap-3'>
-          <TypeBadge type={typeOne} />
-          {typeTwo !== 'empty' && <TypeBadge type={typeTwo} />}
-        </div>
-      );
-    },
-  }
-);
+const typesColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor((row) => [row.typeOneName, row.typeTwoName], {
+  id: 'types',
+  header: () => {
+    return <div>Type</div>;
+  },
+  cell: (info) => {
+    const [typeOne, typeTwo] = info.getValue();
+    return (
+      <div className='flex flex-row justify-center gap-3'>
+        <TypeBadge type={typeOne} />
+        {typeTwo !== 'empty' && <TypeBadge type={typeTwo} />}
+      </div>
+    );
+  },
+});
 
 const gendersColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor((row) => row.genders.join(' - '), {
   id: 'genders',

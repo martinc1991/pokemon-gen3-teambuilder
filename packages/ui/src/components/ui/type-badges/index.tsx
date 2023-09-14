@@ -1,12 +1,13 @@
 import clsx from 'clsx';
 import { Badge } from '../badge';
-import { TypesNames, commonClasseses, typeClassNames } from './helpers';
+import { commonClasseses, typeClassNames } from './helpers';
+import { TypesNames } from 'contract';
 
 interface TypeBadgeProps {
   type: TypesNames;
 }
 
-export function TypeBadge({ type = TypesNames.empty }: TypeBadgeProps) {
+export function TypeBadge({ type = 'empty' }: TypeBadgeProps) {
   return (
     <Badge variant='default' className={clsx(commonClasseses, typeClassNames[type])}>
       {type}

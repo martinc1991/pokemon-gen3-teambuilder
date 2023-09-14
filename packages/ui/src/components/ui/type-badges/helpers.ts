@@ -1,24 +1,3 @@
-export const enum TypesNames {
-  normal = 'normal',
-  ice = 'ice',
-  ghost = 'ghost',
-  dark = 'dark',
-  grass = 'grass',
-  electric = 'electric',
-  steel = 'steel',
-  ground = 'ground',
-  fighting = 'fighting',
-  bug = 'bug',
-  poison = 'poison',
-  rock = 'rock',
-  water = 'water',
-  flying = 'flying',
-  fire = 'fire',
-  dragon = 'dragon',
-  psychic = 'psychic',
-  empty = 'empty',
-}
-
 export const commonClasseses = 'w-14 capitalize text-foreground';
 export const typeClassNames = {
   bug: 'bg-bug',
