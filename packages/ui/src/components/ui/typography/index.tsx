@@ -1,3 +1,5 @@
+'use client';
+
 import clsx from 'clsx';
 
 function makeTextWhite(classname: string): string {
