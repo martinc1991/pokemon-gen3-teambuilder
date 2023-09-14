@@ -1,5 +1,5 @@
 import Image, { ImageProps } from 'next/image';
-import substitute from '../sprites/pokemon/substitute.png';
+import substitute from '../../sprites/pokemon/substitute.png';
 
 type SubstitutePlaceholderProps = Omit<ImageProps, 'src' | 'alt'>;
 
