@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 
 function makeTextWhite(classname: string): string {
-  return clsx(classname, 'text-white');
+  return clsx(classname, 'text-foreground');
 }
 
 // h1 heading

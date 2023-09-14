@@ -1,7 +1,7 @@
 import { capitalizeFirstLetter, cn, idToIconUrl } from '@/lib/utils';
 import Image, { ImageProps } from 'next/image';
 import { useState } from 'react';
-import { SubstitutePlaceholder } from './substitute-placeholder';
+import { SubstitutePlaceholder } from '../substitute-placeholder';
 
 interface PokemonIconProps extends Omit<ImageProps, 'src' | 'alt'> {
   inputId: number;
