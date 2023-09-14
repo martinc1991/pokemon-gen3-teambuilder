@@ -1,10 +1,10 @@
 import clsx from 'clsx';
 import { Badge } from '../badge';
 import { commonClasseses, typeClassNames } from './helpers';
-import { TypesNames } from 'contract';
+import { TypeNames } from 'contract';
 
 interface TypeBadgeProps {
-  type: TypesNames;
+  type: TypeNames;
 }
 
 export function TypeBadge({ type = 'empty' }: TypeBadgeProps) {
