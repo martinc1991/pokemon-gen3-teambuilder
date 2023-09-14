@@ -1,76 +1,70 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
-  darkMode: ["class"],
-  content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-	],
-  theme: {
-    container: {
-      center: true,
-      padding: "2rem",
-      screens: {
-        "2xl": "1400px",
-      },
-    },
-    extend: {
-      colors: {
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
-        },
-        secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
-        },
-        destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
-        },
-        muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
-        },
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
-        },
-        popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
-        },
-        card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
-        },
-      },
-      borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
-      },
-      keyframes: {
-        "accordion-down": {
-          from: { height: 0 },
-          to: { height: "var(--radix-accordion-content-height)" },
-        },
-        "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: 0 },
-        },
-      },
-      animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
-      },
+
+export const content = ['./pages/**/*.{ts,tsx}', './components/**/*.{ts,tsx}', './app/**/*.{ts,tsx}', './src/**/*.{ts,tsx}'];
+export const theme = {
+  container: {
+    center: true,
+    padding: '2rem',
+    screens: {
+      '2xl': '1400px',
     },
   },
-  plugins: [require("tailwindcss-animate")],
-}
+  extend: {
+    colors: {
+      // Theme colors
+      accent: { DEFAULT: 'var(--accent)', foreground: 'var(--accent-foreground)' },
+      background: 'var(--background)',
+      border: 'var(--border)',
+      card: { DEFAULT: 'var(--card)', foreground: 'var(--card-foreground)' },
+      destructive: { DEFAULT: 'var(--destructive)', foreground: 'var(--destructive-foreground)' },
+      foreground: 'var(--foreground)',
+      input: 'var(--input)',
+      muted: { DEFAULT: 'var(--muted)', foreground: 'var(--muted-foreground)' },
+      popover: { DEFAULT: 'var(--popover)', foreground: 'var(--popover-foreground)' },
+      primary: { DEFAULT: 'var(--primary)', foreground: 'var(--primary-foreground)' },
+      ring: 'var(--ring)',
+      secondary: { DEFAULT: 'var(--secondary)', foreground: 'var(--secondary-foreground)' },
+      // Types colors
+      bug: 'var(--bug)',
+      dark: 'var(--dark)',
+      dragon: 'var(--dragon)',
+      electric: 'var(--electric)',
+      empty: 'var(--empty)',
+      fighting: 'var(--fighting)',
+      fire: 'var(--fire)',
+      flying: 'var(--flying)',
+      ghost: 'var(--ghost)',
+      grass: 'var(--grass)',
+      ground: 'var(--ground)',
+      ice: 'var(--ice)',
+      normal: 'var(--normal)',
+      poison: 'var(--poison)',
+      psychic: 'var(--psychic)',
+      rock: 'var(--rock)',
+      steel: 'var(--steel)',
+      water: 'var(--water)',
+    },
+    borderRadius: {
+      lg: 'var(--radius)',
+      md: 'calc(var(--radius) - 2px)',
+      sm: 'calc(var(--radius) - 4px)',
+    },
+    keyframes: {
+      'accordion-down': {
+        from: { height: 0 },
+        to: { height: 'var(--radix-accordion-content-height)' },
+      },
+      'accordion-up': {
+        from: { height: 'var(--radix-accordion-content-height)' },
+        to: { height: 0 },
+      },
+    },
+    animation: {
+      'accordion-down': 'accordion-down 0.2s ease-out',
+      'accordion-up': 'accordion-up 0.2s ease-out',
+    },
+  },
+};
+
+// eslint-disable-next-line no-undef
+export const plugins = [require('tailwindcss-animate')];
