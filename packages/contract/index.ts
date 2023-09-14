@@ -4,3 +4,4 @@ export * from './src/contracts/natures-contract';
 export * from './src/contracts/pokemon-contract';
 export * from './src/contracts/teams-contract';
 export * from './src/contracts/types-contract';
+export { TypeNames as TypesNames } from '@prisma/client';
