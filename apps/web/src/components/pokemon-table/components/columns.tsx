@@ -73,12 +73,12 @@ const weightColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.acce
   cell: (info) => info.getValue(),
 });
 
-const actionsColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.display({
+const actionsColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor((row) => row, {
   id: 'actions',
   enableHiding: false,
   header: () => <div />,
-  cell: () => {
-    return <RowDropdownMenu />;
+  cell: (info) => {
+    return <RowDropdownMenu pokemon={info.cell.getValue()} />;
   },
 });
 
