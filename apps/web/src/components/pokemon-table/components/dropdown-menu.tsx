@@ -16,7 +16,7 @@ interface RowDropdownMenuProps {
 }
 
 export default function RowDropdownMenu(props: RowDropdownMenuProps): JSX.Element {
-  const addPokemon = useTeamStore((state) => state.addPokemon);
+  const addPokemon = useTeamStore((state) => state.addSlot);
 
   function handleClick(): void {
     addPokemon(props.pokemon);
