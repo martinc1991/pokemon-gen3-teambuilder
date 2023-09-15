@@ -11,12 +11,14 @@ export default function RightSidebar(): JSX.Element {
     <BasicSidebar side='right'>
       <Typography.P>Team</Typography.P>
       {slots.map((slot) => {
+        const iconId = slot.pokemon?.nationalPokedexNumber ?? null;
+        const key = slot.slotId;
         return (
           <PokemonAvatar
-            inputId={slot.pokemon.nationalPokedexNumber}
-            key={slot.pokemon.id}
+            iconId={iconId}
+            key={key}
             onClick={() => {
-              removeSlot(slot.slotId);
+              removeSlot(slot);
             }}
           />
         );
