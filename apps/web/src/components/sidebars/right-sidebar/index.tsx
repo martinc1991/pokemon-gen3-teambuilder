@@ -1,16 +1,27 @@
 'use client';
 
-import { Typography } from 'ui';
+import { PokemonAvatar, Typography } from 'ui';
+import { useTeamStore } from '../../../state/team';
 import BasicSidebar from '../basic-sidebar';
 
-const slots = [1, 2, 3, 4, 5, 6];
-
 export default function RightSidebar(): JSX.Element {
+  const [slots, removeSlot] = useTeamStore((state) => [state.slots, state.removeSlot]);
+
   return (
     <BasicSidebar side='right'>
       <Typography.P>Team</Typography.P>
       {slots.map((slot) => {
-        return <Typography.Small key={slot}>{`Slot ${slot}`}</Typography.Small>;
+        const iconId = slot.pokemon?.nationalPokedexNumber ?? null;
+        const key = slot.slotId;
+        return (
+          <PokemonAvatar
+            iconId={iconId}
+            key={key}
+            onClick={() => {
+              removeSlot(slot);
+            }}
+          />
+        );
       })}
     </BasicSidebar>
   );

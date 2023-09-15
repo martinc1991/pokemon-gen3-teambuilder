@@ -15,10 +15,12 @@
     "@ts-rest/react-query": "^3.30.1",
     "clsx": "^2.0.0",
     "contract": "workspace:*",
+    "nanoid": "^5.0.1",
     "next": "^13.4.19",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "ui": "workspace:*"
+    "ui": "workspace:*",
+    "zustand": "^4.4.1"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^13.4.19",

@@ -168,6 +168,9 @@ importers:
       contract:
         specifier: workspace:*
         version: link:../../packages/contract
+      nanoid:
+        specifier: ^5.0.1
+        version: 5.0.1
       next:
         specifier: ^13.4.19
         version: 13.4.19(@babel/core@7.22.11)(react-dom@18.2.0)(react@18.2.0)
@@ -180,6 +183,9 @@ importers:
       ui:
         specifier: workspace:*
         version: link:../../packages/ui
+      zustand:
+        specifier: ^4.4.1
+        version: 4.4.1(@types/react@18.2.21)(react@18.2.0)
     devDependencies:
       '@next/eslint-plugin-next':
         specifier: ^13.4.19
@@ -256,6 +262,9 @@ importers:
 
   packages/ui:
     dependencies:
+      '@radix-ui/react-avatar':
+        specifier: ^1.0.3
+        version: 1.0.3(@types/react-dom@18.2.7)(@types/react@18.2.21)(react-dom@18.2.0)(react@18.2.0)
       '@radix-ui/react-dropdown-menu':
         specifier: ^2.0.5
         version: 2.0.5(@types/react-dom@18.2.7)(@types/react@18.2.21)(react-dom@18.2.0)(react@18.2.0)
@@ -1760,6 +1769,30 @@ packages:
     dependencies:
       '@babel/runtime': 7.22.10
       '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.7)(@types/react@18.2.21)(react-dom@18.2.0)(react@18.2.0)
+      '@types/react': 18.2.21
+      '@types/react-dom': 18.2.7
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
+  /@radix-ui/react-avatar@1.0.3(@types/react-dom@18.2.7)(@types/react@18.2.21)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-9ToF7YNex3Ste45LrAeTlKtONI9yVRt/zOS158iilIkW5K/Apeyb/TUQlcEFTEFvWr8Kzdi2ZYrm1/suiXPajQ==}
+    peerDependencies:
+      '@types/react': '*'
+      '@types/react-dom': '*'
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      '@types/react-dom':
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.22.10
+      '@radix-ui/react-context': 1.0.1(@types/react@18.2.21)(react@18.2.0)
+      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.7)(@types/react@18.2.21)(react-dom@18.2.0)(react@18.2.0)
+      '@radix-ui/react-use-callback-ref': 1.0.1(@types/react@18.2.21)(react@18.2.0)
+      '@radix-ui/react-use-layout-effect': 1.0.1(@types/react@18.2.21)(react@18.2.0)
       '@types/react': 18.2.21
       '@types/react-dom': 18.2.7
       react: 18.2.0
@@ -6733,6 +6766,12 @@ packages:
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
+  /nanoid@5.0.1:
+    resolution: {integrity: sha512-vWeVtV5Cw68aML/QaZvqN/3QQXc6fBfIieAlu05m7FZW2Dgb+3f0xc0TTxuJW+7u30t7iSDTV/j3kVI0oJqIfQ==}
+    engines: {node: ^18 || >=20}
+    hasBin: true
+    dev: false
+
   /natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
     dev: true
@@ -9123,3 +9162,23 @@ packages:
 
   /zod@3.22.2:
     resolution: {integrity: sha512-wvWkphh5WQsJbVk1tbx1l1Ly4yg+XecD+Mq280uBGt9wa5BKSWf4Mhp6GmrkPixhMxmabYY7RbzlwVP32pbGCg==}
+
+  /zustand@4.4.1(@types/react@18.2.21)(react@18.2.0):
+    resolution: {integrity: sha512-QCPfstAS4EBiTQzlaGP1gmorkh/UL1Leaj2tdj+zZCZ/9bm0WS7sI2wnfD5lpOszFqWJ1DcPnGoY8RDL61uokw==}
+    engines: {node: '>=12.7.0'}
+    peerDependencies:
+      '@types/react': '>=16.8'
+      immer: '>=9.0'
+      react: '>=16.8'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      immer:
+        optional: true
+      react:
+        optional: true
+    dependencies:
+      '@types/react': 18.2.21
+      react: 18.2.0
+      use-sync-external-store: 1.2.0(react@18.2.0)
+    dev: false
