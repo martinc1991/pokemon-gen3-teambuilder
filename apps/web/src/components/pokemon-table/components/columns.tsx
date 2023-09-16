@@ -28,7 +28,7 @@ const spriteColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.acce
   },
   cell: (info) => (
     <div>
-      <PokemonIcon inputId={info.getValue()} name={info.row.getValue('name')} />
+      <PokemonIcon inputId={info.getValue()} name={info.row.getValue('name')} priority quality={10} />
     </div>
   ),
 });

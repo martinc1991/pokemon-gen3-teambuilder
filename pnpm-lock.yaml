@@ -159,6 +159,9 @@ importers:
       '@tanstack/react-table':
         specifier: ^8.9.8
         version: 8.9.8(react-dom@18.2.0)(react@18.2.0)
+      '@tanstack/react-virtual':
+        specifier: 3.0.0-beta.60
+        version: 3.0.0-beta.60(react@18.2.0)
       '@ts-rest/react-query':
         specifier: ^3.30.1
         version: 3.30.1(@tanstack/react-query@4.33.0)(@ts-rest/core@3.30.1)(react@18.2.0)
@@ -2355,9 +2358,22 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
+  /@tanstack/react-virtual@3.0.0-beta.60(react@18.2.0):
+    resolution: {integrity: sha512-F0wL9+byp7lf/tH6U5LW0ZjBqs+hrMXJrj5xcIGcklI0pggvjzMNW9DdIBcyltPNr6hmHQ0wt8FDGe1n1ZAThA==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@tanstack/virtual-core': 3.0.0-beta.60
+      react: 18.2.0
+    dev: false
+
   /@tanstack/table-core@8.9.8:
     resolution: {integrity: sha512-f2Y/BcJy3IBkdDxWEk6WX6zJSmCDBI5iS0icr5DyeSbWsbnfaBtOIaeBjfnTEedt9Kk3xPmfciA6uSNOQ1BEXA==}
     engines: {node: '>=12'}
+    dev: false
+
+  /@tanstack/virtual-core@3.0.0-beta.60:
+    resolution: {integrity: sha512-QlCdhsV1+JIf0c0U6ge6SQmpwsyAT0oQaOSZk50AtEeAyQl9tQrd6qCHAslxQpgphrfe945abvKG8uYvw3hIGA==}
     dev: false
 
   /@ts-morph/common@0.12.3:

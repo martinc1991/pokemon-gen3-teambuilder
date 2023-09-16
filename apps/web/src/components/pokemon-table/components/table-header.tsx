@@ -24,10 +24,10 @@ interface PokemonHeaderRowProps {
 
 function PokemonHeaderRow({ headerGroup, key }: PokemonHeaderRowProps): JSX.Element {
   return (
-    <TableRow className='hover:bg-transparent' key={headerGroup.id}>
+    <TableRow className='flex hover:bg-transparent' key={headerGroup.id}>
       {headerGroup.headers.map((header) => {
         return (
-          <TableHead className='text-center' key={key}>
+          <TableHead className='flex items-center justify-center flex-1' key={key}>
             {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
           </TableHead>
         );
