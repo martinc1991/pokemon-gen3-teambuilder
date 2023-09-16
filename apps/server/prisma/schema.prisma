@@ -76,6 +76,18 @@ enum Gender {
   genderless
 }
 
+enum Tier {
+  lc
+  nfe
+  nu
+  ou
+  pu
+  publ
+  uber
+  uu
+  uubl
+}
+
 // Enums
 
 // Basic entities (types, abilities, moves, items)
@@ -135,6 +147,7 @@ model Pokemon {
   slot                  Slot[]
   abilities             Ability[]
   genders               Gender[]
+  tier                  Tier      @default(lc)
 }
 
 // Teams

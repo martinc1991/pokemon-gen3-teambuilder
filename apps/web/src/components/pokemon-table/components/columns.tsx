@@ -4,6 +4,7 @@ import { createColumnHelper, type ColumnDef } from '@tanstack/react-table';
 import type { IPokemonGetAllResponseElement } from 'contract';
 import { PokemonIcon, TypeBadge, Typography } from 'ui';
 import RowDropdownMenu from './dropdown-menu';
+import { getTierText } from '../../../utils/getTierName';
 
 const columnHelper = createColumnHelper<IPokemonGetAllResponseElement>();
 
@@ -11,6 +12,12 @@ const nationalDexColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper
   id: 'nationalPokedexNumber',
   header: '#',
   cell: ({ row }) => <div className='capitalize'>{row.getValue('nationalPokedexNumber')}</div>,
+});
+
+const tierColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor('tier', {
+  id: 'tier',
+  header: 'Tier',
+  cell: ({ row }) => <Typography.P>{getTierText(row.getValue('tier'))}</Typography.P>,
 });
 
 const nameColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor('name', {
@@ -84,6 +91,7 @@ const actionsColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.acc
 
 export const columns: ColumnDef<IPokemonGetAllResponseElement>[] = [
   nationalDexColumn,
+  tierColumn,
   nameColumn,
   spriteColumn,
   typesColumn,
