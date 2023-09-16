@@ -16,6 +16,11 @@ export const columnsConfig: ColumnConfig = {
     colFlexSize: 1,
     maxWidth: 60,
   },
+  tier: {
+    id: 'tier',
+    colFlexSize: 1,
+    maxWidth: 100,
+  },
   name: {
     id: 'name',
     colFlexSize: 2,

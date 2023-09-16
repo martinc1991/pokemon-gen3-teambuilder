@@ -1,4 +1,4 @@
-import { Gender, TypeNames } from '@prisma/client';
+import { Gender, Tier, TypeNames } from '@prisma/client';
 import * as z from 'zod';
 
 export const PokemonModel = z.object({
@@ -11,4 +11,5 @@ export const PokemonModel = z.object({
   typeOneName: z.nativeEnum(TypeNames),
   typeTwoName: z.nativeEnum(TypeNames),
   genders: z.nativeEnum(Gender).array(),
+  tier: z.nativeEnum(Tier),
 });

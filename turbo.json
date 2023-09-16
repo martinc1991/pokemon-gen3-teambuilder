@@ -18,6 +18,9 @@
     "studio": {
       "cache": false,
       "persistent": true
+    },
+    "prisma:generate": {
+      "cache": true
     }
   }
 }
