@@ -1,4 +1,5 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Tier } from '@prisma/client';
+import { pokemonTiers } from './data/tiers';
 import { getAbilities } from './entities/abilities';
 import { getItems } from './entities/items';
 import { naturesArray } from './entities/natures';
@@ -67,6 +68,7 @@ export async function seeder() {
               return { name };
             }),
         },
+        tier: Tier[pokemonTiers[pkmn.name]],
       },
     });
   });
