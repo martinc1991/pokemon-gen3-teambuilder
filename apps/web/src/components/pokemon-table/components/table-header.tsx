@@ -2,6 +2,7 @@ import type { HeaderGroup, Table } from '@tanstack/react-table';
 import { flexRender } from '@tanstack/react-table';
 import type { IPokemonGetAllResponseElement } from 'contract';
 import { TableHead, TableHeader, TableRow } from 'ui';
+import { ColumnID, columnsConfig } from './constants';
 
 interface PokemonTableHeaderProps {
   table: Table<IPokemonGetAllResponseElement>;
@@ -24,10 +25,13 @@ interface PokemonHeaderRowProps {
 
 function PokemonHeaderRow({ headerGroup, key }: PokemonHeaderRowProps): JSX.Element {
   return (
-    <TableRow className='hover:bg-transparent' key={headerGroup.id}>
+    <TableRow className='flex hover:bg-transparent' key={headerGroup.id}>
       {headerGroup.headers.map((header) => {
+        const ID = header.getContext().header.id as ColumnID; // Had to cast just for typing
+        const colFlexSize = columnsConfig[ID].colFlexSize;
+        const maxWidth = columnsConfig[ID].maxWidth;
         return (
-          <TableHead className='text-center' key={key}>
+          <TableHead className='flex items-center justify-center' style={{ flex: colFlexSize, maxWidth: maxWidth }} key={key}>
             {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
           </TableHead>
         );

@@ -1,17 +1,20 @@
 import type { ColumnFiltersState, SortingState, VisibilityState } from '@tanstack/react-table';
-import { getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, useReactTable } from '@tanstack/react-table';
+import { getCoreRowModel, getFilteredRowModel, getSortedRowModel, useReactTable } from '@tanstack/react-table';
+import { useVirtualizer } from '@tanstack/react-virtual';
 import type { IPokemonGetAllResponse } from 'contract';
-import { useState } from 'react';
-import { Table } from 'ui';
+import { useRef, useState } from 'react';
+import { Table, TableBody } from 'ui';
 import { columns } from './components/columns';
-import { PokemonTableBody } from './components/table-body';
 import { PokemonTableHeader } from './components/table-header';
+import { EmptyRow, PokemonTableRow } from './components/table-rows';
 
 interface PokemonTableProps {
   pokemon: IPokemonGetAllResponse;
 }
 
 export function PokemonTable({ pokemon }: PokemonTableProps): JSX.Element {
+  const parentRef = useRef(null);
+
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
@@ -23,7 +26,6 @@ export function PokemonTable({ pokemon }: PokemonTableProps): JSX.Element {
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
@@ -37,14 +39,36 @@ export function PokemonTable({ pokemon }: PokemonTableProps): JSX.Element {
     manualPagination: true,
   });
 
+  const { rows } = table.getRowModel();
+
+  const rowVirtualizer = useVirtualizer({
+    count: table.getRowModel().rows.length,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => 50,
+    overscan: 10,
+  });
+
   return (
-    <div className='w-full'>
-      <div className='border rounded-md'>
-        <Table>
-          <PokemonTableHeader table={table} />
-          <PokemonTableBody table={table} />
-        </Table>
-      </div>
+    <div className='w-full border rounded-md h-[800px] overflow-auto' ref={parentRef}>
+      <Table>
+        <PokemonTableHeader table={table} />
+        <TableBody
+          style={{
+            height: `${rowVirtualizer.getTotalSize()}px`,
+            width: '600px',
+            position: 'relative',
+          }}
+        >
+          {rowVirtualizer.getVirtualItems().length ? (
+            rowVirtualizer.getVirtualItems().map((virtualRow) => {
+              const row = rows[virtualRow.index];
+              return <PokemonTableRow key={row.id} row={row} size={virtualRow.size} start={virtualRow.start} />;
+            })
+          ) : (
+            <EmptyRow />
+          )}
+        </TableBody>
+      </Table>
     </div>
   );
 }
