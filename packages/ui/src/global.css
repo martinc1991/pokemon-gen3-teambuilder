@@ -46,5 +46,9 @@
     --rock: hsl(39, 47%, 37%);
     --steel: hsl(0, 0%, 68%);
     --water: hsl(217, 49%, 54%);
+
+    /* Genders colors */
+    --male: rgb(137, 203, 224);
+    --female: rgb(253, 180, 191);
   }
 }

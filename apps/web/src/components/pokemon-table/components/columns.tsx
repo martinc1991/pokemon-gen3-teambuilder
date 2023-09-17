@@ -2,8 +2,8 @@
 
 import { createColumnHelper, type ColumnDef } from '@tanstack/react-table';
 import type { IPokemonGetAllResponseElement } from 'contract';
-import { PokemonIcon, TypeBadge, Typography } from 'ui';
-import { getTierText } from '../../../utils/pokemon';
+import { GendersText, PokemonIcon, TypeBadge, Typography } from 'ui';
+import { formatPokemonName, getTierText } from '../../../utils/pokemon';
 import { TableRowStats } from '../../stats/tableRowStats';
 import RowDropdownMenu from './dropdown-menu';
 
@@ -26,7 +26,7 @@ const nameColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.access
   header: () => {
     return <div>Name</div>;
   },
-  cell: ({ row }) => <Typography.P>{row.getValue('name')}</Typography.P>,
+  cell: ({ row }) => <Typography.P>{formatPokemonName(row.getValue('name'))}</Typography.P>,
 });
 
 const spriteColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor((row) => row.nationalPokedexNumber, {
@@ -86,12 +86,16 @@ const statsColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.acces
   }
 );
 
-const gendersColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor((row) => row.genders.join(' - '), {
+const gendersColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor((row) => row.genders, {
   id: 'genders',
   header: () => {
     return <div>Genders</div>;
   },
-  cell: (info) => info.getValue(),
+  cell: (info) => (
+    <div className='flex justify-center'>
+      <GendersText genders={info.getValue()} />
+    </div>
+  ),
 });
 
 const heightColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor((row) => row.height / 10, {
