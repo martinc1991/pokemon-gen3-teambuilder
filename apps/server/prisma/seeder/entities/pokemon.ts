@@ -1,12 +1,12 @@
+import { LAST_POKEMON_DEX_NUMBER } from '@config/app';
 import { Gender, TypeNames } from '@prisma/client';
+import { IBaseStats } from 'contract';
 import {
   Pokemon,
   PokemonClient,
   PokemonSpecies,
   PokemonType,
 } from 'pokenode-ts';
-import { LAST_POKEMON_DEX_NUMBER } from '../../../../config/app';
-import { IBaseStats } from 'contract';
 
 type PokemonMergedInfo = PokemonSpecies & Pokemon;
 
