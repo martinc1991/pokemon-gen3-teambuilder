@@ -1,14 +1,12 @@
-import { PrismaClient, Tier } from '@prisma/client';
+import { Tier } from '@prisma/client';
+import { overrides } from './data/overrides';
 import { pokemonTiers } from './data/tiers';
 import { getAbilities } from './entities/abilities';
 import { getItems } from './entities/items';
 import { naturesArray } from './entities/natures';
 import { getPokemonPromises } from './entities/pokemon';
 import { typesArray } from './entities/types';
-
-const prisma = new PrismaClient({
-  datasources: { db: { url: process.env.DATABASE_URL } },
-});
+import { prismaSeederClient } from './seederClient';
 
 const CYAN = '\x1b[36m';
 const RESET = '\x1b[0m';
@@ -23,36 +21,45 @@ export async function seeder() {
   const itemsPromises = getItems();
 
   // Seed types
-  await prisma.type.createMany({
+  console.log('Creating types');
+  await prismaSeederClient.type.createMany({
     data: typesArray,
   });
+  console.log('Creating types finished');
 
   // Seed natures
-  await prisma.nature.createMany({
+  console.log('Creating natures');
+  await prismaSeederClient.nature.createMany({
     data: naturesArray,
   });
+  console.log('Creating natures finished');
 
   const items = await itemsPromises;
   const pokemons = await pokemonPromises;
   const abilities = await abilitiesPromises;
 
   // Seed items
-  await prisma.item.createMany({
+  console.log('Creating items');
+  await prismaSeederClient.item.createMany({
     data: items,
   });
+  console.log('Creating items finished');
 
   const abilitiesNames: string[] = [];
 
+  console.log('Creating abilities');
   abilities.forEach(async (ability) => {
     abilitiesNames.push(ability.name);
-    await prisma.ability.create({
+    await prismaSeederClient.ability.create({
       data: ability,
     });
   });
+  console.log('Creating abilities finished');
 
   // Seed pokemon
+  console.log('Creating pokemons');
   pokemons.forEach(async (pkmn) => {
-    await prisma.pokemon.create({
+    await prismaSeederClient.pokemon.create({
       data: {
         ...pkmn,
         typeOne: {
@@ -72,6 +79,9 @@ export async function seeder() {
       },
     });
   });
+  console.log('Creating pokemons finished');
+
+  await overrides();
 
   performance.mark('end');
 }

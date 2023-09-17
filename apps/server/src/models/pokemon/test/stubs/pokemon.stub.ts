@@ -1,6 +1,7 @@
 import { Gender, TypeNames } from '@prisma/client';
+import { IPokemon } from 'contract';
 
-export function pokemonStub() {
+export function pokemonStub(): IPokemon {
   return {
     id: '83035ed6-e712-4146-b70d-16361ef035ef',
     name: 'ivysaur',
@@ -12,5 +13,12 @@ export function pokemonStub() {
     typeOneName: TypeNames.grass,
     typeTwoName: TypeNames.poison,
     genders: [Gender.male, Gender.female],
+    baseAttack: 10,
+    baseDefense: 10,
+    baseHp: 10,
+    baseSpattack: 10,
+    baseSpdefense: 10,
+    baseSpeed: 10,
+    tier: 'lc',
   };
 }

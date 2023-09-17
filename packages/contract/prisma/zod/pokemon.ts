@@ -12,4 +12,10 @@ export const PokemonModel = z.object({
   typeTwoName: z.nativeEnum(TypeNames),
   genders: z.nativeEnum(Gender).array(),
   tier: z.nativeEnum(Tier),
+  baseHp: z.number().int(),
+  baseAttack: z.number().int(),
+  baseDefense: z.number().int(),
+  baseSpattack: z.number().int(),
+  baseSpdefense: z.number().int(),
+  baseSpeed: z.number().int(),
 });

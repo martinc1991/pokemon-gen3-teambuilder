@@ -171,6 +171,12 @@ model Pokemon {
   abilities             Ability[]
   genders               Gender[]
   tier                  Tier      @default(lc)
+  baseHp                Int
+  baseAttack            Int
+  baseDefense           Int
+  baseSpattack          Int
+  baseSpdefense         Int
+  baseSpeed             Int
 }
 
 // Teams

@@ -1,46 +1,53 @@
 'use client';
 
-import clsx from 'clsx';
-
-function makeTextWhite(classname: string): string {
-  return clsx(classname, 'text-foreground');
-}
+import { cn } from '@/lib/utils';
 
 // h1 heading
-export function H1({ children }: { children: React.ReactNode }) {
-  return <h1 className={makeTextWhite('font-sans text-4xl font-extrabold tracking-tight scroll-m-20 lg:text-5xl')}>{children}</h1>;
+export function H1({ className, ...props }: React.HTMLAttributes<HTMLHeadElement>) {
+  return (
+    <h1 className={cn('font-sans text-4xl font-extrabold tracking-tight scroll-m-20 lg:text-5xl text-foreground', className)} {...props} />
+  );
 }
 
 // h2 heading
-export function H2({ children }: { children: React.ReactNode }) {
+export function H2({ className, ...props }: React.HTMLAttributes<HTMLHeadElement>) {
   return (
-    <h2 className={makeTextWhite('pb-2 text-3xl font-semibold tracking-tight transition-colors border-b scroll-m-20 first:mt-0')}>
-      {children}
-    </h2>
+    <h2
+      className={cn(
+        'pb-2 text-3xl font-semibold tracking-tight transition-colors border-b scroll-m-20 first:mt-0 text-foreground',
+        className
+      )}
+      {...props}
+    />
   );
 }
 
 // h3 heading
-export function H3({ children }: { children: React.ReactNode }) {
-  return <h3 className={makeTextWhite('scroll-m-20 text-2xl font-semibold tracking-tight')}>{children}</h3>;
+export function H3({ className, ...props }: React.HTMLAttributes<HTMLHeadElement>) {
+  return <h3 className={cn('scroll-m-20 text-2xl font-semibold tracking-tight text-foreground', className)} {...props} />;
 }
 
 // h4 heading
-export function H4({ children }: { children: React.ReactNode }) {
-  return <h4 className={makeTextWhite('text-xl font-semibold tracking-tight scroll-m-20')}>{children}</h4>;
+export function H4({ className, ...props }: React.HTMLAttributes<HTMLHeadElement>) {
+  return <h4 className={cn('text-xl font-semibold tracking-tight scroll-m-20 text-foreground', className)} {...props} />;
 }
 
 // Paragraph
-export function P({ children }: { children: React.ReactNode }) {
-  return <p className={makeTextWhite('font-sans leading-7 [&:not(:first-child)]:mt-6')}>{children}</p>;
+export function P({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
+  return <p className={cn('font-sans leading-7 [&:not(:first-child)]:mt-6 text-foreground', className)} {...props} />;
 }
 
 // Muted paragraph
-export function Muted({ children }: { children: React.ReactNode }) {
-  return <p className={'text-sm text-muted-foreground'}>{children}</p>;
+export function Muted({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
+  return <p className={cn('text-sm text-muted-foreground', className)} {...props} />;
 }
 
 // Small
-export function Small({ children }: { children: React.ReactNode }) {
-  return <small className={makeTextWhite('text-sm font-medium leading-none')}>{children}</small>;
+export function Small({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
+  return <small className={cn('text-sm font-medium leading-none text-foreground', className)} {...props} />;
+}
+
+// Small
+export function Tiny({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
+  return <small className={cn('text-xs font-medium leading-none text-foreground', className)} {...props} />;
 }
