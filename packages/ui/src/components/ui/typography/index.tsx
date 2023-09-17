@@ -44,7 +44,7 @@ export function Muted({ className, ...props }: React.HTMLAttributes<HTMLParagrap
 
 // Small
 export function Small({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
-  return <small className={cn('text-sm font-medium leading-none text-foreground', className)} {...props} />;
+  return <small className={cn('text-sm font-medium text-foreground', className)} {...props} />;
 }
 
 // Small

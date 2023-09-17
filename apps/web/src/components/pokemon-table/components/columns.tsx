@@ -101,17 +101,27 @@ const gendersColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.acc
 const heightColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor((row) => row.height / 10, {
   id: 'height',
   header: () => {
-    return <div>Height (m)</div>;
+    return <div>Height</div>;
   },
-  cell: (info) => info.getValue(),
+  cell: (info) => (
+    <div className='flex justify-center gap-1'>
+      <Typography.Small>{info.getValue().toFixed(1)}</Typography.Small>
+      <Typography.Muted>m</Typography.Muted>
+    </div>
+  ),
 });
 
 const weightColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor((row) => row.weight / 10, {
   id: 'weight',
   header: () => {
-    return <div>Weight (kg)</div>;
+    return <div>Weight</div>;
   },
-  cell: (info) => info.getValue(),
+  cell: (info) => (
+    <div className='flex justify-center gap-1'>
+      <Typography.Small>{info.getValue().toFixed(1)}</Typography.Small>
+      <Typography.Muted>kg</Typography.Muted>
+    </div>
+  ),
 });
 
 const actionsColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor((row) => row, {
