@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { seeder } from '../src/providers/database/seed/seeder';
+import { seeder } from './seeder';
 
 const prisma = new PrismaClient({
   datasources: { db: { url: process.env.DATABASE_URL } },
