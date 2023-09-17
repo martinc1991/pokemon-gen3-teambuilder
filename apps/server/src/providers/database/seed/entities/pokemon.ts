@@ -6,10 +6,11 @@ import {
   PokemonType,
 } from 'pokenode-ts';
 import { LAST_POKEMON_DEX_NUMBER } from '../../../../config/app';
+import { IBaseStats } from 'contract';
 
 type PokemonMergedInfo = PokemonSpecies & Pokemon;
 
-interface Seed_Pokemon {
+interface Seed_Pokemon extends IBaseStats {
   name: string;
   nationalPokedexNumber: number;
   sprite: string;
@@ -52,6 +53,14 @@ export async function getPokemonPromises(): Promise<Seed_Pokemon[]> {
     const [typeOne, typeTwo] = getGenThreeTypes(pkmn);
 
     const abilities = pkmn.abilities.map((ab) => ab.ability.name);
+    const {
+      baseHp,
+      baseAttack,
+      baseDefense,
+      baseSpattack,
+      baseSpdefense,
+      baseSpeed,
+    } = getPokemonBaseStats(pkmn);
 
     return {
       name: pkmn.name,
@@ -63,6 +72,12 @@ export async function getPokemonPromises(): Promise<Seed_Pokemon[]> {
       typeTwo,
       abilities,
       genders: getPossibleGenders(pkmn.gender_rate),
+      baseHp,
+      baseAttack,
+      baseDefense,
+      baseSpattack,
+      baseSpdefense,
+      baseSpeed,
     };
   });
 }
@@ -126,4 +141,31 @@ function getPossibleGenders(rate: number): Gender[] {
     return [Gender.male];
   }
   return [Gender.male, Gender.female];
+}
+
+// INFO: I know for a fact (according to poke API) that "stats" is an array with 6 objects with the stats properly ordered (hp, atk, def, spatk, spdef, spe)
+const objProperties = [
+  'baseHp',
+  'baseAttack',
+  'baseDefense',
+  'baseSpattack',
+  'baseSpdefense',
+  'baseSpeed',
+];
+
+function getPokemonBaseStats({ stats }: PokemonMergedInfo): IBaseStats {
+  return stats.reduce(
+    (obj, stat, i) => {
+      obj[objProperties[i]] = stat.base_stat;
+      return obj;
+    },
+    {
+      baseHp: 0,
+      baseAttack: 0,
+      baseDefense: 0,
+      baseSpattack: 0,
+      baseSpdefense: 0,
+      baseSpeed: 0,
+    },
+  );
 }
