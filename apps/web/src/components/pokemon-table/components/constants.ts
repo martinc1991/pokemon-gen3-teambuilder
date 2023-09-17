@@ -1,6 +1,13 @@
 import { IPokemon } from 'contract';
 
-export type ColumnID = keyof Omit<IPokemon, 'typeOneName' | 'typeTwoName' | 'id'> | 'types' | 'actions';
+export type ColumnID =
+  | keyof Omit<
+      IPokemon,
+      'typeOneName' | 'typeTwoName' | 'id' | 'baseHp' | 'baseAttack' | 'baseDefense' | 'baseSpattack' | 'baseSpdefense' | 'baseSpeed'
+    >
+  | 'types'
+  | 'stats'
+  | 'actions';
 
 interface PokemonTableColumnConfig {
   id: ColumnID;
@@ -33,6 +40,11 @@ export const columnsConfig: ColumnConfig = {
   types: {
     id: 'types',
     colFlexSize: 2,
+  },
+  stats: {
+    id: 'stats',
+    colFlexSize: 2,
+    maxWidth: 240,
   },
   genders: {
     id: 'genders',
