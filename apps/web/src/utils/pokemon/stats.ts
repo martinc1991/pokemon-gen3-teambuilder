@@ -1,25 +1,25 @@
-import { IStats } from 'contract';
+import { IBaseStats } from 'contract';
 
-export function getShortStatName(statName: keyof IStats): string {
+export function getShortStatName(statName: keyof IBaseStats): string {
   switch (statName) {
-    case 'hp':
+    case 'baseHp':
       return 'HP';
-    case 'attack':
+    case 'baseAttack':
       return 'Atk';
-    case 'defense':
+    case 'baseDefense':
       return 'Def';
-    case 'spattack':
+    case 'baseSpattack':
       return 'SpA';
-    case 'spdefense':
+    case 'baseSpdefense':
       return 'SpD';
-    case 'speed':
+    case 'baseSpeed':
       return 'Spe';
     default:
       return '-';
   }
 }
 
-export function getTotalBaseStat(stats: IStats): number {
+export function getTotalBaseStat(stats: IBaseStats): number {
   let bst = 0;
   for (const stat in stats) {
     bst = bst + stats[stat];

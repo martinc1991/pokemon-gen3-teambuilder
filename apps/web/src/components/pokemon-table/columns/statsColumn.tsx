@@ -1,7 +1,7 @@
 'use client';
 
-import { type ColumnDef } from '@tanstack/react-table';
-import { type IPokemonGetAllResponseElement } from 'contract';
+import { Row, type ColumnDef } from '@tanstack/react-table';
+import { IBaseStats, type IPokemonGetAllResponseElement } from 'contract';
 import { TableRowStats } from '../../stats/tableRowStats';
 import { columnHelper } from './getColumnHelper';
 
@@ -20,17 +20,14 @@ export const statsColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelpe
       return <div>Base Stats</div>;
     },
     cell: (info) => {
-      const s = info.getValue();
-      const stats = {
-        hp: s.baseHp,
-        attack: s.baseAttack,
-        defense: s.baseDefense,
-        spattack: s.baseSpattack,
-        spdefense: s.baseSpdefense,
-        speed: s.baseSpeed,
-      };
+      const stats = info.getValue();
       return <TableRowStats stats={stats} />;
     },
-    enableSorting: false, // TODO: add sorting capacity based on BST
+    sortingFn: (rowA, rowB) => getTotalBaseStatsFromRow(rowA) - getTotalBaseStatsFromRow(rowB),
   }
 );
+
+function getTotalBaseStatsFromRow(row: Row<IPokemonGetAllResponseElement>) {
+  const stats = row.getValue('stats') as IBaseStats;
+  return Object.values(stats).reduce((a, b) => a + b, 0);
+}

@@ -1,10 +1,10 @@
-import { IStats } from 'contract';
+import { IBaseStats } from 'contract';
 import { Typography } from 'ui';
 import { getKeys } from '../../utils/common';
 import { getShortStatName, getTotalBaseStat } from '../../utils/pokemon';
 
 interface TableRowStatsProps {
-  stats: IStats;
+  stats: IBaseStats;
 }
 
 export function TableRowStats({ stats }: TableRowStatsProps): JSX.Element {
