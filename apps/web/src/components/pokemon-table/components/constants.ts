@@ -22,7 +22,7 @@ export const columnsConfig: ColumnConfig = {
   nationalPokedexNumber: {
     id: 'nationalPokedexNumber',
     colFlexSize: 1,
-    maxWidth: 60,
+    maxWidth: 50,
   },
   tier: {
     id: 'tier',
@@ -31,8 +31,7 @@ export const columnsConfig: ColumnConfig = {
   },
   name: {
     id: 'name',
-    colFlexSize: 2,
-    maxWidth: 120,
+    colFlexSize: 1,
   },
   sprite: {
     id: 'sprite',
@@ -55,17 +54,16 @@ export const columnsConfig: ColumnConfig = {
   genders: {
     id: 'genders',
     colFlexSize: 1,
-    maxWidth: 100,
   },
   height: {
     id: 'height',
     colFlexSize: 1,
-    maxWidth: 100,
+    maxWidth: 80,
   },
   weight: {
     id: 'weight',
     colFlexSize: 1,
-    maxWidth: 100,
+    maxWidth: 80,
   },
   actions: {
     id: 'actions',
