@@ -1,7 +1,8 @@
 import clsx from 'clsx';
-import { Badge } from '../badge';
-import { commonClasseses, typeClassNames } from './helpers';
 import { TypeNames } from 'contract';
+import { Badge } from '../badge';
+import { Tiny } from '../typography';
+import { commonClasseses, typeClassNames } from './helpers';
 
 interface TypeBadgeProps {
   type: TypeNames;
@@ -10,7 +11,7 @@ interface TypeBadgeProps {
 export function TypeBadge({ type = 'empty' }: TypeBadgeProps) {
   return (
     <Badge variant='default' className={clsx(commonClasseses, typeClassNames[type])}>
-      {type}
+      <Tiny>{type}</Tiny>
     </Badge>
   );
 }
