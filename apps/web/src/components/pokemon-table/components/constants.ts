@@ -7,6 +7,7 @@ export type ColumnID =
     >
   | 'types'
   | 'stats'
+  | 'abilities'
   | 'actions';
 
 interface PokemonTableColumnConfig {
@@ -26,11 +27,12 @@ export const columnsConfig: ColumnConfig = {
   tier: {
     id: 'tier',
     colFlexSize: 1,
-    maxWidth: 100,
+    maxWidth: 70,
   },
   name: {
     id: 'name',
     colFlexSize: 2,
+    maxWidth: 120,
   },
   sprite: {
     id: 'sprite',
@@ -45,6 +47,10 @@ export const columnsConfig: ColumnConfig = {
     id: 'stats',
     colFlexSize: 2,
     maxWidth: 240,
+  },
+  abilities: {
+    id: 'abilities',
+    colFlexSize: 2,
   },
   genders: {
     id: 'genders',

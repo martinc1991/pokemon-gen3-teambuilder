@@ -9,5 +9,8 @@
       "@models/*": ["src/models/*"],
       "@config/*": ["src/config/*"]
     }
+  },
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
   }
 }

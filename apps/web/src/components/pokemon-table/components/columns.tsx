@@ -6,6 +6,7 @@ import { GendersText, PokemonIcon, TypeBadge, Typography } from 'ui';
 import { formatPokemonName, getTierText } from '../../../utils/pokemon';
 import { TableRowStats } from '../../stats/tableRowStats';
 import RowDropdownMenu from './dropdown-menu';
+import TableAbilities from './table-abilities';
 
 const columnHelper = createColumnHelper<IPokemonGetAllResponseElement>();
 
@@ -86,6 +87,16 @@ const statsColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.acces
   }
 );
 
+const abilitiesColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor((row) => row.abilities, {
+  id: 'abilities',
+  header: () => {
+    return <div>Abilities</div>;
+  },
+  cell: (info) => {
+    return <TableAbilities abilities={info.getValue()} />;
+  },
+});
+
 const gendersColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor((row) => row.genders, {
   id: 'genders',
   header: () => {
@@ -140,6 +151,7 @@ export const columns: ColumnDef<IPokemonGetAllResponseElement>[] = [
   spriteColumn,
   typesColumn,
   statsColumn,
+  abilitiesColumn,
   gendersColumn,
   heightColumn,
   weightColumn,
