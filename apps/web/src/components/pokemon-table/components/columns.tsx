@@ -12,13 +12,13 @@ const columnHelper = createColumnHelper<IPokemonGetAllResponseElement>();
 const nationalDexColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor('nationalPokedexNumber', {
   id: 'nationalPokedexNumber',
   header: '#',
-  cell: ({ row }) => <div className='capitalize'>{row.getValue('nationalPokedexNumber')}</div>,
+  cell: (info) => <Typography.Muted>{info.getValue()}</Typography.Muted>,
 });
 
 const tierColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor('tier', {
   id: 'tier',
   header: 'Tier',
-  cell: ({ row }) => <Typography.P>{getTierText(row.getValue('tier'))}</Typography.P>,
+  cell: (info) => <Typography.Small>{getTierText(info.getValue())}</Typography.Small>,
 });
 
 const nameColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor('name', {
@@ -26,7 +26,7 @@ const nameColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.access
   header: () => {
     return <div>Name</div>;
   },
-  cell: ({ row }) => <Typography.P>{formatPokemonName(row.getValue('name'))}</Typography.P>,
+  cell: (info) => <Typography.Word className='font-medium'>{formatPokemonName(info.getValue())}</Typography.Word>,
 });
 
 const spriteColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor((row) => row.nationalPokedexNumber, {

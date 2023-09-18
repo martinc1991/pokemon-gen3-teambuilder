@@ -37,9 +37,14 @@ export function P({ className, ...props }: React.HTMLAttributes<HTMLParagraphEle
   return <p className={cn('font-sans leading-7 [&:not(:first-child)]:mt-6 text-foreground', className)} {...props} />;
 }
 
-// Muted paragraph
+// A couple or a single word, but no a paragraph
+export function Word({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
+  return <p className={cn('font-sans text-foreground', className)} {...props} />;
+}
+
+// Muted word
 export function Muted({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
-  return <p className={cn('text-sm text-muted-foreground', className)} {...props} />;
+  return <p className={cn('text-sm font-medium text-muted-foreground', className)} {...props} />;
 }
 
 // Small
@@ -47,7 +52,7 @@ export function Small({ className, ...props }: React.HTMLAttributes<HTMLParagrap
   return <small className={cn('text-sm font-medium text-foreground', className)} {...props} />;
 }
 
-// Small
+// Tiny
 export function Tiny({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
   return <small className={cn('text-xs font-medium leading-none text-foreground', className)} {...props} />;
 }
