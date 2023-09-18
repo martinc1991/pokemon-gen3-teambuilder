@@ -4,7 +4,7 @@ import { flexRender } from '@tanstack/react-table';
 import clsx from 'clsx';
 import type { IPokemonGetAllResponseElement } from 'contract';
 import { TableHead, TableHeader, TableRow } from 'ui';
-import { ColumnID, columnsConfig } from './constants';
+import { ColumnID, columnsConfig } from '../columns/constants';
 
 interface PokemonTableHeaderProps {
   table: Table<IPokemonGetAllResponseElement>;
