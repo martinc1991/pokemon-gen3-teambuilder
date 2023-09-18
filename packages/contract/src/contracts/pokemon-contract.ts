@@ -1,6 +1,6 @@
 import { ClientInferResponseBody, initContract } from '@ts-rest/core';
 import { z } from 'zod';
-import { PokemonModel } from '../../prisma/zod';
+import { CompletePokemon, PokemonModel } from '../../prisma/zod';
 import { ArrayElementType } from '../utils/types/array-element-type';
 
 const c = initContract();
@@ -12,12 +12,19 @@ const queryParamsSchema = z.object({
   sortOrder: z.string().optional(),
 });
 
+type Ability = {
+  abilities: { name: string; shortDescription: string }[];
+};
+
+type GetAllPokemonResponse = Omit<CompletePokemon, 'typeOne' | 'slot' | 'abilities'> & Ability;
+const getAllPokemonResponseSchema = z.custom<GetAllPokemonResponse>();
+
 export const pokemonContract = c.router({
   getAll: {
     method: 'GET',
     path: '/pokemon',
     responses: {
-      200: z.array(PokemonModel),
+      200: z.array(getAllPokemonResponseSchema),
     },
     query: queryParamsSchema,
     summary: 'Get all pokemon',
