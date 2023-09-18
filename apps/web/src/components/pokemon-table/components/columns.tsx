@@ -2,8 +2,8 @@
 
 import { createColumnHelper, type ColumnDef } from '@tanstack/react-table';
 import type { IPokemonGetAllResponseElement } from 'contract';
-import { PokemonIcon, TypeBadge, Typography } from 'ui';
-import { getTierText } from '../../../utils/pokemon';
+import { GendersText, PokemonIcon, TypeBadge, Typography } from 'ui';
+import { formatPokemonName, getTierText } from '../../../utils/pokemon';
 import { TableRowStats } from '../../stats/tableRowStats';
 import RowDropdownMenu from './dropdown-menu';
 
@@ -12,13 +12,13 @@ const columnHelper = createColumnHelper<IPokemonGetAllResponseElement>();
 const nationalDexColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor('nationalPokedexNumber', {
   id: 'nationalPokedexNumber',
   header: '#',
-  cell: ({ row }) => <div className='capitalize'>{row.getValue('nationalPokedexNumber')}</div>,
+  cell: (info) => <Typography.Muted>{info.getValue()}</Typography.Muted>,
 });
 
 const tierColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor('tier', {
   id: 'tier',
   header: 'Tier',
-  cell: ({ row }) => <Typography.P>{getTierText(row.getValue('tier'))}</Typography.P>,
+  cell: (info) => <Typography.Small>{getTierText(info.getValue())}</Typography.Small>,
 });
 
 const nameColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor('name', {
@@ -26,7 +26,7 @@ const nameColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.access
   header: () => {
     return <div>Name</div>;
   },
-  cell: ({ row }) => <Typography.P>{row.getValue('name')}</Typography.P>,
+  cell: (info) => <Typography.Word className='font-medium'>{formatPokemonName(info.getValue())}</Typography.Word>,
 });
 
 const spriteColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor((row) => row.nationalPokedexNumber, {
@@ -86,28 +86,42 @@ const statsColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.acces
   }
 );
 
-const gendersColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor((row) => row.genders.join(' - '), {
+const gendersColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor((row) => row.genders, {
   id: 'genders',
   header: () => {
     return <div>Genders</div>;
   },
-  cell: (info) => info.getValue(),
+  cell: (info) => (
+    <div className='flex justify-center'>
+      <GendersText genders={info.getValue()} />
+    </div>
+  ),
 });
 
 const heightColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor((row) => row.height / 10, {
   id: 'height',
   header: () => {
-    return <div>Height (m)</div>;
+    return <div>Height</div>;
   },
-  cell: (info) => info.getValue(),
+  cell: (info) => (
+    <div className='flex justify-center gap-1'>
+      <Typography.Small>{info.getValue().toFixed(1)}</Typography.Small>
+      <Typography.Muted>m</Typography.Muted>
+    </div>
+  ),
 });
 
 const weightColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor((row) => row.weight / 10, {
   id: 'weight',
   header: () => {
-    return <div>Weight (kg)</div>;
+    return <div>Weight</div>;
   },
-  cell: (info) => info.getValue(),
+  cell: (info) => (
+    <div className='flex justify-center gap-1'>
+      <Typography.Small>{info.getValue().toFixed(1)}</Typography.Small>
+      <Typography.Muted>kg</Typography.Muted>
+    </div>
+  ),
 });
 
 const actionsColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor((row) => row, {

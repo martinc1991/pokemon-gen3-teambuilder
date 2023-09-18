@@ -1,4 +1,4 @@
-export const commonClasseses = 'w-14 capitalize text-foreground';
+export const commonClasseses = 'w-14 h-6 capitalize text-foreground';
 export const typeClassNames = {
   bug: 'bg-bug',
   dark: 'bg-dark',

@@ -43,6 +43,9 @@ export const theme = {
       rock: 'var(--rock)',
       steel: 'var(--steel)',
       water: 'var(--water)',
+      /* Genders colors */
+      male: 'var(--male)',
+      female: 'var(--female)',
     },
     borderRadius: {
       lg: 'var(--radius)',
