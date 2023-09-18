@@ -15,4 +15,5 @@ export const gendersColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHel
       <GendersText genders={info.getValue()} />
     </div>
   ),
+  enableSorting: false,
 });
