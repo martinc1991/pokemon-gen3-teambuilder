@@ -1,7 +1,7 @@
 'use client';
 
 import { createColumnHelper, type ColumnDef } from '@tanstack/react-table';
-import type { IPokemonGetAllResponseElement } from 'contract';
+import { sortedTiers, type IPokemonGetAllResponseElement } from 'contract';
 import { PokemonIcon, TypeBadge, Typography } from 'ui';
 import { formatPokemonName, getTierText } from '../../../utils/pokemon';
 import { TableRowStats } from '../../stats/tableRowStats';
@@ -21,6 +21,7 @@ const tierColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.access
   id: 'tier',
   header: 'Tier',
   cell: (info) => <Typography.Small>{getTierText(info.getValue())}</Typography.Small>,
+  sortingFn: (rowA, rowB) => sortedTiers.indexOf(rowA.getValue('tier')) - sortedTiers.indexOf(rowB.getValue('tier')),
 });
 
 const nameColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor('name', {
@@ -41,6 +42,7 @@ const spriteColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.acce
       <PokemonIcon inputId={info.getValue()} name={info.row.getValue('name')} priority quality={10} />
     </div>
   ),
+  enableSorting: false,
 });
 
 const typesColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor((row) => [row.typeOneName, row.typeTwoName], {
@@ -85,6 +87,7 @@ const statsColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.acces
       };
       return <TableRowStats stats={stats} />;
     },
+    enableSorting: false, // TODO: add sorting capacity based on BST
   }
 );
 
@@ -96,6 +99,7 @@ const abilitiesColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.a
   cell: (info) => {
     return <TableAbilities abilities={info.getValue()} />;
   },
+  enableSorting: false,
 });
 
 const gendersColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor((row) => row.genders, {
@@ -143,6 +147,7 @@ const actionsColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.acc
   cell: (info) => {
     return <RowDropdownMenu pokemon={info.cell.getValue()} />;
   },
+  enableSorting: false,
 });
 
 export const columns: ColumnDef<IPokemonGetAllResponseElement>[] = [
