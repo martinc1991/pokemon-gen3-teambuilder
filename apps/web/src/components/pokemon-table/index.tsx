@@ -4,7 +4,7 @@ import { useVirtualizer } from '@tanstack/react-virtual';
 import type { IPokemonGetAllResponse } from 'contract';
 import { useRef, useState } from 'react';
 import { Table, TableBody } from 'ui';
-import { columns } from './components/columns';
+import TABLE_COLUMNS from './columns/index';
 import { PokemonTableHeader } from './components/table-header';
 import { EmptyRow, PokemonTableRow } from './components/table-rows';
 
@@ -22,7 +22,7 @@ export function PokemonTable({ pokemon }: PokemonTableProps): JSX.Element {
 
   const table = useReactTable({
     data: pokemon,
-    columns,
+    columns: TABLE_COLUMNS,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),

@@ -2,8 +2,8 @@ import type { Row } from '@tanstack/react-table';
 import { flexRender } from '@tanstack/react-table';
 import type { IPokemonGetAllResponseElement } from 'contract';
 import { TableCell, TableRow, Typography } from 'ui';
-import { columns } from './columns';
-import { ColumnID, columnsConfig } from './constants';
+import TABLE_COLUMNS from '../columns';
+import { ColumnID, columnsConfig } from '../columns/constants';
 
 interface PokemonRowProps {
   row: Row<IPokemonGetAllResponseElement>;
@@ -47,7 +47,7 @@ export function PokemonTableRow({ row, key, size, start }: PokemonRowProps): JSX
 export function EmptyRow(): JSX.Element {
   return (
     <TableRow>
-      <TableCell className='h-24 text-center' colSpan={columns.length}>
+      <TableCell className='h-24 text-center' colSpan={TABLE_COLUMNS.length}>
         No results.
       </TableCell>
     </TableRow>
