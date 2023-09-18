@@ -2,10 +2,11 @@
 
 import { createColumnHelper, type ColumnDef } from '@tanstack/react-table';
 import type { IPokemonGetAllResponseElement } from 'contract';
-import { GendersText, PokemonIcon, TypeBadge, Typography } from 'ui';
+import { PokemonIcon, TypeBadge, Typography } from 'ui';
 import { formatPokemonName, getTierText } from '../../../utils/pokemon';
 import { TableRowStats } from '../../stats/tableRowStats';
 import RowDropdownMenu from './dropdown-menu';
+import { GendersText } from './genders-text';
 import TableAbilities from './table-abilities';
 
 const columnHelper = createColumnHelper<IPokemonGetAllResponseElement>();

@@ -55,6 +55,7 @@ export const columnsConfig: ColumnConfig = {
   genders: {
     id: 'genders',
     colFlexSize: 1,
+    maxWidth: 100,
   },
   height: {
     id: 'height',

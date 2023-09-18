@@ -56,3 +56,12 @@ export function Small({ className, ...props }: React.HTMLAttributes<HTMLParagrap
 export function Tiny({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
   return <small className={cn('text-xs font-medium leading-none text-foreground', className)} {...props} />;
 }
+
+// Male
+export function Male({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
+  return <small className={cn('text-sm font-medium leading-none text-male', className)} {...props} />;
+}
+// Female
+export function Female({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
+  return <small className={cn('text-sm font-medium leading-none text-female', className)} {...props} />;
+}
