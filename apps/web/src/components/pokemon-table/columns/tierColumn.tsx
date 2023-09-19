@@ -6,7 +6,7 @@ import { columnHelper } from './getColumnHelper';
 
 export const tierColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor('tier', {
   id: 'tier',
-  header: 'Tier',
+  header: () => <div>Tier</div>,
   cell: (info) => <Typography.Small>{getTierText(info.getValue())}</Typography.Small>,
   sortingFn: (rowA, rowB) => sortedTiers.indexOf(rowA.getValue('tier')) - sortedTiers.indexOf(rowB.getValue('tier')),
 });

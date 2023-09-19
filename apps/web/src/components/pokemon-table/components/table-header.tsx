@@ -32,6 +32,7 @@ function PokemonHeaderRow({ headerGroup, key }: PokemonHeaderRowProps): JSX.Elem
         const ID = header.getContext().header.id as ColumnID; // Had to cast just for typing
         const colFlexSize = columnsConfig[ID].colFlexSize;
         const maxWidth = columnsConfig[ID].maxWidth;
+        const minWidth = columnsConfig[ID].minWidth;
 
         const text = flexRender(header.column.columnDef.header, header.getContext());
         const sort = header.column.getIsSorted();
@@ -40,7 +41,7 @@ function PokemonHeaderRow({ headerGroup, key }: PokemonHeaderRowProps): JSX.Elem
         return (
           <TableHead
             className='flex items-center justify-center gap-1'
-            style={{ flex: colFlexSize, maxWidth: maxWidth }}
+            style={{ flex: colFlexSize, maxWidth: maxWidth, minWidth: minWidth }}
             key={key}
             onClick={header.column.getToggleSortingHandler()}
           >
