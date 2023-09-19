@@ -3,7 +3,16 @@ import { IPokemon } from 'contract';
 export type ColumnID =
   | keyof Omit<
       IPokemon,
-      'typeOneName' | 'typeTwoName' | 'id' | 'baseHp' | 'baseAttack' | 'baseDefense' | 'baseSpattack' | 'baseSpdefense' | 'baseSpeed'
+      | 'typeOneName'
+      | 'typeTwoName'
+      | 'id'
+      | 'baseHp'
+      | 'baseAttack'
+      | 'baseDefense'
+      | 'baseSpattack'
+      | 'baseSpdefense'
+      | 'baseSpeed'
+      | 'icon'
     >
   | 'types'
   | 'stats'
@@ -31,7 +40,7 @@ export const columnsConfig: ColumnConfig = {
   },
   name: {
     id: 'name',
-    colFlexSize: 1,
+    colFlexSize: 2,
   },
   sprite: {
     id: 'sprite',
