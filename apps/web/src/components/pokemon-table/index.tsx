@@ -49,7 +49,7 @@ export function PokemonTable({ pokemon }: PokemonTableProps): JSX.Element {
   });
 
   return (
-    <div className='w-full border rounded-md h-[800px] overflow-auto' ref={parentRef}>
+    <div className='w-11/12 border rounded-md h-[800px] overflow-auto' ref={parentRef}>
       <Table>
         <PokemonTableHeader table={table} />
         <TableBody

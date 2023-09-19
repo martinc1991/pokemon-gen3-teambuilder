@@ -2,6 +2,7 @@
 
 import { PokemonAvatar, Typography } from 'ui';
 import { useTeamStore } from '../../../state/team';
+import { formatPokemonName } from '../../../utils/pokemon';
 import BasicSidebar from '../basic-sidebar';
 
 export default function RightSidebar(): JSX.Element {
@@ -11,12 +12,14 @@ export default function RightSidebar(): JSX.Element {
     <BasicSidebar side='right'>
       <Typography.P>Team</Typography.P>
       {slots.map((slot) => {
-        const iconId = slot.pokemon?.nationalPokedexNumber ?? null;
+        const iconUrl = slot.pokemon?.icon ?? null;
         const key = slot.slotId;
+        const name = slot.name.length ? slot.name : formatPokemonName(slot.pokemon?.name ?? '');
         return (
           <PokemonAvatar
-            iconId={iconId}
+            iconUrl={iconUrl}
             key={key}
+            name={name}
             onClick={() => {
               removeSlot(slot);
             }}

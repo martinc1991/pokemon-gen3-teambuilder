@@ -1,23 +1,21 @@
-import { capitalizeFirstLetter, cn, idToIconUrl } from '@/lib/utils';
+import { capitalizeFirstLetter, cn } from '@/lib/utils';
 import Image, { ImageProps } from 'next/image';
 import { useState } from 'react';
 import { SubstitutePlaceholder } from '../substitute-placeholder';
 
 interface PokemonIconProps extends Omit<ImageProps, 'src' | 'alt'> {
-  inputId: number;
+  iconUrl: string;
   name?: string;
-  fetchStatic?: boolean;
 }
 
-export function PokemonIcon({ inputId, height = 40, name = '', fetchStatic, ...props }: PokemonIconProps) {
+export function PokemonIcon({ iconUrl, height = 40, name = '', ...props }: PokemonIconProps) {
   const [loaded, setLoaded] = useState(false);
-  const icon = idToIconUrl(inputId, fetchStatic);
 
   function toggleLoaded() {
     setLoaded(true);
   }
   function handleError() {
-    console.log('Error loading img: ', icon, name);
+    console.log('Error loading img: ', iconUrl, name);
   }
 
   return (
@@ -25,7 +23,7 @@ export function PokemonIcon({ inputId, height = 40, name = '', fetchStatic, ...p
       {!loaded && <SubstitutePlaceholder />}
       <Image
         className={cn('-mt-2 bg-transparent', loaded ? 'opacity-100' : 'opacity-0')}
-        src={icon}
+        src={iconUrl}
         height={height}
         width={loaded ? height : 0}
         title={capitalizeFirstLetter(name)}

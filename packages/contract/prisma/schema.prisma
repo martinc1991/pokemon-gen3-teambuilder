@@ -160,7 +160,8 @@ model Pokemon {
   id                    String    @id @default(uuid())
   name                  String    @unique
   nationalPokedexNumber Int       @unique
-  sprite                String    @unique
+  sprite                String
+  icon                  String
   height                Int
   weight                Int
   typeOne               Type      @relation("TypeToPokemonTypeOne", fields: [typeOneName], references: [name])
