@@ -12,7 +12,7 @@ export type ColumnID =
       | 'baseSpattack'
       | 'baseSpdefense'
       | 'baseSpeed'
-      | 'icon'
+      | 'sprite'
     >
   | 'types'
   | 'stats'
@@ -42,8 +42,8 @@ export const columnsConfig: ColumnConfig = {
     id: 'name',
     colFlexSize: 2,
   },
-  sprite: {
-    id: 'sprite',
+  icon: {
+    id: 'icon',
     colFlexSize: 1,
     maxWidth: 50,
   },

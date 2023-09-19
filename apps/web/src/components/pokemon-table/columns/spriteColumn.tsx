@@ -6,7 +6,7 @@ import { PokemonIcon } from 'ui';
 import { columnHelper } from './getColumnHelper';
 
 export const spriteColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor((row) => row.icon, {
-  id: 'sprite',
+  id: 'icon',
   header: () => {
     return <div />;
   },
