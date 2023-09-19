@@ -11,7 +11,8 @@ interface PokemonIconProps extends Omit<ImageProps, 'src' | 'alt'> {
 
 export function PokemonIcon({ inputId, height = 40, name = '', fetchStatic, ...props }: PokemonIconProps) {
   const [loaded, setLoaded] = useState(false);
-  const icon = idToIconUrl(inputId, fetchStatic);
+  const id = inputId >= 386 ? 386 : inputId; // For the case of deoxys having variants, TODO: fix this
+  const icon = idToIconUrl(id, fetchStatic);
 
   function toggleLoaded() {
     setLoaded(true);

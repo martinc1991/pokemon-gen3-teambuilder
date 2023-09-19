@@ -1,4 +1,5 @@
 import { Tier } from '@prisma/client';
+import { deoxysVariations } from './data/deoxys';
 import { overrides } from './data/overrides';
 import { pokemonTiers } from './data/tiers';
 import { getAbilities } from './entities/abilities';
@@ -56,9 +57,11 @@ export async function seeder() {
   });
   console.log('Creating abilities finished');
 
+  const allPokemon = pokemons.concat(deoxysVariations);
+
   // Seed pokemon
   console.log('Creating pokemons');
-  pokemons.forEach(async (pkmn) => {
+  allPokemon.forEach(async (pkmn) => {
     await prismaSeederClient.pokemon.create({
       data: {
         ...pkmn,
@@ -81,6 +84,7 @@ export async function seeder() {
   });
   console.log('Creating pokemons finished');
 
+  // Overrides
   await overrides();
 
   performance.mark('end');
