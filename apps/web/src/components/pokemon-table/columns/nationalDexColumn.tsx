@@ -7,6 +7,6 @@ import { columnHelper } from './getColumnHelper';
 
 export const nationalDexColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor('nationalPokedexNumber', {
   id: 'nationalPokedexNumber',
-  header: '#',
+  header: () => <div>#</div>,
   cell: (info) => <Typography.Muted>{info.getValue()}</Typography.Muted>,
 });

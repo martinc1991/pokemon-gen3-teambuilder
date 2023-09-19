@@ -23,6 +23,7 @@ interface PokemonTableColumnConfig {
   id: ColumnID;
   colFlexSize: number;
   maxWidth?: number;
+  minWidth?: number;
 }
 
 type ColumnConfig = { [Property in ColumnID]: PokemonTableColumnConfig };
@@ -31,12 +32,14 @@ export const columnsConfig: ColumnConfig = {
   nationalPokedexNumber: {
     id: 'nationalPokedexNumber',
     colFlexSize: 1,
-    maxWidth: 80,
+    maxWidth: 40,
+    minWidth: 40,
   },
   tier: {
     id: 'tier',
     colFlexSize: 1,
-    maxWidth: 100,
+    maxWidth: 50,
+    minWidth: 50,
   },
   name: {
     id: 'name',
@@ -46,20 +49,21 @@ export const columnsConfig: ColumnConfig = {
     id: 'icon',
     colFlexSize: 1,
     maxWidth: 50,
+    minWidth: 50,
   },
   types: {
     id: 'types',
     colFlexSize: 2,
-    maxWidth: 190,
   },
   stats: {
     id: 'stats',
     colFlexSize: 2,
-    maxWidth: 240,
+    minWidth: 240,
   },
   abilities: {
     id: 'abilities',
     colFlexSize: 2,
+    minWidth: 160,
   },
   genders: {
     id: 'genders',
@@ -68,16 +72,17 @@ export const columnsConfig: ColumnConfig = {
   height: {
     id: 'height',
     colFlexSize: 1,
-    maxWidth: 110,
+    maxWidth: 80,
   },
   weight: {
     id: 'weight',
     colFlexSize: 1,
-    maxWidth: 110,
+    maxWidth: 80,
   },
   actions: {
     id: 'actions',
     colFlexSize: 1,
-    maxWidth: 50,
+    maxWidth: 35,
+    minWidth: 35,
   },
 };

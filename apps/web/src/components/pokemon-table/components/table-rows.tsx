@@ -34,8 +34,10 @@ export function PokemonTableRow({ row, key, size, start }: PokemonRowProps): JSX
         const ID = cell.getContext().column.id as ColumnID; // Had to cast just for typing
         const colFlexSize = columnsConfig[ID].colFlexSize;
         const maxWidth = columnsConfig[ID].maxWidth;
+        const minWidth = columnsConfig[ID].minWidth;
+
         return (
-          <TableCell className='flex-1 text-center' key={cell.id} style={{ flex: colFlexSize, maxWidth: maxWidth }}>
+          <TableCell className='flex-1 p-0 text-center' key={cell.id} style={{ flex: colFlexSize, maxWidth: maxWidth, minWidth: minWidth }}>
             <Typography.P>{flexRender(cell.column.columnDef.cell, cell.getContext())}</Typography.P>
           </TableCell>
         );
