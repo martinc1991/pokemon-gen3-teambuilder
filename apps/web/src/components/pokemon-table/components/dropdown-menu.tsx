@@ -8,10 +8,14 @@ interface RowDropdownMenuProps {
 }
 
 export default function RowDropdownMenu(props: RowDropdownMenuProps): JSX.Element {
-  const addPokemon = useTeamStore((state) => state.addSlot);
+  const [slots, addPokemon] = useTeamStore((state) => [state.slots, state.addSlot]);
+
+  const addPokemonDisabled = slots.every((slot) => {
+    return Boolean(slot.pokemon);
+  });
 
   function handleClick(): void {
-    addPokemon(props.pokemon);
+    if (!addPokemonDisabled) addPokemon(props.pokemon);
   }
 
   return (
@@ -23,8 +27,10 @@ export default function RowDropdownMenu(props: RowDropdownMenuProps): JSX.Elemen
             <DotsHorizontalIcon className='w-4 h-4' />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align='start'>
-          <DropdownMenuItem onClick={handleClick}>Add to team</DropdownMenuItem>
+        <DropdownMenuContent align='end'>
+          <DropdownMenuItem onClick={handleClick} disabled={addPokemonDisabled}>
+            Add to team
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
