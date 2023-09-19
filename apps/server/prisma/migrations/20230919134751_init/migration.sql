@@ -13,6 +13,9 @@ CREATE TYPE "DamageClass" AS ENUM ('physical', 'special', 'none');
 -- CreateEnum
 CREATE TYPE "Gender" AS ENUM ('male', 'female', 'genderless');
 
+-- CreateEnum
+CREATE TYPE "Tier" AS ENUM ('lc', 'nfe', 'nu', 'ou', 'pu', 'publ', 'uber', 'uu', 'uubl');
+
 -- CreateTable
 CREATE TABLE "Type" (
     "id" TEXT NOT NULL,
@@ -66,11 +69,19 @@ CREATE TABLE "Pokemon" (
     "name" TEXT NOT NULL,
     "nationalPokedexNumber" INTEGER NOT NULL,
     "sprite" TEXT NOT NULL,
+    "icon" TEXT NOT NULL,
     "height" INTEGER NOT NULL,
     "weight" INTEGER NOT NULL,
     "typeOneName" "TypeNames" NOT NULL,
     "typeTwoName" "TypeNames" NOT NULL,
     "genders" "Gender"[],
+    "tier" "Tier" NOT NULL DEFAULT 'lc',
+    "baseHp" INTEGER NOT NULL,
+    "baseAttack" INTEGER NOT NULL,
+    "baseDefense" INTEGER NOT NULL,
+    "baseSpattack" INTEGER NOT NULL,
+    "baseSpdefense" INTEGER NOT NULL,
+    "baseSpeed" INTEGER NOT NULL,
 
     CONSTRAINT "Pokemon_pkey" PRIMARY KEY ("id")
 );
@@ -127,9 +138,6 @@ CREATE UNIQUE INDEX "Pokemon_name_key" ON "Pokemon"("name");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Pokemon_nationalPokedexNumber_key" ON "Pokemon"("nationalPokedexNumber");
-
--- CreateIndex
-CREATE UNIQUE INDEX "Pokemon_sprite_key" ON "Pokemon"("sprite");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Slot_teamId_order_key" ON "Slot"("teamId", "order");

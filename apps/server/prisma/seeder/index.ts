@@ -1,7 +1,5 @@
-import { Tier } from '@prisma/client';
 import { deoxysVariations } from './data/deoxys';
 import { overrides } from './data/overrides';
-import { pokemonTiers } from './data/tiers';
 import { getAbilities } from './entities/abilities';
 import { getItems } from './entities/items';
 import { naturesArray } from './entities/natures';
@@ -78,7 +76,6 @@ export async function seeder() {
               return { name };
             }),
         },
-        tier: Tier[pokemonTiers[pkmn.name]],
       },
     });
   });

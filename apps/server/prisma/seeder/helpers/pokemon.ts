@@ -1,15 +1,12 @@
-import { Gender, TypeNames } from '@prisma/client';
+import { SEREBII_URL } from '@config/app';
+import { Gender, TypeNames, Pokemon as PokemonModel } from '@prisma/client';
 import { IBaseStats } from 'contract';
 import { Pokemon, PokemonSpecies, PokemonType } from 'pokenode-ts';
 
 export type PokemonMergedInfo = PokemonSpecies & Pokemon;
 
-export interface Seed_Pokemon extends IBaseStats {
-  name: string;
-  nationalPokedexNumber: number;
-  sprite: string;
-  height: number;
-  weight: number;
+export interface Seed_Pokemon
+  extends Omit<PokemonModel, 'id' | 'typeOneName' | 'typeTwoName'> {
   typeOne: TypeNames;
   typeTwo?: TypeNames;
   abilities: string[];
@@ -104,4 +101,12 @@ export function getPokemonBaseStats({ stats }: PokemonMergedInfo): IBaseStats {
       baseSpeed: 0,
     },
   );
+}
+
+export function idToIconUrl(id: number, fetchStatic = false): string {
+  const _id = id.toString().padStart(3, '0');
+  if (id > 493 || fetchStatic) {
+    return `${SEREBII_URL}/pokedex-sm/icon/${_id}.png`; // static (only until volcanion (721) )
+  }
+  return `${SEREBII_URL}/pokedex-rs/icon/${_id}.gif`; // animated gifs (only until arceus (493) )
 }

@@ -7,6 +7,7 @@ export const PokemonModel = z.object({
   name: z.string(),
   nationalPokedexNumber: z.number().int(),
   sprite: z.string(),
+  icon: z.string(),
   height: z.number().int(),
   weight: z.number().int(),
   typeOneName: z.nativeEnum(TypeNames),

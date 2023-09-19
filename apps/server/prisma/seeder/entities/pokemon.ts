@@ -7,7 +7,10 @@ import {
   getGenThreeTypes,
   getPokemonBaseStats,
   getPossibleGenders,
+  idToIconUrl,
 } from '../helpers/pokemon';
+import { Tier } from '@prisma/client';
+import { pokemonTiers } from '../data/tiers';
 
 const pokemonIds = Array.from(
   { length: LAST_POKEMON_DEX_NUMBER },
@@ -53,6 +56,7 @@ export async function getPokemonPromises(): Promise<Seed_Pokemon[]> {
       name: pkmn.name,
       nationalPokedexNumber: pkmn.id,
       sprite: getGenThreeSprite(pkmn),
+      icon: idToIconUrl(pkmn.id),
       height: pkmn.height,
       weight: pkmn.weight,
       typeOne,
@@ -65,6 +69,7 @@ export async function getPokemonPromises(): Promise<Seed_Pokemon[]> {
       baseSpattack,
       baseSpdefense,
       baseSpeed,
+      tier: Tier[pokemonTiers[pkmn.name]],
     };
   });
 }
