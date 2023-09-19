@@ -8,6 +8,7 @@ export function pokemonStub(): IPokemon {
     nationalPokedexNumber: 2,
     sprite:
       'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/2.png',
+    icon: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/2.png',
     height: 10,
     weight: 130,
     typeOneName: TypeNames.grass,
