@@ -4,7 +4,8 @@ import { flexRender } from '@tanstack/react-table';
 import clsx from 'clsx';
 import type { IPokemonGetAllResponseElement } from 'contract';
 import { TableHead, TableHeader, TableRow } from 'ui';
-import { ColumnID, columnsConfig } from '../columns/constants';
+import type { ColumnID } from '../columns/constants';
+import { columnsConfig } from '../columns/constants';
 
 interface PokemonTableHeaderProps {
   table: Table<IPokemonGetAllResponseElement>;
@@ -41,11 +42,11 @@ function PokemonHeaderRow({ headerGroup, key }: PokemonHeaderRowProps): JSX.Elem
         return (
           <TableHead
             className='flex items-center justify-center gap-1'
-            style={{ flex: colFlexSize, maxWidth: maxWidth, minWidth: minWidth }}
             key={key}
             onClick={header.column.getToggleSortingHandler()}
+            style={{ flex: colFlexSize, maxWidth, minWidth }}
           >
-            {canSort && <div className='flex-1' />}
+            {canSort ? <div className='flex-1' /> : null}
             <div
               className={clsx(
                 'flex justify-center flex-3 ',
@@ -54,11 +55,9 @@ function PokemonHeaderRow({ headerGroup, key }: PokemonHeaderRowProps): JSX.Elem
             >
               {text}
             </div>
-            {canSort && (
-              <div className='flex-1'>
+            {canSort ? <div className='flex-1'>
                 {sort === 'asc' && <ArrowUpIcon />} {sort === 'desc' && <ArrowDownIcon />}
-              </div>
-            )}
+              </div> : null}
           </TableHead>
         );
       })}

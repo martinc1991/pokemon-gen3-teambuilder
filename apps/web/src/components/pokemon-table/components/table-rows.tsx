@@ -3,7 +3,8 @@ import { flexRender } from '@tanstack/react-table';
 import type { IPokemonGetAllResponseElement } from 'contract';
 import { TableCell, TableRow, Typography } from 'ui';
 import TABLE_COLUMNS from '../columns';
-import { ColumnID, columnsConfig } from '../columns/constants';
+import type { ColumnID} from '../columns/constants';
+import { columnsConfig } from '../columns/constants';
 
 interface PokemonRowProps {
   row: Row<IPokemonGetAllResponseElement>;
@@ -36,7 +37,7 @@ export function PokemonTableRow({ row, size, start }: PokemonRowProps): JSX.Elem
         const minWidth = columnsConfig[ID].minWidth;
 
         return (
-          <TableCell className='flex-1 p-0 text-center' key={cell.id} style={{ flex: colFlexSize, maxWidth: maxWidth, minWidth: minWidth }}>
+          <TableCell className='flex-1 p-0 text-center' key={cell.id} style={{ flex: colFlexSize, maxWidth, minWidth }}>
             <Typography.P>{flexRender(cell.column.columnDef.cell, cell.getContext())}</Typography.P>
           </TableCell>
         );

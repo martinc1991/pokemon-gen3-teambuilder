@@ -28,7 +28,7 @@ export default function RowDropdownMenu(props: RowDropdownMenuProps): JSX.Elemen
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align='end'>
-          <DropdownMenuItem onClick={handleClick} disabled={addPokemonDisabled}>
+          <DropdownMenuItem disabled={addPokemonDisabled} onClick={handleClick}>
             Add to team
           </DropdownMenuItem>
         </DropdownMenuContent>

@@ -1,13 +1,14 @@
-import type { ColumnFiltersState, SortingState, VisibilityState } from '@tanstack/react-table';
+import type { ColumnFiltersState, SortingState, Table, VisibilityState } from '@tanstack/react-table';
 import { getCoreRowModel, getFilteredRowModel, getSortedRowModel, useReactTable } from '@tanstack/react-table';
-import { IPokemonGetAllResponse } from 'contract';
+import type { IPokemonGetAllResponse, IPokemonGetAllResponseElement } from 'contract';
 import { useEffect, useState } from 'react';
 import TABLE_COLUMNS from '../columns';
-import { usePokemonTableMediaQueries } from './usePokemonTableMediaQueries';
+import { usePokemonTableMediaQueries } from './use-pokemon-table-media-queries';
 
 type Props = IPokemonGetAllResponse;
+type HookReturnType = Table<IPokemonGetAllResponseElement>;
 
-export function usePokemonTableConfig(data: Props) {
+export function usePokemonTableConfig(data: Props): HookReturnType {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
@@ -43,7 +44,7 @@ export function usePokemonTableConfig(data: Props) {
       nationalPokedexNumber: moreThan1200,
       abilities: moreThan1000,
     });
-  }, [moreThan1500, moreThan1200, moreThan1000]);
+  }, [moreThan1500, moreThan1200, moreThan1000, table]);
 
   return table;
 }

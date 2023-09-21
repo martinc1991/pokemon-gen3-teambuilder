@@ -3,7 +3,7 @@
 import { type ColumnDef } from '@tanstack/react-table';
 import { type IPokemonGetAllResponseElement } from 'contract';
 import TableAbilities from '../components/table-abilities';
-import { columnHelper } from './getColumnHelper';
+import { columnHelper } from './get-column-helper';
 
 export const abilitiesColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor((row) => row.abilities, {
   id: 'abilities',

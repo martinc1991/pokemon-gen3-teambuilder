@@ -3,7 +3,7 @@
 import { type ColumnDef } from '@tanstack/react-table';
 import { type IPokemonGetAllResponseElement } from 'contract';
 import { GendersText } from '../components/genders-text';
-import { columnHelper } from './getColumnHelper';
+import { columnHelper } from './get-column-helper';
 
 export const gendersColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor((row) => row.genders, {
   id: 'genders',

@@ -1,4 +1,5 @@
-import { IBaseStats } from 'contract';
+import type { IBaseStats } from 'contract';
+import { getValues } from '../common';
 
 export function getShortStatName(statName: keyof IBaseStats): string {
   switch (statName) {
@@ -20,9 +21,5 @@ export function getShortStatName(statName: keyof IBaseStats): string {
 }
 
 export function getTotalBaseStat(stats: IBaseStats): number {
-  let bst = 0;
-  for (const stat in stats) {
-    bst = bst + stats[stat];
-  }
-  return bst;
+  return getValues(stats).reduce((a, b) => a + b, 0);
 }

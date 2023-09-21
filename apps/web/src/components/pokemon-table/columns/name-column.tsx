@@ -4,7 +4,7 @@ import { type ColumnDef } from '@tanstack/react-table';
 import { type IPokemonGetAllResponseElement } from 'contract';
 import { Typography } from 'ui';
 import { formatPokemonName } from '../../../utils/pokemon';
-import { columnHelper } from './getColumnHelper';
+import { columnHelper } from './get-column-helper';
 
 export const nameColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor('name', {
   id: 'name',

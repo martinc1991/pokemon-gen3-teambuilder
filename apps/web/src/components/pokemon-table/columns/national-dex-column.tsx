@@ -3,7 +3,7 @@
 import { type ColumnDef } from '@tanstack/react-table';
 import { type IPokemonGetAllResponseElement } from 'contract';
 import { Typography } from 'ui';
-import { columnHelper } from './getColumnHelper';
+import { columnHelper } from './get-column-helper';
 
 export const nationalDexColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor('nationalPokedexNumber', {
   id: 'nationalPokedexNumber',

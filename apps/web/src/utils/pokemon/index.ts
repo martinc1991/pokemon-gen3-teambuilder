@@ -1,3 +1,3 @@
-export * from './getTierName';
+export * from './get-tier-name';
 export * from './stats';
-export * from './formatTableData';
+export * from './format-table-data';

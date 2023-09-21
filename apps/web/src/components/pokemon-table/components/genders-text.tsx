@@ -5,7 +5,7 @@ interface GendersTextProps {
   genders: Gender[];
 }
 
-export function GendersText({ genders }: GendersTextProps) {
+export function GendersText({ genders }: GendersTextProps): JSX.Element {
   return (
     <div className='flex flex-col gap-1'>
       {genders.includes('male') && <Typography.Male className='capitalize'>Male</Typography.Male>}

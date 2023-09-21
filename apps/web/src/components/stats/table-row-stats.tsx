@@ -1,4 +1,4 @@
-import { IBaseStats } from 'contract';
+import type { IBaseStats } from 'contract';
 import { Typography } from 'ui';
 import { getKeys } from '../../utils/common';
 import { getShortStatName, getTotalBaseStat } from '../../utils/pokemon';
@@ -13,7 +13,7 @@ export function TableRowStats({ stats }: TableRowStatsProps): JSX.Element {
       <div className='flex flex-row gap-1'>
         {getKeys(stats).map((statName) => {
           return (
-            <div className='flex flex-col items-center gap-1 w-[26px]'>
+            <div className='flex flex-col items-center gap-1 w-[26px]' key={`row-${statName}`}>
               <Typography.Tiny className='text-muted-foreground'>{getShortStatName(statName)}</Typography.Tiny>
               <Typography.Small>{stats[statName]}</Typography.Small>
             </div>

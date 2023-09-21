@@ -1,4 +1,4 @@
-import { IPokemon } from 'contract';
+import type { IPokemon } from 'contract';
 
 export type ColumnID =
   | keyof Omit<

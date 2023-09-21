@@ -4,10 +4,10 @@ import { Table, TableBody, Typography } from 'ui';
 import { useWindowSize } from 'usehooks-ts';
 import { BUILDER_PAGE_HEADER_HEIGHT } from '../../../app/builder/constants';
 import LoadingState from '../../loading-state';
-import { usePokemonTableConfig } from '../hooks/usePokemonTableConfig';
-import { usePokemonTableInfo } from '../hooks/usePokemonTableInfo';
+import { usePokemonTableConfig } from '../hooks/use-pokemon-table-config';
+import { usePokemonTableInfo } from '../hooks/use-pokemon-table-info';
 import { PokemonTableHeader } from './table-header';
-import { PokemonTableRow, EmptyRow } from './table-rows';
+import { EmptyRow, PokemonTableRow } from './table-rows';
 
 export function TableContent(): JSX.Element {
   const tableContainerRef = useRef(null);
@@ -40,9 +40,9 @@ export function TableContent(): JSX.Element {
         <PokemonTableHeader table={table} />
         <TableBody style={{ height: `${rowVirtualizer.getTotalSize()}px`, width: '600px', position: 'relative' }}>
           {rowVirtualizer.getVirtualItems().length ? (
-            rowVirtualizer.getVirtualItems().map((virtualRow, i, arr) => {
+            rowVirtualizer.getVirtualItems().map((virtualRow) => {
               const row = rows[virtualRow.index];
-              return <PokemonTableRow row={row} size={virtualRow.size} start={virtualRow.start} />;
+              return <PokemonTableRow key={row.id} row={row} size={virtualRow.size} start={virtualRow.start} />;
             })
           ) : (
             <EmptyRow />

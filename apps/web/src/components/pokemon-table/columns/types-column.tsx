@@ -3,7 +3,7 @@
 import { type ColumnDef } from '@tanstack/react-table';
 import { type IPokemonGetAllResponseElement } from 'contract';
 import { TypeBadge } from 'ui';
-import { columnHelper } from './getColumnHelper';
+import { columnHelper } from './get-column-helper';
 
 export const typesColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor((row) => [row.typeOneName, row.typeTwoName], {
   id: 'types',

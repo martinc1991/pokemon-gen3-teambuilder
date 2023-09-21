@@ -1,4 +1,4 @@
-import { ITier } from 'contract';
+import type { ITier } from 'contract';
 
 function capitalizeWord(word: string): string {
   return word.charAt(0).toUpperCase() + word.slice(1);

@@ -1,7 +1,7 @@
 'use client';
 
-import { TableContent } from './components/table';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { TableContent } from './components/table';
 
 const queryClient = new QueryClient();
 

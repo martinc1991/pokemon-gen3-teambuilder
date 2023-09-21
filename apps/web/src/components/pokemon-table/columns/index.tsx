@@ -2,17 +2,17 @@
 
 import { type ColumnDef } from '@tanstack/react-table';
 import { type IPokemonGetAllResponseElement } from 'contract';
-import { abilitiesColumn } from './abilitiesColumn';
-import { actionsColumn } from './actionsColumn';
-import { gendersColumn } from './gendersColumn';
-import { heightColumn } from './heightColumn';
-import { nameColumn } from './nameColumn';
-import { nationalDexColumn } from './nationalDexColumn';
-import { spriteColumn } from './spriteColumn';
-import { statsColumn } from './statsColumn';
-import { tierColumn } from './tierColumn';
-import { typesColumn } from './typesColumn';
-import { weightColumn } from './weightColumn';
+import { abilitiesColumn } from './abilities-column';
+import { actionsColumn } from './actions-column';
+import { gendersColumn } from './genders-column';
+import { heightColumn } from './height-column';
+import { nameColumn } from './name-column';
+import { nationalDexColumn } from './national-dex-column';
+import { spriteColumn } from './sprite-column';
+import { statsColumn } from './stats-column';
+import { tierColumn } from './tier-column';
+import { typesColumn } from './types-column';
+import { weightColumn } from './weight-column';
 
 const TABLE_COLUMNS: ColumnDef<IPokemonGetAllResponseElement>[] = [
   nationalDexColumn,
