@@ -1,8 +1,7 @@
 import type { IPokemon } from 'contract';
-import { nanoid } from 'nanoid';
 import { create } from 'zustand';
 import type { TeamSlot } from './helpers';
-import { EmptySlot, emptyTeam, getFirstEmptySlotIndex, replaceSlot } from './helpers';
+import { EmptySlot, addokemonToSlot, emptyTeam, getFirstEmptySlotIndex } from './helpers';
 
 interface TeamState {
   slots: TeamSlot[];
@@ -13,12 +12,12 @@ interface TeamState {
 export const useTeamStore = create<TeamState>()((set) => ({
   slots: emptyTeam,
   addSlot: (pokemon) => {
-    const newSlot: TeamSlot = { name: '', pokemon, slotId: nanoid(6) };
     set((state) => {
       const index = getFirstEmptySlotIndex(state.slots);
       if (index === null) return state;
+      const newSlot: TeamSlot = { ...state.slots[index], name: '', pokemon, nationalPokedexNumber: pokemon.nationalPokedexNumber };
 
-      const newSlots = replaceSlot(state.slots, index, newSlot);
+      const newSlots = addokemonToSlot(state.slots, index, newSlot);
       return { slots: newSlots };
     });
   },
@@ -26,7 +25,7 @@ export const useTeamStore = create<TeamState>()((set) => ({
     set((state) => {
       if (!slot.pokemon) return state;
       const newSlots: TeamSlot[] = state.slots.filter((s) => s.slotId !== slot.slotId);
-      newSlots.push(new EmptySlot());
+      newSlots.push(new EmptySlot(5));
       return { slots: newSlots };
     });
   },
