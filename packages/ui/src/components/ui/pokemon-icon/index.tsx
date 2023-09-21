@@ -25,7 +25,7 @@ export function PokemonIcon({ iconUrl, height = 40, name = '', ...props }: Pokem
         className={cn('-mt-2 bg-transparent', loaded ? 'opacity-100' : 'opacity-0')}
         src={iconUrl}
         height={height}
-        width={loaded ? height : 0}
+        width={height}
         title={capitalizeFirstLetter(name)}
         alt={capitalizeFirstLetter(name)}
         onLoadingComplete={toggleLoaded}
