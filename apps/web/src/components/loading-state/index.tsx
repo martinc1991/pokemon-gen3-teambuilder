@@ -1,11 +1,15 @@
-'use client';
-
+import clsx from 'clsx';
 import { SubstitutePlaceholder } from 'ui';
 
-export default function LoadingState(): JSX.Element {
+interface Props {
+  containerClassName?: string;
+  height?: number;
+}
+
+export default function LoadingState({ containerClassName = '', height = 40 }: Props): JSX.Element {
   return (
-    <div className='flex flex-col items-center justify-center w-5/6 min-h-screen gap-2 py-2'>
-      <SubstitutePlaceholder height={40} />
+    <div className={clsx('flex items-center justify-center flex-1 w-full', containerClassName)}>
+      <SubstitutePlaceholder height={height} />
     </div>
   );
 }
