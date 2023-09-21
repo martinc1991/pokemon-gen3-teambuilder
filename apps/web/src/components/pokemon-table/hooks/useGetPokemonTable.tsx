@@ -3,8 +3,7 @@
 import type { IPokemonGetAllQueryParams } from 'contract';
 import { client } from '../../../rq-client';
 
-// CHECK: if this number is right
-export const POKEMON_QUERY_PAGE_SIZE = 20;
+export const POKEMON_QUERY_PAGE_SIZE = 30; // CHECK: if this number is right
 
 type PageParam = IPokemonGetAllQueryParams | undefined;
 
@@ -29,6 +28,7 @@ export function useGetPokemonTable() {
       keepPreviousData: true,
       refetchOnWindowFocus: false,
       refetchOnReconnect: false,
+      cacheTime: 1000 * 60 * 60 * 24 * 7,
     }
   );
 

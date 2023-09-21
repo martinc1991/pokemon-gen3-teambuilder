@@ -7,16 +7,15 @@ import { ColumnID, columnsConfig } from '../columns/constants';
 
 interface PokemonRowProps {
   row: Row<IPokemonGetAllResponseElement>;
-  key: string;
   size: number;
   start: number;
 }
 
-export function PokemonTableRow({ row, key, size, start }: PokemonRowProps): JSX.Element {
+export function PokemonTableRow({ row, size, start }: PokemonRowProps): JSX.Element {
   return (
     <TableRow
       data-state={row.getIsSelected() && 'selected'}
-      key={key}
+      key={row.id}
       style={{
         // Needed for virtualization
         position: 'absolute',

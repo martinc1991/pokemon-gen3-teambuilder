@@ -12,18 +12,20 @@ import { EmptyRow, PokemonTableRow } from './components/table-rows';
 import { useGetPokemonTable } from './hooks/useGetPokemonTable';
 
 export function PokemonTable(): JSX.Element {
-  const parentRef = useRef(null);
+  const tableContainerRef = useRef(null);
   const moreThan1500 = useMediaQuery('(min-width: 1500px)');
   const moreThan1200 = useMediaQuery('(min-width: 1200px)');
   const moreThan1000 = useMediaQuery('(min-width: 1000px)');
+
   const { height } = useWindowSize();
+  const tableHeigth = height - BUILDER_PAGE_HEADER_HEIGHT - 20;
 
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
 
-  const { isLoading, data, hasNextPage, fetchNextPage, isError, fetchStatus } = useGetPokemonTable();
+  const { data, hasNextPage, fetchNextPage, isError, fetchStatus, isFetchingNextPage, isLoading } = useGetPokemonTable();
 
   useEffect(() => {
     // Whenever fetching a batch finishes, load next one
@@ -55,7 +57,7 @@ export function PokemonTable(): JSX.Element {
 
   const rowVirtualizer = useVirtualizer({
     count: table.getRowModel().rows.length,
-    getScrollElement: () => parentRef.current,
+    getScrollElement: () => tableContainerRef.current,
     estimateSize: () => 50,
     overscan: 10,
   });
@@ -71,15 +73,15 @@ export function PokemonTable(): JSX.Element {
     });
   }, [moreThan1500, moreThan1200, moreThan1000]);
 
-  const tableHeigth = height - BUILDER_PAGE_HEADER_HEIGHT - 20;
-
-  if (isLoading) return <LoadingState />;
+  if ((fetchStatus === 'fetching' && !isFetchingNextPage) || isLoading) {
+    return <LoadingState />;
+  }
   if (isError) {
     return <Typography.P>error...</Typography.P>;
   }
 
   return (
-    <div className='w-11/12 overflow-auto border rounded-md' ref={parentRef} style={{ height: tableHeigth }}>
+    <div className='w-11/12 overflow-auto border rounded-md' ref={tableContainerRef} style={{ height: tableHeigth }}>
       <Table>
         <PokemonTableHeader table={table} />
         <TableBody
@@ -90,9 +92,9 @@ export function PokemonTable(): JSX.Element {
           }}
         >
           {rowVirtualizer.getVirtualItems().length ? (
-            rowVirtualizer.getVirtualItems().map((virtualRow) => {
+            rowVirtualizer.getVirtualItems().map((virtualRow, i, arr) => {
               const row = rows[virtualRow.index];
-              return <PokemonTableRow key={row.id} row={row} size={virtualRow.size} start={virtualRow.start} />;
+              return <PokemonTableRow row={row} size={virtualRow.size} start={virtualRow.start} />;
             })
           ) : (
             <EmptyRow />
