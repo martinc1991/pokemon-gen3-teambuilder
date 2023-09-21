@@ -23,10 +23,9 @@ export function PokemonTableHeader({ table }: PokemonTableHeaderProps): JSX.Elem
 
 interface PokemonHeaderRowProps {
   headerGroup: HeaderGroup<IPokemonGetAllResponseElement>;
-  key: string;
 }
 
-function PokemonHeaderRow({ headerGroup, key }: PokemonHeaderRowProps): JSX.Element {
+function PokemonHeaderRow({ headerGroup }: PokemonHeaderRowProps): JSX.Element {
   return (
     <TableRow className='flex hover:bg-transparent' key={headerGroup.id}>
       {headerGroup.headers.map((header) => {
@@ -42,7 +41,7 @@ function PokemonHeaderRow({ headerGroup, key }: PokemonHeaderRowProps): JSX.Elem
         return (
           <TableHead
             className='flex items-center justify-center gap-1'
-            key={key}
+            key={header.id}
             onClick={header.column.getToggleSortingHandler()}
             style={{ flex: colFlexSize, maxWidth, minWidth }}
           >
@@ -55,9 +54,11 @@ function PokemonHeaderRow({ headerGroup, key }: PokemonHeaderRowProps): JSX.Elem
             >
               {text}
             </div>
-            {canSort ? <div className='flex-1'>
+            {canSort ? (
+              <div className='flex-1'>
                 {sort === 'asc' && <ArrowUpIcon />} {sort === 'desc' && <ArrowDownIcon />}
-              </div> : null}
+              </div>
+            ) : null}
           </TableHead>
         );
       })}
