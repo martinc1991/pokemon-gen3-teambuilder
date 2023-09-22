@@ -7,6 +7,10 @@ export interface TeamSlot extends Omit<ISlot, 'team' | 'ability' | 'nature' | 'i
   slotId: string;
 }
 
+export interface FilledSlot extends TeamSlot {
+  pokemon: IPokemon;
+}
+
 export class EmptySlot implements TeamSlot {
   slotId: string;
   teamId: string;

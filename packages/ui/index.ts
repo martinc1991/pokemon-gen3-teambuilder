@@ -2,7 +2,10 @@ import './src/global.css';
 
 export * from './src/components/ui/badge';
 export * from './src/components/ui/button';
+export * from './src/components/ui/card';
+export * from './src/components/ui/checkbox';
 export * from './src/components/ui/dropdown-menu';
+export * from './src/components/ui/input';
 export * from './src/components/ui/pokemon-avatar';
 export * from './src/components/ui/pokemon-icon';
 export * from './src/components/ui/substitute-placeholder';

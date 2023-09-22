@@ -23,6 +23,7 @@ export default defineConfig({
     },
     emptyOutDir: true,
     outDir: 'dist',
+    sourcemap: true,
   },
   plugins: [react(), dts()],
   resolve: {
