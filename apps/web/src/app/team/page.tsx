@@ -2,8 +2,8 @@
 
 import { Typography } from 'ui';
 import PokemonCard from '../../components/pokemon-table/pokemon-cards';
-import type { FilledSlot } from '../../components/pokemon-table/pokemon-cards/utils/types';
 import { useTeamStore } from '../../state/team';
+import type { FilledSlot } from '../../state/team/helpers';
 import { BUILDER_PAGE_HEADER_HEIGHT } from './constants';
 
 export default function Builder(): JSX.Element {
