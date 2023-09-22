@@ -20,9 +20,9 @@ export function PokemonIcon({ iconUrl, height = 40, name = '', ...props }: Pokem
 
   return (
     <div className='flex justify-center'>
-      {!loaded && <SubstitutePlaceholder />}
+      <SubstitutePlaceholder className={cn(loaded ? 'hidden' : 'block')} />
       <Image
-        className={cn('-mt-2 bg-transparent', loaded ? 'opacity-100' : 'opacity-0')}
+        className={cn('-mt-2 bg-transparent', loaded ? 'block' : 'hidden')}
         src={iconUrl}
         height={height}
         width={height}
