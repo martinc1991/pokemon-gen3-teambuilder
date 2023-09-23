@@ -1,17 +1,4 @@
-import { useState } from 'react';
-import {
-  Button,
-  Card,
-  CardContent,
-  CardHeader,
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  TypeBadge,
-  Typography,
-} from 'ui';
+import { Card, CardContent, CardHeader, TypeBadge, Typography } from 'ui';
 import type { FilledSlot } from '../../state/team/helpers';
 import PokemonCardImage from './components/card-image';
 import PokemonCardMoves from './components/card-moves';
@@ -24,14 +11,8 @@ interface PokemonCardProps {
 }
 
 export default function PokemonCard({ slot }: PokemonCardProps): JSX.Element {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
-  function handleClick(): void {
-    setIsModalOpen(!isModalOpen);
-  }
-
   return (
-    <Card className='w-[500px] hover:bg-slate-700 hover:cursor-pointer transition duration-150 ease-in-out' onClick={handleClick}>
+    <Card className='w-[500px] hover:bg-slate-700 hover:cursor-pointer transition duration-150 ease-in-out'>
       <CardHeader>
         <div className='flex items-center justify-between gap-5'>
           <Typography.H3 className='truncate'>{getCardTitleName(slot)}</Typography.H3>
@@ -74,18 +55,6 @@ export default function PokemonCard({ slot }: PokemonCardProps): JSX.Element {
           <PokemonCardStats pokemon={slot.pokemon} />
         </div>
       </CardContent>
-
-      <Dialog open={isModalOpen}>
-        <DialogContent>
-          <Button onClick={handleClick}>Close</Button>
-          <DialogHeader>
-            <DialogTitle>Are you sure absolutely sure?</DialogTitle>
-            <DialogDescription>
-              This action cannot be undone. This will permanently delete your account and remove your data from our servers.
-            </DialogDescription>
-          </DialogHeader>
-        </DialogContent>
-      </Dialog>
     </Card>
   );
 }
