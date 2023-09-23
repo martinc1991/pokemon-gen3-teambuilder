@@ -1,7 +1,7 @@
 'use client';
 
 import { Typography } from 'ui';
-import PokemonCard from '../../components/pokemon-table/pokemon-cards';
+import PokemonCard from '../../components/pokemon-cards';
 import { useTeamStore } from '../../state/team';
 import type { FilledSlot } from '../../state/team/helpers';
 import { BUILDER_PAGE_HEADER_HEIGHT } from './constants';

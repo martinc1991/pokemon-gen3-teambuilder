@@ -1,5 +1,5 @@
-import type { FilledSlot } from '../../../../state/team/helpers';
-import { formatPokemonName } from '../../../../utils/pokemon';
+import type { FilledSlot } from '../../../state/team/helpers';
+import { formatPokemonName } from '../../../utils/pokemon';
 
 export function getCardTitleName({ pokemon, name, order }: FilledSlot): string {
   if (name) {
