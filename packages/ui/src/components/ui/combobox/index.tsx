@@ -8,20 +8,34 @@ import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from '
 import { Popover, PopoverContent, PopoverTrigger } from '../popover/popover';
 import { Muted, Word } from '../typography';
 
-interface ComboboxProps {
-  data: { id: string; label: string }[];
-  placeholder?: string;
-  searchBox?: boolean;
+interface ComboboxItem {
+  id: string;
+  label: string;
 }
 
-export function Combobox({ searchBox = false, ...props }: ComboboxProps) {
+interface ComboboxProps {
+  data: ComboboxItem[];
+  placeholder?: string;
+  searchBox?: boolean;
+  onChange?: (item: ComboboxItem) => void;
+  value?: ComboboxItem;
+  disabled?: boolean;
+}
+
+export function Combobox({ searchBox = false, onChange = () => {}, ...props }: ComboboxProps) {
   const [open, setOpen] = React.useState(false);
-  const [selectedId, setSelectedId] = React.useState('');
+  const [selectedId, setSelectedId] = React.useState(props.value?.id || '');
+
+  React.useEffect(() => {
+    if (props.value) {
+      setSelectedId(props.value.id);
+    }
+  }, [props.value]);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button variant='outline' role='combobox' aria-expanded={open} className='justify-between w-[200px]'>
+        <Button variant='outline' role='combobox' disabled={props.disabled} aria-expanded={open} className='justify-between w-[200px]'>
           <SelectedValue {...props} selectedId={selectedId} />
           <CaretSortIcon className='w-4 h-4 ml-2 opacity-50 shrink-0' />
         </Button>
@@ -38,6 +52,7 @@ export function Combobox({ searchBox = false, ...props }: ComboboxProps) {
                   // TODO: Add optional option here
                   // setValue(currentValue === value ? '' : currentValue);
                   setSelectedId(item.id);
+                  onChange(item);
                   setOpen(false);
                 }}
               >
