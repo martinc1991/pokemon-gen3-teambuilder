@@ -1,29 +1,65 @@
-import { Button, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, Input, Label } from 'ui';
+import { Checkbox, DialogContent, DialogDescription, DialogHeader, Input, Label, TypeBadge, Typography } from 'ui';
+import { useTeamStore } from '../../state/team';
+import { getCardTitleName } from '../pokemon-cards/utils/get-card-title';
 
 export default function SlotConfigModal(): JSX.Element {
+  const [slots, selectedSlotIndex, setSlotFieldValue] = useTeamStore((state) => [
+    state.slots,
+    state.selectedSlotIndex,
+    state.setSlotFieldValue,
+  ]);
+
+  if (selectedSlotIndex === null) return <div />;
+
+  const slot = slots[selectedSlotIndex];
+
+  const { pokemon } = slot;
+  if (pokemon === null) return <div />;
+
   return (
-    <DialogContent>
-      <DialogHeader>
-        <DialogTitle>name</DialogTitle>
-        <DialogDescription>You can customize your pokemon here. No need to save.</DialogDescription>
+    <DialogContent className='max-w-3xl'>
+      <DialogHeader className='overflow-auto'>
+        <div className='flex items-center justify-between gap-5'>
+          <Typography.H3 className='truncate'>{getCardTitleName(slot)}</Typography.H3>
+          <div className='flex gap-2 mr-5'>
+            <TypeBadge type={pokemon.typeOneName} />
+            {pokemon.typeTwoName !== 'empty' && <TypeBadge type={pokemon.typeTwoName} />}
+          </div>
+        </div>
+        <DialogDescription>Customize your pokemon here. No need to save.</DialogDescription>
       </DialogHeader>
-      <div className='grid gap-4 py-4'>
-        <div className='grid items-center grid-cols-4 gap-4'>
-          <Label className='text-right text-white' htmlFor='name'>
+      <div className='flex flex-col items-start w-full gap-4 py-4'>
+        <div className='flex items-center w-full gap-4'>
+          <Label className='text-white min-w-[60px]' htmlFor='name'>
             Name
           </Label>
-          <Input className='col-span-3 text-white' id='name' />
+          <Input
+            className='col-span-3 text-white'
+            id='name'
+            onChange={(e) => {
+              setSlotFieldValue(slot, 'name', e.target.value);
+            }}
+            placeholder='Change the name here'
+            value={slot.name || ''}
+          />
         </div>
-        <div className='grid items-center grid-cols-4 gap-4'>
-          <Label className='text-right text-white' htmlFor='username'>
-            Username
+        <div className='flex items-center w-full gap-4 '>
+          <Label className='text-white min-w-[60px]' htmlFor='shiny'>
+            Shiny
           </Label>
-          <Input className='col-span-3 text-white' id='username' />
+          <Checkbox
+            checked={Boolean(slot.shiny)}
+            id='shiny'
+            onCheckedChange={(checked) => {
+              const c = checked === true;
+              setSlotFieldValue(slot, 'shiny', c);
+            }}
+          />
         </div>
       </div>
-      <DialogFooter>
+      {/* <DialogFooter>
         <Button>Save changes</Button>
-      </DialogFooter>
+      </DialogFooter> */}
     </DialogContent>
   );
 }

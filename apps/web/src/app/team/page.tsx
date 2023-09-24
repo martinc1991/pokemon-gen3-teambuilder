@@ -1,5 +1,6 @@
 'use client';
 
+import type { ISlotOrder } from 'contract';
 import { Dialog, DialogTrigger, Typography } from 'ui';
 import PokemonCard from '../../components/pokemon-cards';
 import SlotConfigModal from '../../components/slot-config-modal';
@@ -8,7 +9,15 @@ import type { FilledSlot } from '../../state/team/helpers';
 import { BUILDER_PAGE_HEADER_HEIGHT } from './constants';
 
 export default function Builder(): JSX.Element {
-  const [slots] = useTeamStore((state) => [state.slots]);
+  const [slots, setSelectedSlotIndex, selectedSlotIndex] = useTeamStore((state) => [
+    state.slots,
+    state.setSelectedSlotIndex,
+    state.selectedSlotIndex,
+  ]);
+
+  function handleSetSelectedSlotIndex(index: ISlotOrder): void {
+    setSelectedSlotIndex(index);
+  }
 
   return (
     <Dialog>
@@ -21,13 +30,18 @@ export default function Builder(): JSX.Element {
           .filter((s) => s.pokemon !== null)
           .map((slot) => {
             return (
-              <DialogTrigger key={slot.slotId}>
+              <DialogTrigger
+                key={slot.slotId}
+                onClick={() => {
+                  handleSetSelectedSlotIndex(slot.order);
+                }}
+              >
                 <PokemonCard slot={slot as FilledSlot} />;
               </DialogTrigger>
             );
           })}
       </div>
-      <SlotConfigModal />
+      {selectedSlotIndex !== null && <SlotConfigModal />}
     </Dialog>
   );
 }
