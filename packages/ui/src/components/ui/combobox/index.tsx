@@ -1,5 +1,3 @@
-'use client';
-
 import { cn } from '@/lib/utils';
 import { CaretSortIcon, CheckIcon } from '@radix-ui/react-icons';
 import * as React from 'react';
@@ -7,22 +5,9 @@ import { Button } from '../button';
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from '../command/command';
 import { Popover, PopoverContent, PopoverTrigger } from '../popover/popover';
 import { Muted, Word } from '../typography';
+import { ComboboxProps } from './helpers/types';
 
-interface ComboboxItem {
-  id: string;
-  label: string;
-}
-
-interface ComboboxProps {
-  data: ComboboxItem[];
-  placeholder?: string;
-  searchBox?: boolean;
-  onChange?: (item: ComboboxItem) => void;
-  value?: ComboboxItem;
-  disabled?: boolean;
-}
-
-export function Combobox({ searchBox = false, onChange = () => {}, ...props }: ComboboxProps) {
+export function Combobox<T>({ searchBox = false, onChange = () => {}, ...props }: ComboboxProps<T>) {
   const [open, setOpen] = React.useState(false);
   const [selectedId, setSelectedId] = React.useState(props.value?.id || '');
 
@@ -49,8 +34,6 @@ export function Combobox({ searchBox = false, onChange = () => {}, ...props }: C
               <CommandItem
                 key={item.id}
                 onSelect={() => {
-                  // TODO: Add optional option here
-                  // setValue(currentValue === value ? '' : currentValue);
                   setSelectedId(item.id);
                   onChange(item);
                   setOpen(false);
@@ -67,11 +50,11 @@ export function Combobox({ searchBox = false, onChange = () => {}, ...props }: C
   );
 }
 
-interface SelectedValueSelectedValueProps extends ComboboxProps {
+interface SelectedValueSelectedValueProps<T> extends ComboboxProps<T> {
   selectedId: string;
 }
 
-function SelectedValue(props: SelectedValueSelectedValueProps) {
+function SelectedValue<T>(props: SelectedValueSelectedValueProps<T>) {
   const text = props.data.find((item) => {
     return item.id === props.selectedId;
   })?.label;
