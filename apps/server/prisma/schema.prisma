@@ -185,6 +185,7 @@ model Slot {
   item                  Item?        @relation(fields: [itemName], references: [name])
   itemName              String?
   shiny                 Boolean?     @default(false)
+  gender                Gender?
 
   @@unique([teamId, order])
 }

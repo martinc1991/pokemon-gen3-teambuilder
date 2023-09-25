@@ -1,4 +1,4 @@
-import { NatureNames } from '@prisma/client';
+import { Gender, NatureNames } from '@prisma/client';
 import * as z from 'zod';
 import {
   CompleteAbility,
@@ -29,6 +29,7 @@ export const SlotModel = z.object({
   evSpeed: z.number().int(),
   itemName: z.string().nullish(),
   shiny: z.boolean().nullish(),
+  gender: z.nativeEnum(Gender).nullish(),
 });
 
 export interface CompleteSlot extends z.infer<typeof SlotModel> {
