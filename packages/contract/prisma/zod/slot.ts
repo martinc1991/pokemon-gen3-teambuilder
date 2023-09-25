@@ -31,6 +31,7 @@ export const SlotModel = z.object({
   shiny: z.boolean().nullish(),
   gender: z.nativeEnum(Gender),
   level: z.number().int(),
+  happiness: z.number().int(),
 });
 
 export interface CompleteSlot extends z.infer<typeof SlotModel> {
