@@ -2,10 +2,10 @@
 
 import type { ISlotOrder } from 'contract';
 import { Dialog, DialogTrigger, Typography } from 'ui';
-import PokemonCard from '../../components/pokemon-cards';
-import SlotConfigModal from '../../components/slot-config-modal';
 import { useTeamStore } from '../../state/team';
 import type { FilledSlot } from '../../state/team/helpers';
+import PokemonCard from '../../components/slots/cards';
+import SlotConfigModal from '../../components/slots/config-modal';
 import { BUILDER_PAGE_HEADER_HEIGHT } from './constants';
 
 export default function Builder(): JSX.Element {

@@ -1,9 +1,9 @@
 import type { Gender } from 'contract';
 import type { ComboboxItem } from 'ui';
 import { Checkbox, Combobox, DialogContent, DialogDescription, DialogHeader, Input, Label, TypeBadge, Typography } from 'ui';
-import { useTeamStore } from '../../state/team';
-import { capitalize } from '../../utils/common';
-import { getCardTitleName } from '../pokemon-cards/utils/get-card-title';
+import { useTeamStore } from '../../../state/team';
+import { capitalize } from '../../../utils/common';
+import { getCardTitleName } from '../cards/utils/get-card-title';
 
 export default function SlotConfigModal(): JSX.Element {
   const [slots, selectedSlotIndex, setSlotFieldValue] = useTeamStore((state) => [
