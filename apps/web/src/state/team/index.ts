@@ -30,6 +30,8 @@ export const useTeamStore = create(
           pokemon,
           nationalPokedexNumber: pokemon.nationalPokedexNumber,
           gender: pokemon.genders[0],
+          level: pokemon.name === 'shedinja' ? 1 : 100,
+          happiness: 255,
         };
 
         const newSlots = addokemonToSlot(state.slots, index, newSlot);
