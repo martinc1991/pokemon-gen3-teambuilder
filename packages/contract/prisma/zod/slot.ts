@@ -19,7 +19,7 @@ export const SlotModel = z.object({
   teamId: z.string(),
   nationalPokedexNumber: z.number().int(),
   order: z.number().int(),
-  abilityName: z.string().nullish(),
+  abilityName: z.string(),
   natureName: z.nativeEnum(NatureNames).nullish(),
   evHp: z.number().int(),
   evAttack: z.number().int(),
@@ -37,7 +37,7 @@ export const SlotModel = z.object({
 export interface CompleteSlot extends z.infer<typeof SlotModel> {
   team: CompleteTeam;
   pokemon: CompletePokemon;
-  ability?: CompleteAbility | null;
+  ability: CompleteAbility;
   nature?: CompleteNature | null;
   item?: CompleteItem | null;
 }
@@ -51,7 +51,7 @@ export const RelatedSlotModel: z.ZodSchema<CompleteSlot> = z.lazy(() =>
   SlotModel.extend({
     team: RelatedTeamModel,
     pokemon: RelatedPokemonModel,
-    ability: RelatedAbilityModel.nullish(),
+    ability: RelatedAbilityModel,
     nature: RelatedNatureModel.nullish(),
     item: RelatedItemModel.nullish(),
   })

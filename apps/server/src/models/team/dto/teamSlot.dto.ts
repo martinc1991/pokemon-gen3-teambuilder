@@ -20,9 +20,8 @@ export class TeamSlotDto {
   @IsString()
   name?: string;
 
-  @IsOptional()
   @IsString()
-  abilityName?: string;
+  abilityName: string;
 
   @IsOptional()
   @IsEnum(NatureNames)

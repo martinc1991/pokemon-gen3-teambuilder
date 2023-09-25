@@ -172,8 +172,8 @@ model Slot {
   pokemon               Pokemon      @relation(fields: [nationalPokedexNumber], references: [nationalPokedexNumber])
   nationalPokedexNumber Int
   order                 Int
-  ability               Ability?     @relation(fields: [abilityName], references: [name])
-  abilityName           String?
+  ability               Ability      @relation(fields: [abilityName], references: [name])
+  abilityName           String
   nature                Nature?      @relation(fields: [natureName], references: [name])
   natureName            NatureNames?
   evHp                  Int          @default(0)
