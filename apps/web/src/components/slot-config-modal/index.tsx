@@ -1,5 +1,8 @@
-import { Checkbox, DialogContent, DialogDescription, DialogHeader, Input, Label, TypeBadge, Typography } from 'ui';
+import type { Gender } from 'contract';
+import type { ComboboxItem } from 'ui';
+import { Checkbox, Combobox, DialogContent, DialogDescription, DialogHeader, Input, Label, TypeBadge, Typography } from 'ui';
 import { useTeamStore } from '../../state/team';
+import { capitalize } from '../../utils/common';
 import { getCardTitleName } from '../pokemon-cards/utils/get-card-title';
 
 export default function SlotConfigModal(): JSX.Element {
@@ -16,11 +19,19 @@ export default function SlotConfigModal(): JSX.Element {
   const { pokemon } = slot;
   if (pokemon === null) return <div />;
 
+  const gendersData = pokemon.genders.map((gender) => ({ id: gender.toString(), label: capitalize(gender.toString()), payload: gender }));
+
+  function handleGenderChange(item: ComboboxItem<Gender>): void {
+    if (item.payload) {
+      setSlotFieldValue(slot, 'gender', item.payload);
+    }
+  }
+
   return (
     <DialogContent className='max-w-3xl'>
       <DialogHeader className='overflow-auto'>
         <div className='flex items-center justify-between gap-5'>
-          <Typography.H3 className='truncate'>{getCardTitleName(slot)}</Typography.H3>
+          <Typography.H3 className='truncate'>{getCardTitleName({ ...slot, pokemon })}</Typography.H3>
           <div className='flex gap-2 mr-5'>
             <TypeBadge type={pokemon.typeOneName} />
             {pokemon.typeTwoName !== 'empty' && <TypeBadge type={pokemon.typeTwoName} />}
@@ -56,10 +67,22 @@ export default function SlotConfigModal(): JSX.Element {
             }}
           />
         </div>
+        <div className='flex items-center w-full gap-4 '>
+          <Label className='text-white min-w-[60px]' htmlFor='gender'>
+            Gender
+          </Label>
+          <Combobox
+            data={gendersData}
+            disabled={gendersData.length < 2}
+            onChange={handleGenderChange}
+            value={
+              gendersData.find((gender) => {
+                return gender.payload === slot.gender;
+              }) || gendersData[0]
+            }
+          />
+        </div>
       </div>
-      {/* <DialogFooter>
-        <Button>Save changes</Button>
-      </DialogFooter> */}
     </DialogContent>
   );
 }

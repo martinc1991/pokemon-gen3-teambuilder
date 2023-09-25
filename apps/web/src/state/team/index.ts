@@ -24,7 +24,13 @@ export const useTeamStore = create(
       set((state) => {
         const index = getFirstEmptySlotIndex(state.slots);
         if (index === null) return state;
-        const newSlot: TeamSlot = { ...state.slots[index], name: '', pokemon, nationalPokedexNumber: pokemon.nationalPokedexNumber };
+        const newSlot: TeamSlot = {
+          ...state.slots[index],
+          name: '',
+          pokemon,
+          nationalPokedexNumber: pokemon.nationalPokedexNumber,
+          gender: pokemon.genders[0],
+        };
 
         const newSlots = addokemonToSlot(state.slots, index, newSlot);
 

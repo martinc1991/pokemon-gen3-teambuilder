@@ -1,4 +1,4 @@
-import type { IPokemon, ISlot, ISlotOrder } from 'contract';
+import type { Gender, IPokemon, ISlot, ISlotOrder } from 'contract';
 import { nanoid } from 'nanoid';
 
 export interface TeamSlot extends Omit<ISlot, 'team' | 'ability' | 'nature' | 'item' | 'id'> {
@@ -9,6 +9,7 @@ export interface TeamSlot extends Omit<ISlot, 'team' | 'ability' | 'nature' | 'i
 
 export interface FilledSlot extends TeamSlot {
   pokemon: IPokemon;
+  gender: Gender;
 }
 
 export class EmptySlot implements TeamSlot {
@@ -32,6 +33,8 @@ export class EmptySlot implements TeamSlot {
   evSpDefense: 0;
   evSpeed: 0;
 
+  gender: Gender | null;
+
   constructor(order: ISlotOrder) {
     this.slotId = genLocalSlotId();
     this.teamId = genLocalTeamId();
@@ -52,6 +55,7 @@ export class EmptySlot implements TeamSlot {
     this.evSpeed = 0;
 
     this.order = order;
+    this.gender = null;
   }
 }
 

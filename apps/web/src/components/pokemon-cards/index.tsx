@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader, TypeBadge, Typography } from 'ui';
 import type { FilledSlot } from '../../state/team/helpers';
+import { GendersText } from '../pokemon-table/components/genders-text';
 import PokemonCardImage from './components/card-image';
 import PokemonCardMoves from './components/card-moves';
 import PokemonCardStats from './components/card-stats';
@@ -33,8 +34,7 @@ export default function PokemonCard({ slot }: PokemonCardProps): JSX.Element {
             {/* HARDCODED: */}
             <CardInfoField fieldName='Lv'>100</CardInfoField>
             <CardInfoField fieldName='Gender'>
-              {/* HARDCODED: */}
-              <Typography.Male>Male</Typography.Male>
+              <GendersText genders={[slot.gender]} />
             </CardInfoField>
             {/* HARDCODED: */}
             <CardInfoField fieldName='Happiness'>255</CardInfoField>
