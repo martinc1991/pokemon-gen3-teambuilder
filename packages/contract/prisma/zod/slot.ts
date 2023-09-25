@@ -29,7 +29,7 @@ export const SlotModel = z.object({
   evSpeed: z.number().int(),
   itemName: z.string().nullish(),
   shiny: z.boolean().nullish(),
-  gender: z.nativeEnum(Gender).nullish(),
+  gender: z.nativeEnum(Gender),
 });
 
 export interface CompleteSlot extends z.infer<typeof SlotModel> {
