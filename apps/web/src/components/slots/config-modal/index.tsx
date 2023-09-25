@@ -98,6 +98,22 @@ export default function SlotConfigModal(): JSX.Element {
             value={slot.level}
           />
         </div>
+        <div className='flex items-center w-full gap-4'>
+          <Label className='text-white min-w-[60px]' htmlFor='happiness'>
+            Happiness
+          </Label>
+          <Input
+            className='col-span-3 text-white'
+            id='happiness'
+            max={100}
+            min={1}
+            onChange={(e) => {
+              setSlotFieldValue(slot, 'happiness', parseInt(e.target.value));
+            }}
+            type='number'
+            value={slot.happiness}
+          />
+        </div>
       </div>
     </DialogContent>
   );

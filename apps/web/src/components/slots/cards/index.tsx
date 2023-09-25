@@ -35,8 +35,7 @@ export default function PokemonCard({ slot }: PokemonCardProps): JSX.Element {
             <CardInfoField fieldName='Gender'>
               <GendersText genders={[slot.gender]} />
             </CardInfoField>
-            {/* HARDCODED: */}
-            <CardInfoField fieldName='Happiness'>255</CardInfoField>
+            <CardInfoField fieldName='Happiness'>{slot.happiness}</CardInfoField>
             <CardInfoField fieldName='Shiny'>{slot.shiny ? 'Yes' : 'No'}</CardInfoField>
           </div>
 
