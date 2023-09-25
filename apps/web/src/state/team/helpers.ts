@@ -34,6 +34,7 @@ export class EmptySlot implements TeamSlot {
   evSpeed: 0;
 
   gender: Gender;
+  level: number;
 
   constructor(order: ISlotOrder) {
     this.slotId = genLocalSlotId();
@@ -56,6 +57,7 @@ export class EmptySlot implements TeamSlot {
 
     this.order = order;
     this.gender = Gender.genderless; // Just a default value, it isn't used
+    this.level = 100;
   }
 }
 

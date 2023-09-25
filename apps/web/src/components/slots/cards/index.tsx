@@ -31,8 +31,7 @@ export default function PokemonCard({ slot }: PokemonCardProps): JSX.Element {
 
           {/* Second column (level gender happiness) */}
           <div className='flex flex-col min-w-[120px] gap-1' style={{ border: '1px solid transparent' }}>
-            {/* HARDCODED: */}
-            <CardInfoField fieldName='Lv'>100</CardInfoField>
+            <CardInfoField fieldName='Lv'>{slot.level}</CardInfoField>
             <CardInfoField fieldName='Gender'>
               <GendersText genders={[slot.gender]} />
             </CardInfoField>
