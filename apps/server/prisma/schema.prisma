@@ -186,6 +186,7 @@ model Slot {
   itemName              String?
   shiny                 Boolean?     @default(false)
   gender                Gender
+  level                 Int          @default(100)
 
   @@unique([teamId, order])
 }
