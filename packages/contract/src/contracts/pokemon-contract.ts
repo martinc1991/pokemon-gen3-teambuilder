@@ -16,7 +16,7 @@ type Ability = {
   abilities: { name: string; shortDescription: string }[];
 };
 
-type GetAllPokemonResponse = Omit<CompletePokemon, 'typeOne' | 'slot' | 'abilities'> & Ability;
+type GetAllPokemonResponse = Omit<CompletePokemon, 'typeOne' | 'typeTwo' | 'slot' | 'abilities'> & Ability;
 const getAllPokemonResponseSchema = z.custom<GetAllPokemonResponse>();
 
 export const pokemonContract = c.router({
