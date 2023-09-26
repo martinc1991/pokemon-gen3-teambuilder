@@ -10,7 +10,7 @@ export default function CardInfoField({ fieldName, children }: CardInfoFieldProp
     <div className='flex gap-5'>
       <div className='flex justify-between flex-1 gap-1'>
         <Typography.Muted>{`${fieldName}:`}</Typography.Muted>
-        <Typography.Small>{children}</Typography.Small>
+        <Typography.Small className='capitalize'>{children}</Typography.Small>
       </div>
     </div>
   );

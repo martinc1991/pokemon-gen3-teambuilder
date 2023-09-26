@@ -29,7 +29,7 @@ export default function PokemonCard({ slot }: PokemonCardProps): JSX.Element {
           {/* First column (img) */}
           <PokemonCardImage pokemon={slot.pokemon} />
 
-          {/* Second column (level gender happiness) */}
+          {/* Second column (level - gender - happiness - shiny) */}
           <div className='flex flex-col min-w-[120px] gap-1' style={{ border: '1px solid transparent' }}>
             <CardInfoField fieldName='Lv'>{slot.level}</CardInfoField>
             <CardInfoField fieldName='Gender'>
@@ -39,9 +39,9 @@ export default function PokemonCard({ slot }: PokemonCardProps): JSX.Element {
             <CardInfoField fieldName='Shiny'>{slot.shiny ? 'Yes' : 'No'}</CardInfoField>
           </div>
 
-          {/* Third column (ability, item, hp type, shiny) */}
+          {/* Third column (ability - item - nature - hp type) */}
           <div className='flex flex-col flex-1 gap-1'>
-            <CardInfoField fieldName='Ability'>{slot.abilityName || '-'}</CardInfoField>
+            <CardInfoField fieldName='Ability'>{slot.abilityName.replace('-', ' ')}</CardInfoField>
             <CardInfoField fieldName='Item'>{slot.itemName || '-'}</CardInfoField>
             <CardInfoField fieldName='Nature'>{slot.natureName || '-'}</CardInfoField>
             {/* HARDCODED: */}

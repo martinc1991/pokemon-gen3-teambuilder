@@ -1,15 +1,15 @@
-import type { IPokemon, ISlot, ISlotOrder } from 'contract';
+import type { IPokemonGetAllResponseElement, ISlot, ISlotOrder } from 'contract';
 import { Gender } from 'contract';
 import { nanoid } from 'nanoid';
 
 export interface TeamSlot extends Omit<ISlot, 'team' | 'ability' | 'nature' | 'item' | 'id'> {
-  pokemon: IPokemon | null;
+  pokemon: IPokemonGetAllResponseElement | null;
   order: ISlotOrder;
   slotId: string;
 }
 
 export interface FilledSlot extends TeamSlot {
-  pokemon: IPokemon;
+  pokemon: IPokemonGetAllResponseElement; // TODO: this should be a complete pokemon (see IPokemon from contract)
 }
 
 export class EmptySlot implements TeamSlot {

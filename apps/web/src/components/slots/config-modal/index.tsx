@@ -1,4 +1,5 @@
 import type { Gender } from 'contract';
+import type { CompleteAbility } from 'contract/dist/prisma/zod';
 import type { ComboboxItem } from 'ui';
 import { Checkbox, Combobox, DialogContent, DialogDescription, DialogHeader, Input, Label, TypeBadge, Typography } from 'ui';
 import { useTeamStore } from '../../../state/team';
@@ -20,10 +21,17 @@ export default function SlotConfigModal(): JSX.Element {
   if (pokemon === null) return <div />;
 
   const gendersData = pokemon.genders.map((gender) => ({ id: gender.toString(), label: capitalize(gender.toString()), payload: gender }));
+  const abilitiesData = pokemon.abilities.map((ability) => ({ id: ability.name, label: capitalize(ability.name), payload: ability }));
 
   function handleGenderChange(item: ComboboxItem<Gender>): void {
     if (item.payload) {
       setSlotFieldValue(slot, 'gender', item.payload);
+    }
+  }
+
+  function handleAbilityChange(item: ComboboxItem<CompleteAbility>): void {
+    if (item.payload) {
+      setSlotFieldValue(slot, 'abilityName', item.payload.name);
     }
   }
 
@@ -112,6 +120,19 @@ export default function SlotConfigModal(): JSX.Element {
             }}
             type='number'
             value={slot.happiness}
+          />
+        </div>
+        <div className='flex items-center w-full gap-4 '>
+          <Label className='text-white min-w-[60px]' htmlFor='gender'>
+            Ability
+          </Label>
+          <Combobox
+            data={abilitiesData}
+            disabled={abilitiesData.length < 2}
+            onChange={handleAbilityChange}
+            value={abilitiesData.find((ability) => {
+              return ability.payload.name === slot.abilityName;
+            })}
           />
         </div>
       </div>

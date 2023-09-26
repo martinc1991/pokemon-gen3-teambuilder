@@ -1,4 +1,4 @@
-import { type IPokemon, type ISlotOrder } from 'contract';
+import type { IPokemonGetAllResponseElement, ISlotOrder } from 'contract';
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 import type { TeamSlot } from './helpers';
@@ -10,7 +10,7 @@ interface TeamState {
 }
 
 interface TeamActions {
-  addSlot: (pokemon: IPokemon) => void;
+  addSlot: (pokemon: IPokemonGetAllResponseElement) => void;
   removeSlot: (slot: TeamSlot) => void;
   setSelectedSlotIndex: (index: ISlotOrder) => void;
   setSlotFieldValue: <T extends keyof TeamSlot>(slot: TeamSlot, fieldName: T, fieldValue: TeamSlot[T]) => void;
@@ -30,8 +30,9 @@ export const useTeamStore = create(
           pokemon,
           nationalPokedexNumber: pokemon.nationalPokedexNumber,
           gender: pokemon.genders[0],
-          level: pokemon.name === 'shedinja' ? 1 : 100,
+          level: 100,
           happiness: 255,
+          abilityName: pokemon.abilities[0].name,
         };
 
         const newSlots = addokemonToSlot(state.slots, index, newSlot);
