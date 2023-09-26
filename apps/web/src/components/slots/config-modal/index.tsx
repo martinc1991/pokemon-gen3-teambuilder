@@ -1,9 +1,7 @@
-import type { CompleteAbility } from 'contract/dist/prisma/zod';
-import type { ComboboxItem } from 'ui';
-import { Checkbox, Combobox, DialogContent, DialogDescription, DialogHeader, Label, TypeBadge, Typography } from 'ui';
+import { Checkbox, DialogContent, DialogDescription, DialogHeader, Label, TypeBadge, Typography } from 'ui';
 import { useTeamStore } from '../../../state/team';
-import { capitalize } from '../../../utils/common';
 import { getCardTitleName } from '../cards/utils/get-card-title';
+import AbilitiesConfigField from './components/fields/abilities';
 import GenderConfigField from './components/fields/gender';
 import HappinessConfigField from './components/fields/happiness';
 import LevelConfigField from './components/fields/level';
@@ -19,14 +17,6 @@ export default function SlotConfigModal(): JSX.Element {
   if (selectedSlotIndex === null || slots.length < 1) return <div />;
 
   const slot = slots[selectedSlotIndex];
-
-  const abilitiesData = slot.pokemon.abilities.map((ability) => ({ id: ability.name, label: capitalize(ability.name), payload: ability }));
-
-  function handleAbilityChange(item: ComboboxItem<CompleteAbility>): void {
-    if (item.payload) {
-      setSlotFieldValue(slot, 'abilityName', item.payload.name);
-    }
-  }
 
   return (
     <DialogContent className='max-w-3xl'>
@@ -67,17 +57,7 @@ export default function SlotConfigModal(): JSX.Element {
           <HappinessConfigField slot={slot} />
         </div>
         <div className='flex items-center w-full gap-4 '>
-          <Label className='text-white min-w-[60px]' htmlFor='gender'>
-            Ability
-          </Label>
-          <Combobox
-            data={abilitiesData}
-            disabled={abilitiesData.length < 2}
-            onChange={handleAbilityChange}
-            value={abilitiesData.find((ability) => {
-              return ability.payload.name === slot.abilityName;
-            })}
-          />
+          <AbilitiesConfigField slot={slot} />
         </div>
       </div>
     </DialogContent>
