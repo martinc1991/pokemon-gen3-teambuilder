@@ -1,4 +1,4 @@
-import { Checkbox, DialogContent, DialogDescription, DialogHeader, Label, TypeBadge, Typography } from 'ui';
+import { DialogContent, DialogDescription, DialogHeader, TypeBadge, Typography } from 'ui';
 import { useTeamStore } from '../../../state/team';
 import { getCardTitleName } from '../cards/utils/get-card-title';
 import AbilitiesConfigField from './components/fields/abilities';
@@ -6,13 +6,10 @@ import GenderConfigField from './components/fields/gender';
 import HappinessConfigField from './components/fields/happiness';
 import LevelConfigField from './components/fields/level';
 import NameConfigField from './components/fields/name';
+import ShinyConfigField from './components/fields/shiny';
 
 export default function SlotConfigModal(): JSX.Element {
-  const [slots, selectedSlotIndex, setSlotFieldValue] = useTeamStore((state) => [
-    state.slots,
-    state.selectedSlotIndex,
-    state.setSlotFieldValue,
-  ]);
+  const [slots, selectedSlotIndex] = useTeamStore((state) => [state.slots, state.selectedSlotIndex]);
 
   if (selectedSlotIndex === null || slots.length < 1) return <div />;
 
@@ -35,17 +32,7 @@ export default function SlotConfigModal(): JSX.Element {
           <NameConfigField slot={slot} />
         </div>
         <div className='flex items-center w-full gap-4 '>
-          <Label className='text-white min-w-[60px]' htmlFor='shiny'>
-            Shiny
-          </Label>
-          <Checkbox
-            checked={Boolean(slot.shiny)}
-            id='shiny'
-            onCheckedChange={(checked) => {
-              const c = checked === true;
-              setSlotFieldValue(slot, 'shiny', c);
-            }}
-          />
+          <ShinyConfigField slot={slot} />
         </div>
         <div className='flex items-center w-full gap-4'>
           <GenderConfigField slot={slot} />
