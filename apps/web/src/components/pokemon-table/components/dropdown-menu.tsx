@@ -10,9 +10,7 @@ interface RowDropdownMenuProps {
 export default function RowDropdownMenu(props: RowDropdownMenuProps): JSX.Element {
   const [slots, addPokemon] = useTeamStore((state) => [state.slots, state.addSlot]);
 
-  const addPokemonDisabled = slots.every((slot) => {
-    return Boolean(slot.pokemon);
-  });
+  const addPokemonDisabled = slots.length >= 6;
 
   function handleClick(): void {
     if (!addPokemonDisabled) addPokemon(props.pokemon);

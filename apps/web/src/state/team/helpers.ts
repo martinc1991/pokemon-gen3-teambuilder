@@ -1,27 +1,23 @@
-import type { IPokemonGetAllResponseElement, ISlot, ISlotOrder } from 'contract';
-import { Gender } from 'contract';
+import type { IPokemon, ISlot } from 'contract';
+import { Gender, NatureNames } from 'contract';
 import { nanoid } from 'nanoid';
 
-export interface TeamSlot extends Omit<ISlot, 'team' | 'ability' | 'nature' | 'item' | 'id'> {
-  pokemon: IPokemonGetAllResponseElement | null;
-  order: ISlotOrder;
-  slotId: string;
+export interface TeamSlot extends Omit<ISlot, 'team' | 'ability' | 'nature' | 'item'> {
+  pokemon: IPokemon;
+  order: number;
 }
 
-export interface FilledSlot extends TeamSlot {
-  pokemon: IPokemonGetAllResponseElement; // TODO: this should be a complete pokemon (see IPokemon from contract)
-}
-
-export class EmptySlot implements TeamSlot {
-  slotId: string;
+// This is used as a base for a empty TeamSlot
+export class EmptySlot implements Omit<TeamSlot, 'pokemon'> {
+  id: string;
   teamId: string;
   name: '';
   pokemon: null;
   nationalPokedexNumber: 0;
-  order: ISlotOrder;
+  order: -1;
 
   abilityName: '';
-  natureName: null;
+  natureName: NatureNames;
   itemName: '';
 
   shiny: false;
@@ -34,18 +30,18 @@ export class EmptySlot implements TeamSlot {
   evSpeed: 0;
 
   gender: Gender;
-  level: number;
-  happiness: number;
+  level: 100;
+  happiness: 255;
 
-  constructor(order: ISlotOrder) {
-    this.slotId = genLocalSlotId();
-    this.teamId = genLocalTeamId();
+  constructor() {
+    this.id = genLocalSlotId();
+    this.teamId = '';
     this.nationalPokedexNumber = 0;
     this.name = '';
     this.abilityName = '';
     this.pokemon = null;
 
-    this.natureName = null;
+    this.natureName = NatureNames.docile;
     this.itemName = '';
     this.shiny = false;
 
@@ -56,14 +52,12 @@ export class EmptySlot implements TeamSlot {
     this.evSpDefense = 0;
     this.evSpeed = 0;
 
-    this.order = order;
+    this.order = -1;
     this.gender = Gender.genderless; // Just a default value, it isn't used
     this.level = 100;
     this.happiness = 255;
   }
 }
-
-export const emptyTeam = [new EmptySlot(0), new EmptySlot(1), new EmptySlot(2), new EmptySlot(3), new EmptySlot(4), new EmptySlot(5)];
 
 export function genLocalSlotId(): string {
   return `local-slot-${nanoid(6)}`;
@@ -71,15 +65,4 @@ export function genLocalSlotId(): string {
 
 export function genLocalTeamId(): string {
   return `local-team-${nanoid(6)}`;
-}
-
-export function getFirstEmptySlotIndex(team: TeamSlot[]): ISlotOrder | null {
-  const index = team.findIndex((s) => s.pokemon === null);
-  return index >= 0 ? (index as ISlotOrder) : null;
-}
-
-export function addokemonToSlot(team: TeamSlot[], order: ISlotOrder, slot: TeamSlot): TeamSlot[] {
-  const newArr = [...team];
-  newArr.splice(order, 1, { ...slot, order });
-  return newArr;
 }

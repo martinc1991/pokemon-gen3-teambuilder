@@ -1,31 +1,36 @@
-import type { IPokemonGetAllResponseElement, ISlotOrder } from 'contract';
+import { type IPokemon } from 'contract';
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 import type { TeamSlot } from './helpers';
-import { EmptySlot, addokemonToSlot, emptyTeam, getFirstEmptySlotIndex } from './helpers';
+import { EmptySlot, genLocalTeamId } from './helpers';
 
 interface TeamState {
+  teamId: string;
+  name: string;
   slots: TeamSlot[];
-  selectedSlotIndex: ISlotOrder | null;
+  selectedSlotIndex: number | null;
 }
 
 interface TeamActions {
-  addSlot: (pokemon: IPokemonGetAllResponseElement) => void;
+  addSlot: (pokemon: IPokemon) => void;
   removeSlot: (slot: TeamSlot) => void;
-  setSelectedSlotIndex: (index: ISlotOrder) => void;
+  setSelectedSlotIndex: (index: number) => void;
   setSlotFieldValue: <T extends keyof TeamSlot>(slot: TeamSlot, fieldName: T, fieldValue: TeamSlot[T]) => void;
 }
 
 export const useTeamStore = create(
   immer<TeamState & TeamActions>((set) => ({
-    slots: emptyTeam,
+    teamId: genLocalTeamId(),
+    name: '',
+    slots: [],
     selectedSlotIndex: 0,
     addSlot: (pokemon) => {
       set((state) => {
-        const index = getFirstEmptySlotIndex(state.slots);
-        if (index === null) return state;
+        if (state.slots.length >= 6) return state;
         const newSlot: TeamSlot = {
-          ...state.slots[index],
+          ...new EmptySlot(),
+          order: state.slots.length,
+          teamId: state.teamId,
           name: '',
           pokemon,
           nationalPokedexNumber: pokemon.nationalPokedexNumber,
@@ -35,20 +40,17 @@ export const useTeamStore = create(
           abilityName: pokemon.abilities[0].name,
         };
 
-        const newSlots = addokemonToSlot(state.slots, index, newSlot);
+        const newSlots = state.slots.concat(newSlot);
 
         state.slots = newSlots;
       });
     },
     removeSlot: (slot: TeamSlot) => {
       set((state) => {
-        if (!slot.pokemon) return state;
-        const newSlots: TeamSlot[] = state.slots.filter((s) => s.slotId !== slot.slotId);
-
-        newSlots.push(new EmptySlot(5));
+        const newSlots: TeamSlot[] = state.slots.filter((s) => s.id !== slot.id);
 
         for (let i = 0; i < newSlots.length; i++) {
-          newSlots[i].order = i as ISlotOrder;
+          newSlots[i].order = i;
         }
 
         state.slots = newSlots;

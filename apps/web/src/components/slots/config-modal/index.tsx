@@ -13,15 +13,16 @@ export default function SlotConfigModal(): JSX.Element {
     state.setSlotFieldValue,
   ]);
 
-  if (selectedSlotIndex === null) return <div />;
+  if (selectedSlotIndex === null || slots.length < 1) return <div />;
 
   const slot = slots[selectedSlotIndex];
 
-  const { pokemon } = slot;
-  if (pokemon === null) return <div />;
-
-  const gendersData = pokemon.genders.map((gender) => ({ id: gender.toString(), label: capitalize(gender.toString()), payload: gender }));
-  const abilitiesData = pokemon.abilities.map((ability) => ({ id: ability.name, label: capitalize(ability.name), payload: ability }));
+  const gendersData = slot.pokemon.genders.map((gender) => ({
+    id: gender.toString(),
+    label: capitalize(gender.toString()),
+    payload: gender,
+  }));
+  const abilitiesData = slot.pokemon.abilities.map((ability) => ({ id: ability.name, label: capitalize(ability.name), payload: ability }));
 
   function handleGenderChange(item: ComboboxItem<Gender>): void {
     if (item.payload) {
@@ -39,10 +40,10 @@ export default function SlotConfigModal(): JSX.Element {
     <DialogContent className='max-w-3xl'>
       <DialogHeader className='overflow-auto'>
         <div className='flex items-center justify-between gap-5'>
-          <Typography.H3 className='truncate'>{getCardTitleName({ ...slot, pokemon })}</Typography.H3>
+          <Typography.H3 className='truncate'>{getCardTitleName({ ...slot })}</Typography.H3>
           <div className='flex gap-2 mr-5'>
-            <TypeBadge type={pokemon.typeOneName} />
-            {pokemon.typeTwoName !== 'empty' && <TypeBadge type={pokemon.typeTwoName} />}
+            <TypeBadge type={slot.pokemon.typeOneName} />
+            {slot.pokemon.typeTwoName !== 'empty' && <TypeBadge type={slot.pokemon.typeTwoName} />}
           </div>
         </div>
         <DialogDescription>Customize your pokemon here. No need to save.</DialogDescription>
