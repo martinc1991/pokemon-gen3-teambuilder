@@ -21,5 +21,13 @@ export function pokemonStub(): IPokemon {
     baseSpdefense: 10,
     baseSpeed: 10,
     tier: 'lc',
+    abilities: [
+      {
+        id: '',
+        longDescription: '',
+        name: '',
+        shortDescription: '',
+      },
+    ],
   };
 }

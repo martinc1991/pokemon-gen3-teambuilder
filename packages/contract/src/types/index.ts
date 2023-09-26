@@ -1,9 +1,10 @@
-import { Pokemon, Slot, StatName } from '@prisma/client';
+import { Slot, StatName } from '@prisma/client';
+import { IPokemonGetAllResponseElement } from '../contracts/pokemon-contract';
 
 export { Gender, NatureNames, TypeNames } from '@prisma/client';
 
 export type ITier = 'lc' | 'nfe' | 'nu' | 'ou' | 'pu' | 'publ' | 'uber' | 'uu' | 'uubl';
-export type IPokemon = Pokemon;
+export type IPokemon = IPokemonGetAllResponseElement; // This type is in sync with the response of the get all pokemon endpoint
 export type ISlot = Slot;
 export type ISlotOrder = 0 | 1 | 2 | 3 | 4 | 5;
 export type IStats = { [key in StatName]: number };

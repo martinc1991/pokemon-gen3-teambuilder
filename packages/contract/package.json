@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc",
     "dev": " tsc --watch",
-    "prisma:generate": "pnpm prisma generate"
+    "prisma:generate": "pnpm prisma generate --schema src/prisma/schema.prisma"
   },
   "keywords": [],
   "author": "",

@@ -6,10 +6,12 @@
     "isolatedModules": true,
     "module": "NodeNext",
     "outDir": "./dist",
+    "rootDir": "./src",
     "preserveWatchOutput": true,
     "skipLibCheck": true,
-    "strict": true
+    "strict": true,
+    "sourceMap": true
   },
   "exclude": ["node_modules"],
-  "include": ["index.ts", "src/**/*.ts", "prisma/**/*.ts"]
+  "include": ["src/**/*.ts"]
 }
