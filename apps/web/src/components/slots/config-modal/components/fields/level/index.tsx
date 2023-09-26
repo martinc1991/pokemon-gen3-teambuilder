@@ -10,7 +10,7 @@ export default function LevelConfigField({ slot }: LevelConfigFieldProps): JSX.E
   const [setSlotFieldValue] = useTeamStore((state) => [state.setSlotFieldValue]);
 
   return (
-    <div className='flex items-center w-full gap-4'>
+    <>
       <Label className='text-white min-w-[60px]' htmlFor='level'>
         Level
       </Label>
@@ -25,6 +25,6 @@ export default function LevelConfigField({ slot }: LevelConfigFieldProps): JSX.E
         type='number'
         value={slot.level}
       />
-    </div>
+    </>
   );
 }

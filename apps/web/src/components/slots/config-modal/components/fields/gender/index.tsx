@@ -25,7 +25,7 @@ export default function GenderConfigField({ slot }: GenderConfigFieldProps): JSX
   }
 
   return (
-    <div className='flex items-center w-full gap-4 '>
+    <>
       <Label className='text-white min-w-[60px]' htmlFor='gender'>
         Gender
       </Label>
@@ -39,6 +39,6 @@ export default function GenderConfigField({ slot }: GenderConfigFieldProps): JSX
           }) || gendersData[0]
         }
       />
-    </div>
+    </>
   );
 }

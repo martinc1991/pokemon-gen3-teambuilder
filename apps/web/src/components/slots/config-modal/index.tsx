@@ -56,8 +56,12 @@ export default function SlotConfigModal(): JSX.Element {
             }}
           />
         </div>
-        <GenderConfigField slot={slot} />
-        <LevelConfigField slot={slot} />
+        <div className='flex items-center w-full gap-4'>
+          <GenderConfigField slot={slot} />
+        </div>
+        <div className='flex items-center w-full gap-4'>
+          <LevelConfigField slot={slot} />
+        </div>
         <div className='flex items-center w-full gap-4'>
           <Label className='text-white min-w-[60px]' htmlFor='happiness'>
             Happiness
