@@ -3,7 +3,7 @@ import { flexRender } from '@tanstack/react-table';
 import type { IPokemonGetAllResponseElement } from 'contract';
 import { TableCell, TableRow, Typography } from 'ui';
 import TABLE_COLUMNS from '../columns';
-import type { ColumnID} from '../columns/constants';
+import type { ColumnID } from '../columns/constants';
 import { columnsConfig } from '../columns/constants';
 
 interface PokemonRowProps {
