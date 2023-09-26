@@ -5,6 +5,7 @@ import { useTeamStore } from '../../../state/team';
 import { capitalize } from '../../../utils/common';
 import { getCardTitleName } from '../cards/utils/get-card-title';
 import GenderConfigField from './components/fields/gender';
+import LevelConfigField from './components/fields/level';
 
 export default function SlotConfigModal(): JSX.Element {
   const [slots, selectedSlotIndex, setSlotFieldValue] = useTeamStore((state) => [
@@ -66,22 +67,7 @@ export default function SlotConfigModal(): JSX.Element {
           />
         </div>
         <GenderConfigField slot={slot} />
-        <div className='flex items-center w-full gap-4'>
-          <Label className='text-white min-w-[60px]' htmlFor='level'>
-            Level
-          </Label>
-          <Input
-            className='col-span-3 text-white'
-            id='level'
-            max={100}
-            min={1}
-            onChange={(e) => {
-              setSlotFieldValue(slot, 'level', parseInt(e.target.value));
-            }}
-            type='number'
-            value={slot.level}
-          />
-        </div>
+        <LevelConfigField slot={slot} />
         <div className='flex items-center w-full gap-4'>
           <Label className='text-white min-w-[60px]' htmlFor='happiness'>
             Happiness
@@ -97,6 +83,7 @@ export default function SlotConfigModal(): JSX.Element {
             type='number'
             value={slot.happiness}
           />
+          LevelConfigField
         </div>
         <div className='flex items-center w-full gap-4 '>
           <Label className='text-white min-w-[60px]' htmlFor='gender'>
