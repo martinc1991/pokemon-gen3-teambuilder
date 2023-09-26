@@ -6,6 +6,7 @@ import { capitalize } from '../../../utils/common';
 import { getCardTitleName } from '../cards/utils/get-card-title';
 import GenderConfigField from './components/fields/gender';
 import LevelConfigField from './components/fields/level';
+import NameConfigField from './components/fields/name';
 
 export default function SlotConfigModal(): JSX.Element {
   const [slots, selectedSlotIndex, setSlotFieldValue] = useTeamStore((state) => [
@@ -40,18 +41,7 @@ export default function SlotConfigModal(): JSX.Element {
       </DialogHeader>
       <div className='flex flex-col items-start w-full gap-4 py-4'>
         <div className='flex items-center w-full gap-4'>
-          <Label className='text-white min-w-[60px]' htmlFor='name'>
-            Name
-          </Label>
-          <Input
-            className='col-span-3 text-white'
-            id='name'
-            onChange={(e) => {
-              setSlotFieldValue(slot, 'name', e.target.value);
-            }}
-            placeholder='Change the name here'
-            value={slot.name || ''}
-          />
+          <NameConfigField slot={slot} />
         </div>
         <div className='flex items-center w-full gap-4 '>
           <Label className='text-white min-w-[60px]' htmlFor='shiny'>
