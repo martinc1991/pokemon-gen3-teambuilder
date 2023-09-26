@@ -22,7 +22,7 @@ export default function AbilitiesConfigField({ slot }: AbilitiesConfigFieldProps
 
   return (
     <>
-      <Label className='text-white min-w-[60px]' htmlFor='gender'>
+      <Label className='text-white min-w-[60px]' htmlFor='ability'>
         Ability
       </Label>
       <Combobox
