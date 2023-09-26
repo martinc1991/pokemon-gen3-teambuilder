@@ -2,18 +2,19 @@
 
 import { PokemonAvatar, Typography } from 'ui';
 import { useTeamStore } from '../../../state/team';
-import { EmptySlot, type TeamSlot } from '../../../state/team/helpers';
+import { BaseSlot, type FilledSlot } from '../../../state/team/helpers';
 import { formatPokemonName } from '../../../utils/pokemon';
 import BasicSidebar from '../basic-sidebar';
 
 export default function RightSidebar(): JSX.Element {
   const [slots, removeSlot] = useTeamStore((state) => [state.slots, state.removeSlot]);
 
-  function handleEmptySlot(slot: TeamSlot): void {
+  function handleEmptySlot(slot: FilledSlot): void {
     removeSlot(slot);
   }
 
-  const emptySlots = Array(6 - slots.length).fill(new EmptySlot());
+  // Pad team to show always 6 slots
+  const emptySlots = Array(6 - slots.length).fill(new BaseSlot());
 
   return (
     <BasicSidebar side='right'>

@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, TypeBadge, Typography } from 'ui';
-import type { TeamSlot } from '../../../state/team/helpers';
+import type { FilledSlot } from '../../../state/team/helpers';
 import { GendersText } from '../../pokemon-table/components/genders-text';
 import PokemonCardImage from './components/card-image';
 import PokemonCardMoves from './components/card-moves';
@@ -8,7 +8,7 @@ import CardInfoField from './components/info-field';
 import { getCardTitleName } from './utils/get-card-title';
 
 interface PokemonCardProps {
-  slot: TeamSlot;
+  slot: FilledSlot;
 }
 
 export default function PokemonCard({ slot }: PokemonCardProps): JSX.Element {

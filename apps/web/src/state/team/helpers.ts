@@ -2,23 +2,23 @@ import type { IPokemon, ISlot } from 'contract';
 import { Gender, NatureNames } from 'contract';
 import { nanoid } from 'nanoid';
 
-export interface TeamSlot extends Omit<ISlot, 'team' | 'ability' | 'nature' | 'item'> {
+export interface FilledSlot extends Omit<ISlot, 'team' | 'ability' | 'nature' | 'item'> {
   pokemon: IPokemon;
   order: number;
 }
 
 // This is used as a base for a empty TeamSlot
-export class EmptySlot implements Omit<TeamSlot, 'pokemon'> {
+export class BaseSlot implements Omit<FilledSlot, 'pokemon'> {
   id: string;
   teamId: string;
-  name: '';
+  name: string;
   pokemon: null;
-  nationalPokedexNumber: 0;
-  order: -1;
+  nationalPokedexNumber: number;
+  order: number;
 
-  abilityName: '';
+  abilityName: string;
   natureName: NatureNames;
-  itemName: '';
+  itemName: string;
 
   shiny: false;
 
@@ -30,15 +30,17 @@ export class EmptySlot implements Omit<TeamSlot, 'pokemon'> {
   evSpeed: 0;
 
   gender: Gender;
-  level: 100;
-  happiness: 255;
+  level: number;
+  happiness: number;
 
-  constructor() {
+  constructor(order?: number, pokemon?: IPokemon) {
+    const isSlotFilled = pokemon && order !== undefined;
+
     this.id = genLocalSlotId();
     this.teamId = '';
-    this.nationalPokedexNumber = 0;
+    this.nationalPokedexNumber = isSlotFilled ? pokemon.nationalPokedexNumber : 0;
     this.name = '';
-    this.abilityName = '';
+    this.abilityName = isSlotFilled ? pokemon.abilities[0].name : '';
     this.pokemon = null;
 
     this.natureName = NatureNames.docile;
@@ -52,8 +54,9 @@ export class EmptySlot implements Omit<TeamSlot, 'pokemon'> {
     this.evSpDefense = 0;
     this.evSpeed = 0;
 
-    this.order = -1;
-    this.gender = Gender.genderless; // Just a default value, it isn't used
+    this.order = isSlotFilled ? order : -1;
+
+    this.gender = isSlotFilled ? pokemon.genders[0] : Gender.genderless; // Just a default value, it isn't used
     this.level = 100;
     this.happiness = 255;
   }
