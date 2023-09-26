@@ -1,10 +1,10 @@
-import type { Gender } from 'contract';
 import type { CompleteAbility } from 'contract/dist/prisma/zod';
 import type { ComboboxItem } from 'ui';
 import { Checkbox, Combobox, DialogContent, DialogDescription, DialogHeader, Input, Label, TypeBadge, Typography } from 'ui';
 import { useTeamStore } from '../../../state/team';
 import { capitalize } from '../../../utils/common';
 import { getCardTitleName } from '../cards/utils/get-card-title';
+import GenderConfigField from './components/fields/gender';
 
 export default function SlotConfigModal(): JSX.Element {
   const [slots, selectedSlotIndex, setSlotFieldValue] = useTeamStore((state) => [
@@ -17,18 +17,7 @@ export default function SlotConfigModal(): JSX.Element {
 
   const slot = slots[selectedSlotIndex];
 
-  const gendersData = slot.pokemon.genders.map((gender) => ({
-    id: gender.toString(),
-    label: capitalize(gender.toString()),
-    payload: gender,
-  }));
   const abilitiesData = slot.pokemon.abilities.map((ability) => ({ id: ability.name, label: capitalize(ability.name), payload: ability }));
-
-  function handleGenderChange(item: ComboboxItem<Gender>): void {
-    if (item.payload) {
-      setSlotFieldValue(slot, 'gender', item.payload);
-    }
-  }
 
   function handleAbilityChange(item: ComboboxItem<CompleteAbility>): void {
     if (item.payload) {
@@ -76,21 +65,7 @@ export default function SlotConfigModal(): JSX.Element {
             }}
           />
         </div>
-        <div className='flex items-center w-full gap-4 '>
-          <Label className='text-white min-w-[60px]' htmlFor='gender'>
-            Gender
-          </Label>
-          <Combobox
-            data={gendersData}
-            disabled={gendersData.length < 2}
-            onChange={handleGenderChange}
-            value={
-              gendersData.find((gender) => {
-                return gender.payload === slot.gender;
-              }) || gendersData[0]
-            }
-          />
-        </div>
+        <GenderConfigField slot={slot} />
         <div className='flex items-center w-full gap-4'>
           <Label className='text-white min-w-[60px]' htmlFor='level'>
             Level
