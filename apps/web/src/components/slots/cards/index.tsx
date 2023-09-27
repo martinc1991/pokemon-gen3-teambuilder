@@ -50,7 +50,7 @@ export default function PokemonCard({ slot }: PokemonCardProps): JSX.Element {
         </div>
         <div className='flex w-full'>
           <PokemonCardMoves />
-          <PokemonCardStats pokemon={slot.pokemon} />
+          <PokemonCardStats slot={slot} />
         </div>
       </CardContent>
     </Card>

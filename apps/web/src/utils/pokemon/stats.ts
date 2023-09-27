@@ -30,7 +30,7 @@ export function getTotalBaseStat(stats: IBaseStats): number {
   return getValues(stats).reduce((a, b) => a + b, 0);
 }
 
-interface CalculateStatProps {
+export interface CalculateStatProps {
   statName: StatName;
   base: number;
   ev: number;
@@ -53,5 +53,5 @@ export function calculateStat({ statName, base, ev, iv, level, nature }: Calcula
     natureMultiplier = 1.1;
   }
 
-  return Math.floor(0.01 * (2 * base + iv + Math.floor(0.25 * ev)) * level + 5) * natureMultiplier;
+  return Math.floor((0.01 * (2 * base + iv + Math.floor(0.25 * ev)) * level + 5) * natureMultiplier);
 }
