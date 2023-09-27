@@ -1,7 +1,7 @@
 export interface ComboboxItem<T> {
   id: string;
   label: string;
-  payload?: T;
+  payload: T;
 }
 
 export interface ComboboxProps<T> {
