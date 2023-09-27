@@ -2,19 +2,24 @@ import type { IBaseStats, StatName } from 'contract';
 import type { CompleteNature } from 'contract/dist/prisma/zod';
 import { getValues } from '../common';
 
-export function getShortStatName(statName: keyof IBaseStats): string {
+export function getShortStatName(statName: keyof IBaseStats | StatName): string {
   switch (statName) {
     case 'baseHp':
+    case 'hp':
       return 'HP';
     case 'baseAttack':
+    case 'attack':
       return 'Atk';
     case 'baseDefense':
+    case 'defense':
       return 'Def';
     case 'baseSpattack':
+    case 'spattack':
       return 'SpA';
     case 'baseSpdefense':
+    case 'spdefense':
       return 'SpD';
-    case 'baseSpeed':
+    case 'speed':
       return 'Spe';
     default:
       return '-';
