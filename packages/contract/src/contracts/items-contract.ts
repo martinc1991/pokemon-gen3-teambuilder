@@ -1,6 +1,7 @@
-import { initContract } from '@ts-rest/core';
+import { ClientInferResponseBody, initContract } from '@ts-rest/core';
 import { z } from 'zod';
 import { ItemModel } from '../prisma/zod';
+import { ArrayElementType } from '../utils/types/array-element-type';
 
 const c = initContract();
 
@@ -24,3 +25,6 @@ export const itemsContract = c.router({
 });
 
 export type IItemsContract = typeof itemsContract;
+
+export type IItemGetAllResponse = ClientInferResponseBody<typeof itemsContract.getAll, 200>;
+export type IItemGetAllResponseElement = ArrayElementType<IItemGetAllResponse>;
