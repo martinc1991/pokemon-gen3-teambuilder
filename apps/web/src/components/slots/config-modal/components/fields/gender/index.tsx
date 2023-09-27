@@ -19,9 +19,7 @@ export default function GenderConfigField({ slot }: GenderConfigFieldProps): JSX
   }));
 
   function handleGenderChange(item: ComboboxItem<Gender>): void {
-    if (item.payload) {
-      setSlotFieldValue(slot, 'gender', item.payload);
-    }
+    setSlotFieldValue(slot, 'gender', item.payload);
   }
 
   return (
@@ -30,6 +28,7 @@ export default function GenderConfigField({ slot }: GenderConfigFieldProps): JSX
         Gender
       </Label>
       <Combobox
+        className='min-w-[200px]'
         data={gendersData}
         disabled={gendersData.length < 2}
         onChange={handleGenderChange}

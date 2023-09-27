@@ -36,6 +36,8 @@ export default function ItemConfigField({ slot }: ItemConfigFieldProps): JSX.Ele
         Item
       </Label>
       <Combobox
+        className='min-w-[200px]'
+        clearButtonClassName='min-w-max'
         clearText='Remove item'
         cleareable
         data={itemsData}

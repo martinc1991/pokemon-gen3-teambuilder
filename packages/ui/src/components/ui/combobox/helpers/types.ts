@@ -5,14 +5,16 @@ export interface ComboboxItem<T> {
 }
 
 export interface ComboboxProps<T> {
-  data: ComboboxItem<T>[];
-  placeholder?: string;
-  searchBox?: boolean;
+  className?: string;
+  clearButtonClassName?: string;
   cleareable?: boolean;
   clearText?: string;
-  onClear?: (item: ComboboxItem<T>) => void;
-  onChange?: (item: ComboboxItem<T>) => void;
-  value?: ComboboxItem<T>;
+  data: ComboboxItem<T>[];
   disabled?: boolean;
   itemsClassName?: string;
+  onChange?: (item: ComboboxItem<T>) => void;
+  onClear?: (item: ComboboxItem<T>) => void;
+  placeholder?: string;
+  searchBox?: boolean;
+  value?: ComboboxItem<T>;
 }

@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils';
 import { CaretSortIcon, CheckIcon } from '@radix-ui/react-icons';
+import clsx from 'clsx';
 import * as React from 'react';
 import { Button } from '../button';
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from '../command/command';
@@ -8,12 +9,14 @@ import { Muted, Word } from '../typography';
 import { ComboboxItem, ComboboxProps } from './helpers/types';
 
 export function Combobox<T>({
+  className = '',
+  clearButtonClassName = '',
   cleareable = false,
   clearText,
-  searchBox = false,
+  itemsClassName = '',
   onChange = () => {},
   onClear = () => {},
-  itemsClassName = '',
+  searchBox = false,
   ...props
 }: ComboboxProps<T>) {
   const [open, setOpen] = React.useState(false);
@@ -35,7 +38,7 @@ export function Combobox<T>({
           role='combobox'
           disabled={props.disabled}
           aria-expanded={open}
-          className='justify-between w-[200px] capitalize'
+          className={clsx('justify-between capitalize min-w-max', className)}
         >
           <SelectedValue {...props} selectedId={selectedId} />
           <CaretSortIcon className='w-4 h-4 ml-2 opacity-50 shrink-0' />
@@ -49,6 +52,7 @@ export function Combobox<T>({
             onClear(props.data.find((i) => i.id === selectedId) as ComboboxItem<T>);
             setSelectedId('');
           }}
+          className={clearButtonClassName}
         >
           {clearText || 'Clear'}
         </Button>

@@ -18,9 +18,7 @@ export default function AbilitiesConfigField({ slot }: AbilitiesConfigFieldProps
   }));
 
   function handleAbilityChange(item: ComboboxItem<CompleteAbility>): void {
-    if (item.payload) {
-      setSlotFieldValue(slot, 'abilityName', item.payload.name);
-    }
+    setSlotFieldValue(slot, 'abilityName', item.payload.name);
   }
 
   return (
@@ -29,6 +27,7 @@ export default function AbilitiesConfigField({ slot }: AbilitiesConfigFieldProps
         Ability
       </Label>
       <Combobox
+        className='min-w-[200px]'
         data={abilitiesData}
         disabled={abilitiesData.length < 2}
         itemsClassName='capitalize'
