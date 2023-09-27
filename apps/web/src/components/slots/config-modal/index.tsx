@@ -7,6 +7,7 @@ import HappinessConfigField from './components/fields/happiness';
 import LevelConfigField from './components/fields/level';
 import NameConfigField from './components/fields/name';
 import ShinyConfigField from './components/fields/shiny';
+import ItemConfigField from './components/fields/item';
 
 export default function SlotConfigModal(): JSX.Element {
   const [slots, selectedSlotIndex] = useTeamStore((state) => [state.slots, state.selectedSlotIndex]);
@@ -45,6 +46,9 @@ export default function SlotConfigModal(): JSX.Element {
         </div>
         <div className='flex items-center w-full gap-4 '>
           <AbilitiesConfigField slot={slot} />
+        </div>
+        <div className='flex items-center w-full gap-4 '>
+          <ItemConfigField slot={slot} />
         </div>
       </div>
     </DialogContent>

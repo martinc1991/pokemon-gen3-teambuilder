@@ -42,7 +42,7 @@ export default function PokemonCard({ slot }: PokemonCardProps): JSX.Element {
           {/* Third column (ability - item - nature - hp type) */}
           <div className='flex flex-col flex-1 gap-1'>
             <CardInfoField fieldName='Ability'>{slot.abilityName.replace('-', ' ')}</CardInfoField>
-            <CardInfoField fieldName='Item'>{slot.itemName || '-'}</CardInfoField>
+            <CardInfoField fieldName='Item'>{slot.itemName?.replace('-', ' ') || '-'}</CardInfoField>
             <CardInfoField fieldName='Nature'>{slot.natureName || '-'}</CardInfoField>
             {/* HARDCODED: */}
             <CardInfoField fieldName='HP type'>-</CardInfoField>
