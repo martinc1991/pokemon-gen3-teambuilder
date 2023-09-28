@@ -11,11 +11,11 @@ export default function NameConfigField({ slot }: NameConfigFieldProps): JSX.Ele
 
   return (
     <>
-      <Label className='text-white min-w-[60px]' htmlFor='name'>
+      <Label className='min-w-[60px]' htmlFor='name'>
         Name
       </Label>
       <Input
-        className='col-span-3 text-white'
+        className='col-span-3'
         id='name'
         onChange={(e) => {
           setSlotFieldValue(slot, 'name', e.target.value);

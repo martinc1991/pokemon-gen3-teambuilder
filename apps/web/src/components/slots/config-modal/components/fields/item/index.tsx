@@ -32,7 +32,7 @@ export default function ItemConfigField({ slot }: ItemConfigFieldProps): JSX.Ele
 
   return (
     <>
-      <Label className='text-white min-w-[60px]' htmlFor='item'>
+      <Label className='min-w-[60px]' htmlFor='item'>
         Item
       </Label>
       <Combobox

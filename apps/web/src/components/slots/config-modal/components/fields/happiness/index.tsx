@@ -11,11 +11,11 @@ export default function HappinessConfigField({ slot }: HappinessConfigFieldProps
 
   return (
     <>
-      <Label className='text-white min-w-[60px]' htmlFor='happiness'>
+      <Label className='min-w-[60px]' htmlFor='happiness'>
         Happiness
       </Label>
       <Input
-        className='col-span-3 text-white'
+        className='col-span-3'
         id='happiness'
         max={255}
         min={0}
