@@ -1,5 +1,4 @@
-import type { IBaseStats, StatName } from 'contract';
-import type { CompleteNature } from 'contract/dist/prisma/zod';
+import type { IBaseStats, StatName, CompleteNature } from 'contract';
 import { getValues } from '../common';
 
 export function getShortStatName(statName: keyof IBaseStats | StatName): string {
