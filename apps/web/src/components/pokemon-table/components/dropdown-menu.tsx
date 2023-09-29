@@ -1,5 +1,5 @@
 import { DotsHorizontalIcon } from '@radix-ui/react-icons';
-import type { IPokemon } from 'contract';
+import { MAX_TEAM_MEMBERS, type IPokemon } from 'contract';
 import { Button, DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from 'ui';
 import { useTeamStore } from '../../../state/team';
 
@@ -10,7 +10,7 @@ interface RowDropdownMenuProps {
 export default function RowDropdownMenu(props: RowDropdownMenuProps): JSX.Element {
   const [slots, addPokemon] = useTeamStore((state) => [state.slots, state.addSlot]);
 
-  const addPokemonDisabled = slots.length >= 6;
+  const addPokemonDisabled = slots.length >= MAX_TEAM_MEMBERS;
 
   function handleClick(): void {
     if (!addPokemonDisabled) addPokemon(props.pokemon);

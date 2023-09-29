@@ -1,5 +1,5 @@
 import type { IPokemon, ISlot } from 'contract';
-import { Gender, NatureNames } from 'contract';
+import { Gender, MAX_HAPPINESS, MAX_INDIVIDUAL_IV, MAX_LEVEL, NatureNames } from 'contract';
 import { nanoid } from 'nanoid';
 
 export interface FilledSlot extends Omit<ISlot, 'team' | 'ability' | 'nature' | 'item'> {
@@ -61,18 +61,18 @@ export class BaseSlot implements Omit<FilledSlot, 'pokemon'> {
     this.evSpDefense = 0;
     this.evSpeed = 0;
 
-    this.ivAttack = 31;
-    this.ivDefense = 31;
-    this.ivHp = 31;
-    this.ivSpAttack = 31;
-    this.ivSpDefense = 31;
-    this.ivSpeed = 31;
+    this.ivAttack = MAX_INDIVIDUAL_IV;
+    this.ivDefense = MAX_INDIVIDUAL_IV;
+    this.ivHp = MAX_INDIVIDUAL_IV;
+    this.ivSpAttack = MAX_INDIVIDUAL_IV;
+    this.ivSpDefense = MAX_INDIVIDUAL_IV;
+    this.ivSpeed = MAX_INDIVIDUAL_IV;
 
     this.order = isSlotFilled ? order : -1;
 
     this.gender = isSlotFilled ? pokemon.genders[0] : Gender.genderless; // Just a default value, it isn't used
-    this.level = 100;
-    this.happiness = 255;
+    this.level = MAX_LEVEL;
+    this.happiness = MAX_HAPPINESS;
   }
 }
 

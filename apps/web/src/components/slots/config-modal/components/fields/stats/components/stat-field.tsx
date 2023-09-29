@@ -1,8 +1,8 @@
-import type { CompleteNature, StatName } from 'contract';
+import { MAX_INDIVIDUAL_EV, MAX_INDIVIDUAL_IV, MAX_POSSIBLE_EVS, type CompleteNature, type StatName } from 'contract';
 import type { ChangeEvent } from 'react';
 import { useEffect, useState } from 'react';
 import { Input, Progress, Slider, Typography } from 'ui';
-import { MAX_POSSIBLE_EVS, calculateStat, getShortStatName } from '../../../../../../../utils/pokemon';
+import { calculateStat, getShortStatName } from '../../../../../../../utils/pokemon';
 
 interface SlotStatFieldProps {
   statName: StatName;
@@ -16,8 +16,8 @@ interface SlotStatFieldProps {
   totalEvs: number;
 }
 
-const evsLimits = { max: 252, min: 0 };
-const ivsLimits = { max: 31, min: 0 };
+const evsLimits = { max: MAX_INDIVIDUAL_EV, min: 0 };
+const ivsLimits = { max: MAX_INDIVIDUAL_IV, min: 0 };
 
 export default function StatField(props: SlotStatFieldProps): JSX.Element {
   const statTotal = calculateStat(props);

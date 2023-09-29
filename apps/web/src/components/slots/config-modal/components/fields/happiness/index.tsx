@@ -1,3 +1,4 @@
+import { MAX_HAPPINESS, MIN_HAPPINESS } from 'contract';
 import { Input, Label } from 'ui';
 import { useTeamStore } from '../../../../../../state/team';
 import type { FilledSlot } from '../../../../../../state/team/helpers';
@@ -17,8 +18,8 @@ export default function HappinessConfigField({ slot }: HappinessConfigFieldProps
       <Input
         className='col-span-3'
         id='happiness'
-        max={255}
-        min={0}
+        max={MAX_HAPPINESS}
+        min={MIN_HAPPINESS}
         onChange={(e) => {
           setSlotFieldValue(slot, 'happiness', parseInt(e.target.value));
         }}

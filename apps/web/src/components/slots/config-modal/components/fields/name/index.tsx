@@ -1,6 +1,7 @@
-import { Label, Input } from 'ui';
-import type { FilledSlot } from '../../../../../../state/team/helpers';
+import { MAX_POKEMON_NAME_LENGTH } from 'contract';
+import { Input, Label } from 'ui';
 import { useTeamStore } from '../../../../../../state/team';
+import type { FilledSlot } from '../../../../../../state/team/helpers';
 
 interface NameConfigFieldProps {
   slot: FilledSlot;
@@ -18,7 +19,9 @@ export default function NameConfigField({ slot }: NameConfigFieldProps): JSX.Ele
         className='col-span-3'
         id='name'
         onChange={(e) => {
-          setSlotFieldValue(slot, 'name', e.target.value);
+          if (e.target.value.length < MAX_POKEMON_NAME_LENGTH) {
+            setSlotFieldValue(slot, 'name', e.target.value);
+          }
         }}
         placeholder='Change the name here'
         value={slot.name || ''}

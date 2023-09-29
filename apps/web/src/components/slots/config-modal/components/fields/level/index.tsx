@@ -1,6 +1,7 @@
-import { Label, Input } from 'ui';
-import type { FilledSlot } from '../../../../../../state/team/helpers';
+import { MAX_LEVEL, MIN_LEVEL } from 'contract';
+import { Input, Label } from 'ui';
 import { useTeamStore } from '../../../../../../state/team';
+import type { FilledSlot } from '../../../../../../state/team/helpers';
 
 interface LevelConfigFieldProps {
   slot: FilledSlot;
@@ -17,8 +18,8 @@ export default function LevelConfigField({ slot }: LevelConfigFieldProps): JSX.E
       <Input
         className='col-span-3'
         id='level'
-        max={100}
-        min={1}
+        max={MAX_LEVEL}
+        min={MIN_LEVEL}
         onChange={(e) => {
           setSlotFieldValue(slot, 'level', parseInt(e.target.value));
         }}

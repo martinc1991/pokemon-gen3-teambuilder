@@ -55,8 +55,6 @@ export function calculateStat({ statName, base, ev, iv, level, nature }: Calcula
   return Math.floor((0.01 * (2 * base + iv + Math.floor(0.25 * ev)) * level + 5) * natureMultiplier);
 }
 
-export const MAX_POSSIBLE_EVS = 252 + 252 + 4;
-
 export function getTotalEvs({
   evAttack,
   evDefense,

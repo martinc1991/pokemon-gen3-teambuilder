@@ -1,5 +1,6 @@
 'use client';
 
+import { MAX_TEAM_MEMBERS } from 'contract';
 import { PokemonAvatar, Typography } from 'ui';
 import { useTeamStore } from '../../../state/team';
 import { BaseSlot, type FilledSlot } from '../../../state/team/helpers';
@@ -14,7 +15,7 @@ export default function RightSidebar(): JSX.Element {
   }
 
   // Pad team to show always 6 slots
-  const emptySlots = Array(6 - slots.length).fill(new BaseSlot());
+  const emptySlots = Array(MAX_TEAM_MEMBERS - slots.length).fill(new BaseSlot());
 
   return (
     <BasicSidebar side='right'>

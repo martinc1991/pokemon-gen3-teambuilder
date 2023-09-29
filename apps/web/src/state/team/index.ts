@@ -1,4 +1,4 @@
-import { type IPokemon } from 'contract';
+import { MAX_TEAM_MEMBERS, type IPokemon } from 'contract';
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 import type { FilledSlot } from './helpers';
@@ -26,7 +26,7 @@ export const useTeamStore = create(
     selectedSlotIndex: 0,
     addSlot: (pokemon) => {
       set((state) => {
-        if (state.slots.length >= 6) return;
+        if (state.slots.length >= MAX_TEAM_MEMBERS) return;
 
         const newSlot: FilledSlot = {
           ...new BaseSlot(state.slots.length, pokemon),
