@@ -205,6 +205,12 @@ model Slot {
   evSpAttack            Int          @default(0)
   evSpDefense           Int          @default(0)
   evSpeed               Int          @default(0)
+  ivHp                  Int          @default(31)
+  ivAttack              Int          @default(31)
+  ivDefense             Int          @default(31)
+  ivSpAttack            Int          @default(31)
+  ivSpDefense           Int          @default(31)
+  ivSpeed               Int          @default(31)
   item                  Item?        @relation(fields: [itemName], references: [name])
   itemName              String?
   shiny                 Boolean?     @default(false)

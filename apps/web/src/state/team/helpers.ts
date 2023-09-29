@@ -29,6 +29,13 @@ export class BaseSlot implements Omit<FilledSlot, 'pokemon'> {
   evSpDefense: 0;
   evSpeed: 0;
 
+  ivAttack: 31;
+  ivDefense: 31;
+  ivHp: 31;
+  ivSpAttack: 31;
+  ivSpDefense: 31;
+  ivSpeed: 31;
+
   gender: Gender;
   level: number;
   happiness: number;
@@ -53,6 +60,13 @@ export class BaseSlot implements Omit<FilledSlot, 'pokemon'> {
     this.evSpAttack = 0;
     this.evSpDefense = 0;
     this.evSpeed = 0;
+
+    this.ivAttack = 31;
+    this.ivDefense = 31;
+    this.ivHp = 31;
+    this.ivSpAttack = 31;
+    this.ivSpDefense = 31;
+    this.ivSpeed = 31;
 
     this.order = isSlotFilled ? order : -1;
 
