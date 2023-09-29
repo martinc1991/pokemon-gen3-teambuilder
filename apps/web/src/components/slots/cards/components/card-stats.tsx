@@ -21,8 +21,7 @@ export default function PokemonCardStats({ slot }: PokemonCardStatsProps): JSX.E
 
   if (!nature) return <div>error</div>;
 
-  const basicArguments: Omit<CalculateStatProps, 'statName' | 'base' | 'ev'> = {
-    iv: 0, // HARDCODED: // TODO: add ivs to schema
+  const basicArguments: Omit<CalculateStatProps, 'statName' | 'base' | 'ev' | 'iv'> = {
     level: slot.level,
     nature,
   };
@@ -33,36 +32,50 @@ export default function PokemonCardStats({ slot }: PokemonCardStatsProps): JSX.E
       <div className='flex flex-col w-full gap-1'>
         <div className='flex items-center justify-between gap-1'>
           <Typography.Muted>HP: </Typography.Muted>
-          <Typography.Small>{calculateStat({ ...basicArguments, statName: 'hp', base: pokemon.baseHp, ev: slot.evHp })}</Typography.Small>
+          <Typography.Small>
+            {calculateStat({ ...basicArguments, statName: 'hp', base: pokemon.baseHp, ev: slot.evHp, iv: slot.ivHp })}
+          </Typography.Small>
         </div>
         <div className='flex justify-between gap-1'>
           <Typography.Muted>Atk: </Typography.Muted>
           <Typography.Small>
-            {calculateStat({ ...basicArguments, statName: 'attack', base: pokemon.baseAttack, ev: slot.evAttack })}
+            {calculateStat({ ...basicArguments, statName: 'attack', base: pokemon.baseAttack, ev: slot.evAttack, iv: slot.ivAttack })}
           </Typography.Small>
         </div>
         <div className='flex justify-between gap-1'>
           <Typography.Muted>Def: </Typography.Muted>
           <Typography.Small>
-            {calculateStat({ ...basicArguments, statName: 'defense', base: pokemon.baseDefense, ev: slot.evDefense })}
+            {calculateStat({ ...basicArguments, statName: 'defense', base: pokemon.baseDefense, ev: slot.evDefense, iv: slot.ivDefense })}
           </Typography.Small>
         </div>
         <div className='flex justify-between gap-1'>
           <Typography.Muted>SpAtk: </Typography.Muted>
           <Typography.Small>
-            {calculateStat({ ...basicArguments, statName: 'spattack', base: pokemon.baseSpattack, ev: slot.evSpAttack })}
+            {calculateStat({
+              ...basicArguments,
+              statName: 'spattack',
+              base: pokemon.baseSpattack,
+              ev: slot.evSpAttack,
+              iv: slot.ivSpAttack,
+            })}
           </Typography.Small>
         </div>
         <div className='flex justify-between gap-1'>
           <Typography.Muted>SpDef: </Typography.Muted>
           <Typography.Small>
-            {calculateStat({ ...basicArguments, statName: 'spdefense', base: pokemon.baseSpdefense, ev: slot.evSpDefense })}
+            {calculateStat({
+              ...basicArguments,
+              statName: 'spdefense',
+              base: pokemon.baseSpdefense,
+              ev: slot.evSpDefense,
+              iv: slot.ivSpDefense,
+            })}
           </Typography.Small>
         </div>
         <div className='flex justify-between gap-1'>
           <Typography.Muted>Spe: </Typography.Muted>
           <Typography.Small>
-            {calculateStat({ ...basicArguments, statName: 'speed', base: pokemon.baseSpeed, ev: slot.evSpeed })}
+            {calculateStat({ ...basicArguments, statName: 'speed', base: pokemon.baseSpeed, ev: slot.evSpeed, iv: slot.ivSpeed })}
           </Typography.Small>
         </div>
       </div>
