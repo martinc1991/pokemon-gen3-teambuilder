@@ -3,6 +3,7 @@ import { Typography } from 'ui';
 import { client } from '../../../../../../rq-client';
 import { useTeamStore } from '../../../../../../state/team';
 import type { FilledSlot } from '../../../../../../state/team/helpers';
+import { getTotalEvs } from '../../../../../../utils/pokemon';
 import StatField, { StatsHeader } from './components/stat-field';
 
 interface SlotStatsFieldsProps {
@@ -12,6 +13,8 @@ interface SlotStatsFieldsProps {
 export default function SlotStatsFields({ slot }: SlotStatsFieldsProps): JSX.Element {
   const { data, isFetching, error, isLoading } = client.natures.getAll.useQuery(['all-natures']);
   const [setSlotFieldValue] = useTeamStore((state) => [state.setSlotFieldValue]);
+
+  const totalEvs = getTotalEvs(slot);
 
   function handleEvChange(stat: EvFieldName, value: number): void {
     setSlotFieldValue(slot, stat, value);
@@ -46,6 +49,7 @@ export default function SlotStatsFields({ slot }: SlotStatsFieldsProps): JSX.Ele
             handleIvChange('ivHp', value);
           }}
           statName='hp'
+          totalEvs={totalEvs}
         />
         <StatField
           base={slot.pokemon.baseAttack}
@@ -60,6 +64,7 @@ export default function SlotStatsFields({ slot }: SlotStatsFieldsProps): JSX.Ele
             handleIvChange('ivAttack', value);
           }}
           statName='attack'
+          totalEvs={totalEvs}
         />
         <StatField
           base={slot.pokemon.baseDefense}
@@ -74,6 +79,7 @@ export default function SlotStatsFields({ slot }: SlotStatsFieldsProps): JSX.Ele
             handleIvChange('ivDefense', value);
           }}
           statName='defense'
+          totalEvs={totalEvs}
         />
         <StatField
           base={slot.pokemon.baseSpattack}
@@ -88,6 +94,7 @@ export default function SlotStatsFields({ slot }: SlotStatsFieldsProps): JSX.Ele
             handleIvChange('ivSpAttack', value);
           }}
           statName='spattack'
+          totalEvs={totalEvs}
         />
         <StatField
           base={slot.pokemon.baseSpdefense}
@@ -102,6 +109,7 @@ export default function SlotStatsFields({ slot }: SlotStatsFieldsProps): JSX.Ele
             handleIvChange('ivSpDefense', value);
           }}
           statName='spdefense'
+          totalEvs={totalEvs}
         />
         <StatField
           base={slot.pokemon.baseSpeed}
@@ -116,6 +124,7 @@ export default function SlotStatsFields({ slot }: SlotStatsFieldsProps): JSX.Ele
             handleIvChange('ivSpeed', value);
           }}
           statName='speed'
+          totalEvs={totalEvs}
         />
       </div>
     </>
