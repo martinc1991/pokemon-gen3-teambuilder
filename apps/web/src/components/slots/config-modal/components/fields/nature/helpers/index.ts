@@ -1,7 +1,7 @@
-import type { INatureGetAllResponseElement } from 'contract';
+import type { INature } from 'contract';
 import { getShortStatName } from '../../../../../../../utils/pokemon';
 
-export function getNatureSelectLabel({ name, decreased, increased }: INatureGetAllResponseElement): string {
+export function getNatureSelectLabel({ name, decreased, increased }: INature): string {
   const basic = `${name.replace('-', ' ')}`;
 
   if (increased && decreased) {

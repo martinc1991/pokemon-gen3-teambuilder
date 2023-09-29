@@ -1,12 +1,29 @@
 import { NatureNames, StatName } from '@prisma/client';
+import { INature } from '../../types';
 
-interface Seed_Nature {
-  name: NatureNames;
-  increased: StatName | null;
-  decreased: StatName | null;
-}
-
-export const naturesArray: Seed_Nature[] = [
+// There are 25 natures, 5 neutral (https://bulbapedia.bulbagarden.net/wiki/Nature)
+export const naturesArray: INature[] = [
+  {
+    name: NatureNames.sassy,
+    increased: StatName.spdefense,
+    decreased: StatName.speed,
+  },
+  {
+    name: NatureNames.brave,
+    increased: StatName.attack,
+    decreased: StatName.speed,
+  },
+  {
+    name: NatureNames.quiet,
+    increased: StatName.spattack,
+    decreased: StatName.speed,
+  },
+  {
+    name: NatureNames.relaxed,
+    increased: StatName.defense,
+    decreased: StatName.speed,
+  },
+  { name: NatureNames.serious, increased: null, decreased: null },
   { name: NatureNames.hardy, increased: null, decreased: null },
   {
     name: NatureNames.bold,

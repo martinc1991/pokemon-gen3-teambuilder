@@ -1,6 +1,5 @@
-import type { EvFieldName, IvFieldName } from 'contract';
+import { naturesArray, type EvFieldName, type IvFieldName } from 'contract';
 import { Typography } from 'ui';
-import { client } from '../../../../../../rq-client';
 import { useTeamStore } from '../../../../../../state/team';
 import type { FilledSlot } from '../../../../../../state/team/helpers';
 import { getTotalEvs } from '../../../../../../utils/pokemon';
@@ -11,7 +10,6 @@ interface SlotStatsFieldsProps {
 }
 
 export default function SlotStatsFields({ slot }: SlotStatsFieldsProps): JSX.Element {
-  const { data, isFetching, error, isLoading } = client.natures.getAll.useQuery(['all-natures']);
   const [setSlotFieldValue] = useTeamStore((state) => [state.setSlotFieldValue]);
 
   const totalEvs = getTotalEvs(slot);
@@ -24,10 +22,7 @@ export default function SlotStatsFields({ slot }: SlotStatsFieldsProps): JSX.Ele
     setSlotFieldValue(slot, stat, value);
   }
 
-  if (error) return <div>error</div>;
-  if (isLoading || isFetching) return <div>loading</div>;
-
-  const nature = data.body.find((nat) => nat.name === slot.natureName) || { increased: null, decreased: null }; // INFO: default value TODO: make a hook
+  const nature = naturesArray.find((nat) => nat.name === slot.natureName) || { increased: null, decreased: null }; // DEFAULT: docile nature
 
   return (
     <>

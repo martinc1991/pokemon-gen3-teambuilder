@@ -1,7 +1,7 @@
-import type { INatureGetAllResponseElement } from 'contract';
+import type { INature } from 'contract';
+import { naturesArray } from 'contract';
 import type { ComboboxItem } from 'ui';
 import { Combobox, Label } from 'ui';
-import { client } from '../../../../../../rq-client';
 import { useTeamStore } from '../../../../../../state/team';
 import type { FilledSlot } from '../../../../../../state/team/helpers';
 import { getNatureSelectLabel } from './helpers';
@@ -11,19 +11,13 @@ interface NatureConfigFieldProps {
 }
 
 export default function NatureConfigField({ slot }: NatureConfigFieldProps): JSX.Element {
-  const { data, isFetching, error, isLoading } = client.natures.getAll.useQuery(['all-natures']);
   const [setSlotFieldValue] = useTeamStore((state) => [state.setSlotFieldValue]);
 
-  if (error) return <div>error</div>;
-  if (isLoading) return <div>loading</div>;
+  const naturesData: ComboboxItem<INature>[] = naturesArray.map((nature) => {
+    return { id: nature.name, label: getNatureSelectLabel(nature), payload: nature };
+  });
 
-  const naturesData: ComboboxItem<INatureGetAllResponseElement>[] = data.body.map((nature) => ({
-    id: nature.name,
-    label: getNatureSelectLabel(nature),
-    payload: nature,
-  }));
-
-  function handleItemChange(item: ComboboxItem<INatureGetAllResponseElement>): void {
+  function handleItemChange(item: ComboboxItem<INature>): void {
     setSlotFieldValue(slot, 'natureName', item.payload.name);
   }
 
@@ -35,7 +29,6 @@ export default function NatureConfigField({ slot }: NatureConfigFieldProps): JSX
       <Combobox
         className='min-w-[210px]'
         data={naturesData}
-        disabled={isFetching || isLoading}
         itemsClassName='capitalize'
         onChange={handleItemChange}
         searchBox

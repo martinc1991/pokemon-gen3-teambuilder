@@ -21,26 +21,31 @@ enum StatName {
 }
 
 enum NatureNames {
-  hardy
-  bold
-  modest
-  calm
-  timid
-  lonely
-  docile
-  mild
-  gentle
-  hasty
   adamant
-  impish
   bashful
+  bold
+  brave
+  calm
   careful
-  rash
+  docile
+  gentle
+  hardy
+  hasty
+  impish
   jolly
-  naughty
   lax
-  quirky
+  lonely
+  mild
+  modest
   naive
+  naughty
+  quiet
+  quirky
+  rash
+  relaxed
+  sassy
+  serious
+  timid
 }
 
 enum TypeNames {

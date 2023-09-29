@@ -1,17 +1,7 @@
 import { DamageClass, TypeNames } from '@prisma/client';
+import { IType } from '../../types';
 
-interface Seed_Type {
-  name: TypeNames;
-  damageClass: DamageClass | null;
-  doubleDamageFrom: TypeNames[];
-  doubleDamageTo: TypeNames[];
-  halfDamageFrom: TypeNames[];
-  halfDamageTo: TypeNames[];
-  noDamageFrom: TypeNames[];
-  noDamageTo: TypeNames[];
-}
-
-export const typesArray: Seed_Type[] = [
+export const typesArray: IType[] = [
   {
     name: TypeNames.normal,
     damageClass: DamageClass.physical,
@@ -25,25 +15,10 @@ export const typesArray: Seed_Type[] = [
   {
     name: TypeNames.ice,
     damageClass: DamageClass.special,
-    doubleDamageFrom: [
-      TypeNames.fighting,
-      TypeNames.rock,
-      TypeNames.steel,
-      TypeNames.fire,
-    ],
-    doubleDamageTo: [
-      TypeNames.flying,
-      TypeNames.ground,
-      TypeNames.grass,
-      TypeNames.dragon,
-    ],
+    doubleDamageFrom: [TypeNames.fighting, TypeNames.rock, TypeNames.steel, TypeNames.fire],
+    doubleDamageTo: [TypeNames.flying, TypeNames.ground, TypeNames.grass, TypeNames.dragon],
     halfDamageFrom: [TypeNames.ice],
-    halfDamageTo: [
-      TypeNames.steel,
-      TypeNames.fire,
-      TypeNames.water,
-      TypeNames.ice,
-    ],
+    halfDamageTo: [TypeNames.steel, TypeNames.fire, TypeNames.water, TypeNames.ice],
     noDamageFrom: [],
     noDamageTo: [],
   },
@@ -70,29 +45,10 @@ export const typesArray: Seed_Type[] = [
   {
     name: TypeNames.grass,
     damageClass: DamageClass.special,
-    doubleDamageFrom: [
-      TypeNames.flying,
-      TypeNames.poison,
-      TypeNames.bug,
-      TypeNames.fire,
-      TypeNames.ice,
-    ],
+    doubleDamageFrom: [TypeNames.flying, TypeNames.poison, TypeNames.bug, TypeNames.fire, TypeNames.ice],
     doubleDamageTo: [TypeNames.ground, TypeNames.rock, TypeNames.water],
-    halfDamageFrom: [
-      TypeNames.ground,
-      TypeNames.water,
-      TypeNames.grass,
-      TypeNames.electric,
-    ],
-    halfDamageTo: [
-      TypeNames.flying,
-      TypeNames.poison,
-      TypeNames.bug,
-      TypeNames.steel,
-      TypeNames.fire,
-      TypeNames.grass,
-      TypeNames.dragon,
-    ],
+    halfDamageFrom: [TypeNames.ground, TypeNames.water, TypeNames.grass, TypeNames.electric],
+    halfDamageTo: [TypeNames.flying, TypeNames.poison, TypeNames.bug, TypeNames.steel, TypeNames.fire, TypeNames.grass, TypeNames.dragon],
     noDamageFrom: [],
     noDamageTo: [],
   },
@@ -124,12 +80,7 @@ export const typesArray: Seed_Type[] = [
       TypeNames.ghost,
       TypeNames.dark,
     ],
-    halfDamageTo: [
-      TypeNames.steel,
-      TypeNames.fire,
-      TypeNames.water,
-      TypeNames.electric,
-    ],
+    halfDamageTo: [TypeNames.steel, TypeNames.fire, TypeNames.water, TypeNames.electric],
     noDamageFrom: [TypeNames.poison],
     noDamageTo: [],
   },
@@ -137,13 +88,7 @@ export const typesArray: Seed_Type[] = [
     name: TypeNames.ground,
     damageClass: DamageClass.physical,
     doubleDamageFrom: [TypeNames.water, TypeNames.grass, TypeNames.ice],
-    doubleDamageTo: [
-      TypeNames.poison,
-      TypeNames.rock,
-      TypeNames.steel,
-      TypeNames.fire,
-      TypeNames.electric,
-    ],
+    doubleDamageTo: [TypeNames.poison, TypeNames.rock, TypeNames.steel, TypeNames.fire, TypeNames.electric],
     halfDamageFrom: [TypeNames.poison, TypeNames.rock],
     halfDamageTo: [TypeNames.bug, TypeNames.grass],
     noDamageFrom: [TypeNames.electric],
@@ -153,20 +98,9 @@ export const typesArray: Seed_Type[] = [
     name: TypeNames.fighting,
     damageClass: DamageClass.physical,
     doubleDamageFrom: [TypeNames.flying, TypeNames.psychic],
-    doubleDamageTo: [
-      TypeNames.normal,
-      TypeNames.rock,
-      TypeNames.steel,
-      TypeNames.ice,
-      TypeNames.dark,
-    ],
+    doubleDamageTo: [TypeNames.normal, TypeNames.rock, TypeNames.steel, TypeNames.ice, TypeNames.dark],
     halfDamageFrom: [TypeNames.rock, TypeNames.bug, TypeNames.dark],
-    halfDamageTo: [
-      TypeNames.flying,
-      TypeNames.poison,
-      TypeNames.bug,
-      TypeNames.psychic,
-    ],
+    halfDamageTo: [TypeNames.flying, TypeNames.poison, TypeNames.bug, TypeNames.psychic],
     noDamageFrom: [],
     noDamageTo: [TypeNames.ghost],
   },
@@ -176,14 +110,7 @@ export const typesArray: Seed_Type[] = [
     doubleDamageFrom: [TypeNames.flying, TypeNames.rock, TypeNames.fire],
     doubleDamageTo: [TypeNames.grass, TypeNames.psychic, TypeNames.dark],
     halfDamageFrom: [TypeNames.fighting, TypeNames.ground, TypeNames.grass],
-    halfDamageTo: [
-      TypeNames.fighting,
-      TypeNames.flying,
-      TypeNames.poison,
-      TypeNames.ghost,
-      TypeNames.steel,
-      TypeNames.fire,
-    ],
+    halfDamageTo: [TypeNames.fighting, TypeNames.flying, TypeNames.poison, TypeNames.ghost, TypeNames.steel, TypeNames.fire],
     noDamageFrom: [],
     noDamageTo: [],
   },
@@ -192,43 +119,17 @@ export const typesArray: Seed_Type[] = [
     damageClass: DamageClass.physical,
     doubleDamageFrom: [TypeNames.ground, TypeNames.psychic],
     doubleDamageTo: [TypeNames.grass],
-    halfDamageFrom: [
-      TypeNames.fighting,
-      TypeNames.poison,
-      TypeNames.bug,
-      TypeNames.grass,
-    ],
-    halfDamageTo: [
-      TypeNames.poison,
-      TypeNames.ground,
-      TypeNames.rock,
-      TypeNames.ghost,
-    ],
+    halfDamageFrom: [TypeNames.fighting, TypeNames.poison, TypeNames.bug, TypeNames.grass],
+    halfDamageTo: [TypeNames.poison, TypeNames.ground, TypeNames.rock, TypeNames.ghost],
     noDamageFrom: [],
     noDamageTo: [TypeNames.steel],
   },
   {
     name: TypeNames.rock,
     damageClass: DamageClass.physical,
-    doubleDamageFrom: [
-      TypeNames.fighting,
-      TypeNames.ground,
-      TypeNames.steel,
-      TypeNames.water,
-      TypeNames.grass,
-    ],
-    doubleDamageTo: [
-      TypeNames.flying,
-      TypeNames.bug,
-      TypeNames.fire,
-      TypeNames.ice,
-    ],
-    halfDamageFrom: [
-      TypeNames.normal,
-      TypeNames.flying,
-      TypeNames.poison,
-      TypeNames.fire,
-    ],
+    doubleDamageFrom: [TypeNames.fighting, TypeNames.ground, TypeNames.steel, TypeNames.water, TypeNames.grass],
+    doubleDamageTo: [TypeNames.flying, TypeNames.bug, TypeNames.fire, TypeNames.ice],
+    halfDamageFrom: [TypeNames.normal, TypeNames.flying, TypeNames.poison, TypeNames.fire],
     halfDamageTo: [TypeNames.fighting, TypeNames.ground, TypeNames.steel],
     noDamageFrom: [],
     noDamageTo: [],
@@ -238,12 +139,7 @@ export const typesArray: Seed_Type[] = [
     damageClass: DamageClass.special,
     doubleDamageFrom: [TypeNames.grass, TypeNames.electric],
     doubleDamageTo: [TypeNames.ground, TypeNames.rock, TypeNames.fire],
-    halfDamageFrom: [
-      TypeNames.steel,
-      TypeNames.fire,
-      TypeNames.water,
-      TypeNames.ice,
-    ],
+    halfDamageFrom: [TypeNames.steel, TypeNames.fire, TypeNames.water, TypeNames.ice],
     halfDamageTo: [TypeNames.water, TypeNames.grass, TypeNames.dragon],
     noDamageFrom: [],
     noDamageTo: [],
@@ -262,25 +158,9 @@ export const typesArray: Seed_Type[] = [
     name: TypeNames.fire,
     damageClass: DamageClass.special,
     doubleDamageFrom: [TypeNames.ground, TypeNames.rock, TypeNames.water],
-    doubleDamageTo: [
-      TypeNames.bug,
-      TypeNames.steel,
-      TypeNames.grass,
-      TypeNames.ice,
-    ],
-    halfDamageFrom: [
-      TypeNames.bug,
-      TypeNames.steel,
-      TypeNames.fire,
-      TypeNames.grass,
-      TypeNames.ice,
-    ],
-    halfDamageTo: [
-      TypeNames.rock,
-      TypeNames.fire,
-      TypeNames.water,
-      TypeNames.dragon,
-    ],
+    doubleDamageTo: [TypeNames.bug, TypeNames.steel, TypeNames.grass, TypeNames.ice],
+    halfDamageFrom: [TypeNames.bug, TypeNames.steel, TypeNames.fire, TypeNames.grass, TypeNames.ice],
+    halfDamageTo: [TypeNames.rock, TypeNames.fire, TypeNames.water, TypeNames.dragon],
     noDamageFrom: [],
     noDamageTo: [],
   },
@@ -289,12 +169,7 @@ export const typesArray: Seed_Type[] = [
     damageClass: DamageClass.special,
     doubleDamageFrom: [TypeNames.ice, TypeNames.dragon],
     doubleDamageTo: [TypeNames.dragon],
-    halfDamageFrom: [
-      TypeNames.fire,
-      TypeNames.water,
-      TypeNames.grass,
-      TypeNames.electric,
-    ],
+    halfDamageFrom: [TypeNames.fire, TypeNames.water, TypeNames.grass, TypeNames.electric],
     halfDamageTo: [TypeNames.steel],
     noDamageFrom: [],
     noDamageTo: [],

@@ -1,10 +1,9 @@
+import { naturesArray, typesArray } from 'contract';
 import { deoxysVariations } from './data/deoxys';
 import { overrides } from './data/overrides';
 import { getAbilities } from './entities/abilities';
 import { getItems } from './entities/items';
-import { naturesArray } from './entities/natures';
 import { getPokemonPromises } from './entities/pokemon';
-import { typesArray } from './entities/types';
 import { prismaSeederClient } from './seederClient';
 
 const CYAN = '\x1b[36m';
