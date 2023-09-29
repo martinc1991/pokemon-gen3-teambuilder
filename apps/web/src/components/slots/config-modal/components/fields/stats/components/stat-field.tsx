@@ -1,4 +1,6 @@
 import type { CompleteNature, StatName } from 'contract';
+import type { ChangeEvent } from 'react';
+import { useEffect, useState } from 'react';
 import { Input, Progress, Slider, Typography } from 'ui';
 import { calculateStat, getShortStatName } from '../../../../../../../utils/pokemon';
 
@@ -13,10 +15,39 @@ interface SlotStatFieldProps {
   onChangeIv?: (value: number) => void;
 }
 
+const evsLimits = { max: 252, min: 0 };
+const ivsLimits = { max: 31, min: 0 };
+
 export default function StatField(props: SlotStatFieldProps): JSX.Element {
   const total = calculateStat(props);
+  const [evs, setEvs] = useState(props.ev);
+
+  useEffect(() => {
+    setEvs(props.ev);
+  }, [props.ev]);
 
   const progress = (total / 714) * 100; // TODO: extract to constant, also make it logarithmic
+
+  // EVs handlers
+  function handleEvOnChangeInput(e: ChangeEvent<HTMLInputElement>): void {
+    handleEvOnChangeSlider([parseInt(e.target.value)]);
+  }
+  function handleEvOnChangeSlider([value]: [number]): void {
+    setEvs(value);
+  }
+  function handleEvOnCommit([value]: [number]): void {
+    // This callback should be used to handle cases when the thumb goes further than disabled state allows it (because there a delay (bug) that allows it to do so)
+    if (props.onChangeEv) {
+      props.onChangeEv(value);
+    }
+  }
+
+  // IVs handlers
+  function handleIvOnChange(e: ChangeEvent<HTMLInputElement>): void {
+    if (props.onChangeIv) {
+      props.onChangeIv(parseInt(e.target.value));
+    }
+  }
 
   return (
     <div className='flex items-center w-full gap-2'>
@@ -29,48 +60,12 @@ export default function StatField(props: SlotStatFieldProps): JSX.Element {
       <div className='flex items-center justify-center flex-[4]'>
         <Progress value={progress} />
       </div>
-
       <div className='flex justify-between gap-4 items-center flex-[6]'>
-        <Input
-          className='w-[80px] h-[30px]'
-          max={252}
-          min={0}
-          onChange={(e) => {
-            if (props.onChangeEv) {
-              props.onChangeEv(parseInt(e.target.value));
-            }
-          }}
-          type='number'
-          value={props.ev}
-        />
-        <Slider
-          // disabled
-          max={252}
-          min={0}
-          onValueChange={(v) => {
-            if (props.onChangeEv) {
-              props.onChangeEv(v[0]);
-            }
-          }}
-          onValueCommit={() => {
-            // This callback should be used to handle cases when the thumb goes further than disabled state allows it (because there a delay (bug) that allows it to do so)
-          }}
-          value={[props.ev]}
-        />
+        <Input className='w-[80px] h-[30px]' {...evsLimits} onChange={handleEvOnChangeInput} type='number' value={evs} />
+        <Slider {...evsLimits} onValueChange={handleEvOnChangeSlider} onValueCommit={handleEvOnCommit} value={[evs]} />
       </div>
       <div className='flex items-center justify-center flex-[1]'>
-        <Input
-          className='w-[70px] h-[30px]'
-          max={31}
-          min={0}
-          onChange={(e) => {
-            if (props.onChangeIv) {
-              props.onChangeIv(parseInt(e.target.value));
-            }
-          }}
-          type='number'
-          value={props.iv}
-        />
+        <Input className='w-[70px] h-[30px]' {...ivsLimits} onChange={handleIvOnChange} type='number' value={props.iv} />
       </div>
       <div className='flex items-center justify-center w-12'>
         <Typography.Small>{total}</Typography.Small>
