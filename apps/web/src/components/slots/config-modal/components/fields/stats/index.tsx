@@ -1,3 +1,4 @@
+import type { EvFieldName, IvFieldName } from 'contract';
 import { Typography } from 'ui';
 import { client } from '../../../../../../rq-client';
 import { useTeamStore } from '../../../../../../state/team';
@@ -7,9 +8,6 @@ import StatField, { StatsHeader } from './components/stat-field';
 interface SlotStatsFieldsProps {
   slot: FilledSlot;
 }
-
-type EvFieldName = keyof Pick<FilledSlot, 'evAttack' | 'evDefense' | 'evHp' | 'evSpAttack' | 'evSpDefense' | 'evSpeed'>;
-type IvFieldName = keyof Pick<FilledSlot, 'ivAttack' | 'ivDefense' | 'ivHp' | 'ivSpAttack' | 'ivSpDefense' | 'ivSpeed'>;
 
 export default function SlotStatsFields({ slot }: SlotStatsFieldsProps): JSX.Element {
   const { data, isFetching, error, isLoading } = client.natures.getAll.useQuery(['all-natures']);

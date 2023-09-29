@@ -1,4 +1,4 @@
-import type { IBaseStats, StatName, CompleteNature } from 'contract';
+import type { CompleteNature, EvFieldName, IBaseStats, StatName } from 'contract';
 import { getValues } from '../common';
 
 export function getShortStatName(statName: keyof IBaseStats | StatName): string {
@@ -53,4 +53,19 @@ export function calculateStat({ statName, base, ev, iv, level, nature }: Calcula
   }
 
   return Math.floor((0.01 * (2 * base + iv + Math.floor(0.25 * ev)) * level + 5) * natureMultiplier);
+}
+
+export const MAX_POSSIBLE_EVS = 252 + 252 + 4;
+
+export function getTotalEvs({
+  evAttack,
+  evDefense,
+  evHp,
+  evSpAttack,
+  evSpDefense,
+  evSpeed,
+}: {
+  [K in EvFieldName]: number;
+}): number {
+  return evAttack + evDefense + evHp + evSpAttack + evSpDefense + evSpeed;
 }
