@@ -13,6 +13,9 @@ export default function LeftSidebar(): JSX.Element {
       <Link className='flex justify-center' href='/builder'>
         <Button variant='link'>Builder</Button>
       </Link>
+      <Link className='flex justify-center' href='/team'>
+        <Button variant='link'>Team</Button>
+      </Link>
     </BasicSidebar>
   );
 }

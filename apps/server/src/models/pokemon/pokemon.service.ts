@@ -14,12 +14,7 @@ export class PokemonService {
       skip: pagination.skip,
       take: pagination.take,
       include: {
-        abilities: {
-          select: {
-            name: true,
-            shortDescription: true,
-          },
-        },
+        abilities: true,
       },
     });
   }

@@ -1,6 +1,7 @@
+import { Ability } from '@prisma/client';
 import { ClientInferResponseBody, initContract } from '@ts-rest/core';
 import { z } from 'zod';
-import { CompletePokemon, PokemonModel } from '../../prisma/zod';
+import { CompletePokemon, PokemonModel } from '../prisma/zod';
 import { ArrayElementType } from '../utils/types/array-element-type';
 
 const c = initContract();
@@ -12,11 +13,7 @@ const queryParamsSchema = z.object({
   sortOrder: z.string().optional(),
 });
 
-type Ability = {
-  abilities: { name: string; shortDescription: string }[];
-};
-
-type GetAllPokemonResponse = Omit<CompletePokemon, 'typeOne' | 'slot' | 'abilities'> & Ability;
+type GetAllPokemonResponse = Omit<CompletePokemon, 'typeOne' | 'typeTwo' | 'slot' | 'abilities'> & { abilities: Ability[] };
 const getAllPokemonResponseSchema = z.custom<GetAllPokemonResponse>();
 
 export const pokemonContract = c.router({

@@ -1,4 +1,4 @@
-import { NatureNames } from '@prisma/client';
+import { Gender, NatureNames } from '@prisma/client';
 import * as z from 'zod';
 import {
   CompleteAbility,
@@ -19,7 +19,7 @@ export const SlotModel = z.object({
   teamId: z.string(),
   nationalPokedexNumber: z.number().int(),
   order: z.number().int(),
-  abilityName: z.string().nullish(),
+  abilityName: z.string(),
   natureName: z.nativeEnum(NatureNames).nullish(),
   evHp: z.number().int(),
   evAttack: z.number().int(),
@@ -27,14 +27,23 @@ export const SlotModel = z.object({
   evSpAttack: z.number().int(),
   evSpDefense: z.number().int(),
   evSpeed: z.number().int(),
+  ivHp: z.number().int(),
+  ivAttack: z.number().int(),
+  ivDefense: z.number().int(),
+  ivSpAttack: z.number().int(),
+  ivSpDefense: z.number().int(),
+  ivSpeed: z.number().int(),
   itemName: z.string().nullish(),
   shiny: z.boolean().nullish(),
+  gender: z.nativeEnum(Gender),
+  level: z.number().int(),
+  happiness: z.number().int(),
 });
 
 export interface CompleteSlot extends z.infer<typeof SlotModel> {
   team: CompleteTeam;
   pokemon: CompletePokemon;
-  ability?: CompleteAbility | null;
+  ability: CompleteAbility;
   nature?: CompleteNature | null;
   item?: CompleteItem | null;
 }
@@ -48,7 +57,7 @@ export const RelatedSlotModel: z.ZodSchema<CompleteSlot> = z.lazy(() =>
   SlotModel.extend({
     team: RelatedTeamModel,
     pokemon: RelatedPokemonModel,
-    ability: RelatedAbilityModel.nullish(),
+    ability: RelatedAbilityModel,
     nature: RelatedNatureModel.nullish(),
     item: RelatedItemModel.nullish(),
   })

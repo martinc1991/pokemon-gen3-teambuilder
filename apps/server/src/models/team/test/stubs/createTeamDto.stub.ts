@@ -1,4 +1,4 @@
-import { NatureNames } from '@prisma/client';
+import { Gender, NatureNames } from '@prisma/client';
 import { CreateTeamDto, EditTeamDto, TeamSlotDto } from '../../dto';
 
 export const teamIdStub = 'fake-team-id';
@@ -43,6 +43,7 @@ const genericSlot: TeamSlotDto = {
   evSpeed: 0,
   itemName: 'generic-itemName',
   shiny: false,
+  gender: Gender.male,
 };
 
 const slotArr: TeamSlotDto[] = [

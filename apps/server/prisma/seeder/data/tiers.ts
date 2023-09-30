@@ -1,6 +1,6 @@
-import { ITier } from 'contract';
+import { Tier } from 'contract';
 
-export const pokemonTiers: { [k: string]: ITier } = {
+export const pokemonTiers: { [k: string]: Tier } = {
   bulbasaur: 'lc',
   ivysaur: 'nfe',
   venusaur: 'uubl',

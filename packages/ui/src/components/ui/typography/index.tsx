@@ -44,12 +44,12 @@ export function Word({ className, ...props }: React.HTMLAttributes<HTMLParagraph
 
 // Muted word
 export function Muted({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
-  return <p className={cn('text-sm font-medium text-muted-foreground', className)} {...props} />;
+  return <p className={cn('text-sm font-medium leading-none text-muted-foreground', className)} {...props} />;
 }
 
 // Small
 export function Small({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
-  return <small className={cn('text-sm font-medium text-foreground', className)} {...props} />;
+  return <small className={cn('text-sm font-medium text-foreground leading-none', className)} {...props} />;
 }
 
 // Tiny

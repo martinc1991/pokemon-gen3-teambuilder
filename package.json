@@ -2,8 +2,8 @@
   "private": true,
   "scripts": {
     "build": "turbo build",
-    "dev": "turbo dev",
-    "lint": "turbo lint",
+    "dev": "turbo dev --no-daemon",
+    "lint": "turbo lint --no-daemon",
     "clean": "turbo clean",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "studio": "turbo studio",

@@ -39,7 +39,7 @@ export function usePokemonTableInfo() {
   useEffect(() => {
     // Whenever fetching a batch finishes, load next one
     if (fetchStatus === 'idle' && hasNextPage) void fetchNextPage();
-  }, [fetchStatus, hasNextPage]);
+  }, [fetchStatus, hasNextPage, fetchNextPage]);
 
   // Flattened data for usePokemonTableConfig to use
   const flatData = pokemonInfiniteQuery.data?.pages.flatMap((page) => page.body) || [];

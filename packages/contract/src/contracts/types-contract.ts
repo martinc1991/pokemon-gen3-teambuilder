@@ -1,6 +1,6 @@
 import { initContract } from '@ts-rest/core';
 import { z } from 'zod';
-import { TypeModel } from '../../prisma/zod';
+import { TypeModel } from '../prisma/zod';
 
 const c = initContract();
 

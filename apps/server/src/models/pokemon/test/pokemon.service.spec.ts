@@ -45,12 +45,7 @@ describe('Pokemon service', () => {
         skip: 0,
         take: 10,
         include: {
-          abilities: {
-            select: {
-              name: true,
-              shortDescription: true,
-            },
-          },
+          abilities: true,
         },
       };
       const result = await service.getAll(pokemonPaginationStub());

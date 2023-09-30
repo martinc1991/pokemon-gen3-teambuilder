@@ -1,5 +1,5 @@
 import { NationalPokedexNumberValidator } from '@common/validations/nationalPokedexNumber.validator';
-import { NatureNames } from '@prisma/client';
+import { Gender, NatureNames } from '@prisma/client';
 import {
   IsBoolean,
   IsEnum,
@@ -20,9 +20,8 @@ export class TeamSlotDto {
   @IsString()
   name?: string;
 
-  @IsOptional()
   @IsString()
-  abilityName?: string;
+  abilityName: string;
 
   @IsOptional()
   @IsEnum(NatureNames)
@@ -66,4 +65,7 @@ export class TeamSlotDto {
   @IsOptional()
   @IsBoolean()
   shiny?: boolean;
+
+  @IsEnum(Gender)
+  gender: Gender;
 }
