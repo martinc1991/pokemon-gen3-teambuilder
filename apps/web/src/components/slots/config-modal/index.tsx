@@ -19,7 +19,7 @@ export default function SlotConfigModal(): JSX.Element {
   const slot = slots[selectedSlotIndex];
 
   return (
-    <DialogContent className='max-w-3xl'>
+    <DialogContent className='max-w-4xl'>
       <DialogHeader className='overflow-auto'>
         <div className='flex items-center justify-between gap-5'>
           <Typography.H3 className='truncate'>{getCardTitleName({ ...slot })}</Typography.H3>
