@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader, TypeBadge, Typography } from 'ui';
 import type { FilledSlot } from '../../../state/team/helpers';
+import { calculateHiddenPowerType } from '../../../utils/pokemon';
 import { GendersText } from '../../pokemon-table/components/genders-text';
 import PokemonCardImage from './components/card-image';
 import PokemonCardMoves from './components/card-moves';
@@ -44,8 +45,7 @@ export default function PokemonCard({ slot }: PokemonCardProps): JSX.Element {
             <CardInfoField fieldName='Ability'>{slot.abilityName.replace('-', ' ')}</CardInfoField>
             <CardInfoField fieldName='Item'>{slot.itemName?.replace('-', ' ') || '-'}</CardInfoField>
             <CardInfoField fieldName='Nature'>{slot.natureName || '-'}</CardInfoField>
-            {/* HARDCODED: */}
-            <CardInfoField fieldName='HP type'>-</CardInfoField>
+            <CardInfoField fieldName='HP type'>{calculateHiddenPowerType(slot)}</CardInfoField>
           </div>
         </div>
         <div className='flex w-full'>

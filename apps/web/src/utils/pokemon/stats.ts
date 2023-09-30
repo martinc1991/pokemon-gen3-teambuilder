@@ -1,4 +1,5 @@
-import type { CompleteNature, EvFieldName, IBaseStats, StatName } from 'contract';
+import type { CompleteNature, EvFieldName, IBaseStats, IvFieldName, StatName, TypeNames } from 'contract';
+import { sortedTypesNames } from 'contract';
 import { getValues } from '../common';
 
 export function getShortStatName(statName: keyof IBaseStats | StatName): string {
@@ -66,4 +67,26 @@ export function getTotalEvs({
   [K in EvFieldName]: number;
 }): number {
   return evAttack + evDefense + evHp + evSpAttack + evSpDefense + evSpeed;
+}
+
+export function calculateHiddenPowerType({
+  ivHp,
+  ivAttack,
+  ivDefense,
+  ivSpAttack,
+  ivSpDefense,
+  ivSpeed,
+}: {
+  [K in IvFieldName]: number;
+}): TypeNames {
+  const HP_NUM = ivHp % 2;
+  const ATTACK_NUM = ivAttack % 2;
+  const DEFENSE_NUM = ivDefense % 2;
+  const SPEED_NUM = ivSpeed % 2;
+  const SPATTACK_NUM = ivSpAttack % 2;
+  const SPDEFENSE_NUM = ivSpDefense % 2;
+
+  const num = Math.floor(((HP_NUM + 2 * ATTACK_NUM + 4 * DEFENSE_NUM + 8 * SPEED_NUM + 16 * SPATTACK_NUM + 32 * SPDEFENSE_NUM) * 15) / 63);
+
+  return sortedTypesNames[num];
 }

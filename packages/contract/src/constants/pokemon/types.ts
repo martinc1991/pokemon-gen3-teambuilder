@@ -195,3 +195,22 @@ export const typesArray: IType[] = [
     noDamageTo: [],
   },
 ];
+// Sorted for hidden-power calculation
+export const sortedTypesNames: TypeNames[] = [
+  TypeNames.fighting,
+  TypeNames.flying,
+  TypeNames.poison,
+  TypeNames.ground,
+  TypeNames.rock,
+  TypeNames.bug,
+  TypeNames.ghost,
+  TypeNames.steel,
+  TypeNames.fire,
+  TypeNames.water,
+  TypeNames.grass,
+  TypeNames.electric,
+  TypeNames.psychic,
+  TypeNames.ice,
+  TypeNames.dragon,
+  TypeNames.dark,
+];
