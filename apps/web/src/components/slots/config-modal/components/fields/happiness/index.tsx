@@ -12,11 +12,10 @@ export default function HappinessConfigField({ slot }: HappinessConfigFieldProps
 
   return (
     <>
-      <Label className='min-w-[60px]' htmlFor='happiness'>
+      <Label className='min-w-[70px] text-right' htmlFor='happiness'>
         Happiness
       </Label>
       <Input
-        className='col-span-3'
         id='happiness'
         max={MAX_HAPPINESS}
         min={MIN_HAPPINESS}

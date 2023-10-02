@@ -11,7 +11,7 @@ export default function ShinyConfigField({ slot }: ShinyConfigFieldProps): JSX.E
 
   return (
     <>
-      <Label className='min-w-[60px]' htmlFor='shiny'>
+      <Label className='min-w-[70px] text-right' htmlFor='shiny'>
         Shiny
       </Label>
       <Checkbox

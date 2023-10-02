@@ -12,11 +12,10 @@ export default function LevelConfigField({ slot }: LevelConfigFieldProps): JSX.E
 
   return (
     <>
-      <Label className='min-w-[60px]' htmlFor='level'>
+      <Label className='min-w-[70px] text-right' htmlFor='level'>
         Level
       </Label>
       <Input
-        className='col-span-3'
         id='level'
         max={MAX_LEVEL}
         min={MIN_LEVEL}

@@ -24,7 +24,7 @@ export default function GenderConfigField({ slot }: GenderConfigFieldProps): JSX
 
   return (
     <>
-      <Label className='min-w-[60px]' htmlFor='gender'>
+      <Label className='min-w-[70px] text-right' htmlFor='gender'>
         Gender
       </Label>
       <Combobox

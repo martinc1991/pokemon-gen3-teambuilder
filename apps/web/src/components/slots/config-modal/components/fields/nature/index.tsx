@@ -23,7 +23,7 @@ export default function NatureConfigField({ slot }: NatureConfigFieldProps): JSX
 
   return (
     <>
-      <Label className='min-w-[60px]' htmlFor='nature'>
+      <Label className='min-w-[70px] text-right' htmlFor='nature'>
         Nature
       </Label>
       <Combobox

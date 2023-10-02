@@ -30,30 +30,28 @@ export default function SlotConfigModal(): JSX.Element {
         </div>
         <DialogDescription>Customize your pokemon here. No need to save.</DialogDescription>
       </DialogHeader>
-      <div className='flex flex-col items-start w-full gap-4 py-4'>
+      <div className='flex flex-col items-start w-full gap-4'>
+        <Typography.H4 className='truncate'>Basic</Typography.H4>
+
         <div className='flex items-center w-full gap-4'>
           <NameConfigField slot={slot} />
-        </div>
-        <div className='flex items-center w-full gap-4 '>
           <ShinyConfigField slot={slot} />
         </div>
         <div className='flex items-center w-full gap-4'>
           <GenderConfigField slot={slot} />
-        </div>
-        <div className='flex items-center w-full gap-4'>
           <LevelConfigField slot={slot} />
-        </div>
-        <div className='flex items-center w-full gap-4'>
           <HappinessConfigField slot={slot} />
         </div>
+        <div className='flex items-center w-full gap-4' />
+        <Separator />
+        <Typography.H4 className='truncate'>Abilitiy, item and nature</Typography.H4>
+
         <div className='flex items-center w-full gap-4 '>
           <AbilitiesConfigField slot={slot} />
+          <NatureConfigField slot={slot} />
         </div>
         <div className='flex items-center w-full gap-4 '>
           <ItemConfigField slot={slot} />
-        </div>
-        <div className='flex items-center w-full gap-4 '>
-          <NatureConfigField slot={slot} />
         </div>
       </div>
       <Separator />

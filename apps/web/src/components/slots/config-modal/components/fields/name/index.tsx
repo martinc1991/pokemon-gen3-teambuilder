@@ -12,11 +12,10 @@ export default function NameConfigField({ slot }: NameConfigFieldProps): JSX.Ele
 
   return (
     <>
-      <Label className='min-w-[60px]' htmlFor='name'>
+      <Label className='min-w-[70px] text-right' htmlFor='name'>
         Name
       </Label>
       <Input
-        className='col-span-3'
         id='name'
         onChange={(e) => {
           if (e.target.value.length < MAX_POKEMON_NAME_LENGTH) {
