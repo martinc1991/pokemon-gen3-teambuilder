@@ -6,15 +6,23 @@ import { FormLabel } from '../label';
 interface CheckboxFieldProps {
   name: string;
   id?: string;
-  className?: string;
+  containerClassName?: string;
   labelClassName?: string;
+  inputClassname?: string;
 }
 
-export function CheckboxInput({ name, id, className, labelClassName, ...props }: CheckboxFieldProps & CheckboxProps): JSX.Element {
+export function CheckboxInput({
+  name,
+  id,
+  containerClassName,
+  labelClassName,
+  inputClassname,
+  ...props
+}: CheckboxFieldProps & CheckboxProps): JSX.Element {
   return (
-    <div className={cn('flex items-center w-full gap-4', className)}>
+    <div className={cn('flex items-center w-full gap-4', containerClassName)}>
       <FormLabel name={name} id={id} labelClassName={labelClassName} />
-      <Checkbox id={id || name} {...props} />
+      <Checkbox className={inputClassname} id={id || name} {...props} />
     </div>
   );
 }

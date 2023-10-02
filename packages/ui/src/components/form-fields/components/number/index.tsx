@@ -6,25 +6,28 @@ import { FormLabel } from '../label';
 interface NumberInputProps {
   name: string;
   id?: string;
-  className?: string;
+  containerClassName?: string;
   labelClassName?: string;
+  inputClassname?: string;
   onChange?: (value: number) => void;
 }
 
 export function NumberInput({
   name,
   id,
-  className,
+  containerClassName,
   labelClassName,
+  inputClassname,
   onChange,
   ...props
 }: NumberInputProps & Omit<InputProps, 'onChange' | 'type'>): JSX.Element {
   return (
-    <div className={cn('flex items-center w-full gap-4', className)}>
+    <div className={cn('flex items-center w-full gap-4', containerClassName)}>
       <FormLabel name={name} id={id} labelClassName={labelClassName} />
       <Input
         id={id || name}
         {...props}
+        className={cn('w-full', inputClassname)}
         type='number'
         onChange={(e) => {
           onChange && onChange(parseInt(e.target.value) as number);
