@@ -1,8 +1,8 @@
 import { naturesArray, type EvFieldName, type IvFieldName } from 'contract';
 import { Typography } from 'ui';
-import { useTeamStore } from '../../../../../../state/team';
-import type { FilledSlot } from '../../../../../../state/team/helpers';
-import { getTotalEvs } from '../../../../../../utils/pokemon';
+import { useTeamStore } from '../../../../../state/team';
+import type { FilledSlot } from '../../../../../state/team/helpers';
+import { getTotalEvs } from '../../../../../utils/pokemon';
 import StatField, { StatsHeader } from './components/stat-field';
 
 interface SlotStatsFieldsProps {

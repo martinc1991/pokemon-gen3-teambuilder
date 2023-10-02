@@ -2,7 +2,7 @@ import { MAX_INDIVIDUAL_EV, MAX_INDIVIDUAL_IV, MAX_POSSIBLE_EVS, type CompleteNa
 import type { ChangeEvent } from 'react';
 import { useEffect, useState } from 'react';
 import { Input, Progress, Slider, Typography } from 'ui';
-import { calculateStat, getShortStatName } from '../../../../../../../utils/pokemon';
+import { calculateStat, getShortStatName } from '../../../../../../utils/pokemon';
 
 interface SlotStatFieldProps {
   statName: StatName;

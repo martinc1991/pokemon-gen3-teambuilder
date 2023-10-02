@@ -1,7 +1,6 @@
 import { DialogContent, DialogDescription, DialogHeader, Separator, TypeBadge, Typography } from 'ui';
 import { useTeamStore } from '../../../state/team';
 import { getCardTitleName } from '../cards/utils/get-card-title';
-import SlotStatsFields from './components/fields/stats';
 import AbilityField from './fields/ability';
 import GenderField from './fields/gender';
 import HappinessField from './fields/happiness';
@@ -10,6 +9,7 @@ import LevelField from './fields/level';
 import NameField from './fields/name';
 import NatureField from './fields/nature';
 import ShinyField from './fields/shiny';
+import SlotStatsFields from './fields/stats';
 
 export default function SlotConfigModal(): JSX.Element {
   const [slots, selectedSlotIndex] = useTeamStore((state) => [state.slots, state.selectedSlotIndex]);
