@@ -1,8 +1,127 @@
-import { MAX_INDIVIDUAL_EV, MAX_INDIVIDUAL_IV, MAX_POSSIBLE_EVS, type CompleteNature, type StatName } from 'contract';
+import type { CompleteNature, EvFieldName, IvFieldName, StatName } from 'contract';
+import { MAX_INDIVIDUAL_EV, MAX_INDIVIDUAL_IV, MAX_POSSIBLE_EVS, naturesArray } from 'contract';
 import type { ChangeEvent } from 'react';
 import { useEffect, useState } from 'react';
 import { Input, Progress, Slider, Typography } from 'ui';
-import { calculateStat, getShortStatName } from '../../../../../../utils/pokemon';
+import { useTeamStore } from '../../../../state/team';
+import type { FilledSlot } from '../../../../state/team/helpers';
+import { calculateStat, getShortStatName, getTotalEvs } from '../../../../utils/pokemon';
+
+interface StatsFieldsProps {
+  slot: FilledSlot;
+}
+
+export default function StatsFields({ slot }: StatsFieldsProps): JSX.Element {
+  const [setSlotFieldValue] = useTeamStore((state) => [state.setSlotFieldValue]);
+
+  const totalEvs = getTotalEvs(slot);
+
+  function handleEvChange(stat: EvFieldName, value: number): void {
+    setSlotFieldValue(slot, stat, value);
+  }
+
+  function handleIvChange(stat: IvFieldName, value: number): void {
+    setSlotFieldValue(slot, stat, value);
+  }
+
+  const nature = naturesArray.find((nat) => nat.name === slot.natureName) || { increased: null, decreased: null }; // DEFAULT: docile nature
+
+  return (
+    <div className='flex flex-col w-full gap-1'>
+      <StatsHeader />
+      <StatField
+        base={slot.pokemon.baseHp}
+        ev={slot.evHp}
+        iv={slot.ivHp}
+        level={slot.level}
+        nature={nature}
+        onChangeEv={(value) => {
+          handleEvChange('evHp', value);
+        }}
+        onChangeIv={(value) => {
+          handleIvChange('ivHp', value);
+        }}
+        statName='hp'
+        totalEvs={totalEvs}
+      />
+      <StatField
+        base={slot.pokemon.baseAttack}
+        ev={slot.evAttack}
+        iv={slot.ivAttack}
+        level={slot.level}
+        nature={nature}
+        onChangeEv={(value) => {
+          handleEvChange('evAttack', value);
+        }}
+        onChangeIv={(value) => {
+          handleIvChange('ivAttack', value);
+        }}
+        statName='attack'
+        totalEvs={totalEvs}
+      />
+      <StatField
+        base={slot.pokemon.baseDefense}
+        ev={slot.evDefense}
+        iv={slot.ivDefense}
+        level={slot.level}
+        nature={nature}
+        onChangeEv={(value) => {
+          handleEvChange('evDefense', value);
+        }}
+        onChangeIv={(value) => {
+          handleIvChange('ivDefense', value);
+        }}
+        statName='defense'
+        totalEvs={totalEvs}
+      />
+      <StatField
+        base={slot.pokemon.baseSpattack}
+        ev={slot.evSpAttack}
+        iv={slot.ivSpAttack}
+        level={slot.level}
+        nature={nature}
+        onChangeEv={(value) => {
+          handleEvChange('evSpAttack', value);
+        }}
+        onChangeIv={(value) => {
+          handleIvChange('ivSpAttack', value);
+        }}
+        statName='spattack'
+        totalEvs={totalEvs}
+      />
+      <StatField
+        base={slot.pokemon.baseSpdefense}
+        ev={slot.evSpDefense}
+        iv={slot.ivSpDefense}
+        level={slot.level}
+        nature={nature}
+        onChangeEv={(value) => {
+          handleEvChange('evSpDefense', value);
+        }}
+        onChangeIv={(value) => {
+          handleIvChange('ivSpDefense', value);
+        }}
+        statName='spdefense'
+        totalEvs={totalEvs}
+      />
+      <StatField
+        base={slot.pokemon.baseSpeed}
+        ev={slot.evSpeed}
+        iv={slot.ivSpeed}
+        level={slot.level}
+        nature={nature}
+        onChangeEv={(value) => {
+          handleEvChange('evSpeed', value);
+        }}
+        onChangeIv={(value) => {
+          handleIvChange('ivSpeed', value);
+        }}
+        statName='speed'
+        totalEvs={totalEvs}
+      />
+    </div>
+  );
+}
 
 interface SlotStatFieldProps {
   statName: StatName;
@@ -19,7 +138,7 @@ interface SlotStatFieldProps {
 const evsLimits = { max: MAX_INDIVIDUAL_EV, min: 0 };
 const ivsLimits = { max: MAX_INDIVIDUAL_IV, min: 0 };
 
-export default function StatField(props: SlotStatFieldProps): JSX.Element {
+function StatField(props: SlotStatFieldProps): JSX.Element {
   const statTotal = calculateStat(props);
   const [currentEvs, setCurrentEvs] = useState(props.ev);
 
@@ -87,7 +206,7 @@ export default function StatField(props: SlotStatFieldProps): JSX.Element {
   );
 }
 
-export function StatsHeader(): JSX.Element {
+function StatsHeader(): JSX.Element {
   return (
     <div className='flex items-center w-full gap-2 mb-3'>
       <div className='flex items-center justify-center w-12'>

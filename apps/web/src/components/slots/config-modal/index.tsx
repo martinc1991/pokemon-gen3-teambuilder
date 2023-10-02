@@ -9,7 +9,7 @@ import LevelField from './fields/level';
 import NameField from './fields/name';
 import NatureField from './fields/nature';
 import ShinyField from './fields/shiny';
-import SlotStatsFields from './fields/stats';
+import StatsFields from './fields/stats';
 
 export default function SlotConfigModal(): JSX.Element {
   const [slots, selectedSlotIndex] = useTeamStore((state) => [state.slots, state.selectedSlotIndex]);
@@ -32,7 +32,6 @@ export default function SlotConfigModal(): JSX.Element {
       </DialogHeader>
       <div className='flex flex-col items-start w-full gap-4'>
         <Typography.H4 className='truncate'>Basic</Typography.H4>
-
         <div className='flex items-center w-full gap-4'>
           <NameField slot={slot} />
           <ShinyField slot={slot} />
@@ -43,9 +42,10 @@ export default function SlotConfigModal(): JSX.Element {
           <HappinessField slot={slot} />
         </div>
         <div className='flex items-center w-full gap-4' />
-        <Separator />
-        <Typography.H4 className='truncate'>Abilitiy, item and nature</Typography.H4>
 
+        <Separator />
+
+        <Typography.H4 className='truncate'>Abilitiy, item and nature</Typography.H4>
         <div className='flex items-center w-full gap-4 '>
           <AbilityField slot={slot} />
           <NatureField slot={slot} />
@@ -54,8 +54,12 @@ export default function SlotConfigModal(): JSX.Element {
           <ItemField slot={slot} />
         </div>
       </div>
+
       <Separator />
-      <SlotStatsFields slot={slot} />
+
+      <Typography.H4>Stats (EVs, IVs)</Typography.H4>
+
+      <StatsFields slot={slot} />
     </DialogContent>
   );
 }
