@@ -22,6 +22,8 @@
 
     "declaration": true,
     "typeRoots": ["./dist.index.d.ts"],
+    "sourceMap": true,
+    "sourceRoot": "./src",
 
     "baseUrl": ".",
     "paths": {

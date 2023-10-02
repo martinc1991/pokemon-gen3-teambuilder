@@ -1,4 +1,5 @@
-import { DialogContent, DialogDescription, DialogHeader, Separator, TypeBadge, Typography } from 'ui';
+import { MAX_POKEMON_NAME_LENGTH } from 'contract';
+import { DialogContent, DialogDescription, DialogHeader, FormField, Separator, TypeBadge, Typography } from 'ui';
 import { useTeamStore } from '../../../state/team';
 import { getCardTitleName } from '../cards/utils/get-card-title';
 import AbilitiesConfigField from './components/fields/abilities';
@@ -6,13 +7,15 @@ import GenderConfigField from './components/fields/gender';
 import HappinessConfigField from './components/fields/happiness';
 import ItemConfigField from './components/fields/item';
 import LevelConfigField from './components/fields/level';
-import NameConfigField from './components/fields/name';
 import NatureConfigField from './components/fields/nature';
-import ShinyConfigField from './components/fields/shiny';
 import SlotStatsFields from './components/fields/stats';
 
 export default function SlotConfigModal(): JSX.Element {
-  const [slots, selectedSlotIndex] = useTeamStore((state) => [state.slots, state.selectedSlotIndex]);
+  const [slots, selectedSlotIndex, setSlotFieldValue] = useTeamStore((state) => [
+    state.slots,
+    state.selectedSlotIndex,
+    state.setSlotFieldValue,
+  ]);
 
   if (selectedSlotIndex === null || slots.length < 1) return <div />;
 
@@ -34,8 +37,24 @@ export default function SlotConfigModal(): JSX.Element {
         <Typography.H4 className='truncate'>Basic</Typography.H4>
 
         <div className='flex items-center w-full gap-4'>
-          <NameConfigField slot={slot} />
-          <ShinyConfigField slot={slot} />
+          <FormField.Text
+            name='name'
+            onChange={(e) => {
+              if (e.target.value.length < MAX_POKEMON_NAME_LENGTH) {
+                setSlotFieldValue(slot, 'name', e.target.value);
+              }
+            }}
+            placeholder='Change the name here'
+            value={slot.name || ''}
+          />
+          <FormField.Checkbox
+            checked={Boolean(slot.shiny)}
+            name='shiny'
+            onCheckedChange={(checked) => {
+              const c = checked === true;
+              setSlotFieldValue(slot, 'shiny', c);
+            }}
+          />
         </div>
         <div className='flex items-center w-full gap-4'>
           <GenderConfigField slot={slot} />
