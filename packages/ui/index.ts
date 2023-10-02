@@ -1,5 +1,6 @@
 import './src/global.css';
 
+export * as FormField from './src/components/form-fields';
 export * from './src/components/ui/badge';
 export * from './src/components/ui/button';
 export * from './src/components/ui/card';
