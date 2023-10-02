@@ -1,6 +1,6 @@
 import type { CompleteAbility } from 'contract/dist/prisma/zod';
 import type { ComboboxItem } from 'ui';
-import { Combobox, Label } from 'ui';
+import { FormField } from 'ui';
 import { useTeamStore } from '../../../../../../state/team';
 import type { FilledSlot } from '../../../../../../state/team/helpers';
 
@@ -22,20 +22,15 @@ export default function AbilitiesConfigField({ slot }: AbilitiesConfigFieldProps
   }
 
   return (
-    <>
-      <Label className='min-w-[70px] text-right' htmlFor='ability'>
-        Ability
-      </Label>
-      <Combobox
-        className='min-w-[200px]'
-        data={abilitiesData}
-        disabled={abilitiesData.length < 2}
-        itemsClassName='capitalize'
-        onChange={handleAbilityChange}
-        value={abilitiesData.find((ability) => {
-          return ability.payload.name === slot.abilityName;
-        })}
-      />
-    </>
+    <FormField.Select
+      data={abilitiesData}
+      disabled={abilitiesData.length < 2}
+      itemsClassName='capitalize'
+      name='ability'
+      onChange={handleAbilityChange}
+      value={abilitiesData.find((ability) => {
+        return ability.payload.name === slot.abilityName;
+      })}
+    />
   );
 }

@@ -1,7 +1,7 @@
 import type { INature } from 'contract';
 import { naturesArray } from 'contract';
 import type { ComboboxItem } from 'ui';
-import { Combobox, Label } from 'ui';
+import { FormField } from 'ui';
 import { useTeamStore } from '../../../../../../state/team';
 import type { FilledSlot } from '../../../../../../state/team/helpers';
 import { getNatureSelectLabel } from './helpers';
@@ -22,20 +22,15 @@ export default function NatureConfigField({ slot }: NatureConfigFieldProps): JSX
   }
 
   return (
-    <>
-      <Label className='min-w-[70px] text-right' htmlFor='nature'>
-        Nature
-      </Label>
-      <Combobox
-        className='min-w-[210px]'
-        data={naturesData}
-        itemsClassName='capitalize'
-        onChange={handleItemChange}
-        searchBox
-        value={naturesData.find((nature) => {
-          return nature.payload.name === slot.natureName;
-        })}
-      />
-    </>
+    <FormField.Select
+      data={naturesData}
+      itemsClassName='capitalize'
+      name='nature'
+      onChange={handleItemChange}
+      searchBox
+      value={naturesData.find((nature) => {
+        return nature.payload.name === slot.natureName;
+      })}
+    />
   );
 }

@@ -1,6 +1,6 @@
 import type { IItemGetAllResponseElement } from 'contract';
 import type { ComboboxItem } from 'ui';
-import { Combobox, Label } from 'ui';
+import { FormField } from 'ui';
 import { client } from '../../../../../../rq-client';
 import { useTeamStore } from '../../../../../../state/team';
 import type { FilledSlot } from '../../../../../../state/team/helpers';
@@ -31,25 +31,20 @@ export default function ItemConfigField({ slot }: ItemConfigFieldProps): JSX.Ele
   }
 
   return (
-    <>
-      <Label className='min-w-[70px] text-right' htmlFor='item'>
-        Item
-      </Label>
-      <Combobox
-        className='min-w-[200px]'
-        clearButtonClassName='min-w-max'
-        clearText='Remove item'
-        cleareable
-        data={itemsData}
-        disabled={isFetching || isLoading}
-        itemsClassName='capitalize'
-        onChange={handleItemChange}
-        onClear={handleRemoveitem}
-        searchBox
-        value={itemsData.find((ability) => {
-          return ability.payload.name === slot.itemName;
-        })}
-      />
-    </>
+    <FormField.Select
+      clearButtonClassName='min-w-max'
+      clearText='Remove item'
+      cleareable
+      data={itemsData}
+      disabled={isFetching || isLoading}
+      itemsClassName='capitalize'
+      name='item'
+      onChange={handleItemChange}
+      onClear={handleRemoveitem}
+      searchBox
+      value={itemsData.find((ability) => {
+        return ability.payload.name === slot.itemName;
+      })}
+    />
   );
 }
