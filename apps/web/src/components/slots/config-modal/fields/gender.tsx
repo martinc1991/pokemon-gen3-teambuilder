@@ -24,6 +24,7 @@ export default function GenderField({ slot }: GenderFieldProps): JSX.Element {
 
   return (
     <FormField.Select
+      containerClassName='flex-1'
       data={gendersData}
       disabled={gendersData.length < 2}
       name='gender'

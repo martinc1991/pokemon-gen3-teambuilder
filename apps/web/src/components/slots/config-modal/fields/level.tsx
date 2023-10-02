@@ -12,6 +12,7 @@ export default function LevelField({ slot }: LevelFieldProps): JSX.Element {
 
   return (
     <FormField.Number
+      containerClassName='flex-1'
       max={MAX_LEVEL}
       min={MIN_LEVEL}
       name='level'

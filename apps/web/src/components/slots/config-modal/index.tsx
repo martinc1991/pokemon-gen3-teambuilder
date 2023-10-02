@@ -36,7 +36,7 @@ export default function SlotConfigModal(): JSX.Element {
           <NameField slot={slot} />
           <ShinyField slot={slot} />
         </div>
-        <div className='flex items-center w-full gap-4'>
+        <div className='flex flex-col items-center justify-between w-full gap-4 sm:flex-row'>
           <GenderField slot={slot} />
           <LevelField slot={slot} />
           <HappinessField slot={slot} />
@@ -46,12 +46,12 @@ export default function SlotConfigModal(): JSX.Element {
         <Separator />
 
         <Typography.H4 className='truncate'>Abilitiy, item and nature</Typography.H4>
-        <div className='flex items-center w-full gap-4 '>
+        <div className='flex flex-col items-start w-full gap-4 sm:flex-row sm:items-center'>
           <AbilityField slot={slot} />
-          <NatureField slot={slot} />
-        </div>
-        <div className='flex items-center w-full gap-4 '>
           <ItemField slot={slot} />
+        </div>
+        <div className='flex items-center w-full gap-4'>
+          <NatureField slot={slot} />
         </div>
       </div>
 

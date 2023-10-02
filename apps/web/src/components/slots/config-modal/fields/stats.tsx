@@ -196,7 +196,7 @@ function StatField(props: SlotStatFieldProps): JSX.Element {
         <Input className='w-[80px] h-[30px]' {...evsLimits} onChange={handleEvOnChangeInput} type='number' value={currentEvs} />
         <Slider {...evsLimits} onValueChange={handleEvOnChangeSlider} onValueCommit={handleEvOnCommit} value={[currentEvs]} />
       </div>
-      <div className='flex items-center justify-center flex-[1]'>
+      <div className='flex items-center justify-center flex-[1] ml-5'>
         <Input className='w-[70px] h-[30px]' {...ivsLimits} onChange={handleIvOnChange} type='number' value={props.iv} />
       </div>
       <div className='flex items-center justify-center w-12'>
@@ -208,7 +208,7 @@ function StatField(props: SlotStatFieldProps): JSX.Element {
 
 function StatsHeader(): JSX.Element {
   return (
-    <div className='flex items-center w-full gap-2 mb-3'>
+    <div className='flex items-center w-full gap-2 mb-1'>
       <div className='flex items-center justify-center w-12'>
         <Typography.Muted />
       </div>
@@ -219,7 +219,7 @@ function StatsHeader(): JSX.Element {
       <div className='text-center flex-[6]'>
         <Typography.Muted>EVs</Typography.Muted>
       </div>
-      <div className='text-center w-[70px]'>
+      <div className='text-center w-[70px] ml-5'>
         <Typography.Muted>IVs</Typography.Muted>
       </div>
       <div className='flex items-center justify-center w-12'>

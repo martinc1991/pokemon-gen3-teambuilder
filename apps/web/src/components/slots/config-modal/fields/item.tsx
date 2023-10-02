@@ -35,6 +35,7 @@ export default function ItemField({ slot }: ItemFieldProps): JSX.Element {
       clearButtonClassName='min-w-max'
       clearText='Remove item'
       cleareable
+      containerClassName='flex-1 max-w-md'
       data={itemsData}
       disabled={isFetching || isLoading}
       itemsClassName='capitalize'

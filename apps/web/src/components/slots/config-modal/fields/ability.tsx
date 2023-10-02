@@ -23,6 +23,7 @@ export default function AbilityField({ slot }: AbilityFieldProps): JSX.Element {
 
   return (
     <FormField.Select
+      containerClassName='flex-1 max-w-xs'
       data={abilitiesData}
       disabled={abilitiesData.length < 2}
       itemsClassName='capitalize'

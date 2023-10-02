@@ -12,6 +12,7 @@ export default function ShinyField({ slot }: ShinyFieldProps): JSX.Element {
   return (
     <FormField.Checkbox
       checked={Boolean(slot.shiny)}
+      containerClassName='flex-1'
       name='shiny'
       onCheckedChange={(checked) => {
         const c = checked === true;

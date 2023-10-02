@@ -12,6 +12,7 @@ export default function HappinessField({ slot }: HappinessFieldProps): JSX.Eleme
 
   return (
     <FormField.Number
+      containerClassName='flex-1'
       max={MAX_HAPPINESS}
       min={MIN_HAPPINESS}
       name='happiness'

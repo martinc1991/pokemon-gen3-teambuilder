@@ -23,6 +23,7 @@ export default function NatureField({ slot }: NatureFieldProps): JSX.Element {
 
   return (
     <FormField.Select
+      containerClassName='flex-1 max-w-xs'
       data={naturesData}
       itemsClassName='capitalize'
       name='nature'
