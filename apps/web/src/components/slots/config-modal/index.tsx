@@ -1,19 +1,18 @@
-import { MAX_HAPPINESS, MAX_LEVEL, MAX_POKEMON_NAME_LENGTH, MIN_HAPPINESS, MIN_LEVEL } from 'contract';
-import { DialogContent, DialogDescription, DialogHeader, FormField, Separator, TypeBadge, Typography } from 'ui';
+import { DialogContent, DialogDescription, DialogHeader, Separator, TypeBadge, Typography } from 'ui';
 import { useTeamStore } from '../../../state/team';
 import { getCardTitleName } from '../cards/utils/get-card-title';
-import AbilitiesConfigField from './components/fields/abilities';
-import GenderConfigField from './components/fields/gender';
-import ItemConfigField from './components/fields/item';
-import NatureConfigField from './components/fields/nature';
 import SlotStatsFields from './components/fields/stats';
+import AbilityField from './fields/ability';
+import GenderField from './fields/gender';
+import HappinessField from './fields/happiness';
+import ItemField from './fields/item';
+import LevelField from './fields/level';
+import NameField from './fields/name';
+import NatureField from './fields/nature';
+import ShinyField from './fields/shiny';
 
 export default function SlotConfigModal(): JSX.Element {
-  const [slots, selectedSlotIndex, setSlotFieldValue] = useTeamStore((state) => [
-    state.slots,
-    state.selectedSlotIndex,
-    state.setSlotFieldValue,
-  ]);
+  const [slots, selectedSlotIndex] = useTeamStore((state) => [state.slots, state.selectedSlotIndex]);
 
   if (selectedSlotIndex === null || slots.length < 1) return <div />;
 
@@ -35,56 +34,24 @@ export default function SlotConfigModal(): JSX.Element {
         <Typography.H4 className='truncate'>Basic</Typography.H4>
 
         <div className='flex items-center w-full gap-4'>
-          <FormField.Text
-            name='name'
-            onChange={(e) => {
-              if (e.target.value.length < MAX_POKEMON_NAME_LENGTH) {
-                setSlotFieldValue(slot, 'name', e.target.value);
-              }
-            }}
-            placeholder='Change the name here'
-            value={slot.name || ''}
-          />
-          <FormField.Checkbox
-            checked={Boolean(slot.shiny)}
-            name='shiny'
-            onCheckedChange={(checked) => {
-              const c = checked === true;
-              setSlotFieldValue(slot, 'shiny', c);
-            }}
-          />
+          <NameField slot={slot} />
+          <ShinyField slot={slot} />
         </div>
         <div className='flex items-center w-full gap-4'>
-          <GenderConfigField slot={slot} />
-          <FormField.Number
-            max={MAX_LEVEL}
-            min={MIN_LEVEL}
-            name='level'
-            onChange={(value: number) => {
-              setSlotFieldValue(slot, 'level', value);
-            }}
-            value={slot.level}
-          />
-          <FormField.Number
-            max={MAX_HAPPINESS}
-            min={MIN_HAPPINESS}
-            name='happiness'
-            onChange={(value: number) => {
-              setSlotFieldValue(slot, 'happiness', value);
-            }}
-            value={slot.happiness}
-          />
+          <GenderField slot={slot} />
+          <LevelField slot={slot} />
+          <HappinessField slot={slot} />
         </div>
         <div className='flex items-center w-full gap-4' />
         <Separator />
         <Typography.H4 className='truncate'>Abilitiy, item and nature</Typography.H4>
 
         <div className='flex items-center w-full gap-4 '>
-          <AbilitiesConfigField slot={slot} />
-          <NatureConfigField slot={slot} />
+          <AbilityField slot={slot} />
+          <NatureField slot={slot} />
         </div>
         <div className='flex items-center w-full gap-4 '>
-          <ItemConfigField slot={slot} />
+          <ItemField slot={slot} />
         </div>
       </div>
       <Separator />

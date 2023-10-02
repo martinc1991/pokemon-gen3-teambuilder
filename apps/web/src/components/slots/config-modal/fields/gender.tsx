@@ -1,16 +1,16 @@
-import type { Gender } from 'contract';
 import type { ComboboxItem } from 'ui';
 import { FormField } from 'ui';
-import { useTeamStore } from '../../../../../../state/team';
-import type { FilledSlot } from '../../../../../../state/team/helpers';
-import { capitalize } from '../../../../../../utils/common';
+import type { Gender } from 'contract';
+import { useTeamStore } from '../../../../state/team';
+import type { FilledSlot } from '../../../../state/team/helpers';
+import { capitalize } from '../../../../utils/common';
 
-interface GenderConfigFieldProps {
+interface GenderFieldProps {
   slot: FilledSlot;
 }
 
-export default function GenderConfigField({ slot }: GenderConfigFieldProps): JSX.Element {
-  const [setSlotFieldValue] = useTeamStore((state) => [state.setSlotFieldValue]);
+export default function GenderField({ slot }: GenderFieldProps): JSX.Element {
+  const setSlotFieldValue = useTeamStore((state) => state.setSlotFieldValue);
 
   const gendersData = slot.pokemon.genders.map((gender) => ({
     id: gender.toString(),

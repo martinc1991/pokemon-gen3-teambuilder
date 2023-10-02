@@ -2,16 +2,16 @@ import type { INature } from 'contract';
 import { naturesArray } from 'contract';
 import type { ComboboxItem } from 'ui';
 import { FormField } from 'ui';
-import { useTeamStore } from '../../../../../../state/team';
-import type { FilledSlot } from '../../../../../../state/team/helpers';
-import { getNatureSelectLabel } from './helpers';
+import { useTeamStore } from '../../../../state/team';
+import type { FilledSlot } from '../../../../state/team/helpers';
+import { getShortStatName } from '../../../../utils/pokemon';
 
-interface NatureConfigFieldProps {
+interface NatureFieldProps {
   slot: FilledSlot;
 }
 
-export default function NatureConfigField({ slot }: NatureConfigFieldProps): JSX.Element {
-  const [setSlotFieldValue] = useTeamStore((state) => [state.setSlotFieldValue]);
+export default function NatureField({ slot }: NatureFieldProps): JSX.Element {
+  const setSlotFieldValue = useTeamStore((state) => state.setSlotFieldValue);
 
   const naturesData: ComboboxItem<INature>[] = naturesArray.map((nature) => {
     return { id: nature.name, label: getNatureSelectLabel(nature), payload: nature };
@@ -33,4 +33,13 @@ export default function NatureConfigField({ slot }: NatureConfigFieldProps): JSX
       })}
     />
   );
+}
+
+export function getNatureSelectLabel({ name, decreased, increased }: INature): string {
+  const basic = `${name.replace('-', ' ')}`;
+
+  if (increased && decreased) {
+    return `${basic} (+${getShortStatName(increased)} / -${getShortStatName(decreased)})`;
+  }
+  return basic;
 }

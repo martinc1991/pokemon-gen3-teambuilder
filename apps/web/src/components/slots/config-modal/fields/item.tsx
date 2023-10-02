@@ -1,15 +1,15 @@
 import type { IItemGetAllResponseElement } from 'contract';
 import type { ComboboxItem } from 'ui';
 import { FormField } from 'ui';
-import { client } from '../../../../../../rq-client';
-import { useTeamStore } from '../../../../../../state/team';
-import type { FilledSlot } from '../../../../../../state/team/helpers';
+import { client } from '../../../../rq-client';
+import { useTeamStore } from '../../../../state/team';
+import type { FilledSlot } from '../../../../state/team/helpers';
 
-interface ItemConfigFieldProps {
+interface ItemFieldProps {
   slot: FilledSlot;
 }
 
-export default function ItemConfigField({ slot }: ItemConfigFieldProps): JSX.Element {
+export default function ItemField({ slot }: ItemFieldProps): JSX.Element {
   const { data, isFetching, error, isLoading } = client.items.getAll.useQuery(['all-items']);
   const [setSlotFieldValue] = useTeamStore((state) => [state.setSlotFieldValue]);
 
