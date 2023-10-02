@@ -1,12 +1,10 @@
-import { MAX_POKEMON_NAME_LENGTH } from 'contract';
+import { MAX_HAPPINESS, MAX_LEVEL, MAX_POKEMON_NAME_LENGTH, MIN_HAPPINESS, MIN_LEVEL } from 'contract';
 import { DialogContent, DialogDescription, DialogHeader, FormField, Separator, TypeBadge, Typography } from 'ui';
 import { useTeamStore } from '../../../state/team';
 import { getCardTitleName } from '../cards/utils/get-card-title';
 import AbilitiesConfigField from './components/fields/abilities';
 import GenderConfigField from './components/fields/gender';
-import HappinessConfigField from './components/fields/happiness';
 import ItemConfigField from './components/fields/item';
-import LevelConfigField from './components/fields/level';
 import NatureConfigField from './components/fields/nature';
 import SlotStatsFields from './components/fields/stats';
 
@@ -58,8 +56,24 @@ export default function SlotConfigModal(): JSX.Element {
         </div>
         <div className='flex items-center w-full gap-4'>
           <GenderConfigField slot={slot} />
-          <LevelConfigField slot={slot} />
-          <HappinessConfigField slot={slot} />
+          <FormField.Number
+            max={MAX_LEVEL}
+            min={MIN_LEVEL}
+            name='level'
+            onChange={(value: number) => {
+              setSlotFieldValue(slot, 'level', value);
+            }}
+            value={slot.level}
+          />
+          <FormField.Number
+            max={MAX_HAPPINESS}
+            min={MIN_HAPPINESS}
+            name='happiness'
+            onChange={(value: number) => {
+              setSlotFieldValue(slot, 'happiness', value);
+            }}
+            value={slot.happiness}
+          />
         </div>
         <div className='flex items-center w-full gap-4' />
         <Separator />
