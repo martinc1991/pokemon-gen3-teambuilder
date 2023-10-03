@@ -1,11 +1,11 @@
+import { Prisma } from '@prisma/client';
 import { naturesArray, typesArray } from 'contract';
 import { deoxysVariations } from './data/deoxys';
+import { items } from './data/items';
 import { overrides } from './data/overrides';
 import { getAbilities } from './entities/abilities';
-import { getItems } from './entities/items';
 import { getPokemonPromises } from './entities/pokemon';
 import { prismaSeederClient } from './seederClient';
-import { Prisma } from '@prisma/client';
 
 const CYAN = '\x1b[36m';
 const RESET = '\x1b[0m';
@@ -20,7 +20,6 @@ export async function seeder() {
       // Send pokemon promises
       const pokemonPromises = getPokemonPromises();
       const abilitiesPromises = getAbilities();
-      const itemsPromises = getItems();
 
       // Seed types
       console.log('Upserting types');
@@ -48,7 +47,6 @@ export async function seeder() {
       });
       console.log('Upserting natures finished');
 
-      const items = await itemsPromises;
       const pokemons = await pokemonPromises;
       const abilities = await abilitiesPromises;
       const allPokemon = pokemons.concat(deoxysVariations);
