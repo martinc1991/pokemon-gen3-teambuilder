@@ -21,6 +21,9 @@
     },
     "prisma:generate": {
       "cache": true
+    },
+    "db:seed": {
+      "cache": false
     }
   }
 }
