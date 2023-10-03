@@ -1,9 +1,5 @@
-import { PrismaClient } from '@prisma/client';
 import { seeder } from './seeder';
-
-const prisma = new PrismaClient({
-  datasources: { db: { url: process.env.DATABASE_URL } },
-});
+import { prismaSeederClient } from './seeder/seederClient';
 
 const CYAN = '\x1b[36m';
 const RESET = '\x1b[0m';
@@ -17,10 +13,10 @@ seeder()
     );
   })
   .then(async () => {
-    await prisma.$disconnect();
+    await prismaSeederClient.$disconnect();
   })
   .catch(async (e) => {
     console.error(e);
-    await prisma.$disconnect();
+    await prismaSeederClient.$disconnect();
     process.exit(1);
   });
