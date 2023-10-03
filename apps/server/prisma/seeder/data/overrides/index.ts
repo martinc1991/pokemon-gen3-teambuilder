@@ -1,18 +1,27 @@
-import { prismaSeederClient } from '../../seederClient';
+import { PrismaClient } from '@prisma/client';
 import { overrideAbilitiesData } from './abilities';
 import { overrideStatsData } from './stats';
+import {
+  PrismaClientOptions,
+  DefaultArgs,
+} from '@prisma/client/runtime/library';
 
 const getKeys = Object.keys as <T extends object>(obj: T) => Array<keyof T>;
 
-export async function overrides() {
-  await statsOverrides();
-  await abilitiesOverrides();
+type TransactionClient = Omit<
+  PrismaClient<PrismaClientOptions, never, DefaultArgs>,
+  '$connect' | '$disconnect' | '$on' | '$transaction' | '$use' | '$extends'
+>;
+
+export function overrides(client: TransactionClient) {
+  statsOverrides(client);
+  abilitiesOverrides(client);
 }
 
-async function statsOverrides() {
+function statsOverrides(client: TransactionClient) {
   console.log('Overriding stats');
-  getKeys(overrideStatsData).forEach(async (pkmn) => {
-    await prismaSeederClient.pokemon.update({
+  getKeys(overrideStatsData).forEach((pkmn) => {
+    client.pokemon.update({
       where: {
         name: pkmn,
       },
@@ -29,13 +38,13 @@ async function statsOverrides() {
   console.log('Overriding stats finished');
 }
 
-async function abilitiesOverrides() {
+function abilitiesOverrides(client: TransactionClient) {
   console.log('Overriding abilities');
 
-  getKeys(overrideAbilitiesData).forEach(async (pkmn) => {
+  getKeys(overrideAbilitiesData).forEach((pkmn) => {
     const abilities = overrideAbilitiesData[pkmn];
 
-    await prismaSeederClient.pokemon.update({
+    client.pokemon.update({
       where: {
         name: pkmn,
       },
