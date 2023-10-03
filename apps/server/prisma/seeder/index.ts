@@ -5,7 +5,7 @@ import { deoxysVariations } from './data/deoxys';
 import { items } from './data/items';
 import { overrides } from './data/overrides';
 import { getPokemonPromises } from './entities/pokemon';
-import { prismaSeederClient } from './seederClient';
+import { prismaSeederClient } from './helpers/seederClient';
 
 const CYAN = '\x1b[36m';
 const RESET = '\x1b[0m';
