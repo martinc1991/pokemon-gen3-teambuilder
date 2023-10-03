@@ -10,7 +10,7 @@ import {
   idToIconUrl,
 } from '../helpers/pokemon';
 import { Tier } from '@prisma/client';
-import { pokemonTiers } from '../data/tiers';
+import { pokemonTiers } from './tiers';
 
 const pokemonIds = Array.from(
   { length: LAST_POKEMON_DEX_NUMBER },

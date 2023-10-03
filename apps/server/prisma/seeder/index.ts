@@ -4,7 +4,7 @@ import { abilities } from './data/abilities';
 import { deoxysVariations } from './data/deoxys';
 import { items } from './data/items';
 import { overrides } from './data/overrides';
-import { getPokemonPromises } from './entities/pokemon';
+import { getPokemonPromises } from './data/pokemon';
 import { prismaSeederClient } from './helpers/seederClient';
 
 const CYAN = '\x1b[36m';
