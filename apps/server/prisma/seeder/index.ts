@@ -1,9 +1,9 @@
 import { Prisma } from '@prisma/client';
 import { naturesArray, typesArray } from 'contract';
+import { abilities } from './data/abilities';
 import { deoxysVariations } from './data/deoxys';
 import { items } from './data/items';
 import { overrides } from './data/overrides';
-import { getAbilities } from './entities/abilities';
 import { getPokemonPromises } from './entities/pokemon';
 import { prismaSeederClient } from './seederClient';
 
@@ -19,7 +19,6 @@ export async function seeder() {
 
       // Send pokemon promises
       const pokemonPromises = getPokemonPromises();
-      const abilitiesPromises = getAbilities();
 
       // Seed types
       console.log('Upserting types');
@@ -47,10 +46,6 @@ export async function seeder() {
       });
       console.log('Upserting natures finished');
 
-      const pokemons = await pokemonPromises;
-      const abilities = await abilitiesPromises;
-      const allPokemon = pokemons.concat(deoxysVariations);
-
       // Seed items
       console.log('Upserting items');
       items.forEach(({ name, ...item }) => {
@@ -64,12 +59,13 @@ export async function seeder() {
       });
       console.log('Upserting items finished');
 
+      // Seed abilities
+      console.log('Upserting abilities');
+
       const abilitiesNames: string[] = abilities.map((ability) => {
         return ability.name;
       });
 
-      // Seed abilities
-      console.log('Upserting abilities');
       abilities.forEach(({ name, ...ability }) => {
         client.ability.upsert({
           where: {
@@ -80,6 +76,9 @@ export async function seeder() {
         });
       });
       console.log('Upserting abilities finished');
+
+      const pokemons = await pokemonPromises;
+      const allPokemon = pokemons.concat(deoxysVariations);
 
       // Seed pokemon
       console.log('Upserting pokemons');
