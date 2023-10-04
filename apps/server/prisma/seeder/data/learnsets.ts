@@ -5181,7 +5181,6 @@ export const learnsets: PokemonLearnSet = {
     'swords-dance',
     'thief',
     'toxic',
-    null,
     'water-pulse',
   ],
   kingler: [
@@ -5229,7 +5228,6 @@ export const learnsets: PokemonLearnSet = {
     'swords-dance',
     'thief',
     'toxic',
-    null,
     'water-pulse',
   ],
   voltorb: [
@@ -5413,7 +5411,6 @@ export const learnsets: PokemonLearnSet = {
     'blizzard',
     'body-slam',
     'bone-club',
-    null,
     'bone-rush',
     'brick-break',
     'counter',
@@ -5474,7 +5471,6 @@ export const learnsets: PokemonLearnSet = {
     'blizzard',
     'body-slam',
     'bone-club',
-    null,
     'bone-rush',
     'brick-break',
     'counter',
@@ -7088,7 +7084,6 @@ export const learnsets: PokemonLearnSet = {
     'swords-dance',
     'thief',
     'toxic',
-    null,
   ],
   tauros: [
     'attract',
@@ -14916,7 +14911,6 @@ export const learnsets: PokemonLearnSet = {
     'tickle',
     'torment',
     'toxic',
-    null,
   ],
   aron: [
     'aerial-ace',
@@ -16869,7 +16863,6 @@ export const learnsets: PokemonLearnSet = {
     'swords-dance',
     'taunt',
     'toxic',
-    null,
     'waterfall',
     'water-pulse',
     'water-sport',
@@ -16923,7 +16916,6 @@ export const learnsets: PokemonLearnSet = {
     'swords-dance',
     'taunt',
     'toxic',
-    null,
     'waterfall',
     'water-pulse',
   ],
