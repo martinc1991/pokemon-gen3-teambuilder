@@ -1,11 +1,12 @@
-import { Prisma } from '@prisma/client';
 import { naturesArray, typesArray } from 'contract';
 import { abilities } from './data/abilities';
 import { deoxysVariations } from './data/deoxys';
 import { items } from './data/items';
+import { learnsets } from './data/learnsets';
 import { getMovesPromises } from './data/moves';
 import { overrides } from './data/overrides';
 import { getPokemonPromises } from './data/pokemon';
+import { getMoveName } from './helpers/pokemon';
 import { prismaSeederClient } from './helpers/seederClient';
 
 const CYAN = '\x1b[36m';
@@ -91,7 +92,7 @@ export async function seeder() {
             name,
           },
           create: { ...move, name },
-          update: move,
+          update: { ...move },
         });
       });
 
@@ -99,8 +100,8 @@ export async function seeder() {
 
       // Seed pokemon
       console.log('Upserting pokemons');
-      const pokemonData: Prisma.PokemonUpsertArgs[] = allPokemon.map(
-        ({ name, ...pkmn }) => ({
+      allPokemon.forEach(({ name, ...pkmn }) => {
+        client.pokemon.upsert({
           where: { name },
           update: {
             ...pkmn,
@@ -110,6 +111,11 @@ export async function seeder() {
               connect: pkmn.abilities
                 .filter((abilityName) => abilitiesNames.includes(abilityName))
                 .map((name) => ({ name })),
+            },
+            learnset: {
+              connect: learnsets[name].map((moveName) => {
+                return { name: getMoveName(moveName) };
+              }),
             },
           },
           create: {
@@ -122,13 +128,15 @@ export async function seeder() {
                 .filter((abilityName) => abilitiesNames.includes(abilityName))
                 .map((name) => ({ name })),
             },
+            learnset: {
+              connect: learnsets[name].map((moveName) => {
+                return { name: getMoveName(moveName) };
+              }),
+            },
           },
-        }),
-      );
+        });
+      });
 
-      for (const record of pokemonData) {
-        client.pokemon.upsert(record);
-      }
       console.log('Upserting pokemons finished');
 
       // Overrides

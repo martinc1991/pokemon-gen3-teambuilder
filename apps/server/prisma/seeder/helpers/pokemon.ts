@@ -8,6 +8,7 @@ import {
 } from '@prisma/client';
 import { IBaseStats } from 'contract';
 import { Pokemon, PokemonSpecies, PokemonType } from 'pokenode-ts';
+import { uniqueMovesMap } from '../data/uniqueMovesMap';
 
 export type PokemonMergedInfo = PokemonSpecies & Pokemon;
 
@@ -134,4 +135,14 @@ export function getDamageClassFromType(type: TypeNames): DamageClass {
     default:
       return DamageClass.physical;
   }
+}
+
+function removeHyphen(str: string): string {
+  return str.replace(/-/g, '');
+}
+
+// Removes '-' and then uses a move name map for consistency
+export function getMoveName(moveName: string): string {
+  const name = removeHyphen(moveName);
+  return uniqueMovesMap[name];
 }
