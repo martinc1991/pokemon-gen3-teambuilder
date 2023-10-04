@@ -8,3 +8,7 @@ export function isValidNationalPokedexInteger(value: unknown): boolean {
     value <= LAST_POKEMON_DEX_NUMBER
   );
 }
+
+export function kebabToCamelCase(str: string): string {
+  return str.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
+}

@@ -3,6 +3,7 @@ import { naturesArray, typesArray } from 'contract';
 import { abilities } from './data/abilities';
 import { deoxysVariations } from './data/deoxys';
 import { items } from './data/items';
+import { getMovesPromises } from './data/moves';
 import { overrides } from './data/overrides';
 import { getPokemonPromises } from './data/pokemon';
 import { prismaSeederClient } from './helpers/seederClient';
@@ -19,6 +20,7 @@ export async function seeder() {
 
       // Send pokemon promises
       const pokemonPromises = getPokemonPromises();
+      const movesPromises = getMovesPromises();
 
       // Seed types
       console.log('Upserting types');
@@ -78,7 +80,22 @@ export async function seeder() {
       console.log('Upserting abilities finished');
 
       const pokemons = await pokemonPromises;
+      const moves = await movesPromises;
       const allPokemon = pokemons.concat(deoxysVariations);
+
+      // Seed moves
+      console.log('Creating moves');
+      moves.forEach(async ({ name, ...move }) => {
+        await prismaSeederClient.move.upsert({
+          where: {
+            name,
+          },
+          create: { ...move, name },
+          update: move,
+        });
+      });
+
+      console.log('Creating moves finished');
 
       // Seed pokemon
       console.log('Upserting pokemons');
