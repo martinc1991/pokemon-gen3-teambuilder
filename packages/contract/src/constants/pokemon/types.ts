@@ -186,7 +186,7 @@ export const typesArray: IType[] = [
   },
   {
     name: TypeNames.empty,
-    damageClass: DamageClass.none,
+    damageClass: DamageClass.status,
     doubleDamageFrom: [],
     doubleDamageTo: [],
     halfDamageFrom: [],

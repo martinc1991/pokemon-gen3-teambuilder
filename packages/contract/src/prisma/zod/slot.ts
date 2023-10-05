@@ -3,11 +3,13 @@ import * as z from 'zod';
 import {
   CompleteAbility,
   CompleteItem,
+  CompleteMove,
   CompleteNature,
   CompletePokemon,
   CompleteTeam,
   RelatedAbilityModel,
   RelatedItemModel,
+  RelatedMoveModel,
   RelatedNatureModel,
   RelatedPokemonModel,
   RelatedTeamModel,
@@ -38,6 +40,10 @@ export const SlotModel = z.object({
   gender: z.nativeEnum(Gender),
   level: z.number().int(),
   happiness: z.number().int(),
+  moveOneName: z.string(),
+  moveTwoName: z.string().nullish(),
+  moveThreeName: z.string().nullish(),
+  moveFourName: z.string().nullish(),
 });
 
 export interface CompleteSlot extends z.infer<typeof SlotModel> {
@@ -46,6 +52,10 @@ export interface CompleteSlot extends z.infer<typeof SlotModel> {
   ability: CompleteAbility;
   nature?: CompleteNature | null;
   item?: CompleteItem | null;
+  moveOne: CompleteMove;
+  moveTwo?: CompleteMove | null;
+  moveThree?: CompleteMove | null;
+  moveFour?: CompleteMove | null;
 }
 
 /**
@@ -60,5 +70,9 @@ export const RelatedSlotModel: z.ZodSchema<CompleteSlot> = z.lazy(() =>
     ability: RelatedAbilityModel,
     nature: RelatedNatureModel.nullish(),
     item: RelatedItemModel.nullish(),
+    moveOne: RelatedMoveModel,
+    moveTwo: RelatedMoveModel.nullish(),
+    moveThree: RelatedMoveModel.nullish(),
+    moveFour: RelatedMoveModel.nullish(),
   })
 );

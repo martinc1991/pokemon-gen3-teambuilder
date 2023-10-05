@@ -44,6 +44,7 @@ const genericSlot: TeamSlotDto = {
   itemName: 'generic-itemName',
   shiny: false,
   gender: Gender.male,
+  moveOneName: 'tackle',
 };
 
 const slotArr: TeamSlotDto[] = [

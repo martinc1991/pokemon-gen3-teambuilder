@@ -95,7 +95,22 @@ enum TypeNames {
 enum DamageClass {
   physical
   special
-  none
+  status
+}
+
+enum MoveTarget {
+  selectedPokemon
+  user
+  allOpponents
+  userAndAllies
+  specificMove
+  allOtherPokemon
+  entireField
+  ally
+  usersField
+  randomOpponent
+  allPokemon
+  opponentsField
 }
 
 enum Gender {
@@ -183,6 +198,7 @@ model Pokemon {
   baseSpattack          Int
   baseSpdefense         Int
   baseSpeed             Int
+  learnset              Move[]
 }
 
 // Teams
@@ -222,6 +238,31 @@ model Slot {
   gender                Gender
   level                 Int          @default(100)
   happiness             Int          @default(255)
+  moveOne               Move         @relation("MoveToSlotMoveOne", fields: [moveOneName], references: [name])
+  moveOneName           String
+  moveTwo               Move?        @relation("MoveToSlotMoveTwo", fields: [moveTwoName], references: [name])
+  moveTwoName           String?
+  moveThree             Move?        @relation("MoveToSlotMoveThree", fields: [moveThreeName], references: [name])
+  moveThreeName         String?
+  moveFour              Move?        @relation("MoveToSlotMoveFour", fields: [moveFourName], references: [name])
+  moveFourName          String?
 
   @@unique([teamId, order])
+}
+
+model Move {
+  id               String      @id @default(uuid())
+  name             String      @unique
+  accuracy         Int
+  damageClass      DamageClass
+  description      String
+  power            Int
+  pp               Int
+  target           MoveTarget
+  type             TypeNames
+  pokemon          Pokemon[]
+  pokemonMoveOne   Slot[]      @relation("MoveToSlotMoveOne")
+  pokemonMoveTwo   Slot[]      @relation("MoveToSlotMoveTwo")
+  pokemonMoveThree Slot[]      @relation("MoveToSlotMoveThree")
+  pokemonMoveFour  Slot[]      @relation("MoveToSlotMoveFour")
 }

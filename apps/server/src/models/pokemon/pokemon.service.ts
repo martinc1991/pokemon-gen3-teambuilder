@@ -35,6 +35,8 @@ export class PokemonService {
             name: true,
           },
         },
+        learnset: true,
+        abilities: true,
       },
     });
 

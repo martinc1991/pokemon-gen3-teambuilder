@@ -1,6 +1,15 @@
 import { Gender, Tier, TypeNames } from '@prisma/client';
 import * as z from 'zod';
-import { CompleteAbility, CompleteSlot, CompleteType, RelatedAbilityModel, RelatedSlotModel, RelatedTypeModel } from './index';
+import {
+  CompleteAbility,
+  CompleteMove,
+  CompleteSlot,
+  CompleteType,
+  RelatedAbilityModel,
+  RelatedMoveModel,
+  RelatedSlotModel,
+  RelatedTypeModel,
+} from './index';
 
 export const PokemonModel = z.object({
   id: z.string(),
@@ -27,6 +36,7 @@ export interface CompletePokemon extends z.infer<typeof PokemonModel> {
   typeTwo?: CompleteType | null;
   slot: CompleteSlot[];
   abilities: CompleteAbility[];
+  learnset: CompleteMove[];
 }
 
 /**
@@ -40,5 +50,6 @@ export const RelatedPokemonModel: z.ZodSchema<CompletePokemon> = z.lazy(() =>
     typeTwo: RelatedTypeModel.nullish(),
     slot: RelatedSlotModel.array(),
     abilities: RelatedAbilityModel.array(),
+    learnset: RelatedMoveModel.array(),
   })
 );

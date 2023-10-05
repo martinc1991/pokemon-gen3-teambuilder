@@ -1,7 +1,14 @@
 import { SEREBII_URL } from '@config/app';
-import { Gender, TypeNames, Pokemon as PokemonModel } from '@prisma/client';
+import {
+  DamageClass,
+  Gender,
+  Move,
+  Pokemon as PokemonModel,
+  TypeNames,
+} from '@prisma/client';
 import { IBaseStats } from 'contract';
 import { Pokemon, PokemonSpecies, PokemonType } from 'pokenode-ts';
+import { uniqueMovesMap } from '../data/uniqueMovesMap';
 
 export type PokemonMergedInfo = PokemonSpecies & Pokemon;
 
@@ -12,6 +19,8 @@ export interface Seed_Pokemon
   abilities: string[];
   genders: Gender[];
 }
+
+export type Seed_Move = Omit<Move, 'id'>;
 
 // Aux
 export function getGenerationNumber(gen: string): number {
@@ -109,4 +118,31 @@ export function idToIconUrl(id: number, fetchStatic = false): string {
     return `${SEREBII_URL}/pokedex-sm/icon/${_id}.png`; // static (only until volcanion (721) )
   }
   return `${SEREBII_URL}/pokedex-rs/icon/${_id}.gif`; // animated gifs (only until arceus (493) )
+}
+
+export function getDamageClassFromType(type: TypeNames): DamageClass {
+  switch (type) {
+    case TypeNames.dark:
+    case TypeNames.fire:
+    case TypeNames.water:
+    case TypeNames.electric:
+    case TypeNames.grass:
+    case TypeNames.ice:
+    case TypeNames.psychic:
+    case TypeNames.dragon:
+      return DamageClass.special;
+
+    default:
+      return DamageClass.physical;
+  }
+}
+
+function removeHyphen(str: string): string {
+  return str.replace(/-/g, '');
+}
+
+// Removes '-' and then uses a move name map for consistency
+export function getMoveName(moveName: string): string {
+  const name = removeHyphen(moveName);
+  return uniqueMovesMap[name];
 }
