@@ -1,7 +1,7 @@
-import { Ability } from '@prisma/client';
+import { Ability, Move } from '@prisma/client';
 import { ClientInferResponseBody, initContract } from '@ts-rest/core';
 import { z } from 'zod';
-import { CompletePokemon, PokemonModel } from '../prisma/zod';
+import { CompletePokemon, MoveModel } from '../prisma/zod';
 import { ArrayElementType } from '../utils/types/array-element-type';
 
 const c = initContract();
@@ -13,8 +13,13 @@ const queryParamsSchema = z.object({
   sortOrder: z.string().optional(),
 });
 
-type GetAllPokemonResponse = Omit<CompletePokemon, 'typeOne' | 'typeTwo' | 'slot' | 'abilities'> & { abilities: Ability[] };
+type GetAllPokemonResponse = Omit<CompletePokemon, 'typeOne' | 'typeTwo' | 'slot' | 'abilities' | 'learnset'> & { abilities: Ability[] };
 const getAllPokemonResponseSchema = z.custom<GetAllPokemonResponse>();
+
+type GetOnePokemonResponse = Omit<CompletePokemon, 'typeOne' | 'typeTwo' | 'slot' | 'abilities' | 'learnset'> & { abilities: Ability[] } & {
+  learnset: Move[];
+};
+const getOnePokemonResponseSchema = z.custom<GetOnePokemonResponse>();
 
 export const pokemonContract = c.router({
   getAll: {
@@ -30,7 +35,7 @@ export const pokemonContract = c.router({
     method: 'GET',
     path: `/pokemon/:nationalDexNumber`,
     responses: {
-      200: PokemonModel,
+      200: getOnePokemonResponseSchema,
     },
     summary: 'Get a pokemon by national pokedex number',
   },
