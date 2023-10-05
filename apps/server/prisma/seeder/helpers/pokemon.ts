@@ -101,15 +101,7 @@ export function getPokemonBaseStats({
 }: PokemonMergedInfo): IBaseStats {
   // INFO: override stats if needed
   if (overrideStatsData[name]) {
-    const overrideData = overrideStatsData[name];
-    return {
-      baseHp: overrideData.hp,
-      baseAttack: overrideData.attack,
-      baseDefense: overrideData.defense,
-      baseSpattack: overrideData.spattack,
-      baseSpdefense: overrideData.spdefense,
-      baseSpeed: overrideData.speed,
-    };
+    return overrideStatsData[name];
   }
 
   return stats.reduce(
