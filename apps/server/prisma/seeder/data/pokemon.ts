@@ -6,11 +6,11 @@ import {
   Seed_Pokemon,
   getGenThreeSprite,
   getGenThreeTypes,
+  getPokemonAbilities,
   getPokemonBaseStats,
   getPossibleGenders,
   idToIconUrl,
 } from '../helpers/pokemon';
-import { overrideAbilitiesData } from './overrides/abilities';
 import { overrideStatsData } from './overrides/stats';
 import { pokemonTiers } from './tiers';
 
@@ -44,7 +44,7 @@ export async function getPokemonPromises(): Promise<Seed_Pokemon[]> {
     // Get types
     const [typeOne, typeTwo] = getGenThreeTypes(pkmn);
 
-    let abilities = pkmn.abilities.map((ab) => ab.ability.name);
+    const abilities = getPokemonAbilities(pkmn);
     let {
       baseHp,
       baseAttack,
@@ -63,10 +63,6 @@ export async function getPokemonPromises(): Promise<Seed_Pokemon[]> {
       baseSpattack = overrideStatsData[pkmn.name].spattack;
       baseSpdefense = overrideStatsData[pkmn.name].spdefense;
       baseSpeed = overrideStatsData[pkmn.name].speed;
-    }
-    // Abilities
-    if (overrideAbilitiesData[pkmn.name]) {
-      abilities = overrideAbilitiesData[pkmn.name];
     }
     // No need to override types
 

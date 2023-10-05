@@ -8,6 +8,7 @@ import {
 } from '@prisma/client';
 import { IBaseStats } from 'contract';
 import { Pokemon, PokemonSpecies, PokemonType } from 'pokenode-ts';
+import { overrideAbilitiesData } from '../data/overrides/abilities';
 import { uniqueMovesMap } from '../data/uniqueMovesMap';
 
 export type PokemonMergedInfo = PokemonSpecies & Pokemon;
@@ -108,6 +109,17 @@ export function getPokemonBaseStats({ stats }: PokemonMergedInfo): IBaseStats {
       baseSpeed: 0,
     },
   );
+}
+
+export function getPokemonAbilities({
+  name,
+  abilities,
+}: PokemonMergedInfo): string[] {
+  // INFO: override abilities if needed
+  if (overrideAbilitiesData[name]) {
+    return overrideAbilitiesData[name];
+  }
+  return abilities.map((ab) => ab.ability.name);
 }
 
 export function idToIconUrl(id: number, fetchStatic = false): string {
