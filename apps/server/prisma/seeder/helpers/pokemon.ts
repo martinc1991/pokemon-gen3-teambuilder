@@ -10,6 +10,7 @@ import { IBaseStats } from 'contract';
 import { Pokemon, PokemonSpecies, PokemonType } from 'pokenode-ts';
 import { overrideAbilitiesData } from '../data/overrides/abilities';
 import { uniqueMovesMap } from '../data/uniqueMovesMap';
+import { overrideStatsData } from '../data/overrides/stats';
 
 export type PokemonMergedInfo = PokemonSpecies & Pokemon;
 
@@ -94,7 +95,23 @@ const objProperties = [
   'baseSpeed',
 ];
 
-export function getPokemonBaseStats({ stats }: PokemonMergedInfo): IBaseStats {
+export function getPokemonBaseStats({
+  stats,
+  name,
+}: PokemonMergedInfo): IBaseStats {
+  // INFO: override stats if needed
+  if (overrideStatsData[name]) {
+    const overrideData = overrideStatsData[name];
+    return {
+      baseHp: overrideData.hp,
+      baseAttack: overrideData.attack,
+      baseDefense: overrideData.defense,
+      baseSpattack: overrideData.spattack,
+      baseSpdefense: overrideData.spdefense,
+      baseSpeed: overrideData.speed,
+    };
+  }
+
   return stats.reduce(
     (obj, stat, i) => {
       obj[objProperties[i]] = stat.base_stat;
