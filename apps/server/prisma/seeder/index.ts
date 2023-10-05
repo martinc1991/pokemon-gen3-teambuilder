@@ -15,7 +15,7 @@ const RESET = '\x1b[0m';
 console.log(`Seeding environment: ${CYAN} ${process.env.ENV_NAME} ${RESET}`);
 
 export async function seeder() {
-  return await prismaSeederClient.$transaction(
+  await prismaSeederClient.$transaction(
     async (client) => {
       performance.mark('start');
 
@@ -138,15 +138,14 @@ export async function seeder() {
       });
 
       console.log('Upserting pokemons finished');
-
-      // Overrides
-      overrides(client);
-
-      performance.mark('end');
     },
     {
       maxWait: 1000 * 60 * 2,
       timeout: 1000 * 60 * 2,
     },
   );
+
+  // Overrides
+  await overrides();
+  performance.mark('end');
 }
