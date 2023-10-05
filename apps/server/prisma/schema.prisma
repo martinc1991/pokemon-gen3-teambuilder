@@ -217,12 +217,12 @@ model Slot {
   happiness             Int          @default(255)
   moveOne               Move         @relation("MoveToSlotMoveOne", fields: [moveOneName], references: [name])
   moveOneName           String
-  moveTwo               Move         @relation("MoveToSlotMoveTwo", fields: [moveTwoName], references: [name])
-  moveTwoName           String
-  moveThree             Move         @relation("MoveToSlotMoveThree", fields: [moveThreeName], references: [name])
-  moveThreeName         String
-  moveFour              Move         @relation("MoveToSlotMoveFour", fields: [moveFourName], references: [name])
-  moveFourName          String
+  moveTwo               Move?        @relation("MoveToSlotMoveTwo", fields: [moveTwoName], references: [name])
+  moveTwoName           String?
+  moveThree             Move?        @relation("MoveToSlotMoveThree", fields: [moveThreeName], references: [name])
+  moveThreeName         String?
+  moveFour              Move?        @relation("MoveToSlotMoveFour", fields: [moveFourName], references: [name])
+  moveFourName          String?
 
   @@unique([teamId, order])
 }

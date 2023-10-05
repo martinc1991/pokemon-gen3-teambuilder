@@ -41,9 +41,9 @@ export const SlotModel = z.object({
   level: z.number().int(),
   happiness: z.number().int(),
   moveOneName: z.string(),
-  moveTwoName: z.string(),
-  moveThreeName: z.string(),
-  moveFourName: z.string(),
+  moveTwoName: z.string().nullish(),
+  moveThreeName: z.string().nullish(),
+  moveFourName: z.string().nullish(),
 });
 
 export interface CompleteSlot extends z.infer<typeof SlotModel> {
@@ -53,9 +53,9 @@ export interface CompleteSlot extends z.infer<typeof SlotModel> {
   nature?: CompleteNature | null;
   item?: CompleteItem | null;
   moveOne: CompleteMove;
-  moveTwo: CompleteMove;
-  moveThree: CompleteMove;
-  moveFour: CompleteMove;
+  moveTwo?: CompleteMove | null;
+  moveThree?: CompleteMove | null;
+  moveFour?: CompleteMove | null;
 }
 
 /**
@@ -71,8 +71,8 @@ export const RelatedSlotModel: z.ZodSchema<CompleteSlot> = z.lazy(() =>
     nature: RelatedNatureModel.nullish(),
     item: RelatedItemModel.nullish(),
     moveOne: RelatedMoveModel,
-    moveTwo: RelatedMoveModel,
-    moveThree: RelatedMoveModel,
-    moveFour: RelatedMoveModel,
+    moveTwo: RelatedMoveModel.nullish(),
+    moveThree: RelatedMoveModel.nullish(),
+    moveFour: RelatedMoveModel.nullish(),
   })
 );

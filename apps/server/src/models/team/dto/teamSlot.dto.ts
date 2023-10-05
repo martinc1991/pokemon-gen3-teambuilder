@@ -68,4 +68,16 @@ export class TeamSlotDto {
 
   @IsEnum(Gender)
   gender: Gender;
+
+  @IsString()
+  moveOneName: string;
+  @IsOptional()
+  @IsString()
+  moveTwoName?: string;
+  @IsOptional()
+  @IsString()
+  moveThreeName?: string;
+  @IsOptional()
+  @IsString()
+  moveFourName?: string;
 }
