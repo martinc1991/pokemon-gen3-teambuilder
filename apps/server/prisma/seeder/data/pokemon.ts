@@ -1,15 +1,16 @@
 import { LAST_POKEMON_DEX_NUMBER } from '@config/app';
+import { Tier } from '@prisma/client';
 import { Pokemon, PokemonClient, PokemonSpecies } from 'pokenode-ts';
 import {
   PokemonMergedInfo,
   Seed_Pokemon,
   getGenThreeSprite,
   getGenThreeTypes,
+  getPokemonAbilities,
   getPokemonBaseStats,
   getPossibleGenders,
   idToIconUrl,
 } from '../helpers/pokemon';
-import { Tier } from '@prisma/client';
 import { pokemonTiers } from './tiers';
 
 const pokemonIds = Array.from(
@@ -42,7 +43,7 @@ export async function getPokemonPromises(): Promise<Seed_Pokemon[]> {
     // Get types
     const [typeOne, typeTwo] = getGenThreeTypes(pkmn);
 
-    const abilities = pkmn.abilities.map((ab) => ab.ability.name);
+    const abilities = getPokemonAbilities(pkmn);
     const {
       baseHp,
       baseAttack,

@@ -8,14 +8,16 @@ import {
 } from '@prisma/client';
 import { IBaseStats } from 'contract';
 import { Pokemon, PokemonSpecies, PokemonType } from 'pokenode-ts';
+import { overrideAbilitiesData } from '../data/overrides/abilities';
 import { uniqueMovesMap } from '../data/uniqueMovesMap';
+import { overrideStatsData } from '../data/overrides/stats';
 
 export type PokemonMergedInfo = PokemonSpecies & Pokemon;
 
 export interface Seed_Pokemon
   extends Omit<PokemonModel, 'id' | 'typeOneName' | 'typeTwoName'> {
   typeOne: TypeNames;
-  typeTwo?: TypeNames;
+  typeTwo: TypeNames;
   abilities: string[];
   genders: Gender[];
 }
@@ -42,15 +44,13 @@ export function getGenerationNumber(gen: string): number {
   }
 }
 
-export function getTypes(type: PokemonType[]): [TypeNames, TypeNames | null] {
+export function getTypes(type: PokemonType[]): [TypeNames, TypeNames] {
   const typeOne = type[0].type.name as TypeNames;
-  const typeTwo = (type[1]?.type.name as TypeNames) || null;
+  const typeTwo = (type[1]?.type.name as TypeNames) || TypeNames.empty;
   return [typeOne, typeTwo];
 }
 
-export function getGenThreeTypes(
-  pokemon: Pokemon,
-): [TypeNames, TypeNames | null] {
+export function getGenThreeTypes(pokemon: Pokemon): [TypeNames, TypeNames] {
   // Get types
   let [typeOne, typeTwo] = getTypes(pokemon.types);
 
@@ -95,7 +95,15 @@ const objProperties = [
   'baseSpeed',
 ];
 
-export function getPokemonBaseStats({ stats }: PokemonMergedInfo): IBaseStats {
+export function getPokemonBaseStats({
+  stats,
+  name,
+}: PokemonMergedInfo): IBaseStats {
+  // INFO: override stats if needed
+  if (overrideStatsData[name]) {
+    return overrideStatsData[name];
+  }
+
   return stats.reduce(
     (obj, stat, i) => {
       obj[objProperties[i]] = stat.base_stat;
@@ -110,6 +118,17 @@ export function getPokemonBaseStats({ stats }: PokemonMergedInfo): IBaseStats {
       baseSpeed: 0,
     },
   );
+}
+
+export function getPokemonAbilities({
+  name,
+  abilities,
+}: PokemonMergedInfo): string[] {
+  // INFO: override abilities if needed
+  if (overrideAbilitiesData[name]) {
+    return overrideAbilitiesData[name];
+  }
+  return abilities.map((ab) => ab.ability.name);
 }
 
 export function idToIconUrl(id: number, fetchStatic = false): string {

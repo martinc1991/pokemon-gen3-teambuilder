@@ -4,7 +4,6 @@ import { deoxysVariations } from './data/deoxys';
 import { items } from './data/items';
 import { learnsets } from './data/learnsets';
 import { getMovesPromises } from './data/moves';
-import { overrides } from './data/overrides';
 import { getPokemonPromises } from './data/pokemon';
 import { getMoveName } from './helpers/pokemon';
 import { prismaSeederClient } from './helpers/seederClient';
@@ -145,7 +144,5 @@ export async function seeder() {
     },
   );
 
-  // Overrides
-  await overrides();
   performance.mark('end');
 }
