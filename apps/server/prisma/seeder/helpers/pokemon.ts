@@ -15,7 +15,7 @@ export type PokemonMergedInfo = PokemonSpecies & Pokemon;
 export interface Seed_Pokemon
   extends Omit<PokemonModel, 'id' | 'typeOneName' | 'typeTwoName'> {
   typeOne: TypeNames;
-  typeTwo?: TypeNames;
+  typeTwo: TypeNames;
   abilities: string[];
   genders: Gender[];
 }
@@ -42,15 +42,13 @@ export function getGenerationNumber(gen: string): number {
   }
 }
 
-export function getTypes(type: PokemonType[]): [TypeNames, TypeNames | null] {
+export function getTypes(type: PokemonType[]): [TypeNames, TypeNames] {
   const typeOne = type[0].type.name as TypeNames;
-  const typeTwo = (type[1]?.type.name as TypeNames) || null;
+  const typeTwo = (type[1]?.type.name as TypeNames) || TypeNames.empty;
   return [typeOne, typeTwo];
 }
 
-export function getGenThreeTypes(
-  pokemon: Pokemon,
-): [TypeNames, TypeNames | null] {
+export function getGenThreeTypes(pokemon: Pokemon): [TypeNames, TypeNames] {
   // Get types
   let [typeOne, typeTwo] = getTypes(pokemon.types);
 

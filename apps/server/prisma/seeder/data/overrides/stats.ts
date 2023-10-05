@@ -1,4 +1,13 @@
-export const overrideStatsData = {
+type Stats = {
+  hp: number;
+  attack: number;
+  defense: number;
+  spattack: number;
+  spdefense: number;
+  speed: number;
+};
+
+export const overrideStatsData: { [k: string]: Stats } = {
   butterfree: {
     hp: 60,
     attack: 45,

@@ -1,4 +1,5 @@
 import { LAST_POKEMON_DEX_NUMBER } from '@config/app';
+import { Tier } from '@prisma/client';
 import { Pokemon, PokemonClient, PokemonSpecies } from 'pokenode-ts';
 import {
   PokemonMergedInfo,
@@ -9,7 +10,8 @@ import {
   getPossibleGenders,
   idToIconUrl,
 } from '../helpers/pokemon';
-import { Tier } from '@prisma/client';
+import { overrideAbilitiesData } from './overrides/abilities';
+import { overrideStatsData } from './overrides/stats';
 import { pokemonTiers } from './tiers';
 
 const pokemonIds = Array.from(
@@ -42,8 +44,8 @@ export async function getPokemonPromises(): Promise<Seed_Pokemon[]> {
     // Get types
     const [typeOne, typeTwo] = getGenThreeTypes(pkmn);
 
-    const abilities = pkmn.abilities.map((ab) => ab.ability.name);
-    const {
+    let abilities = pkmn.abilities.map((ab) => ab.ability.name);
+    let {
       baseHp,
       baseAttack,
       baseDefense,
@@ -51,6 +53,22 @@ export async function getPokemonPromises(): Promise<Seed_Pokemon[]> {
       baseSpdefense,
       baseSpeed,
     } = getPokemonBaseStats(pkmn);
+
+    // Overrides
+    // Stats
+    if (overrideStatsData[pkmn.name]) {
+      baseHp = overrideStatsData[pkmn.name].hp;
+      baseAttack = overrideStatsData[pkmn.name].attack;
+      baseDefense = overrideStatsData[pkmn.name].defense;
+      baseSpattack = overrideStatsData[pkmn.name].spattack;
+      baseSpdefense = overrideStatsData[pkmn.name].spdefense;
+      baseSpeed = overrideStatsData[pkmn.name].speed;
+    }
+    // Abilities
+    if (overrideAbilitiesData[pkmn.name]) {
+      abilities = overrideAbilitiesData[pkmn.name];
+    }
+    // No need to override types
 
     return {
       name: pkmn.name,
