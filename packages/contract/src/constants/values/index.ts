@@ -14,3 +14,6 @@ export const MAX_HAPPINESS = 255;
 
 export const MIN_LEVEL = 1;
 export const MAX_LEVEL = 100;
+
+export const LAST_POKEMON_DEX_NUMBER = 386;
+export const LAST_POKEMON_DEX_NUMBER_WITH_DEOXYS = 389; // Includes deoxys variations
