@@ -48,7 +48,7 @@ export class TeamService {
   async create(dto: CreateTeamDto) {
     const newTeam = await this.prisma.team.create({
       data: {
-        name: dto.name ?? undefined,
+        name: dto.name,
         slots: {},
       },
       select: {
@@ -57,15 +57,13 @@ export class TeamService {
       },
     });
 
-    if (dto.slots && dto.slots.length) {
-      await this.prisma.slot.createMany({
-        data: dto.slots.map((slot, i) => ({
-          ...slot,
-          teamId: newTeam.id,
-          order: i,
-        })),
-      });
-    }
+    await this.prisma.slot.createMany({
+      data: dto.slots.map((slot, i) => ({
+        ...slot,
+        teamId: newTeam.id,
+        order: i,
+      })),
+    });
 
     return newTeam;
   }

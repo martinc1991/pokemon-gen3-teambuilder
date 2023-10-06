@@ -100,7 +100,7 @@ describe('Team controller', () => {
       const dto = createTeamDtoStub(2);
       const expectedCreateParams = {
         data: {
-          name: dto.name ?? undefined,
+          name: dto.name,
           slots: {},
         },
         select: {
@@ -129,22 +129,6 @@ describe('Team controller', () => {
       expect(prismaService.slot.createMany).toBeCalledWith(
         expectedCreateManyParams,
       );
-    });
-
-    it("if slots are empty, shouldn't call prisma slot service", async () => {
-      const dto = createTeamDtoStub(0);
-      await service.create(dto);
-
-      expect(dto.slots).toHaveLength(0);
-      expect(prismaService.slot.createMany).not.toBeCalled();
-    });
-
-    it("if slots are not provided, shouldn't call prisma slot service", async () => {
-      const dto = createTeamDtoStub(0, true);
-      await service.create(dto);
-
-      expect(dto.slots).toBeUndefined();
-      expect(prismaService.slot.createMany).not.toBeCalled();
     });
   });
 
