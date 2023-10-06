@@ -1,22 +1,21 @@
 import { Type } from 'class-transformer';
 import {
   ArrayMaxSize,
+  ArrayMinSize,
   IsArray,
-  IsOptional,
   IsString,
   ValidateNested,
 } from 'class-validator';
 import { TeamSlotDto } from './teamSlot.dto';
 
 export class CreateTeamDto {
-  @IsOptional()
   @IsString()
-  name?: string;
+  name: string;
 
-  @IsOptional()
   @IsArray()
-  @ArrayMaxSize(6)
+  @ArrayMaxSize(6, { message: "a team can't have more than 6 pokemon" })
+  @ArrayMinSize(1, { message: 'a team must have at least 1 pokemon' })
   @ValidateNested({ each: true })
   @Type(() => TeamSlotDto)
-  slots?: TeamSlotDto[];
+  slots: TeamSlotDto[];
 }

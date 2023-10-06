@@ -1,3 +1,4 @@
+import { IsValidAbilityName } from '@common/validations/abilityName.validator';
 import { NationalPokedexNumberValidator } from '@common/validations/nationalPokedexNumber.validator';
 import { Gender, NatureNames } from '@prisma/client';
 import {
@@ -12,59 +13,50 @@ import {
 } from 'class-validator';
 
 export class TeamSlotDto {
-  // This should be the only required field for the slot
+  @IsInt()
   @Validate(NationalPokedexNumberValidator)
   nationalPokedexNumber: number;
 
-  @IsOptional()
   @IsString()
-  name?: string;
+  name: string;
 
-  @IsString()
+  @IsValidAbilityName()
   abilityName: string;
 
-  @IsOptional()
   @IsEnum(NatureNames)
-  natureName?: NatureNames;
+  natureName: NatureNames;
 
-  @IsOptional()
   @IsInt()
   @Max(255)
   @Min(0)
-  evHp?: number;
-  @IsOptional()
+  evHp: number;
   @IsInt()
   @Max(255)
   @Min(0)
-  evAttack?: number;
-  @IsOptional()
+  evAttack: number;
   @IsInt()
   @Max(255)
   @Min(0)
-  evDefense?: number;
-  @IsOptional()
+  evDefense: number;
   @IsInt()
   @Max(255)
   @Min(0)
-  evSpAttack?: number;
-  @IsOptional()
+  evSpAttack: number;
   @IsInt()
   @Max(255)
   @Min(0)
-  evSpDefense?: number;
-  @IsOptional()
+  evSpDefense: number;
   @IsInt()
   @Max(255)
   @Min(0)
-  evSpeed?: number;
+  evSpeed: number;
 
   @IsOptional()
   @IsString()
   itemName?: string;
 
-  @IsOptional()
   @IsBoolean()
-  shiny?: boolean;
+  shiny: boolean;
 
   @IsEnum(Gender)
   gender: Gender;
