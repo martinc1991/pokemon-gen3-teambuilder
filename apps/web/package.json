@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint --quiet",
+    "lint": "next lint --quiet && pnpm typecheck",
+    "typecheck": "tsc --noEmit --skipLibCheck --incremental false",
     "lint:fix": "next lint --fix"
   },
   "dependencies": {

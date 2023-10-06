@@ -3,13 +3,12 @@ import { ComboboxProps } from '@/components/ui/combobox/helpers/types';
 import { cn } from '@/lib/utils';
 import { FormLabel } from '../label';
 
-interface SelectFieldProps<T> {
+interface SelectFieldProps {
   name: string;
   id?: string;
   containerClassName?: string;
   inputClassname?: string;
   labelClassName?: string;
-  data: T[];
 }
 
 export function SelectInput<T>({
@@ -19,7 +18,7 @@ export function SelectInput<T>({
   labelClassName,
   inputClassname,
   ...props
-}: SelectFieldProps<T> & ComboboxProps<T>): JSX.Element {
+}: SelectFieldProps & ComboboxProps<T>): JSX.Element {
   return (
     <div className={cn('flex items-center w-full gap-4', containerClassName)}>
       <FormLabel name={name} id={id} labelClassName={labelClassName} />

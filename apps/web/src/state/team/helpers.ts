@@ -40,6 +40,11 @@ export class BaseSlot implements Omit<FilledSlot, 'pokemon'> {
   level: number;
   happiness: number;
 
+  moveOneName: string;
+  moveTwoName: string | null;
+  moveThreeName: string | null;
+  moveFourName: string | null;
+
   constructor(order?: number, pokemon?: IPokemon) {
     const isSlotFilled = pokemon && order !== undefined;
 
@@ -73,6 +78,11 @@ export class BaseSlot implements Omit<FilledSlot, 'pokemon'> {
     this.gender = isSlotFilled ? pokemon.genders[0] : Gender.genderless; // Just a default value, it isn't used
     this.level = MAX_LEVEL;
     this.happiness = MAX_HAPPINESS;
+
+    this.moveOneName = '';
+    this.moveTwoName = null;
+    this.moveThreeName = null;
+    this.moveFourName = null;
   }
 }
 
