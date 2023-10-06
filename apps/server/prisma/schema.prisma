@@ -10,6 +10,8 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// -----------------------------------------------------------------------------------------
+
 // Enums
 enum StatName {
   hp
@@ -163,6 +165,7 @@ model Pokemon {
   weight                Int
   typeOne               Type      @relation("TypeToPokemonTypeOne", fields: [typeOneName], references: [name])
   typeOneName           TypeNames
+  // TODO: make typeTwo field required
   typeTwo               Type?     @relation("TypeToPokemonTypeTwo", fields: [typeTwoName], references: [name])
   typeTwoName           TypeNames
   slot                  Slot[]
@@ -186,42 +189,42 @@ model Team {
 }
 
 model Slot {
-  id                    String       @id @default(uuid())
-  name                  String?      @default("no-name")
-  team                  Team         @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  id                    String      @id @default(uuid())
+  name                  String?     @default("no-name")
+  team                  Team        @relation(fields: [teamId], references: [id], onDelete: Cascade)
   teamId                String
-  pokemon               Pokemon      @relation(fields: [nationalPokedexNumber], references: [nationalPokedexNumber])
+  pokemon               Pokemon     @relation(fields: [nationalPokedexNumber], references: [nationalPokedexNumber])
   nationalPokedexNumber Int
   order                 Int
-  ability               Ability      @relation(fields: [abilityName], references: [name])
+  ability               Ability     @relation(fields: [abilityName], references: [name])
   abilityName           String
-  nature                Nature?      @relation(fields: [natureName], references: [name])
-  natureName            NatureNames?
-  evHp                  Int          @default(0)
-  evAttack              Int          @default(0)
-  evDefense             Int          @default(0)
-  evSpAttack            Int          @default(0)
-  evSpDefense           Int          @default(0)
-  evSpeed               Int          @default(0)
-  ivHp                  Int          @default(31)
-  ivAttack              Int          @default(31)
-  ivDefense             Int          @default(31)
-  ivSpAttack            Int          @default(31)
-  ivSpDefense           Int          @default(31)
-  ivSpeed               Int          @default(31)
-  item                  Item?        @relation(fields: [itemName], references: [name])
+  nature                Nature      @relation(fields: [natureName], references: [name])
+  natureName            NatureNames
+  evHp                  Int         @default(0)
+  evAttack              Int         @default(0)
+  evDefense             Int         @default(0)
+  evSpAttack            Int         @default(0)
+  evSpDefense           Int         @default(0)
+  evSpeed               Int         @default(0)
+  ivHp                  Int         @default(31)
+  ivAttack              Int         @default(31)
+  ivDefense             Int         @default(31)
+  ivSpAttack            Int         @default(31)
+  ivSpDefense           Int         @default(31)
+  ivSpeed               Int         @default(31)
+  item                  Item?       @relation(fields: [itemName], references: [name])
   itemName              String?
-  shiny                 Boolean?     @default(false)
+  shiny                 Boolean     @default(false)
   gender                Gender
-  level                 Int          @default(100)
-  happiness             Int          @default(255)
-  moveOne               Move         @relation("MoveToSlotMoveOne", fields: [moveOneName], references: [name])
+  level                 Int         @default(100)
+  happiness             Int         @default(255)
+  moveOne               Move        @relation("MoveToSlotMoveOne", fields: [moveOneName], references: [name])
   moveOneName           String
-  moveTwo               Move?        @relation("MoveToSlotMoveTwo", fields: [moveTwoName], references: [name])
+  moveTwo               Move?       @relation("MoveToSlotMoveTwo", fields: [moveTwoName], references: [name])
   moveTwoName           String?
-  moveThree             Move?        @relation("MoveToSlotMoveThree", fields: [moveThreeName], references: [name])
+  moveThree             Move?       @relation("MoveToSlotMoveThree", fields: [moveThreeName], references: [name])
   moveThreeName         String?
-  moveFour              Move?        @relation("MoveToSlotMoveFour", fields: [moveFourName], references: [name])
+  moveFour              Move?       @relation("MoveToSlotMoveFour", fields: [moveFourName], references: [name])
   moveFourName          String?
 
   @@unique([teamId, order])
