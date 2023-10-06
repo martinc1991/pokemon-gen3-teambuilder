@@ -44,7 +44,7 @@ export default function PokemonCard({ slot }: PokemonCardProps): JSX.Element {
           <div className='flex flex-col flex-1 gap-1'>
             <CardInfoField fieldName='Ability'>{slot.abilityName.replace('-', ' ')}</CardInfoField>
             <CardInfoField fieldName='Item'>{slot.itemName?.replace('-', ' ') || '-'}</CardInfoField>
-            <CardInfoField fieldName='Nature'>{slot.natureName || '-'}</CardInfoField>
+            <CardInfoField fieldName='Nature'>{slot.natureName}</CardInfoField>
             <CardInfoField fieldName='HP type'>{calculateHiddenPowerType(slot)}</CardInfoField>
           </div>
         </div>
