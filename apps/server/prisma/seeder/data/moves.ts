@@ -2,11 +2,7 @@ import { kebabToCamelCase } from '@common/helpers/pokemon.helper';
 import { MoveTarget } from '@prisma/client';
 import { TypeNames } from 'contract';
 import { MoveClient } from 'pokenode-ts';
-import {
-  Seed_Move,
-  getDamageClassFromType,
-  getMoveName,
-} from '../helpers/pokemon';
+import { Seed_Move, getMoveDamageClass, getMoveName } from '../helpers/pokemon';
 import { MOVES_NAMES } from './moves-names';
 
 const movesApi = new MoveClient();
@@ -22,7 +18,7 @@ export async function getMovesPromises(): Promise<Seed_Move[]> {
     const moves: Seed_Move[] = results.map((move) => {
       return {
         accuracy: move.accuracy ?? 0,
-        damageClass: getDamageClassFromType(move.type.name as TypeNames),
+        damageClass: getMoveDamageClass(move),
         name: getMoveName(move.name),
         description: move.effect_entries[0].short_effect.replace(
           '$effect_chance',
