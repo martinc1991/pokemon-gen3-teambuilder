@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils';
 import { FormLabel } from '../label';
 
 interface TextInputProps {
-  name: string;
+  name?: string;
   id?: string;
   containerClassName?: string;
   labelClassName?: string;
@@ -21,7 +21,7 @@ export function TextInput({
 }: TextInputProps & InputProps): JSX.Element {
   return (
     <div className={cn('flex items-center w-full gap-4', containerClassName)}>
-      <FormLabel name={name} id={id} labelClassName={labelClassName} />
+      {name && name.length && <FormLabel name={name} id={id} labelClassName={labelClassName} />}
       <Input className={cn('w-full', inputClassname)} id={id || name} {...props} />
     </div>
   );
