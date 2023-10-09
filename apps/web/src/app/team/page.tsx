@@ -10,11 +10,9 @@ import { BUILDER_PAGE_HEADER_HEIGHT } from './constants';
 const queryClient = new QueryClient();
 
 export default function Builder(): JSX.Element {
-  const [slots, setSelectedSlotIndex, selectedSlotIndex] = useTeamStore((state) => [
-    state.slots,
-    state.setSelectedSlotIndex,
-    state.selectedSlotIndex,
-  ]);
+  const [slots, setSelectedSlotIndex] = useTeamStore((state) => [state.slots, state.setSelectedSlotIndex]);
+
+  const areThereSlots = slots.length > 0;
 
   function handleSetSelectedSlotIndex(index: number): void {
     setSelectedSlotIndex(index);
@@ -28,20 +26,22 @@ export default function Builder(): JSX.Element {
           <Typography.P>Your current team</Typography.P>
         </div>
         <div className='flex flex-wrap justify-center w-11/12 gap-6'>
-          {slots.map((slot) => {
-            return (
-              <DialogTrigger
-                key={slot.id}
-                onClick={() => {
-                  handleSetSelectedSlotIndex(slot.order);
-                }}
-              >
-                <PokemonCard slot={slot} />;
-              </DialogTrigger>
-            );
-          })}
+          {areThereSlots
+            ? slots.map((slot) => {
+                return (
+                  <DialogTrigger
+                    key={slot.id}
+                    onClick={() => {
+                      handleSetSelectedSlotIndex(slot.order);
+                    }}
+                  >
+                    <PokemonCard slot={slot} />;
+                  </DialogTrigger>
+                );
+              })
+            : null}
         </div>
-        {selectedSlotIndex !== null && <SlotConfigModal />}
+        {areThereSlots ? <SlotConfigModal /> : null}
       </Dialog>
     </QueryClientProvider>
   );

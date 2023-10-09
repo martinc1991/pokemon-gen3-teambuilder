@@ -8,7 +8,7 @@ interface TeamState {
   teamId: string;
   name: string;
   slots: FilledSlot[];
-  selectedSlotIndex: number | null;
+  selectedSlotIndex: number;
 }
 
 interface TeamActions {

@@ -12,11 +12,7 @@ import ShinyField from './fields/shiny';
 import StatsFields from './fields/stats';
 
 export default function SlotConfigModal(): JSX.Element {
-  const [slots, selectedSlotIndex] = useTeamStore((state) => [state.slots, state.selectedSlotIndex]);
-
-  if (selectedSlotIndex === null || slots.length < 1) return <div />;
-
-  const slot = slots[selectedSlotIndex];
+  const [slot] = useTeamStore((state) => [state.slots[state.selectedSlotIndex]]);
 
   return (
     <DialogContent className='max-w-4xl'>
