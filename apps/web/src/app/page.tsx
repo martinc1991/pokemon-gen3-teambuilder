@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function Builder(): JSX.Element {
   return (
-    <div className='flex flex-col items-center min-h-screen p-2'>
+    <div className='flex flex-col items-center w-full min-h-screen p-2'>
       <Typography.H1>Home</Typography.H1>
       <Typography.P>This is the home: a place where you can chill and relax before anything.</Typography.P>
     </div>

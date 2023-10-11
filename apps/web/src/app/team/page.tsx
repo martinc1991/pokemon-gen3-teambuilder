@@ -35,7 +35,7 @@ export default function Builder(): JSX.Element {
                       handleSetSelectedSlotIndex(slot.order);
                     }}
                   >
-                    <PokemonCard slot={slot} />;
+                    <PokemonCard slot={slot} />
                   </DialogTrigger>
                 );
               })
