@@ -1,9 +1,7 @@
 import sharedConfig from 'tailwind-config/tailwind.config';
+import animatePlugin from 'tailwindcss-animate';
 
 export default {
   presets: [sharedConfig],
 };
-
-// eslint-disable-next-line no-undef
-// TODO: ver si puedo reemplazar esto por un import
-export const plugins = [require('tailwindcss-animate')];
+export const plugins = [animatePlugin];
