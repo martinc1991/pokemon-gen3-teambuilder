@@ -7,10 +7,15 @@ import {
   TypeNames,
 } from '@prisma/client';
 import { IBaseStats } from 'contract';
-import { Pokemon, PokemonSpecies, PokemonType } from 'pokenode-ts';
+import {
+  Move as PokeApiMove,
+  Pokemon,
+  PokemonSpecies,
+  PokemonType,
+} from 'pokenode-ts';
 import { overrideAbilitiesData } from '../data/overrides/abilities';
-import { uniqueMovesMap } from '../data/uniqueMovesMap';
 import { overrideStatsData } from '../data/overrides/stats';
+import { uniqueMovesMap } from '../data/uniqueMovesMap';
 
 export type PokemonMergedInfo = PokemonSpecies & Pokemon;
 
@@ -139,7 +144,16 @@ export function idToIconUrl(id: number, fetchStatic = false): string {
   return `${SEREBII_URL}/pokedex-rs/icon/${_id}.gif`; // animated gifs (only until arceus (493) )
 }
 
-export function getDamageClassFromType(type: TypeNames): DamageClass {
+export function getMoveDamageClass({
+  type,
+  damage_class,
+}: PokeApiMove): DamageClass {
+  if (damage_class.name === 'status') return damage_class.name;
+
+  return getDamageClassFromType(type.name as TypeNames);
+}
+
+function getDamageClassFromType(type: TypeNames): DamageClass {
   switch (type) {
     case TypeNames.dark:
     case TypeNames.fire:

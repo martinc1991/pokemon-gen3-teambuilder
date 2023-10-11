@@ -1,21 +1,14 @@
-import { DialogContent, DialogDescription, DialogHeader, Separator, TypeBadge, Typography } from 'ui';
+import { DialogContent, DialogDescription, DialogHeader, Tabs, TabsContent, TabsList, TabsTrigger, TypeBadge, Typography } from 'ui';
 import { useTeamStore } from '../../../state/team';
 import { getCardTitleName } from '../cards/utils/get-card-title';
-import AbilityField from './fields/ability';
-import GenderField from './fields/gender';
-import HappinessField from './fields/happiness';
-import ItemField from './fields/item';
-import LevelField from './fields/level';
-import NameField from './fields/name';
-import NatureField from './fields/nature';
-import ShinyField from './fields/shiny';
-import StatsFields from './fields/stats';
+import { BasicTab, BASIC_TAB_NAME } from './tabs/basic-tab';
+import { MovesTab, MOVES_TAB_NAME } from './tabs/moves-tab';
 
 export default function SlotConfigModal(): JSX.Element {
   const [slot] = useTeamStore((state) => [state.slots[state.selectedSlotIndex]]);
 
   return (
-    <DialogContent className='max-w-4xl'>
+    <DialogContent className='max-w-5xl flex flex-col justify-start gap-4 min-h-[90%]'>
       <DialogHeader className='overflow-auto'>
         <div className='flex items-center justify-between gap-5'>
           <Typography.H3 className='truncate'>{getCardTitleName({ ...slot })}</Typography.H3>
@@ -26,36 +19,19 @@ export default function SlotConfigModal(): JSX.Element {
         </div>
         <DialogDescription>Customize your pokemon here. No need to save.</DialogDescription>
       </DialogHeader>
-      <div className='flex flex-col items-start w-full gap-4'>
-        <Typography.H4 className='truncate'>Basic</Typography.H4>
-        <div className='flex items-center w-full gap-4'>
-          <NameField slot={slot} />
-          <ShinyField slot={slot} />
-        </div>
-        <div className='flex flex-col items-center justify-between w-full gap-4 sm:flex-row'>
-          <GenderField slot={slot} />
-          <LevelField slot={slot} />
-          <HappinessField slot={slot} />
-        </div>
-        <div className='flex items-center w-full gap-4' />
 
-        <Separator />
-
-        <Typography.H4 className='truncate'>Abilitiy, item and nature</Typography.H4>
-        <div className='flex flex-col items-start w-full gap-4 sm:flex-row sm:items-center'>
-          <AbilityField slot={slot} />
-          <ItemField slot={slot} />
-        </div>
-        <div className='flex items-center w-full gap-4'>
-          <NatureField slot={slot} />
-        </div>
-      </div>
-
-      <Separator />
-
-      <Typography.H4>Stats (EVs, IVs)</Typography.H4>
-
-      <StatsFields slot={slot} />
+      <Tabs defaultValue={BASIC_TAB_NAME}>
+        <TabsList className='grid w-full grid-cols-2'>
+          <TabsTrigger value={BASIC_TAB_NAME}>Basic</TabsTrigger>
+          <TabsTrigger value={MOVES_TAB_NAME}>Moves</TabsTrigger>
+        </TabsList>
+        <TabsContent value={BASIC_TAB_NAME}>
+          <BasicTab slot={slot} />
+        </TabsContent>
+        <TabsContent value={MOVES_TAB_NAME}>
+          <MovesTab slot={slot} />
+        </TabsContent>
+      </Tabs>
     </DialogContent>
   );
 }
