@@ -1,4 +1,4 @@
-import './src/global.css';
+import 'tailwind-config/global.css';
 
 export * as FormField from './src/components/form-fields';
 export * from './src/components/ui/badge';
