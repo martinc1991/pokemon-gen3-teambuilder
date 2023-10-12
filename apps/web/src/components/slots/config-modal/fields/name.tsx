@@ -14,7 +14,7 @@ export default function NameField({ slot }: NameFieldProps): JSX.Element {
     <FormField.Text
       containerClassName='flex-1'
       name='name'
-      onChange={(e) => {
+      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.value.length <= MAX_POKEMON_NAME_LENGTH) {
           setSlotFieldValue(slot, 'name', e.target.value);
         }

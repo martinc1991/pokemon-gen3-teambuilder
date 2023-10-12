@@ -88,8 +88,8 @@ export function MovesTab({ slot }: TabProps): JSX.Element {
           autoFocus
           id={MovesNameFields.ONE}
           inputClassname='capitalize'
-          onChange={(e) => {
-            setMoveOneName(e.target.value.toLowerCase().toLowerCase());
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setMoveOneName(e.target.value.toLowerCase());
             handleFilter(e);
           }}
           onFocus={handleFocus}
@@ -99,7 +99,7 @@ export function MovesTab({ slot }: TabProps): JSX.Element {
         <FormField.Text
           id={MovesNameFields.TWO}
           inputClassname='capitalize'
-          onChange={(e) => {
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setMoveTwoName(e.target.value.toLowerCase());
             handleFilter(e);
           }}
@@ -110,7 +110,7 @@ export function MovesTab({ slot }: TabProps): JSX.Element {
         <FormField.Text
           id={MovesNameFields.THREE}
           inputClassname='capitalize'
-          onChange={(e) => {
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setMoveThreeName(e.target.value.toLowerCase());
             handleFilter(e);
           }}
@@ -121,7 +121,7 @@ export function MovesTab({ slot }: TabProps): JSX.Element {
         <FormField.Text
           id={MovesNameFields.FOUR}
           inputClassname='capitalize'
-          onChange={(e) => {
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setMoveFourName(e.target.value.toLowerCase().toLowerCase());
             handleFilter(e);
           }}
