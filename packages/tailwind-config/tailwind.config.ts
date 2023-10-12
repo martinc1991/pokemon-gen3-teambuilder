@@ -1,59 +1,75 @@
 import type { Config } from 'tailwindcss';
+import * as COLORS from './tokens/colors';
+import * as BORDER_RADIUS from './tokens/border-radius';
 
 export default {
   content: [`src/**/*.{js,ts,jsx,tsx}`],
   theme: {
-    container: {
-      center: true,
-      padding: '2rem',
-      screens: {
-        '2xl': '1400px',
-      },
-    },
     extend: {
       colors: {
         // Theme colors
-        accent: { DEFAULT: 'var(--accent)', foreground: 'var(--accent-foreground)' },
-        background: 'var(--background)',
-        border: 'var(--border)',
-        card: { DEFAULT: 'var(--card)', foreground: 'var(--card-foreground)' },
-        destructive: { DEFAULT: 'var(--destructive)', foreground: 'var(--destructive-foreground)' },
-        foreground: 'var(--foreground)',
-        input: 'var(--input)',
-        muted: { DEFAULT: 'var(--muted)', foreground: 'var(--muted-foreground)' },
-        popover: { DEFAULT: 'var(--popover)', foreground: 'var(--popover-foreground)' },
-        primary: { DEFAULT: 'var(--primary)', foreground: 'var(--primary-foreground)' },
-        ring: 'var(--ring)',
-        secondary: { DEFAULT: 'var(--secondary)', foreground: 'var(--secondary-foreground)' },
+        accent: {
+          DEFAULT: COLORS.accent,
+          foreground: COLORS.accentForeground,
+        },
+        background: COLORS.background,
+        border: COLORS.border,
+        card: {
+          DEFAULT: COLORS.card,
+          foreground: COLORS.cardForeground,
+        },
+        destructive: {
+          DEFAULT: COLORS.destructive,
+          foreground: COLORS.destructiveForeground,
+        },
+        foreground: COLORS.foreground,
+        input: COLORS.input,
+        muted: {
+          DEFAULT: COLORS.muted,
+          foreground: COLORS.mutedForeground,
+        },
+        popover: {
+          DEFAULT: COLORS.popover,
+          foreground: COLORS.popoverForeground,
+        },
+        primary: {
+          DEFAULT: COLORS.primary,
+          foreground: COLORS.primaryForeground,
+        },
+        ring: COLORS.ring,
+        secondary: {
+          DEFAULT: COLORS.secondary,
+          foreground: COLORS.secondaryForeground,
+        },
 
         // Types colors
-        bug: 'var(--bug)',
-        dark: 'var(--dark)',
-        dragon: 'var(--dragon)',
-        electric: 'var(--electric)',
-        empty: 'var(--empty)',
-        fighting: 'var(--fighting)',
-        fire: 'var(--fire)',
-        flying: 'var(--flying)',
-        ghost: 'var(--ghost)',
-        grass: 'var(--grass)',
-        ground: 'var(--ground)',
-        ice: 'var(--ice)',
-        normal: 'var(--normal)',
-        poison: 'var(--poison)',
-        psychic: 'var(--psychic)',
-        rock: 'var(--rock)',
-        steel: 'var(--steel)',
-        water: 'var(--water)',
+        bug: COLORS.bug,
+        dark: COLORS.dark,
+        dragon: COLORS.dragon,
+        electric: COLORS.electric,
+        empty: COLORS.empty,
+        fighting: COLORS.fighting,
+        fire: COLORS.fire,
+        flying: COLORS.flying,
+        ghost: COLORS.ghost,
+        grass: COLORS.grass,
+        ground: COLORS.ground,
+        ice: COLORS.ice,
+        normal: COLORS.normal,
+        poison: COLORS.poison,
+        psychic: COLORS.psychic,
+        rock: COLORS.rock,
+        steel: COLORS.steel,
+        water: COLORS.water,
 
         /* Genders colors */
-        male: 'var(--male)',
-        female: 'var(--female)',
+        male: COLORS.male,
+        female: COLORS.female,
       },
       borderRadius: {
-        lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)',
+        lg: BORDER_RADIUS.lg,
+        md: BORDER_RADIUS.md,
+        sm: BORDER_RADIUS.sm,
       },
       keyframes: {
         'accordion-down': {
