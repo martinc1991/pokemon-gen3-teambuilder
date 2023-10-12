@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import LeftSidebar from '../components/sidebars/left-siderbar';
 import RightSidebar from '../components/sidebars/right-sidebar';
-import '../styles/globals.css';
+import 'tailwind-config/global.css';
 // include styles from the ui package
 import 'ui/style';
 
