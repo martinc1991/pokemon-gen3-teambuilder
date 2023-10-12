@@ -215,7 +215,7 @@ importers:
         specifier: workspace:*
         version: link:../../packages/tailwind-config
       tailwindcss:
-        specifier: ^3.2.4
+        specifier: ^3.3.3
         version: 3.3.3
       typescript:
         specifier: ^5.1.6
