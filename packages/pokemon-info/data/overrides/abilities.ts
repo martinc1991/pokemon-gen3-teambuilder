@@ -1,4 +1,4 @@
-export const overrideAbilitiesData = {
+export const ABILITIES_OVERRIDES = {
   jigglypuff: ['cute-charm'],
   wigglytuff: ['cute-charm'],
   gengar: ['levitate'],

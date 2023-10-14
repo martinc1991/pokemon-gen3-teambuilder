@@ -1,9 +1,8 @@
-// import { SEREBII_URL } from '@config/app';
 import { DamageClass, Gender, IBaseStats, Move, Pokemon as PokemonModel, SEREBII_URL, TypeNames } from 'contract';
 import { Move as PokeApiMove, Pokemon, PokemonSpecies, PokemonType } from 'pokenode-ts';
-import { overrideAbilitiesData } from '../data/overrides/abilities';
-import { overrideStatsData } from '../data/overrides/stats';
-import { uniqueMovesMap } from '../data/uniqueMovesMap';
+import { ABILITIES_OVERRIDES } from '../data/overrides/abilities';
+import { STATS_OVERRIDES } from '../data/overrides/stats';
+import { UNIQUE_MOVES_MAP } from '../data/uniqueMovesMap';
 
 export type PokemonMergedInfo = PokemonSpecies & Pokemon;
 
@@ -82,8 +81,8 @@ const objProperties = ['baseHp', 'baseAttack', 'baseDefense', 'baseSpattack', 'b
 
 export function getPokemonBaseStats({ stats, name }: PokemonMergedInfo): IBaseStats {
   // INFO: override stats if needed
-  if (overrideStatsData[name]) {
-    return overrideStatsData[name];
+  if (STATS_OVERRIDES[name]) {
+    return STATS_OVERRIDES[name];
   }
 
   return stats.reduce(
@@ -104,8 +103,8 @@ export function getPokemonBaseStats({ stats, name }: PokemonMergedInfo): IBaseSt
 
 export function getPokemonAbilities({ name, abilities }: PokemonMergedInfo): string[] {
   // INFO: override abilities if needed
-  if (overrideAbilitiesData[name]) {
-    return overrideAbilitiesData[name];
+  if (ABILITIES_OVERRIDES[name]) {
+    return ABILITIES_OVERRIDES[name];
   }
   return abilities.map((ab) => ab.ability.name);
 }
@@ -148,5 +147,5 @@ function removeHyphen(str: string): string {
 // Removes '-' and then uses a move name map for consistency
 export function getMoveName(moveName: string): string {
   const name = removeHyphen(moveName);
-  return uniqueMovesMap[name];
+  return UNIQUE_MOVES_MAP[name];
 }

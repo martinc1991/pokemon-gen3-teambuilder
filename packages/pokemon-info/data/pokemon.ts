@@ -10,7 +10,7 @@ import {
   getPossibleGenders,
   idToIconUrl,
 } from '../helpers/pokemon';
-import { pokemonTiers } from './tiers';
+import { POKEMON_TIERS } from './tiers';
 
 const pokemonIds = Array.from({ length: LAST_POKEMON_DEX_NUMBER }, (_, index) => index + 1);
 
@@ -54,7 +54,7 @@ export async function getPokemonPromises(): Promise<Seed_Pokemon[]> {
       baseSpattack,
       baseSpdefense,
       baseSpeed,
-      tier: Tier[pokemonTiers[pkmn.name]],
+      tier: Tier[POKEMON_TIERS[pkmn.name]],
     };
   });
 }

@@ -1,7 +1,7 @@
 import { INature, NatureNames, StatName } from 'contract';
 
 // There are 25 natures, 5 neutral (https://bulbapedia.bulbagarden.net/wiki/Nature)
-export const naturesArray: INature[] = [
+export const NATURES: INature[] = [
   {
     name: NatureNames.sassy,
     increased: StatName.spdefense,

@@ -32,5 +32,3 @@ export async function getMovesPromises(): Promise<Seed_Move[]> {
     console.log(error);
   }
 }
-
-// getMovesPromises();

@@ -80,7 +80,7 @@ const DEOXYS_LEARSET = [
   'zap-cannon',
 ];
 
-export const learnsets: PokemonLearnSet = {
+export const LEARNSETS: PokemonLearnSet = {
   bulbasaur: [
     'attract',
     'body-slam',
@@ -10412,16 +10412,7 @@ export const learnsets: PokemonLearnSet = {
     'toxic',
   ],
   unown: ['hidden-power'],
-  wynaut: [
-    'charm',
-    'counter',
-    'destiny-bond',
-    'encore',
-    'mirror-coat',
-    'safeguard',
-    'splash',
-    'tickle',
-  ],
+  wynaut: ['charm', 'counter', 'destiny-bond', 'encore', 'mirror-coat', 'safeguard', 'splash', 'tickle'],
   wobbuffet: ['counter', 'destiny-bond', 'mirror-coat', 'safeguard'],
   girafarig: [
     'agility',

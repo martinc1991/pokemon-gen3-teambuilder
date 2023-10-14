@@ -4,18 +4,16 @@ interface Seed_Ability {
   longDescription: string;
 }
 
-export const abilities: Seed_Ability[] = [
+export const ABILITIES: Seed_Ability[] = [
   {
     name: 'stench',
-    shortDescription:
-      'Has a 10% chance of making target Pokémon flinch with each hit.',
+    shortDescription: 'Has a 10% chance of making target Pokémon flinch with each hit.',
     longDescription:
       "This Pokémon's damaging moves have a 10% chance to make the target flinch with each hit if they do not already cause flinching as a secondary effect. This ability does not stack with a held item. Overworld: The wild encounter rate is halved while this Pokémon is first in the party.",
   },
   {
     name: 'drizzle',
-    shortDescription:
-      'Summons rain that lasts indefinitely upon entering battle.',
+    shortDescription: 'Summons rain that lasts indefinitely upon entering battle.',
     longDescription:
       "The weather changes to rain when this Pokémon enters battle and does not end unless replaced by another weather condition. If multiple Pokémon with this ability, drought, sand stream, or snow warning are sent out at the same time, the abilities will activate in order of Speed, respecting trick room.  Each ability's weather will cancel the previous weather, and only the weather summoned by the slowest of the Pokémon will stay.",
   },
@@ -27,22 +25,18 @@ export const abilities: Seed_Ability[] = [
   {
     name: 'battle-armor',
     shortDescription: 'Protects against critical hits.',
-    longDescription:
-      'Moves cannot score critical hits against this Pokémon. This ability functions identically to shell armor.',
+    longDescription: 'Moves cannot score critical hits against this Pokémon. This ability functions identically to shell armor.',
   },
   {
     name: 'sturdy',
-    shortDescription:
-      'Prevents being KOed from full HP, leaving 1 HP instead.  Protects against the one-hit KO moves regardless of HP.',
+    shortDescription: 'Prevents being KOed from full HP, leaving 1 HP instead.  Protects against the one-hit KO moves regardless of HP.',
     longDescription:
       'When this Pokémon is at full HP, any hit that would knock it out will instead leave it with 1 HP.  Regardless of its current HP, it is also immune to the one-hit KO moves: fissure, guillotine, horn drill, and sheer cold. If this Pokémon is holding a focus sash, this ability takes precedence and the item will not be consumed.',
   },
   {
     name: 'damp',
-    shortDescription:
-      'Prevents self destruct, explosion, and aftermath from working while the Pokémon is in battle.',
-    longDescription:
-      'While this Pokémon is in battle, self destruct and explosion will fail and aftermath will not take effect.',
+    shortDescription: 'Prevents self destruct, explosion, and aftermath from working while the Pokémon is in battle.',
+    longDescription: 'While this Pokémon is in battle, self destruct and explosion will fail and aftermath will not take effect.',
   },
   {
     name: 'limber',
@@ -52,15 +46,13 @@ export const abilities: Seed_Ability[] = [
   },
   {
     name: 'sand-veil',
-    shortDescription:
-      'Increases evasion to 1.25x  during a sandstorm.  Protects against sandstorm damage.',
+    shortDescription: 'Increases evasion to 1.25x  during a sandstorm.  Protects against sandstorm damage.',
     longDescription:
       'During a sandstorm, this Pokémon has 1.25x  its evasion, and it does not take sandstorm damage regardless of type. The evasion bonus does not count as a stat modifier. Overworld: If the lead Pokémon has this ability, the wild encounter rate is halved in a sandstorm.',
   },
   {
     name: 'static',
-    shortDescription:
-      'Has a 30% chance of paralyzing attacking Pokémon on contact.',
+    shortDescription: 'Has a 30% chance of paralyzing attacking Pokémon on contact.',
     longDescription:
       "Whenever a move makes contact with this Pokémon, the move's user has a 30% chance of being paralyzed. Pokémon that are immune to electric-type moves can still be paralyzed by this ability. Overworld: If the lead Pokémon has this ability, there is a 50% chance that encounters will be with an electric Pokémon, if applicable.",
   },
@@ -84,8 +76,7 @@ export const abilities: Seed_Ability[] = [
   },
   {
     name: 'cloud-nine',
-    shortDescription:
-      'Negates all effects of weather, but does not prevent the weather itself.',
+    shortDescription: 'Negates all effects of weather, but does not prevent the weather itself.',
     longDescription:
       'While this Pokémon is in battle, weather can still be in play, but will not have any of its effects. This ability functions identically to air lock.',
   },
@@ -134,15 +125,13 @@ export const abilities: Seed_Ability[] = [
   },
   {
     name: 'suction-cups',
-    shortDescription:
-      "Prevents being forced out of battle by other Pokémon's moves.",
+    shortDescription: "Prevents being forced out of battle by other Pokémon's moves.",
     longDescription:
       'This Pokémon cannot be forced out of battle by moves such as whirlwind. dragon tail and circle throw still inflict damage against this Pokémon. Overworld: If the lead Pokémon has this ability, the success rate while fishing is increased.',
   },
   {
     name: 'intimidate',
-    shortDescription:
-      "Lowers opponents' Attack one stage upon entering battle.",
+    shortDescription: "Lowers opponents' Attack one stage upon entering battle.",
     longDescription:
       "When this Pokémon enters battle, the opponent's Attack is lowered by one stage.  In a double battle, both opponents are affected. This ability also takes effect when acquired during a battle, but will not take effect again if lost and reobtained without leaving battle. This ability has no effect on an opponent that has a substitute. Overworld: If the first Pokémon in the party has this ability, any random encounter with a Pokémon five or more levels lower than it has a 50% chance of being skipped.",
   },
@@ -154,15 +143,13 @@ export const abilities: Seed_Ability[] = [
   },
   {
     name: 'rough-skin',
-    shortDescription:
-      'Damages attacking Pokémon for 1/8 their max HP on contact.',
+    shortDescription: 'Damages attacking Pokémon for 1/8 their max HP on contact.',
     longDescription:
       "Whenever a move makes contact with this Pokémon, the move's user takes 1/8 of its maximum HP in damage. This ability functions identically to iron barbs.",
   },
   {
     name: 'wonder-guard',
-    shortDescription:
-      'Protects against damaging moves that are not super effective.',
+    shortDescription: 'Protects against damaging moves that are not super effective.',
     longDescription:
       'This Pokémon is immune to damaging moves that are not super effective against it. Moves that inflict fixed damage, such as night shade or seismic toss, are considered super effective if their types are.  Damage not directly dealt by moves, such as damage from weather, a status ailment, or spikes, is not prevented. This ability cannot be copied with role play or traded away with skill swap, but it can be copied with trace, disabled with gastro acid, or changed with worry seed.  This Pokémon can still use Role Play itself to lose this ability, but not Skill Swap. If this Pokémon has a substitute, this ability will block moves as usual and any moves not blocked will react to the Substitute as usual.',
   },
@@ -174,15 +161,13 @@ export const abilities: Seed_Ability[] = [
   },
   {
     name: 'effect-spore',
-    shortDescription:
-      'Has a 30% chance of inflcting either paralysis, poison, or sleep on attacking Pokémon on contact.',
+    shortDescription: 'Has a 30% chance of inflcting either paralysis, poison, or sleep on attacking Pokémon on contact.',
     longDescription:
       "Whenever a move makes contact with this Pokémon, the move's user has a 30% chance of being paralyzed, poisoned, or put to sleep, chosen at random. Nothing is done to compensate if the move's user is immune to one of these ailments; there is simply a lower chance that the move's user will be affected.",
   },
   {
     name: 'synchronize',
-    shortDescription:
-      'Copies burns, paralysis, and poison received onto the Pokémon that inflicted them.',
+    shortDescription: 'Copies burns, paralysis, and poison received onto the Pokémon that inflicted them.',
     longDescription:
       "Whenever this Pokémon is burned, paralyzed, or poisoned, the Pokémon who gave this Pokémon that ailment is also given the ailment. This ability passes back bad poison when this Pokémon is badly poisoned.  This ability cannot pass on a status ailment that the Pokémon did not directly receive from another Pokémon, such as the poison from toxic spikes or the burn from a flame orb. Overworld: If the lead Pokémon has this ability, wild Pokémon have a 50% chance of having the lead Pokémon's nature, and a 50% chance of being given a random nature as usual, including the lead Pokémon's nature.  This does not work on Pokémon received outside of battle or roaming legendaries.",
   },
@@ -214,14 +199,12 @@ export const abilities: Seed_Ability[] = [
   {
     name: 'swift-swim',
     shortDescription: 'Doubles Speed during rain.',
-    longDescription:
-      "This Pokémon's Speed is doubled during rain. This bonus does not count as a stat modifier.",
+    longDescription: "This Pokémon's Speed is doubled during rain. This bonus does not count as a stat modifier.",
   },
   {
     name: 'chlorophyll',
     shortDescription: 'Doubles Speed during strong sunlight.',
-    longDescription:
-      "This Pokémon's Speed is doubled during strong sunlight. This bonus does not count as a stat modifier.",
+    longDescription: "This Pokémon's Speed is doubled during strong sunlight. This bonus does not count as a stat modifier.",
   },
   {
     name: 'illuminate',
@@ -243,10 +226,8 @@ export const abilities: Seed_Ability[] = [
   },
   {
     name: 'poison-point',
-    shortDescription:
-      'Has a 30% chance of poisoning attacking Pokémon on contact.',
-    longDescription:
-      "Whenever a move makes contact with this Pokémon, the move's user has a 30% chance of being poisoned.",
+    shortDescription: 'Has a 30% chance of poisoning attacking Pokémon on contact.',
+    longDescription: "Whenever a move makes contact with this Pokémon, the move's user has a 30% chance of being poisoned.",
   },
   {
     name: 'inner-focus',
@@ -280,28 +261,24 @@ export const abilities: Seed_Ability[] = [
   {
     name: 'rain-dish',
     shortDescription: 'Heals for 1/16 max HP after each turn during rain.',
-    longDescription:
-      'This Pokémon heals for 1/16 of its maximum HP after each turn during rain.',
+    longDescription: 'This Pokémon heals for 1/16 of its maximum HP after each turn during rain.',
   },
   {
     name: 'sand-stream',
-    shortDescription:
-      'Summons a sandstorm that lasts indefinitely upon entering battle.',
+    shortDescription: 'Summons a sandstorm that lasts indefinitely upon entering battle.',
     longDescription:
       "The weather changes to a sandstorm when this Pokémon enters battle and does not end unless cancelled by another weather condition. If multiple Pokémon with this ability, drizzle, drought, or snow warning are sent out at the same time, the abilities will activate in order of Speed, respecting trick room.  Each ability's weather will cancel the previous weather, and only the weather summoned by the slowest of the Pokémon will stay. Overworld: If the lead Pokémon has this ability, the wild encounter rate is halved in a sandstorm.",
   },
   {
     name: 'pressure',
-    shortDescription:
-      'Increases the PP cost of moves targetting the Pokémon by one.',
+    shortDescription: 'Increases the PP cost of moves targetting the Pokémon by one.',
     longDescription:
       "Moves targetting this Pokémon use one extra PP. This ability stacks if multiple targets have it.  This ability still affects moves that fail or miss.  This ability does not affect ally moves that target either the entire field or just its side, nor this Pokémon's self-targetted moves; it does, however, affect single-targetted ally moves aimed at this Pokémon, ally moves that target all other Pokémon, and opponents' moves that target the entire field.  If this ability raises a move's PP cost above its remaining PP, it will use all remaining PP. When this Pokémon enters battle, all participating trainers are notified that it has this ability. Overworld: If the lead Pokémon has this ability, higher-levelled Pokémon have their encounter rate increased.",
   },
   {
     name: 'thick-fat',
     shortDescription: 'Halves damage from fire and ice moves.',
-    longDescription:
-      'This Pokémon takes half as much damage from fire- and ice-type moves.',
+    longDescription: 'This Pokémon takes half as much damage from fire- and ice-type moves.',
   },
   {
     name: 'early-bird',
@@ -311,16 +288,14 @@ export const abilities: Seed_Ability[] = [
   },
   {
     name: 'flame-body',
-    shortDescription:
-      'Has a 30% chance of burning attacking Pokémon on contact.',
+    shortDescription: 'Has a 30% chance of burning attacking Pokémon on contact.',
     longDescription:
       "Whenever a move makes contact with this Pokémon, the move's user has a 30% chance of being burned. Overworld: If any Pokémon in the party has this ability, each egg in the party has its hatch counter decreased by 2 (rather than 1) each step cycle, making eggs hatch roughly twice as quickly.  This effect does not stack if multiple Pokémon have this ability or magma armor.",
   },
   {
     name: 'run-away',
     shortDescription: 'Ensures success fleeing from wild battles.',
-    longDescription:
-      'This Pokémon is always successful fleeing from wild battles, even if trapped by a move or ability.',
+    longDescription: 'This Pokémon is always successful fleeing from wild battles, even if trapped by a move or ability.',
   },
   {
     name: 'keen-eye',
@@ -336,8 +311,7 @@ export const abilities: Seed_Ability[] = [
   },
   {
     name: 'pickup',
-    shortDescription:
-      "Picks up other Pokémon's used and Flung held items.  May also pick up an item after battle.",
+    shortDescription: "Picks up other Pokémon's used and Flung held items.  May also pick up an item after battle.",
     longDescription:
       "At the end of each turn, if another Pokémon consumed or Flung a held item that turn, this Pokémon picks up the item if it is not already holding one.  After each battle, this Pokémon has a 10% chance of picking up an item if it is not already holding one. The air balloon and eject button cannot be picked up. The items that may be found vary by game, and, since Pokémon Emerald, by the Pokémon's level.  This ability is checked after the battle ends, at which point any temporary ability changes have worn off.",
   },
@@ -349,29 +323,25 @@ export const abilities: Seed_Ability[] = [
   },
   {
     name: 'hustle',
-    shortDescription:
-      'Strengthens physical moves to inflict 1.5x  damage, but decreases their accuracy to 0.8x .',
+    shortDescription: 'Strengthens physical moves to inflict 1.5x  damage, but decreases their accuracy to 0.8x .',
     longDescription:
       "This Pokémon's physical moves do 1.5x  as much regular damage, but have 0.8x  their usual accuracy. Special moves are unaffected.  Moves that do set damage, such as seismic toss, have their accuracy affected, but not their damage. Overworld: If the lead Pokémon has this ability, higher-levelled Pokémon have their encounter rate increased.",
   },
   {
     name: 'cute-charm',
-    shortDescription:
-      'Has a 30% chance of infatuating attacking Pokémon on contact.',
+    shortDescription: 'Has a 30% chance of infatuating attacking Pokémon on contact.',
     longDescription:
       "Whenever a move makes contact with this Pokémon, the move's user has a 30% chance of being infatuated. Overworld: If the first Pokémon in the party has this ability, any wild Pokémon whose species can be either gender has a 2/3 chance of being set to the opposite gender, and a 1/3 chance of having a random gender as usual.",
   },
   {
     name: 'plus',
-    shortDescription:
-      'Increases Special Attack to 1.5x  when a friendly Pokémon has plus or minus.',
+    shortDescription: 'Increases Special Attack to 1.5x  when a friendly Pokémon has plus or minus.',
     longDescription:
       'This Pokémon has 1.5x  its Special Attack if any friendly Pokémon has plus or minus. This bonus does not count as a stat modifier.  If either ability is disabled by gastro acid, both lose their effect.',
   },
   {
     name: 'minus',
-    shortDescription:
-      'Increases Special Attack to 1.5x  when a friendly Pokémon has plus or minus.',
+    shortDescription: 'Increases Special Attack to 1.5x  when a friendly Pokémon has plus or minus.',
     longDescription:
       'This Pokémon has 1.5x  its Special Attack if any friendly Pokémon has plus or minus. This bonus does not count as a stat modifier.  If either ability is disabled by gastro acid, both lose their effect.',
   },
@@ -383,17 +353,14 @@ export const abilities: Seed_Ability[] = [
   },
   {
     name: 'sticky-hold',
-    shortDescription:
-      'Prevents a held item from being removed by other Pokémon.',
+    shortDescription: 'Prevents a held item from being removed by other Pokémon.',
     longDescription:
       "This Pokémon's hold item cannot be removed by other Pokémon. Damaging moves that would remove this Pokémon's item can still inflict damage against this Pokémon, e.g. knock off or pluck.  This Pokémon can still use moves that involve the loss of its own item, e.g. fling or trick. Overworld: If the lead Pokémon has this ability, the encounter rate while fishing is increased.",
   },
   {
     name: 'shed-skin',
-    shortDescription:
-      'Has a 33% chance of curing any major status ailment after each turn.',
-    longDescription:
-      'After each turn, this Pokémon has a 33% of being cured of any major status ailment.',
+    shortDescription: 'Has a 33% chance of curing any major status ailment after each turn.',
+    longDescription: 'After each turn, this Pokémon has a 33% of being cured of any major status ailment.',
   },
   {
     name: 'guts',
@@ -409,36 +376,29 @@ export const abilities: Seed_Ability[] = [
   },
   {
     name: 'liquid-ooze',
-    shortDescription:
-      'Gegnern die absorbierende Attacken einsetzen, wird Schaden in der Höhe zugefügt, die die Attacke geheilt hätte.',
+    shortDescription: 'Gegnern die absorbierende Attacken einsetzen, wird Schaden in der Höhe zugefügt, die die Attacke geheilt hätte.',
     longDescription:
       'Wenn ein Pokémon mit dieser Fähigkeit von einer absorbierenden Attacke wie absorb getroffen wird, erleidet der Gegner so viele hp Schaden wie ihn die Attacke geheilt hätte. dream eater ist davon nicht betroffen.',
   },
   {
     name: 'overgrow',
-    shortDescription:
-      'Erhöht den Schaden von grass Attacken um 50% wenn nur noch 1/3 der maximalen hp oder weniger übrig sind.',
+    shortDescription: 'Erhöht den Schaden von grass Attacken um 50% wenn nur noch 1/3 der maximalen hp oder weniger übrig sind.',
     longDescription:
       'Wenn ein Pokémon mit dieser Fähigkeit nur noch 1/3 seiner maximalen hp oder weniger hat, werden all seine grass Attacken verstärkt, so dass sie 1,5x  so viel regular damage anrichten wie sonst.',
   },
   {
     name: 'blaze',
-    shortDescription:
-      'Strengthens fire moves to inflict 1.5x  damage at 1/3 max HP or less.',
-    longDescription:
-      'When this Pokémon has 1/3 or less of its HP remaining, its fire-type moves inflict 1.5x  as much regular damage.',
+    shortDescription: 'Strengthens fire moves to inflict 1.5x  damage at 1/3 max HP or less.',
+    longDescription: 'When this Pokémon has 1/3 or less of its HP remaining, its fire-type moves inflict 1.5x  as much regular damage.',
   },
   {
     name: 'torrent',
-    shortDescription:
-      'Strengthens water moves to inflict 1.5x  damage at 1/3 max HP or less.',
-    longDescription:
-      'When this Pokémon has 1/3 or less of its HP remaining, its water-type moves inflict 1.5x  as much regular damage.',
+    shortDescription: 'Strengthens water moves to inflict 1.5x  damage at 1/3 max HP or less.',
+    longDescription: 'When this Pokémon has 1/3 or less of its HP remaining, its water-type moves inflict 1.5x  as much regular damage.',
   },
   {
     name: 'swarm',
-    shortDescription:
-      'Strengthens bug moves to inflict 1.5x  damage at 1/3 max HP or less.',
+    shortDescription: 'Strengthens bug moves to inflict 1.5x  damage at 1/3 max HP or less.',
     longDescription:
       'When this Pokémon has 1/3 or less of its HP remaining, its bug-type moves inflict 1.5x  as much regular damage. Overworld: If the lead Pokémon has this ability, the wild encounter rate is increased.',
   },
@@ -450,15 +410,13 @@ export const abilities: Seed_Ability[] = [
   },
   {
     name: 'drought',
-    shortDescription:
-      'Summons strong sunlight that lasts indefinitely upon entering battle.',
+    shortDescription: 'Summons strong sunlight that lasts indefinitely upon entering battle.',
     longDescription:
       "The weather changes to strong sunlight when this Pokémon enters battle and does not end unless cancelled by another weather condition. If multiple Pokémon with this ability, drizzle, sand stream, or snow warning are sent out at the same time, the abilities will activate in order of Speed, respecting trick room.  Each ability's weather will cancel the previous weather, and only the weather summoned by the slowest of the Pokémon will stay.",
   },
   {
     name: 'arena-trap',
-    shortDescription:
-      'Prevents opponents from fleeing or switching out.  Eluded by flying-types and Pokémon in the air.',
+    shortDescription: 'Prevents opponents from fleeing or switching out.  Eluded by flying-types and Pokémon in the air.',
     longDescription:
       'While this Pokémon is in battle, opposing Pokémon cannot flee or switch out.  flying-type Pokémon and Pokémon in the air, e.g. due to levitate or magnet rise, are unaffected. Pokémon with run away can still flee.  Pokémon can still switch out with the use of a move or item. Overworld: If the lead Pokémon has this ability, the wild encounter rate is doubled.',
   },
@@ -483,13 +441,11 @@ export const abilities: Seed_Ability[] = [
   {
     name: 'shell-armor',
     shortDescription: 'Protects against critical hits.',
-    longDescription:
-      'Moves cannot score critical hits against this Pokémon. This ability functions identically to battle armor.',
+    longDescription: 'Moves cannot score critical hits against this Pokémon. This ability functions identically to battle armor.',
   },
   {
     name: 'air-lock',
-    shortDescription:
-      'Negates all effects of weather, but does not prevent the weather itself.',
+    shortDescription: 'Negates all effects of weather, but does not prevent the weather itself.',
     longDescription:
       'While this Pokémon is in battle, weather can still be in play, but will not have any of its effects. This ability functions identically to cloud nine.',
   },

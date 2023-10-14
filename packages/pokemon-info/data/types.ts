@@ -1,5 +1,6 @@
 import { DamageClass, IType, TypeNames } from 'contract';
-export const typesArray: IType[] = [
+
+export const TYPES: IType[] = [
   {
     name: TypeNames.normal,
     damageClass: DamageClass.physical,

@@ -1,6 +1,6 @@
 import { Tier } from 'contract';
 import { Seed_Pokemon, idToIconUrl } from '../../helpers/pokemon';
-import { pokemonTiers } from '../tiers';
+import { POKEMON_TIERS } from '../tiers';
 
 const attack: Seed_Pokemon = {
   abilities: ['pressure'],
@@ -20,7 +20,7 @@ const attack: Seed_Pokemon = {
   baseSpattack: 180,
   baseSpdefense: 20,
   baseSpeed: 150,
-  tier: Tier[pokemonTiers['deoxys-attack']],
+  tier: Tier[POKEMON_TIERS['deoxys-attack']],
 };
 
 const defense: Seed_Pokemon = {
@@ -41,7 +41,7 @@ const defense: Seed_Pokemon = {
   baseSpattack: 70,
   baseSpdefense: 160,
   baseSpeed: 90,
-  tier: Tier[pokemonTiers['deoxys-defense']],
+  tier: Tier[POKEMON_TIERS['deoxys-defense']],
 };
 
 const speed: Seed_Pokemon = {
@@ -61,7 +61,7 @@ const speed: Seed_Pokemon = {
   baseSpattack: 95,
   baseSpdefense: 90,
   baseSpeed: 180,
-  tier: Tier[pokemonTiers['deoxys-speed']],
+  tier: Tier[POKEMON_TIERS['deoxys-speed']],
 };
 
 export const DEOXYS_VARIANTS = {
