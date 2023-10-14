@@ -195,7 +195,7 @@ export const TYPES: IType[] = [
   },
 ];
 // Sorted for hidden-power calculation
-export const sortedTypesNames: TypeNames[] = [
+export const SORTED_TYPES_NAMES: TypeNames[] = [
   TypeNames.fighting,
   TypeNames.flying,
   TypeNames.poison,

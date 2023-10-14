@@ -5,6 +5,7 @@
   "keywords": [],
   "author": "MartinC",
   "license": "ISC",
+  "main": "index.ts",
   "scripts": {
     "lint": "tsc --noEmit --skipLibCheck"
   },

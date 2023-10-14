@@ -1,8 +1,8 @@
 interface Seed_Item {
   name: string;
   effect: string;
-  flingEffect?: string;
-  flingPower?: number;
+  flingEffect?: string | null;
+  flingPower?: number | null;
   sprite: string;
 }
 

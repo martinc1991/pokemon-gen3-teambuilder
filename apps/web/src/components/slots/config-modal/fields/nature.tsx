@@ -1,5 +1,5 @@
 import type { INature } from 'contract';
-import { naturesArray } from 'contract';
+import { NATURES } from 'pokemon-info';
 import type { ComboboxItem } from 'ui';
 import { FormField } from 'ui';
 import { useTeamStore } from '../../../../state/team';
@@ -13,7 +13,7 @@ interface NatureFieldProps {
 export default function NatureField({ slot }: NatureFieldProps): JSX.Element {
   const setSlotFieldValue = useTeamStore((state) => state.setSlotFieldValue);
 
-  const naturesData: ComboboxItem<INature>[] = naturesArray.map((nature) => {
+  const naturesData: ComboboxItem<INature>[] = NATURES.map((nature) => {
     return { id: nature.name, label: getNatureSelectLabel(nature), payload: nature };
   });
 

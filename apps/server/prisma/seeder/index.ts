@@ -1,12 +1,14 @@
-import { ABILITIES } from 'pokemon-info/data/abilities';
-import { DEOXYS_VARIATIONS } from 'pokemon-info/data/deoxys';
-import { ITEMS } from 'pokemon-info/data/items';
-import { LEARNSETS } from 'pokemon-info/data/learnsets';
-import { getMovesPromises } from 'pokemon-info/data/moves';
-import { NATURES } from 'pokemon-info/data/natures';
-import { getPokemonPromises } from 'pokemon-info/data/pokemon';
-import { TYPES } from 'pokemon-info/data/types';
-import { getMoveName } from 'pokemon-info/helpers/pokemon';
+import {
+  ABILITIES,
+  DEOXYS_VARIATIONS,
+  ITEMS,
+  LEARNSETS,
+  NATURES,
+  TYPES,
+  getMoveName,
+  getMovesPromises,
+  getPokemonPromises,
+} from 'pokemon-info';
 import { prismaSeederClient } from './seederClient';
 
 const CYAN = '\x1b[36m';

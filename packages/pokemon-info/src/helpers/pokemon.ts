@@ -1,7 +1,6 @@
 import { DamageClass, Gender, IBaseStats, Move, Pokemon as PokemonModel, SEREBII_URL, TypeNames } from 'contract';
 import { Move as PokeApiMove, Pokemon, PokemonSpecies, PokemonType } from 'pokenode-ts';
-import { ABILITIES_OVERRIDES } from '../data/overrides/abilities';
-import { STATS_OVERRIDES } from '../data/overrides/stats';
+import { ABILITIES_OVERRIDES, STATS_OVERRIDES } from '../data/overrides';
 import { UNIQUE_MOVES_MAP } from '../data/uniqueMovesMap';
 
 export type PokemonMergedInfo = PokemonSpecies & Pokemon;
@@ -31,6 +30,7 @@ export function getGenerationNumber(gen: string): number {
     case 'vii':
     case 'viii':
     case 'ix':
+    default:
       return 9;
   }
 }
@@ -60,7 +60,7 @@ export function getGenThreeTypes(pokemon: Pokemon): [TypeNames, TypeNames] {
 }
 
 export function getGenThreeSprite(pokemon: Pokemon): string {
-  return pokemon.sprites.versions['generation-iii'].emerald.front_default;
+  return pokemon.sprites.versions['generation-iii'].emerald.front_default || 'no-sprite';
 }
 
 export function getPossibleGenders(rate: number): Gender[] {
@@ -118,7 +118,7 @@ export function idToIconUrl(id: number, fetchStatic = false): string {
 }
 
 export function getMoveDamageClass({ type, damage_class }: PokeApiMove): DamageClass {
-  if (damage_class.name === 'status') return damage_class.name;
+  if (damage_class?.name && damage_class.name === 'status') return damage_class.name;
 
   return getDamageClassFromType(type.name as TypeNames);
 }
