@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "composite": true,
+    "declaration": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "incremental": true,
+    "module": "NodeNext",
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": false,
+    "removeComments": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strictBindCallApply": true,
+    "strictNullChecks": false,
+    "target": "ES2021"
+  },
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
+  }
+}

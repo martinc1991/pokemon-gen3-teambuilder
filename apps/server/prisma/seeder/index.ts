@@ -1,12 +1,12 @@
 import { naturesArray, typesArray } from 'contract';
-import { abilities } from './data/abilities';
-import { deoxysVariations } from './data/deoxys';
-import { items } from './data/items';
-import { learnsets } from './data/learnsets';
-import { getMovesPromises } from './data/moves';
-import { getPokemonPromises } from './data/pokemon';
-import { getMoveName } from './helpers/pokemon';
-import { prismaSeederClient } from './helpers/seederClient';
+import { abilities } from 'pokemon-info/data/abilities';
+import { deoxysVariations } from 'pokemon-info/data/deoxys';
+import { items } from 'pokemon-info/data/items';
+import { learnsets } from 'pokemon-info/data/learnsets';
+import { getMovesPromises } from 'pokemon-info/data/moves';
+import { getPokemonPromises } from 'pokemon-info/data/pokemon';
+import { getMoveName } from 'pokemon-info/helpers/pokemon';
+import { prismaSeederClient } from './seederClient';
 
 const CYAN = '\x1b[36m';
 const RESET = '\x1b[0m';

@@ -1,4 +1,4 @@
-import { Tier } from '@prisma/client';
+import { Tier } from 'contract';
 import { Seed_Pokemon, idToIconUrl } from '../../helpers/pokemon';
 import { pokemonTiers } from '../tiers';
 
@@ -49,8 +49,7 @@ const speed: Seed_Pokemon = {
   genders: ['genderless'],
   height: 17,
   weight: 608,
-  sprite:
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/386-speed.png',
+  sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/emerald/386-speed.png',
   icon: idToIconUrl(386),
   typeOne: 'psychic',
   typeTwo: null,
