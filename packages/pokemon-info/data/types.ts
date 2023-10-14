@@ -1,6 +1,4 @@
-import { DamageClass, TypeNames } from '@prisma/client';
-import { IType } from '../../types';
-
+import { DamageClass, IType, TypeNames } from 'contract';
 export const typesArray: IType[] = [
   {
     name: TypeNames.normal,

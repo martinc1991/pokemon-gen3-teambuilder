@@ -1,5 +1,4 @@
-import { NatureNames, StatName } from '@prisma/client';
-import { INature } from '../../types';
+import { INature, NatureNames, StatName } from 'contract';
 
 // There are 25 natures, 5 neutral (https://bulbapedia.bulbagarden.net/wiki/Nature)
 export const naturesArray: INature[] = [

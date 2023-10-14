@@ -1,10 +1,11 @@
-import { naturesArray, typesArray } from 'contract';
 import { abilities } from 'pokemon-info/data/abilities';
 import { deoxysVariations } from 'pokemon-info/data/deoxys';
 import { items } from 'pokemon-info/data/items';
 import { learnsets } from 'pokemon-info/data/learnsets';
 import { getMovesPromises } from 'pokemon-info/data/moves';
+import { naturesArray } from 'pokemon-info/data/natures';
 import { getPokemonPromises } from 'pokemon-info/data/pokemon';
+import { typesArray } from 'pokemon-info/data/types';
 import { getMoveName } from 'pokemon-info/helpers/pokemon';
 import { prismaSeederClient } from './seederClient';
 

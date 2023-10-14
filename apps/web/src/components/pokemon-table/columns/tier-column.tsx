@@ -1,5 +1,6 @@
 import { type ColumnDef } from '@tanstack/react-table';
-import { sortedTiers, type IPokemonGetAllResponseElement } from 'contract';
+import { type IPokemonGetAllResponseElement } from 'contract';
+import { sortedTiers } from 'pokemon-info/data/tiers';
 import { Typography } from 'ui';
 import { getTierText } from '../../../utils/pokemon';
 import { columnHelper } from './get-column-helper';
