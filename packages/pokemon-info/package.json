@@ -5,13 +5,18 @@
   "keywords": [],
   "author": "MartinC",
   "license": "ISC",
-  "main": "index.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
+    "build": "tsc",
+    "dev": " tsc --watch",
     "lint": "tsc --noEmit --skipLibCheck"
   },
   "devDependencies": {
-    "contract": "workspace:*",
-    "pokenode-ts": "^1.20.0",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "pokenode-ts": "^1.20.0"
+  },
+  "dependencies": {
+    "contract": "workspace:*"
   }
 }
