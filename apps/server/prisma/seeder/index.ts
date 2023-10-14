@@ -1,12 +1,15 @@
-import { naturesArray, typesArray } from 'contract';
-import { abilities } from './data/abilities';
-import { deoxysVariations } from './data/deoxys';
-import { items } from './data/items';
-import { learnsets } from './data/learnsets';
-import { getMovesPromises } from './data/moves';
-import { getPokemonPromises } from './data/pokemon';
-import { getMoveName } from './helpers/pokemon';
-import { prismaSeederClient } from './helpers/seederClient';
+import {
+  ABILITIES,
+  DEOXYS_VARIATIONS,
+  ITEMS,
+  LEARNSETS,
+  NATURES,
+  TYPES,
+  getMoveName,
+  getMovesPromises,
+  getPokemonPromises,
+} from 'pokemon-info';
+import { prismaSeederClient } from './seederClient';
 
 const CYAN = '\x1b[36m';
 const RESET = '\x1b[0m';
@@ -24,7 +27,7 @@ export async function seeder() {
 
       // Seed types
       console.log('Upserting types');
-      typesArray.forEach(({ name, ...type }) => {
+      TYPES.forEach(({ name, ...type }) => {
         client.type.upsert({
           where: {
             name,
@@ -37,7 +40,7 @@ export async function seeder() {
 
       // Seed natures
       console.log('Upserting natures');
-      naturesArray.forEach(({ name, ...nature }) => {
+      NATURES.forEach(({ name, ...nature }) => {
         client.nature.upsert({
           where: {
             name,
@@ -50,7 +53,7 @@ export async function seeder() {
 
       // Seed items
       console.log('Upserting items');
-      items.forEach(({ name, ...item }) => {
+      ITEMS.forEach(({ name, ...item }) => {
         client.item.upsert({
           where: {
             name,
@@ -64,11 +67,11 @@ export async function seeder() {
       // Seed abilities
       console.log('Upserting abilities');
 
-      const abilitiesNames: string[] = abilities.map((ability) => {
+      const abilitiesNames: string[] = ABILITIES.map((ability) => {
         return ability.name;
       });
 
-      abilities.forEach(({ name, ...ability }) => {
+      ABILITIES.forEach(({ name, ...ability }) => {
         client.ability.upsert({
           where: {
             name,
@@ -81,7 +84,7 @@ export async function seeder() {
 
       const pokemons = await pokemonPromises;
       const moves = await movesPromises;
-      const allPokemon = pokemons.concat(deoxysVariations);
+      const allPokemon = pokemons.concat(DEOXYS_VARIATIONS);
 
       // Seed moves
       console.log('Creating moves');
@@ -112,7 +115,7 @@ export async function seeder() {
                 .map((name) => ({ name })),
             },
             learnset: {
-              connect: learnsets[name].map((moveName) => {
+              connect: LEARNSETS[name].map((moveName) => {
                 return { name: getMoveName(moveName) };
               }),
             },
@@ -128,7 +131,7 @@ export async function seeder() {
                 .map((name) => ({ name })),
             },
             learnset: {
-              connect: learnsets[name].map((moveName) => {
+              connect: LEARNSETS[name].map((moveName) => {
                 return { name: getMoveName(moveName) };
               }),
             },

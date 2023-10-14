@@ -1,7 +1,6 @@
-import { DamageClass, TypeNames } from '@prisma/client';
-import { IType } from '../../types';
+import { DamageClass, IType, TypeNames } from 'contract';
 
-export const typesArray: IType[] = [
+export const TYPES: IType[] = [
   {
     name: TypeNames.normal,
     damageClass: DamageClass.physical,
@@ -196,7 +195,7 @@ export const typesArray: IType[] = [
   },
 ];
 // Sorted for hidden-power calculation
-export const sortedTypesNames: TypeNames[] = [
+export const SORTED_TYPES_NAMES: TypeNames[] = [
   TypeNames.fighting,
   TypeNames.flying,
   TypeNames.poison,

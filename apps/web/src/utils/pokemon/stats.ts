@@ -1,5 +1,5 @@
 import type { CompleteNature, EvFieldName, IBaseStats, IvFieldName, StatName, TypeNames } from 'contract';
-import { sortedTypesNames } from 'contract';
+import { SORTED_TYPES_NAMES } from 'pokemon-info';
 import { getValues } from '../common';
 
 export function getShortStatName(statName: keyof IBaseStats | StatName): string {
@@ -88,5 +88,5 @@ export function calculateHiddenPowerType({
 
   const num = Math.floor(((HP_NUM + 2 * ATTACK_NUM + 4 * DEFENSE_NUM + 8 * SPEED_NUM + 16 * SPATTACK_NUM + 32 * SPDEFENSE_NUM) * 15) / 63);
 
-  return sortedTypesNames[num];
+  return SORTED_TYPES_NAMES[num];
 }

@@ -1,5 +1,5 @@
 import { seeder } from './seeder';
-import { prismaSeederClient } from './seeder/helpers/seederClient';
+import { prismaSeederClient } from './seeder/seederClient';
 
 const CYAN = '\x1b[36m';
 const RESET = '\x1b[0m';

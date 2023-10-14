@@ -1,5 +1,4 @@
-import { LAST_POKEMON_DEX_NUMBER } from '@config/app';
-import { Tier } from '@prisma/client';
+import { LAST_POKEMON_DEX_NUMBER, Tier } from 'contract';
 import { Pokemon, PokemonClient, PokemonSpecies } from 'pokenode-ts';
 import {
   PokemonMergedInfo,
@@ -11,27 +10,19 @@ import {
   getPossibleGenders,
   idToIconUrl,
 } from '../helpers/pokemon';
-import { pokemonTiers } from './tiers';
+import { POKEMON_TIERS } from './tiers';
 
-const pokemonIds = Array.from(
-  { length: LAST_POKEMON_DEX_NUMBER },
-  (_, index) => index + 1,
-);
+const pokemonIds = Array.from({ length: LAST_POKEMON_DEX_NUMBER }, (_, index) => index + 1);
 
 const pokemonApi = new PokemonClient();
 
 export async function getPokemonPromises(): Promise<Seed_Pokemon[]> {
   const merged: PokemonMergedInfo[] = [];
 
-  const promises = pokemonIds.map<Promise<[Pokemon, PokemonSpecies]>>(
-    async (id) => {
-      const [pokemon, pokemonSpecies] = await Promise.all([
-        pokemonApi.getPokemonById(id),
-        pokemonApi.getPokemonSpeciesById(id),
-      ]);
-      return [pokemon, pokemonSpecies];
-    },
-  );
+  const promises = pokemonIds.map<Promise<[Pokemon, PokemonSpecies]>>(async (id) => {
+    const [pokemon, pokemonSpecies] = await Promise.all([pokemonApi.getPokemonById(id), pokemonApi.getPokemonSpeciesById(id)]);
+    return [pokemon, pokemonSpecies];
+  });
 
   const results = await Promise.all(promises);
 
@@ -44,14 +35,7 @@ export async function getPokemonPromises(): Promise<Seed_Pokemon[]> {
     const [typeOne, typeTwo] = getGenThreeTypes(pkmn);
 
     const abilities = getPokemonAbilities(pkmn);
-    const {
-      baseHp,
-      baseAttack,
-      baseDefense,
-      baseSpattack,
-      baseSpdefense,
-      baseSpeed,
-    } = getPokemonBaseStats(pkmn);
+    const { baseHp, baseAttack, baseDefense, baseSpattack, baseSpdefense, baseSpeed } = getPokemonBaseStats(pkmn);
 
     return {
       name: pkmn.name,
@@ -70,7 +54,7 @@ export async function getPokemonPromises(): Promise<Seed_Pokemon[]> {
       baseSpattack,
       baseSpdefense,
       baseSpeed,
-      tier: Tier[pokemonTiers[pkmn.name]],
+      tier: Tier[POKEMON_TIERS[pkmn.name]],
     };
   });
 }

@@ -1,26 +1,11 @@
-import { SEREBII_URL } from '@config/app';
-import {
-  DamageClass,
-  Gender,
-  Move,
-  Pokemon as PokemonModel,
-  TypeNames,
-} from '@prisma/client';
-import { IBaseStats } from 'contract';
-import {
-  Move as PokeApiMove,
-  Pokemon,
-  PokemonSpecies,
-  PokemonType,
-} from 'pokenode-ts';
-import { overrideAbilitiesData } from '../data/overrides/abilities';
-import { overrideStatsData } from '../data/overrides/stats';
-import { uniqueMovesMap } from '../data/uniqueMovesMap';
+import { DamageClass, Gender, IBaseStats, Move, Pokemon as PokemonModel, SEREBII_URL, TypeNames } from 'contract';
+import { Move as PokeApiMove, Pokemon, PokemonSpecies, PokemonType } from 'pokenode-ts';
+import { ABILITIES_OVERRIDES, STATS_OVERRIDES } from '../data/overrides';
+import { UNIQUE_MOVES_MAP } from '../data/uniqueMovesMap';
 
 export type PokemonMergedInfo = PokemonSpecies & Pokemon;
 
-export interface Seed_Pokemon
-  extends Omit<PokemonModel, 'id' | 'typeOneName' | 'typeTwoName'> {
+export interface Seed_Pokemon extends Omit<PokemonModel, 'id' | 'typeOneName' | 'typeTwoName'> {
   typeOne: TypeNames;
   typeTwo: TypeNames;
   abilities: string[];
@@ -45,6 +30,7 @@ export function getGenerationNumber(gen: string): number {
     case 'vii':
     case 'viii':
     case 'ix':
+    default:
       return 9;
   }
 }
@@ -74,7 +60,7 @@ export function getGenThreeTypes(pokemon: Pokemon): [TypeNames, TypeNames] {
 }
 
 export function getGenThreeSprite(pokemon: Pokemon): string {
-  return pokemon.sprites.versions['generation-iii'].emerald.front_default;
+  return pokemon.sprites.versions['generation-iii'].emerald.front_default || 'no-sprite';
 }
 
 export function getPossibleGenders(rate: number): Gender[] {
@@ -91,22 +77,12 @@ export function getPossibleGenders(rate: number): Gender[] {
 }
 
 // INFO: I know for a fact (according to poke API) that "stats" is an array with 6 objects with the stats properly ordered (hp, atk, def, spatk, spdef, spe)
-const objProperties = [
-  'baseHp',
-  'baseAttack',
-  'baseDefense',
-  'baseSpattack',
-  'baseSpdefense',
-  'baseSpeed',
-];
+const objProperties = ['baseHp', 'baseAttack', 'baseDefense', 'baseSpattack', 'baseSpdefense', 'baseSpeed'];
 
-export function getPokemonBaseStats({
-  stats,
-  name,
-}: PokemonMergedInfo): IBaseStats {
+export function getPokemonBaseStats({ stats, name }: PokemonMergedInfo): IBaseStats {
   // INFO: override stats if needed
-  if (overrideStatsData[name]) {
-    return overrideStatsData[name];
+  if (STATS_OVERRIDES[name]) {
+    return STATS_OVERRIDES[name];
   }
 
   return stats.reduce(
@@ -121,17 +97,14 @@ export function getPokemonBaseStats({
       baseSpattack: 0,
       baseSpdefense: 0,
       baseSpeed: 0,
-    },
+    }
   );
 }
 
-export function getPokemonAbilities({
-  name,
-  abilities,
-}: PokemonMergedInfo): string[] {
+export function getPokemonAbilities({ name, abilities }: PokemonMergedInfo): string[] {
   // INFO: override abilities if needed
-  if (overrideAbilitiesData[name]) {
-    return overrideAbilitiesData[name];
+  if (ABILITIES_OVERRIDES[name]) {
+    return ABILITIES_OVERRIDES[name];
   }
   return abilities.map((ab) => ab.ability.name);
 }
@@ -144,11 +117,8 @@ export function idToIconUrl(id: number, fetchStatic = false): string {
   return `${SEREBII_URL}/pokedex-rs/icon/${_id}.gif`; // animated gifs (only until arceus (493) )
 }
 
-export function getMoveDamageClass({
-  type,
-  damage_class,
-}: PokeApiMove): DamageClass {
-  if (damage_class.name === 'status') return damage_class.name;
+export function getMoveDamageClass({ type, damage_class }: PokeApiMove): DamageClass {
+  if (damage_class?.name && damage_class.name === 'status') return damage_class.name;
 
   return getDamageClassFromType(type.name as TypeNames);
 }
@@ -177,5 +147,5 @@ function removeHyphen(str: string): string {
 // Removes '-' and then uses a move name map for consistency
 export function getMoveName(moveName: string): string {
   const name = removeHyphen(moveName);
-  return uniqueMovesMap[name];
+  return UNIQUE_MOVES_MAP[name];
 }

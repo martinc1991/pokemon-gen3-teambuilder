@@ -1,6 +1,6 @@
 import { IBaseStats } from 'contract';
 
-export const overrideStatsData: { [k: string]: IBaseStats } = {
+export const STATS_OVERRIDES: { [k: string]: IBaseStats } = {
   butterfree: {
     baseHp: 60,
     baseAttack: 45,

@@ -1,4 +1,4 @@
-export const overrideTypesData = {
+export const TYPES_OVERRIDES = {
   clefairy: ['normal'],
   clefable: ['normal'],
   jigglypuff: ['normal'],

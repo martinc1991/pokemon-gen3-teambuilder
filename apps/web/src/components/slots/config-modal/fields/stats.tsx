@@ -1,5 +1,6 @@
 import type { CompleteNature, EvFieldName, IvFieldName, StatName } from 'contract';
-import { MAX_INDIVIDUAL_EV, MAX_INDIVIDUAL_IV, MAX_POSSIBLE_EVS, naturesArray } from 'contract';
+import { MAX_INDIVIDUAL_EV, MAX_INDIVIDUAL_IV, MAX_POSSIBLE_EVS } from 'contract';
+import { NATURES } from 'pokemon-info';
 import type { ChangeEvent } from 'react';
 import { useEffect, useState } from 'react';
 import { Input, Progress, Slider, Typography } from 'ui';
@@ -24,7 +25,7 @@ export default function StatsFields({ slot }: StatsFieldsProps): JSX.Element {
     setSlotFieldValue(slot, stat, value);
   }
 
-  const nature = naturesArray.find((nat) => nat.name === slot.natureName) || { increased: null, decreased: null }; // DEFAULT: docile nature
+  const nature = NATURES.find((nat) => nat.name === slot.natureName) || { increased: null, decreased: null }; // DEFAULT: docile nature
 
   return (
     <div className='flex flex-col w-full gap-1'>

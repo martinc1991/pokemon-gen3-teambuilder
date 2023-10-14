@@ -1,4 +1,4 @@
-export const uniqueMovesMap = {
+export const UNIQUE_MOVES_MAP = {
   absorb: 'absorb',
   acidarmor: 'acid-armor',
   acid: 'acid',

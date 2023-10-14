@@ -6,3 +6,4 @@ export * from './contracts/pokemon-contract';
 export * from './contracts/teams-contract';
 export * from './contracts/types-contract';
 export * from './types';
+export * from '@prisma/client';

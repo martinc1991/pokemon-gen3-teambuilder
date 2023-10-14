@@ -1,6 +1,8 @@
 import { Tier } from 'contract';
 
-export const pokemonTiers: { [k: string]: Tier } = {
+export const SORTED_TIERS: Tier[] = ['uber', 'ou', 'uubl', 'uu', 'nu', 'publ', 'pu', 'nfe', 'lc'];
+
+export const POKEMON_TIERS: { [k: string]: Tier } = {
   bulbasaur: 'lc',
   ivysaur: 'nfe',
   venusaur: 'uubl',
