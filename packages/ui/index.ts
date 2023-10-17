@@ -19,5 +19,6 @@ export * from './src/components/ui/slider';
 export * from './src/components/ui/substitute-placeholder';
 export * from './src/components/ui/table';
 export * from './src/components/ui/tabs';
+export * from './src/components/ui/toast';
 export * from './src/components/ui/type-badges';
 export * as Typography from './src/components/ui/typography';
