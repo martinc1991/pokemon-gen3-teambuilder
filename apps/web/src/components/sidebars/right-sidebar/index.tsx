@@ -6,7 +6,7 @@ import { useTeamStore } from '../../../state/team';
 import { BaseSlot, type FilledSlot } from '../../../state/team/helpers';
 import { formatPokemonName } from '../../../utils/pokemon';
 import BasicSidebar from '../basic-sidebar';
-import CopyButton from './copy-button';
+import CopyButton from '../../copy-button';
 
 export default function RightSidebar(): JSX.Element {
   const [slots, removeSlot] = useTeamStore((state) => [state.slots, state.removeSlot]);

@@ -4,11 +4,12 @@ import { CheckIcon, CopyIcon } from '@radix-ui/react-icons';
 import { useState } from 'react';
 import { Button, useToast } from 'ui';
 import { useCopyToClipboard, useInterval } from 'usehooks-ts';
-import { useTeamStore } from '../../../state/team';
-import { parseTeam } from '../../../utils/pokemon/parse-team';
+import { useTeamStore } from '../../state/team';
+import { parseTeam } from '../../utils/pokemon/parse-team';
+import CopyButtonToastContent from './toast-content';
 
 export default function CopyButton(): JSX.Element {
-  const [slots] = useTeamStore((state) => [state.slots, state.removeSlot]);
+  const [slots] = useTeamStore((state) => [state.slots]);
   const [, copy] = useCopyToClipboard();
   const [copied, setCopied] = useState(false);
   const { toast } = useToast();
@@ -24,10 +25,9 @@ export default function CopyButton(): JSX.Element {
     const txt = parseTeam(slots);
     await copy(txt);
 
-    toast({
-      title: 'Copied to clipboard',
-      variant: 'success',
-    });
+    if (!copied) {
+      toast({ title: 'Copied to clipboard', description: <CopyButtonToastContent /> });
+    }
     setCopied(true);
   }
 
