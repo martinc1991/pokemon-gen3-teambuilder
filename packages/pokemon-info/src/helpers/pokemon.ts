@@ -106,7 +106,7 @@ export function getPokemonAbilities({ name, abilities }: PokemonMergedInfo): str
   if (ABILITIES_OVERRIDES[name]) {
     return ABILITIES_OVERRIDES[name];
   }
-  return abilities.map((ab) => ab.ability.name);
+  return abilities.filter((ab) => !Boolean(ab.is_hidden)).map((ab) => ab.ability.name);
 }
 
 export function idToIconUrl(id: number, fetchStatic = false): string {
