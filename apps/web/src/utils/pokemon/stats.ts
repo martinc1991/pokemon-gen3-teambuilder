@@ -19,6 +19,7 @@ export function getShortStatName(statName: keyof IBaseStats | StatName): string 
     case 'baseSpdefense':
     case 'spdefense':
       return 'SpD';
+    case 'baseSpeed':
     case 'speed':
       return 'Spe';
     default:
