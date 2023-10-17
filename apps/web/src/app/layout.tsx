@@ -1,9 +1,12 @@
+'use client';
+
 import type { Metadata } from 'next';
-import LeftSidebar from '../components/sidebars/left-siderbar';
-import RightSidebar from '../components/sidebars/right-sidebar';
 import 'tailwind-config/global.css';
+import { Toaster } from 'ui';
 // include styles from the ui package
 import 'ui/style';
+import LeftSidebar from '../components/sidebars/left-siderbar';
+import RightSidebar from '../components/sidebars/right-sidebar';
 
 export const metadata: Metadata = {
   title: 'Gen 3 Team Builder',
@@ -17,6 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }):
         <LeftSidebar />
         <main className='flex justify-center flex-1'>{children}</main>
         <RightSidebar />
+        <Toaster />
       </body>
     </html>
   );
