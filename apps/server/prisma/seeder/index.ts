@@ -27,41 +27,53 @@ export async function seeder() {
 
       // Seed types
       console.log('Upserting types');
+      const TYPES__PROMISES = [];
+
       TYPES.forEach(({ name, ...type }) => {
-        client.type.upsert({
+        const p = client.type.upsert({
           where: {
             name,
           },
           create: { ...type, name },
           update: type,
         });
+        TYPES__PROMISES.push(p);
       });
+
+      await Promise.all(TYPES__PROMISES);
       console.log('Upserting types finished');
 
       // Seed natures
       console.log('Upserting natures');
+      const NATURES__PROMISES = [];
       NATURES.forEach(({ name, ...nature }) => {
-        client.nature.upsert({
+        const p = client.nature.upsert({
           where: {
             name,
           },
           create: { ...nature, name },
           update: nature,
         });
+
+        NATURES__PROMISES.push(p);
       });
+      await Promise.all(NATURES__PROMISES);
       console.log('Upserting natures finished');
 
       // Seed items
       console.log('Upserting items');
+      const ITEMS__PROMISES = [];
       ITEMS.forEach(({ name, ...item }) => {
-        client.item.upsert({
+        const p = client.item.upsert({
           where: {
             name,
           },
           create: { ...item, name },
           update: item,
         });
+        ITEMS__PROMISES.push(p);
       });
+      await Promise.all(ITEMS__PROMISES);
       console.log('Upserting items finished');
 
       // Seed abilities
@@ -70,16 +82,19 @@ export async function seeder() {
       const abilitiesNames: string[] = ABILITIES.map((ability) => {
         return ability.name;
       });
+      const ABILITIES__PROMISES = [];
 
       ABILITIES.forEach(({ name, ...ability }) => {
-        client.ability.upsert({
+        const p = client.ability.upsert({
           where: {
             name,
           },
           create: { ...ability, name },
           update: ability,
         });
+        ABILITIES__PROMISES.push(p);
       });
+      await Promise.all(ABILITIES__PROMISES);
       console.log('Upserting abilities finished');
 
       const pokemons = await pokemonPromises;
@@ -87,23 +102,27 @@ export async function seeder() {
       const allPokemon = pokemons.concat(DEOXYS_VARIATIONS);
 
       // Seed moves
-      console.log('Creating moves');
-      moves.forEach(async ({ name, ...move }) => {
-        await prismaSeederClient.move.upsert({
+      console.log('Upserting moves');
+      const MOVES__PROMISES = [];
+      moves.forEach(({ name, ...move }) => {
+        const p = prismaSeederClient.move.upsert({
           where: {
             name,
           },
           create: { ...move, name },
           update: { ...move },
         });
+        MOVES__PROMISES.push(p);
       });
+      await Promise.all(MOVES__PROMISES);
 
-      console.log('Creating moves finished');
+      console.log('Upserting moves finished');
 
       // Seed pokemon
       console.log('Upserting pokemons');
-      allPokemon.forEach(({ name, ...pkmn }) => {
-        client.pokemon.upsert({
+      const POKEMON__PROMISES = [];
+      allPokemon.forEach(async ({ name, ...pkmn }) => {
+        const p = client.pokemon.upsert({
           where: { name },
           update: {
             ...pkmn,
@@ -137,7 +156,11 @@ export async function seeder() {
             },
           },
         });
+
+        POKEMON__PROMISES.push(p);
       });
+
+      await Promise.all(POKEMON__PROMISES);
 
       console.log('Upserting pokemons finished');
     },
