@@ -1,16 +1,17 @@
 'use client';
 
 import { MAX_TEAM_MEMBERS } from 'contract';
-import { PokemonAvatar, Typography } from 'ui';
+import { PokemonAvatar, Separator, Typography } from 'ui';
 import { useTeamStore } from '../../../state/team';
 import { BaseSlot, type FilledSlot } from '../../../state/team/helpers';
 import { formatPokemonName } from '../../../utils/pokemon';
 import BasicSidebar from '../basic-sidebar';
+import CopyButton from './copy-button';
 
 export default function RightSidebar(): JSX.Element {
   const [slots, removeSlot] = useTeamStore((state) => [state.slots, state.removeSlot]);
 
-  function handleEmptySlot(slot: FilledSlot): void {
+  function handleRemoveSlot(slot: FilledSlot): void {
     removeSlot(slot);
   }
 
@@ -30,7 +31,7 @@ export default function RightSidebar(): JSX.Element {
             key={key}
             name={name}
             onClick={() => {
-              handleEmptySlot(slot);
+              handleRemoveSlot(slot);
             }}
           />
         );
@@ -41,6 +42,9 @@ export default function RightSidebar(): JSX.Element {
         const name = 'empty slot';
         return <PokemonAvatar iconUrl={iconUrl} key={key} name={name} />;
       })}
+
+      <Separator />
+      <CopyButton />
     </BasicSidebar>
   );
 }
