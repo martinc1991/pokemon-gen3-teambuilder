@@ -84,7 +84,7 @@ const DEOXYS_LEARSET = [
 
 const SMEARGLE_MOVESET = MOVES_NAMES; // INFO: smeargle can learn EVERY move
 
-export const learnsets: PokemonLearnSet = {
+export const LEARNSETS: PokemonLearnSet = {
   bulbasaur: [
     'attract',
     'body-slam',
