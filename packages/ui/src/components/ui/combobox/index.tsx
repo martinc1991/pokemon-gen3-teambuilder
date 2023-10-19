@@ -12,6 +12,7 @@ export function Combobox<T>({
   className = '',
   clearButtonClassName = '',
   cleareable = false,
+  clearDisabled = false,
   clearText,
   itemsClassName = '',
   onChange = () => {},
@@ -47,7 +48,7 @@ export function Combobox<T>({
       {cleareable && (
         <Button
           variant='link'
-          disabled={Boolean(selectedId === '')}
+          disabled={Boolean(selectedId === '') || clearDisabled}
           onClick={() => {
             onClear(props.data.find((i) => i.id === selectedId) as ComboboxItem<T>);
             setSelectedId('');
