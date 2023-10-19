@@ -49,9 +49,9 @@ export function PokemonTableRow({ row, start }: PokemonRowProps): JSX.Element {
 
 export function EmptyRow(): JSX.Element {
   return (
-    <TableRow>
-      <TableCell className='h-24 text-center' colSpan={TABLE_COLUMNS.length}>
-        No results.
+    <TableRow style={{ height: `${TABLE_ROW_HEIGHT}px` }}>
+      <TableCell className='text-center' colSpan={TABLE_COLUMNS.length}>
+        <Typography.Word>No results.</Typography.Word>
       </TableCell>
     </TableRow>
   );
