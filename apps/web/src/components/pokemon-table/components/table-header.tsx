@@ -7,13 +7,15 @@ import { TableHead, TableHeader, TableRow } from 'ui';
 import type { ColumnID } from '../columns/constants';
 import { columnsConfig } from '../columns/constants';
 
+export const TABLE_HEADER_HEIGHT = 40;
+
 interface PokemonTableHeaderProps {
   table: Table<IPokemonGetAllResponseElement>;
 }
 
 export function PokemonTableHeader({ table }: PokemonTableHeaderProps): JSX.Element {
   return (
-    <TableHeader>
+    <TableHeader style={{ height: TABLE_HEADER_HEIGHT }}>
       {table.getHeaderGroups().map((headerGroup) => (
         <PokemonHeaderRow headerGroup={headerGroup} key={headerGroup.id} />
       ))}

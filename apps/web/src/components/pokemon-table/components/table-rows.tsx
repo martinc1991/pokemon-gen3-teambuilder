@@ -6,13 +6,14 @@ import TABLE_COLUMNS from '../columns';
 import type { ColumnID } from '../columns/constants';
 import { columnsConfig } from '../columns/constants';
 
+export const TABLE_ROW_HEIGHT = 50;
+
 interface PokemonRowProps {
   row: Row<IPokemonGetAllResponseElement>;
-  size: number;
   start: number;
 }
 
-export function PokemonTableRow({ row, size, start }: PokemonRowProps): JSX.Element {
+export function PokemonTableRow({ row, start }: PokemonRowProps): JSX.Element {
   return (
     <TableRow
       data-state={row.getIsSelected() && 'selected'}
@@ -22,7 +23,7 @@ export function PokemonTableRow({ row, size, start }: PokemonRowProps): JSX.Elem
         position: 'absolute',
         top: 0,
         left: 0,
-        height: `${size}px`,
+        height: `${TABLE_ROW_HEIGHT}px`,
         transform: `translateY(${start}px)`,
         // Needed for virtualization
         width: '100%',
