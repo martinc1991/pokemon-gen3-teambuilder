@@ -1,23 +1,16 @@
-import type { IPokemon } from 'contract';
-
-export type ColumnID =
-  | keyof Omit<
-      IPokemon,
-      | 'typeOneName'
-      | 'typeTwoName'
-      | 'id'
-      | 'baseHp'
-      | 'baseAttack'
-      | 'baseDefense'
-      | 'baseSpattack'
-      | 'baseSpdefense'
-      | 'baseSpeed'
-      | 'sprite'
-    >
-  | 'types'
-  | 'stats'
-  | 'abilities'
-  | 'actions';
+export const enum ColumnID {
+  NATIONALPOKEDEXNUMBER = 'nationalPokedexNumber',
+  TIER = 'tier',
+  NAME = 'name',
+  ICON = 'icon',
+  TYPES = 'types',
+  STATS = 'stats',
+  ABILITIES = 'abilities',
+  GENDERS = 'genders',
+  HEIGHT = 'height',
+  WEIGHT = 'weight',
+  ACTIONS = 'actions',
+}
 
 interface PokemonTableColumnConfig {
   id: ColumnID;
@@ -30,57 +23,57 @@ type ColumnConfig = { [Property in ColumnID]: PokemonTableColumnConfig };
 
 export const columnsConfig: ColumnConfig = {
   nationalPokedexNumber: {
-    id: 'nationalPokedexNumber',
+    id: ColumnID.NATIONALPOKEDEXNUMBER,
     colFlexSize: 1,
     maxWidth: 40,
     minWidth: 40,
   },
   tier: {
-    id: 'tier',
+    id: ColumnID.TIER,
     colFlexSize: 1,
     maxWidth: 50,
     minWidth: 50,
   },
   name: {
-    id: 'name',
+    id: ColumnID.NAME,
     colFlexSize: 2,
   },
   icon: {
-    id: 'icon',
+    id: ColumnID.ICON,
     colFlexSize: 1,
     maxWidth: 50,
     minWidth: 50,
   },
   types: {
-    id: 'types',
+    id: ColumnID.TYPES,
     colFlexSize: 2,
   },
   stats: {
-    id: 'stats',
+    id: ColumnID.STATS,
     colFlexSize: 2,
     minWidth: 240,
   },
   abilities: {
-    id: 'abilities',
+    id: ColumnID.ABILITIES,
     colFlexSize: 2,
     minWidth: 160,
   },
   genders: {
-    id: 'genders',
+    id: ColumnID.GENDERS,
     colFlexSize: 1,
   },
   height: {
-    id: 'height',
+    id: ColumnID.HEIGHT,
     colFlexSize: 1,
     maxWidth: 80,
   },
   weight: {
-    id: 'weight',
+    id: ColumnID.WEIGHT,
     colFlexSize: 1,
     maxWidth: 80,
   },
   actions: {
-    id: 'actions',
+    id: ColumnID.ACTIONS,
     colFlexSize: 1,
     maxWidth: 35,
     minWidth: 35,

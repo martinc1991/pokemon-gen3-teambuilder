@@ -6,9 +6,8 @@ import TABLE_COLUMNS from '../columns';
 import { usePokemonTableMediaQueries } from './use-pokemon-table-media-queries';
 
 type Props = IPokemonGetAllResponse;
-type HookReturnType = Table<IPokemonGetAllResponseElement>;
 
-export function usePokemonTableConfig(data: Props): HookReturnType {
+export function usePokemonTableConfig(data: Props): Table<IPokemonGetAllResponseElement> {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});

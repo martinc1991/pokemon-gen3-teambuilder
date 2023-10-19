@@ -1,7 +1,7 @@
 'use client';
 
 import { type ColumnDef } from '@tanstack/react-table';
-import { type IPokemonGetAllResponseElement } from 'contract';
+import type { IPokemonGetAllResponseElement } from 'contract';
 import { TypeBadge } from 'ui';
 import { columnHelper } from './get-column-helper';
 
@@ -19,4 +19,5 @@ export const typesColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelpe
       </div>
     );
   },
+  filterFn: 'arrIncludesAll',
 });
