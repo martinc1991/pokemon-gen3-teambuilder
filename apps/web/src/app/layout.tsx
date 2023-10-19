@@ -18,7 +18,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }):
     <html className='bg-zinc-900' lang='en'>
       <body className='flex flex-row'>
         <LeftSidebar />
-        <main className='flex justify-center flex-1'>{children}</main>
+        <main className='flex justify-center flex-1'>
+          <div className='flex flex-col items-center flex-1 min-h-screen'>{children}</div>
+        </main>
         <RightSidebar />
         <Toaster />
       </body>
