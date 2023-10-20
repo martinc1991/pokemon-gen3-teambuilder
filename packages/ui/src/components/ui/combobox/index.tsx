@@ -94,8 +94,6 @@ function SelectedValue<T>(props: SelectedValueSelectedValueProps<T>) {
   })?.label;
 
   return (
-    <div className='py-1'>
-      {text ? <Word>{text}</Word> : props.placeholder ? <Muted>{props.placeholder}</Muted> : <Muted>Select...</Muted>}
-    </div>
+    <div className='py-1'>{text ? <Word>{text}</Word> : <Muted className='font-normal'>{props.placeholder || 'Select...'}</Muted>}</div>
   );
 }
