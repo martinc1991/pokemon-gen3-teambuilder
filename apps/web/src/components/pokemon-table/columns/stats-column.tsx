@@ -4,6 +4,7 @@ import type { ColumnDef, Row } from '@tanstack/react-table';
 import type { IPokemonGetAllResponseElement } from 'contract';
 import { getValues } from '../../../utils/common';
 import { TableRowStats } from '../../stats/table-row-stats';
+import { ColumnID } from './constants';
 import { columnHelper } from './get-column-helper';
 
 interface StatsType {
@@ -25,7 +26,7 @@ export const statsColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelpe
     baseSpeed,
   }),
   {
-    id: 'stats',
+    id: ColumnID.STATS,
     header: () => {
       return <div>Base Stats</div>;
     },

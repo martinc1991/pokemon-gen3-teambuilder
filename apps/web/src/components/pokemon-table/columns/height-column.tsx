@@ -3,10 +3,11 @@
 import { type ColumnDef } from '@tanstack/react-table';
 import { type IPokemonGetAllResponseElement } from 'contract';
 import { Typography } from 'ui';
+import { ColumnID } from './constants';
 import { columnHelper } from './get-column-helper';
 
 export const heightColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor((row) => row.height / 10, {
-  id: 'height',
+  id: ColumnID.HEIGHT,
   header: () => {
     return <div>Height</div>;
   },

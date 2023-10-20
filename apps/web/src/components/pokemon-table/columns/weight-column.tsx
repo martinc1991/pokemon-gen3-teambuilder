@@ -3,10 +3,11 @@
 import { type ColumnDef } from '@tanstack/react-table';
 import { type IPokemonGetAllResponseElement } from 'contract';
 import { Typography } from 'ui';
+import { ColumnID } from './constants';
 import { columnHelper } from './get-column-helper';
 
 export const weightColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor((row) => row.weight / 10, {
-  id: 'weight',
+  id: ColumnID.WEIGHT,
   header: () => {
     return <div>Weight</div>;
   },
