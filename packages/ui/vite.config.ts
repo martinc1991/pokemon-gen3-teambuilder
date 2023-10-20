@@ -24,6 +24,7 @@ export default defineConfig({
     emptyOutDir: true,
     outDir: 'dist',
     sourcemap: true,
+    target: 'esnext',
   },
   plugins: [react(), dts()],
   resolve: {

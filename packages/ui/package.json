@@ -6,14 +6,11 @@
     "**/*.css"
   ],
   "type": "module",
-  "main": "./dist/index.umd.js",
+  "main": "./dist/index.es.js",
   "module": "./index.ts",
   "types": "./dist/index.d.js",
   "exports": {
-    ".": {
-      "import": "./dist/index.es.js",
-      "require": "./dist/index.umd.js"
-    },
+    ".": "./dist/index.es.js",
     "./style": "./dist/style.css"
   },
   "files": [
