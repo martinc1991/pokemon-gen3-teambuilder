@@ -3,7 +3,7 @@
 import { Cross2Icon } from '@radix-ui/react-icons';
 import type { Table } from '@tanstack/react-table';
 import type { IPokemonGetAllResponseElement, IType, TypeNames } from 'contract';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { ComboboxItem } from 'ui';
 import { Combobox, TypeBadge } from 'ui';
 import { client } from '../../../rq-client';
@@ -14,8 +14,11 @@ interface TypeFiltersProps {
   table: Table<IPokemonGetAllResponseElement>;
 }
 
+const initialValue = { id: '', label: '', payload: {} } as ComboboxItem<IType>; // INFO: Cast because I dont want to fill payload, its just a dummy empty item
+
 export function TypesFilter({ table }: TypeFiltersProps): JSX.Element {
-  const [selectedTypes, setSelectedTypes] = useState<IType[]>([]);
+  const [selectedTypes, setSelectedTypes] = useState<ComboboxItem<IType>[]>([]);
+  const [selectedValue, setSelectedValue] = useState<ComboboxItem<IType>>(initialValue);
   const { data, isFetching, isError } = client.types.getAll.useQuery(['get-all-types']);
 
   const DATA: ComboboxItem<IType>[] =
@@ -23,31 +26,42 @@ export function TypesFilter({ table }: TypeFiltersProps): JSX.Element {
       return { id: type.name, label: capitalize(type.name), payload: type };
     }) || [];
 
-  function setNewFilterValues(types: IType[], filterValues: TypeNames[]): void {
+  function setNewFilterValues(types: ComboboxItem<IType>[], filterValues: TypeNames[]): void {
     table.getColumn(ColumnID.TYPES)?.setFilterValue(filterValues);
     setSelectedTypes(types);
   }
 
   function handleChange(item: ComboboxItem<IType>): void {
     // Dont add the same type twice
-    if (selectedTypes.length && selectedTypes[0].name === item.id) return;
+    if (selectedTypes.length && selectedTypes[0].id === item.id) return;
 
-    const newSelectedTypes = selectedTypes.concat([item.payload]);
-    const newFilterValues = newSelectedTypes.map((type) => type.name);
+    setSelectedValue(item);
+    const newSelectedTypes = selectedTypes.concat([item]);
+    const newFilterValues = newSelectedTypes.map((type) => type.payload.name);
 
     setNewFilterValues(newSelectedTypes, newFilterValues);
   }
 
-  function handleRemoveOne(deletedType: IType): void {
-    const newSelectedTypes = selectedTypes.filter((type) => type.name !== deletedType.name);
-    const newFilterValues = newSelectedTypes.map((type) => type.name);
+  function handleRemoveOne(deletedTypeItem: ComboboxItem<IType>): void {
+    const newSelectedTypes = selectedTypes.filter((type) => type.label !== deletedTypeItem.label);
+    const newFilterValues = newSelectedTypes.map((type) => type.payload.name);
+    if (newSelectedTypes.length < 1) setSelectedValue(initialValue);
 
     setNewFilterValues(newSelectedTypes, newFilterValues);
   }
 
   function handleClear(): void {
     setNewFilterValues([], []);
+    setSelectedValue(initialValue);
   }
+
+  useEffect(() => {
+    if (selectedTypes.length > 0) {
+      setSelectedValue(selectedTypes[selectedTypes.length - 1]);
+    } else {
+      setSelectedValue(initialValue);
+    }
+  }, [selectedTypes]);
 
   return (
     <div className='flex items-center'>
@@ -61,18 +75,19 @@ export function TypesFilter({ table }: TypeFiltersProps): JSX.Element {
         onClear={handleClear}
         placeholder='Types'
         searchBox
+        value={selectedValue}
       />
       <div className='flex gap-4'>
         {selectedTypes.length > 0 &&
-          selectedTypes.map((type) => {
+          selectedTypes.map((item) => {
             return (
-              <div className='flex items-center gap-2' key={`filer-types-${type.name}`}>
-                <TypeBadge type={type.name} />
+              <div className='flex items-center gap-2' key={`filer-types-${item.payload.name}`}>
+                <TypeBadge type={item.payload.name} />
                 <div>
                   <Cross2Icon
                     className='text-white hover:cursor-pointer'
                     onClick={() => {
-                      handleRemoveOne(type);
+                      handleRemoveOne(item);
                     }}
                   />
                 </div>
