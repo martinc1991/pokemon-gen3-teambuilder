@@ -12,7 +12,7 @@ interface FilterProps {
 
 export function Filters({ table }: FilterProps): JSX.Element {
   return (
-    <div className='flex gap-4' style={{ height: TABLE_FILTERS_HEIGHT }}>
+    <div className='flex flex-row items-center gap-4' style={{ height: TABLE_FILTERS_HEIGHT }}>
       <NameFilter table={table} />
       <TierFilter table={table} />
       <TypesFilter table={table} />
