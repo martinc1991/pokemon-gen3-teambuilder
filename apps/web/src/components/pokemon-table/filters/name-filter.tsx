@@ -23,5 +23,9 @@ export function NameFilter({ table }: NameAbilityFilterProps): JSX.Element {
     table.getColumn(ColumnID.NAME)?.setFilterValue(value);
   }, [debouncedValue]);
 
-  return <Input onChange={handleChange} placeholder='Name' />;
+  return (
+    <div>
+      <Input onChange={handleChange} placeholder='Name' />;
+    </div>
+  );
 }
