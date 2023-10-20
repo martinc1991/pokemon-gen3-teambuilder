@@ -14,9 +14,9 @@ interface FilterProps {
 export function Filters({ table }: FilterProps): JSX.Element {
   return (
     <div className='flex flex-row items-center gap-4' style={{ height: TABLE_FILTERS_HEIGHT }}>
+      <TierFilter table={table} />
       <NameFilter table={table} />
       <AbilitiesFilter table={table} />
-      <TierFilter table={table} />
       <TypesFilter table={table} />
     </div>
   );
