@@ -1,19 +1,16 @@
 import { useVirtualizer } from '@tanstack/react-virtual';
 import { useRef } from 'react';
 import { Table, TableBody, Typography } from 'ui';
-import { useWindowSize } from 'usehooks-ts';
-import { BUILDER_PAGE_HEADER_HEIGHT } from '../../../app/builder/constants';
 import LoadingState from '../../loading-state';
+import { Filters } from '../filters';
 import { usePokemonTableConfig } from '../hooks/use-pokemon-table-config';
+import { usePokemonTableHeight } from '../hooks/use-pokemon-table-height';
 import { usePokemonTableInfo } from '../hooks/use-pokemon-table-info';
 import { PokemonTableHeader } from './table-header';
-import { EmptyRow, PokemonTableRow } from './table-rows';
+import { EmptyRow, PokemonTableRow, TABLE_ROW_HEIGHT } from './table-rows';
 
 export function TableContent(): JSX.Element {
   const tableContainerRef = useRef(null);
-
-  const { height } = useWindowSize();
-  const tableHeigth = height - BUILDER_PAGE_HEADER_HEIGHT - 20;
 
   const { flatData, isError, fetchStatus, isFetchingNextPage, isLoading } = usePokemonTableInfo();
 
@@ -23,9 +20,12 @@ export function TableContent(): JSX.Element {
   const rowVirtualizer = useVirtualizer({
     count: table.getRowModel().rows.length,
     getScrollElement: () => tableContainerRef.current,
-    estimateSize: () => 50,
+    estimateSize: () => TABLE_ROW_HEIGHT,
     overscan: 10,
   });
+
+  const RENDERED_ROWS_NUM = rowVirtualizer.getVirtualItems().length;
+  const tableHeight = usePokemonTableHeight(RENDERED_ROWS_NUM);
 
   if ((fetchStatus === 'fetching' && !isFetchingNextPage) || isLoading) {
     return <LoadingState />;
@@ -35,20 +35,23 @@ export function TableContent(): JSX.Element {
   }
 
   return (
-    <div className='w-11/12 overflow-auto border rounded-md' ref={tableContainerRef} style={{ height: tableHeigth }}>
-      <Table>
-        <PokemonTableHeader table={table} />
-        <TableBody style={{ height: `${rowVirtualizer.getTotalSize()}px`, width: '600px', position: 'relative' }}>
-          {rowVirtualizer.getVirtualItems().length ? (
-            rowVirtualizer.getVirtualItems().map((virtualRow) => {
-              const row = rows[virtualRow.index];
-              return <PokemonTableRow key={row.id} row={row} size={virtualRow.size} start={virtualRow.start} />;
-            })
-          ) : (
-            <EmptyRow />
-          )}
-        </TableBody>
-      </Table>
+    <div className='w-11/12 flex flex-col gap-4'>
+      <Filters table={table} />
+      <div className='overflow-auto border rounded-md' ref={tableContainerRef} style={{ height: tableHeight }}>
+        <Table>
+          <PokemonTableHeader table={table} />
+          <TableBody style={{ height: `${rowVirtualizer.getTotalSize()}px`, width: '600px', position: 'relative' }}>
+            {RENDERED_ROWS_NUM ? (
+              rowVirtualizer.getVirtualItems().map((virtualRow) => {
+                const row = rows[virtualRow.index];
+                return <PokemonTableRow key={row.id} row={row} start={virtualRow.start} />;
+              })
+            ) : (
+              <EmptyRow />
+            )}
+          </TableBody>
+        </Table>
+      </div>
     </div>
   );
 }

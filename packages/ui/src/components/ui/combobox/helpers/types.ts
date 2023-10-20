@@ -7,6 +7,7 @@ export interface ComboboxItem<T> {
 export interface ComboboxProps<T> {
   className?: string;
   clearButtonClassName?: string;
+  clearDisabled?: boolean;
   cleareable?: boolean;
   clearText?: string;
   data: ComboboxItem<T>[];

@@ -3,10 +3,11 @@
 import { type ColumnDef } from '@tanstack/react-table';
 import { type IPokemonGetAllResponseElement } from 'contract';
 import { PokemonIcon } from 'ui';
+import { ColumnID } from './constants';
 import { columnHelper } from './get-column-helper';
 
 export const spriteColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor((row) => row.icon, {
-  id: 'icon',
+  id: ColumnID.ICON,
   header: () => {
     return <div />;
   },
