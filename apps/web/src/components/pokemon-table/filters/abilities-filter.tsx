@@ -23,5 +23,5 @@ export function AbilitiesFilter({ table }: NameAbilityFilterProps): JSX.Element 
     table.getColumn(ColumnID.ABILITIES)?.setFilterValue(value);
   }, [debouncedValue]);
 
-  return <Input className='max-w-xs' onChange={handleChange} placeholder='Ability' />;
+  return <Input className='max-w-[200px]' onChange={handleChange} placeholder='Ability' />;
 }

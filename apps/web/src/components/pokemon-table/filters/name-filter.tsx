@@ -23,5 +23,5 @@ export function NameFilter({ table }: NameAbilityFilterProps): JSX.Element {
     table.getColumn(ColumnID.NAME)?.setFilterValue(value);
   }, [debouncedValue]);
 
-  return <Input className='max-w-xs' onChange={handleChange} placeholder='Name' />;
+  return <Input className='max-w-[200px]' onChange={handleChange} placeholder='Name' />;
 }
