@@ -1,7 +1,8 @@
 import type { Table } from '@tanstack/react-table';
 import type { IPokemonGetAllResponseElement } from 'contract';
-import { TierFilters } from './tier-filter';
-import { TypeFilters } from './type-filter';
+import { NameFilter } from './name-ability-filter';
+import { TierFilter } from './tier-filter';
+import { TypesFilter } from './types-filter';
 
 export const TABLE_FILTERS_HEIGHT = 40;
 
@@ -12,8 +13,9 @@ interface FilterProps {
 export function Filters({ table }: FilterProps): JSX.Element {
   return (
     <div className='flex gap-4' style={{ height: TABLE_FILTERS_HEIGHT }}>
-      <TierFilters table={table} />
-      <TypeFilters table={table} />
+      <NameFilter table={table} />
+      <TierFilter table={table} />
+      <TypesFilter table={table} />
     </div>
   );
 }
