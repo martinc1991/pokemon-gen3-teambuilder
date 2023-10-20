@@ -12,7 +12,7 @@ interface TierFiltersProps {
   table: Table<IPokemonGetAllResponseElement>;
 }
 
-export function TierFilters({ table }: TierFiltersProps): JSX.Element {
+export function TierFilter({ table }: TierFiltersProps): JSX.Element {
   const data: ComboboxItem<Tier>[] = SORTED_TIERS.map((tier) => {
     return { id: tier, label: getTierText(tier), payload: tier };
   });

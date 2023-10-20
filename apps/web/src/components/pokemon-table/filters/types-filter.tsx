@@ -14,7 +14,7 @@ interface TypeFiltersProps {
   table: Table<IPokemonGetAllResponseElement>;
 }
 
-export function TypeFilters({ table }: TypeFiltersProps): JSX.Element {
+export function TypesFilter({ table }: TypeFiltersProps): JSX.Element {
   const [selectedTypes, setSelectedTypes] = useState<IType[]>([]);
   const { data, isFetching, isError } = client.types.getAll.useQuery(['get-all-types']);
 
