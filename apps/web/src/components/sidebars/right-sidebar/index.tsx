@@ -5,8 +5,9 @@ import { PokemonAvatar, Separator, Typography } from 'ui';
 import { useTeamStore } from '../../../state/team';
 import { BaseSlot, type FilledSlot } from '../../../state/team/helpers';
 import { formatPokemonName } from '../../../utils/pokemon';
-import BasicSidebar from '../basic-sidebar';
+import ClearButton from '../../clear-button';
 import CopyButton from '../../copy-button';
+import BasicSidebar from '../basic-sidebar';
 
 export default function RightSidebar(): JSX.Element {
   const [slots, removeSlot] = useTeamStore((state) => [state.slots, state.removeSlot]);
@@ -44,7 +45,9 @@ export default function RightSidebar(): JSX.Element {
       })}
 
       <Separator />
+
       <CopyButton />
+      <ClearButton />
     </BasicSidebar>
   );
 }

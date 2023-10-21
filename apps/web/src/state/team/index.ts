@@ -14,6 +14,7 @@ interface TeamState {
 interface TeamActions {
   addSlot: (pokemon: IPokemon) => void;
   removeSlot: (slot: FilledSlot) => void;
+  clearTeam: () => void;
   setSelectedSlotIndex: (index: number) => void;
   setSlotFieldValue: <T extends keyof FilledSlot>(slot: FilledSlot, fieldName: T, fieldValue: FilledSlot[T]) => void;
 }
@@ -48,6 +49,13 @@ export const useTeamStore = create(
         }
 
         state.slots = newSlots;
+      });
+    },
+    clearTeam: () => {
+      set((state) => {
+        state.slots = [];
+        state.name = '';
+        state.selectedSlotIndex = 0;
       });
     },
     setSelectedSlotIndex: (index) => {
