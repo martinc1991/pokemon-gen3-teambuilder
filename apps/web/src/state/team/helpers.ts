@@ -2,6 +2,15 @@ import type { IPokemon, ISlot } from 'contract';
 import { Gender, MAX_HAPPINESS, MAX_INDIVIDUAL_IV, MAX_LEVEL, NatureNames } from 'contract';
 import { nanoid } from 'nanoid';
 
+export interface TeamState {
+  teamId: string;
+  name: string;
+  slots: FilledSlot[];
+  selectedSlotIndex: number;
+}
+
+export type TrashBinTeam = Omit<TeamState, 'selectedSlotIndex'>;
+
 export interface FilledSlot extends Omit<ISlot, 'team' | 'ability' | 'nature' | 'item'> {
   pokemon: IPokemon;
   order: number;

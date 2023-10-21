@@ -14,21 +14,25 @@ import {
   useToast,
 } from 'ui';
 import { useTeamStore } from '../../state/team';
-// import ClearButtonToastContent from './toast-content';
+import { useTrashBinStore } from '../../state/trashBin';
+import { CLEAR_TOAST_TITLE } from './constants';
+import ClearButtonToastContent from './toast-content';
 
 const descriptionTxt = "This will clear your current team and this action can't be undone.";
 
 export default function ClearButton(): JSX.Element {
-  const [slots, clearTeam] = useTeamStore((state) => [state.slots, state.clearTeam]);
+  const [slots, name, teamId, clearTeam] = useTeamStore((state) => [state.slots, state.name, state.teamId, state.clearTeam]);
+  const [addToTrash] = useTrashBinStore((state) => [state.add]);
   const { toast } = useToast();
 
   const buttonDisabled = slots.length < 1;
 
   function handleClear(): void {
+    addToTrash({ slots, name, teamId });
     clearTeam();
     toast({
-      title: 'Team cleared',
-      // description: <ClearButtonToastContent />,
+      title: CLEAR_TOAST_TITLE,
+      description: <ClearButtonToastContent />,
       variant: 'destructive',
     });
   }
