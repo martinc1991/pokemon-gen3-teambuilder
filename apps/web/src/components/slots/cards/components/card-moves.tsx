@@ -1,5 +1,5 @@
+import { FilledSlot } from '@state/team/helpers';
 import { Typography } from 'ui';
-import type { FilledSlot } from '../../../../state/team/helpers';
 
 interface PokemonCardStatsProps {
   slot: FilledSlot;

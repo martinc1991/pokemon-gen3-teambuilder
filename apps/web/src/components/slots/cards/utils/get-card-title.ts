@@ -1,4 +1,4 @@
-import type { FilledSlot } from '../../../../state/team/helpers';
+import { FilledSlot } from '@state/team/helpers';
 import { formatPokemonName } from '../../../../utils/pokemon';
 
 export function getCardTitleName({ pokemon, name, order }: Pick<FilledSlot, 'pokemon' | 'name' | 'order'>): string {

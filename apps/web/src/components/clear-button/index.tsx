@@ -1,6 +1,8 @@
 'use client';
 
 import { TrashIcon } from '@radix-ui/react-icons';
+import { useTeamStore } from '@state/team';
+import { useTrashBinStore } from '@state/trashBin';
 import {
   Button,
   Dialog,
@@ -13,8 +15,6 @@ import {
   DialogTrigger,
   useToast,
 } from 'ui';
-import { useTeamStore } from '../../state/team';
-import { useTrashBinStore } from '../../state/trashBin';
 import { CLEAR_TOAST_TITLE } from './constants';
 import ClearButtonToastContent from './toast-content';
 

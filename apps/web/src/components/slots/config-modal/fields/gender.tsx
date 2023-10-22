@@ -1,8 +1,8 @@
+import { useTeamStore } from '@state/team';
+import { FilledSlot } from '@state/team/helpers';
+import type { Gender } from 'contract';
 import type { ComboboxItem } from 'ui';
 import { FormField } from 'ui';
-import type { Gender } from 'contract';
-import { useTeamStore } from '../../../../state/team';
-import type { FilledSlot } from '../../../../state/team/helpers';
 import { capitalize } from '../../../../utils/common';
 
 interface GenderFieldProps {

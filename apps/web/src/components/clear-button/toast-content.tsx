@@ -1,8 +1,8 @@
 'use client';
 
+import { useTeamStore } from '@state/team';
+import { useTrashBinStore } from '@state/trashBin';
 import { Button, Typography, useToast } from 'ui';
-import { useTeamStore } from '../../state/team';
-import { useTrashBinStore } from '../../state/trashBin';
 import { CLEAR_TOAST_TITLE } from './constants';
 
 export default function ClearButtonToastContent(): JSX.Element {

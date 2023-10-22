@@ -1,8 +1,8 @@
+import { useTeamStore } from '@state/team';
 import { DialogContent, DialogDescription, DialogHeader, Tabs, TabsContent, TabsList, TabsTrigger, TypeBadge, Typography } from 'ui';
-import { useTeamStore } from '../../../state/team';
 import { getCardTitleName } from '../cards/utils/get-card-title';
-import { BasicTab, BASIC_TAB_NAME } from './tabs/basic-tab';
-import { MovesTab, MOVES_TAB_NAME } from './tabs/moves-tab';
+import { BASIC_TAB_NAME, BasicTab } from './tabs/basic-tab';
+import { MOVES_TAB_NAME, MovesTab } from './tabs/moves-tab';
 
 export default function SlotConfigModal(): JSX.Element {
   const [slot] = useTeamStore((state) => [state.slots[state.selectedSlotIndex]]);

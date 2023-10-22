@@ -1,5 +1,5 @@
+import { FilledSlot } from '@state/team/helpers';
 import { Separator, Typography } from 'ui';
-import type { FilledSlot } from '../../../../state/team/helpers';
 import AbilityField from '../fields/ability';
 import GenderField from '../fields/gender';
 import HappinessField from '../fields/happiness';

@@ -1,10 +1,9 @@
 'use client';
 
+import { useTeamStore } from '@state/team';
+import { BaseSlot, FilledSlot } from '@state/team/helpers';
 import { MAX_TEAM_MEMBERS } from 'contract';
 import { PokemonAvatar, Separator, Typography } from 'ui';
-import { useTeamStore } from '../../../state/team';
-import type { FilledSlot } from '../../../state/team/helpers';
-import { BaseSlot } from '../../../state/team/helpers';
 import { formatPokemonName } from '../../../utils/pokemon';
 import ClearButton from '../../clear-button';
 import CopyButton from '../../copy-button';

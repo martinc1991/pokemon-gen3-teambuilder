@@ -1,8 +1,8 @@
+import { useTeamStore } from '@state/team';
+import { FilledSlot } from '@state/team/helpers';
 import type { CompleteAbility } from 'contract/dist/prisma/zod';
 import type { ComboboxItem } from 'ui';
 import { FormField } from 'ui';
-import { useTeamStore } from '../../../../state/team';
-import type { FilledSlot } from '../../../../state/team/helpers';
 
 interface AbilityFieldProps {
   slot: FilledSlot;

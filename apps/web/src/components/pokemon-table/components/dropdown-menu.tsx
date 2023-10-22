@@ -1,7 +1,7 @@
 import { DotsHorizontalIcon } from '@radix-ui/react-icons';
+import { useTeamStore } from '@state/team';
 import { MAX_TEAM_MEMBERS, type IPokemon } from 'contract';
 import { Button, DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from 'ui';
-import { useTeamStore } from '../../../state/team';
 
 interface RowDropdownMenuProps {
   pokemon: IPokemon;
