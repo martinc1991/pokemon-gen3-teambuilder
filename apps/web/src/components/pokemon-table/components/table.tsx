@@ -35,11 +35,13 @@ export function TableContent(): JSX.Element {
   }
 
   return (
-    <div className='w-11/12 flex flex-col gap-4'>
-      <Filters table={table} />
+    <div className='w-11/12 flex flex-col'>
+      <div className='mb-4'>
+        <Filters table={table} />
+      </div>
+      <PokemonTableHeader table={table} />
       <div className='overflow-auto border rounded-md' ref={tableContainerRef} style={{ height: tableHeight }}>
         <Table>
-          <PokemonTableHeader table={table} />
           <TableBody style={{ height: `${rowVirtualizer.getTotalSize()}px`, width: '600px', position: 'relative' }}>
             {RENDERED_ROWS_NUM ? (
               rowVirtualizer.getVirtualItems().map((virtualRow) => {

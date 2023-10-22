@@ -5,7 +5,7 @@ import { TABLE_HEADER_HEIGHT } from '../components/table-header';
 import { TABLE_ROW_HEIGHT } from '../components/table-rows';
 import { TABLE_FILTERS_HEIGHT } from '../filters';
 
-const TAILWIND_GAP_4 = 16;
+const TAILWIND_MB_4 = 16; // To account for Filters div wrapper mb-4
 const MIN = TABLE_HEADER_HEIGHT + TABLE_ROW_HEIGHT; // No pokemon found
 
 export function usePokemonTableHeight(RENDERED_ROWS: number): number {
@@ -14,11 +14,9 @@ export function usePokemonTableHeight(RENDERED_ROWS: number): number {
 
   useEffect(() => {
     // INFO: 20 to account for botton padding
-    const MAX = height - PAGE_HEADER_HEIGHT - TABLE_FILTERS_HEIGHT - TAILWIND_GAP_4 - 20;
+    const MAX = height - PAGE_HEADER_HEIGHT - TABLE_FILTERS_HEIGHT - TAILWIND_MB_4 - 20 - TABLE_HEADER_HEIGHT;
 
-    const RENDERED_ELEMENTS_HEIGHT = RENDERED_ROWS * TABLE_ROW_HEIGHT;
-
-    const HEIGHT = RENDERED_ELEMENTS_HEIGHT + TABLE_HEADER_HEIGHT;
+    const HEIGHT = RENDERED_ROWS * TABLE_ROW_HEIGHT;
 
     if (HEIGHT > MAX) {
       setReturnedHeight(MAX);
