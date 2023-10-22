@@ -1,21 +1,16 @@
 import { MAX_TEAM_MEMBERS, type IPokemon } from 'contract';
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
-import type { FilledSlot } from './helpers';
+import type { FilledSlot, TeamState, TrashBinTeam } from './helpers';
 import { BaseSlot, genLocalTeamId } from './helpers';
-
-interface TeamState {
-  teamId: string;
-  name: string;
-  slots: FilledSlot[];
-  selectedSlotIndex: number;
-}
 
 interface TeamActions {
   addSlot: (pokemon: IPokemon) => void;
   removeSlot: (slot: FilledSlot) => void;
+  clearTeam: () => void;
   setSelectedSlotIndex: (index: number) => void;
   setSlotFieldValue: <T extends keyof FilledSlot>(slot: FilledSlot, fieldName: T, fieldValue: FilledSlot[T]) => void;
+  recoverFromTrash: (team: TrashBinTeam) => void;
 }
 
 export const useTeamStore = create(
@@ -50,6 +45,13 @@ export const useTeamStore = create(
         state.slots = newSlots;
       });
     },
+    clearTeam: () => {
+      set((state) => {
+        state.slots = [];
+        state.name = '';
+        state.selectedSlotIndex = 0;
+      });
+    },
     setSelectedSlotIndex: (index) => {
       set((state) => {
         state.selectedSlotIndex = index;
@@ -58,6 +60,13 @@ export const useTeamStore = create(
     setSlotFieldValue: (slot, field, value) => {
       set((state) => {
         state.slots[slot.order][field] = value;
+      });
+    },
+    recoverFromTrash: (team) => {
+      set((state) => {
+        state.name = team.name;
+        state.slots = team.slots;
+        state.teamId = team.teamId;
       });
     },
   }))
