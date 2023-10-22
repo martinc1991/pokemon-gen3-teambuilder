@@ -2,9 +2,9 @@
 
 import { useTeamStore } from '@state/team';
 import { BaseSlot, FilledSlot } from '@state/team/helpers';
+import { formatPokemonName } from '@utils/pokemon';
 import { MAX_TEAM_MEMBERS } from 'contract';
 import { PokemonAvatar, Separator, Typography } from 'ui';
-import { formatPokemonName } from '../../../utils/pokemon';
 import ClearButton from '../../clear-button';
 import CopyButton from '../../copy-button';
 import BasicSidebar from '../basic-sidebar';

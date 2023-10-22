@@ -2,10 +2,10 @@
 
 import { CheckIcon, CopyIcon } from '@radix-ui/react-icons';
 import { useTeamStore } from '@state/team';
+import { parseTeam } from '@utils/pokemon/parse-team';
 import { useState } from 'react';
 import { Button, useToast } from 'ui';
 import { useCopyToClipboard, useInterval } from 'usehooks-ts';
-import { parseTeam } from '../../utils/pokemon/parse-team';
 import CopyButtonToastContent from './toast-content';
 
 export default function CopyButton(): JSX.Element {

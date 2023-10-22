@@ -1,7 +1,7 @@
+import { getKeys } from '@utils/common';
+import { getShortStatName, getTotalBaseStat } from '@utils/pokemon';
 import type { IBaseStats } from 'contract';
 import { Typography } from 'ui';
-import { getKeys } from '../../utils/common';
-import { getShortStatName, getTotalBaseStat } from '../../utils/pokemon';
 
 interface TableRowStatsProps {
   stats: IBaseStats;

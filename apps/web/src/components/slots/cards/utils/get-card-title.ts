@@ -1,5 +1,5 @@
 import { FilledSlot } from '@state/team/helpers';
-import { formatPokemonName } from '../../../../utils/pokemon';
+import { formatPokemonName } from '@utils/pokemon';
 
 export function getCardTitleName({ pokemon, name, order }: Pick<FilledSlot, 'pokemon' | 'name' | 'order'>): string {
   if (name && name.trim().length > 0) {
