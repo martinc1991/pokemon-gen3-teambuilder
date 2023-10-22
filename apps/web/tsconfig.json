@@ -30,7 +30,8 @@
     "paths": {
       "@state/*": ["state/*"],
       "@components/*": ["components/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@rq-client/*": ["rq-client/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

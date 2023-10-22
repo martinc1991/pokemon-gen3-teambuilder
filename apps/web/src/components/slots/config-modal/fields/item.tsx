@@ -1,9 +1,9 @@
+import { client } from '@rq-client/index';
 import { useTeamStore } from '@state/team';
 import { FilledSlot } from '@state/team/helpers';
 import type { IItemGetAllResponseElement } from 'contract';
 import type { ComboboxItem } from 'ui';
 import { FormField } from 'ui';
-import { client } from '../../../../rq-client';
 
 interface ItemFieldProps {
   slot: FilledSlot;
