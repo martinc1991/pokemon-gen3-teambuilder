@@ -1,8 +1,7 @@
+import { client } from '@rq-client/index';
+import { FilledSlot } from '@state/team/helpers';
+import { CalculateStatProps, calculateStat } from '@utils/pokemon';
 import { Typography } from 'ui';
-import { client } from '../../../../rq-client';
-import type { FilledSlot } from '../../../../state/team/helpers';
-import type { CalculateStatProps } from '../../../../utils/pokemon';
-import { calculateStat } from '../../../../utils/pokemon';
 
 interface PokemonCardStatsProps {
   slot: FilledSlot;

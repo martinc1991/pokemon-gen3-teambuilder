@@ -1,12 +1,12 @@
 'use client';
 
+import LeftSidebar from '@components/sidebars/left-siderbar';
+import RightSidebar from '@components/sidebars/right-sidebar';
 import type { Metadata } from 'next';
 import 'tailwind-config/global.css';
 import { Toaster } from 'ui';
 // include styles from the ui package
 import 'ui/style';
-import LeftSidebar from '../components/sidebars/left-siderbar';
-import RightSidebar from '../components/sidebars/right-sidebar';
 
 export const metadata: Metadata = {
   title: 'Gen 3 Team Builder',

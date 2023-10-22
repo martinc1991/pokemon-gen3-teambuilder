@@ -1,7 +1,7 @@
 'use client';
 
-import PageHeader from '../../components/page-header';
-import { PokemonTable } from '../../components/pokemon-table';
+import PageHeader from '@components/page-header';
+import { PokemonTable } from '@components/pokemon-table';
 
 export default function Builder(): JSX.Element {
   return (

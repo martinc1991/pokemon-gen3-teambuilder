@@ -1,13 +1,13 @@
 'use client';
 
 import { Cross2Icon } from '@radix-ui/react-icons';
+import { client } from '@rq-client/index';
 import type { Table } from '@tanstack/react-table';
+import { capitalize } from '@utils/common';
 import type { IPokemonGetAllResponseElement, IType, TypeNames } from 'contract';
 import { useEffect, useState } from 'react';
 import type { ComboboxItem } from 'ui';
 import { Combobox, TypeBadge } from 'ui';
-import { client } from '../../../rq-client';
-import { capitalize } from '../../../utils/common';
 import { ColumnID } from '../columns/constants';
 
 interface TypeFiltersProps {

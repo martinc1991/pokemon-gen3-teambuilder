@@ -1,7 +1,7 @@
 'use client';
 
+import PageHeader from '@components/page-header';
 import type { Metadata } from 'next';
-import PageHeader from '../components/page-header';
 
 export const metadata: Metadata = {
   title: 'Pokemon Gen 3 TeamBuilder',

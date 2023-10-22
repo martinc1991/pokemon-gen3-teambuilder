@@ -1,8 +1,8 @@
 'use client';
 
 import { type ColumnDef } from '@tanstack/react-table';
+import { replaceHyphensWithSpaces } from '@utils/common';
 import type { Ability, IPokemonGetAllResponseElement } from 'contract';
-import { replaceHyphensWithSpaces } from '../../../utils/common';
 import TableAbilities from '../components/table-abilities';
 import { ColumnID } from './constants';
 import { columnHelper } from './get-column-helper';

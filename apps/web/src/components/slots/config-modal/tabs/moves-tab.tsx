@@ -1,9 +1,9 @@
+import { client } from '@rq-client/index';
+import { useTeamStore } from '@state/team';
+import { FilledSlot } from '@state/team/helpers';
 import clsx from 'clsx';
 import { useEffect, useMemo, useState } from 'react';
 import { FormField, Separator, TypeBadge, Typography } from 'ui';
-import { client } from '../../../../rq-client';
-import { useTeamStore } from '../../../../state/team';
-import type { FilledSlot } from '../../../../state/team/helpers';
 
 export const MOVES_TAB_NAME = 'moves';
 

@@ -1,7 +1,7 @@
+import { useTeamStore } from '@state/team';
+import { FilledSlot } from '@state/team/helpers';
 import { MAX_LEVEL, MIN_LEVEL } from 'contract';
 import { FormField } from 'ui';
-import { useTeamStore } from '../../../../state/team';
-import type { FilledSlot } from '../../../../state/team/helpers';
 
 interface LevelFieldProps {
   slot: FilledSlot;

@@ -1,8 +1,8 @@
 'use client';
 
+import { client } from '@rq-client/index';
 import type { IPokemonGetAllQueryParams } from 'contract';
 import { useEffect } from 'react';
-import { client } from '../../../rq-client';
 
 export const POKEMON_QUERY_PAGE_SIZE = 30; // CHECK: if this number is right
 const POKEMON_TABLE_QUERY_KEY = 'pokemon-infinite';

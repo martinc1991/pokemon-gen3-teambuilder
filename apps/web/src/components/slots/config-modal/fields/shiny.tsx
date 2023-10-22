@@ -1,6 +1,6 @@
+import { useTeamStore } from '@state/team';
+import { FilledSlot } from '@state/team/helpers';
 import { FormField } from 'ui';
-import { useTeamStore } from '../../../../state/team';
-import type { FilledSlot } from '../../../../state/team/helpers';
 
 interface ShinyFieldProps {
   slot: FilledSlot;
