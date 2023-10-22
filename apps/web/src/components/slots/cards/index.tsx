@@ -1,7 +1,7 @@
+import { GendersText } from '@components/pokemon-table/components/genders-text';
 import { FilledSlot } from '@state/team/helpers';
 import { Card, CardContent, CardHeader, TypeBadge, Typography } from 'ui';
 import { calculateHiddenPowerType } from '../../../utils/pokemon';
-import { GendersText } from '../../pokemon-table/components/genders-text';
 import PokemonCardImage from './components/card-image';
 import PokemonCardMoves from './components/card-moves';
 import PokemonCardStats from './components/card-stats';

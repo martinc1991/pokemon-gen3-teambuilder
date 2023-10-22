@@ -1,11 +1,11 @@
 'use client';
 
+import PageHeader from '@components/page-header';
+import PokemonCard from '@components/slots/cards';
+import SlotConfigModal from '@components/slots/config-modal';
 import { useTeamStore } from '@state/team';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Dialog, DialogTrigger } from 'ui';
-import PageHeader from '../../components/page-header';
-import PokemonCard from '../../components/slots/cards';
-import SlotConfigModal from '../../components/slots/config-modal';
 
 const queryClient = new QueryClient();
 
