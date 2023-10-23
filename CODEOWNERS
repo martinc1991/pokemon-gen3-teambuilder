@@ -1,3 +1,2 @@
 # Deny direct pushes to the "main" and "development" branches
-/main/* @martinc1991
-/development/* @martinc1991
+* @martinc1991
