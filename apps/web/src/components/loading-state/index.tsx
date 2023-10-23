@@ -9,7 +9,7 @@ interface LoadingStateProps {
 export default function LoadingState({ containerClassName = '', height = 40 }: LoadingStateProps): JSX.Element {
   return (
     <div className={clsx('flex items-center justify-center flex-1 w-full', containerClassName)}>
-      <SubstitutePlaceholder height={height} />
+      <SubstitutePlaceholder height={height} className='animate-bounce' />
     </div>
   );
 }
