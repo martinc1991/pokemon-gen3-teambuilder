@@ -17,7 +17,7 @@ export default function RowDropdownMenu(props: RowDropdownMenuProps): JSX.Elemen
   }
 
   return (
-    <div className='flex flex-row justify-end'>
+    <div className='flex flex-row place-content-center'>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button size='sm' variant='ghost'>
