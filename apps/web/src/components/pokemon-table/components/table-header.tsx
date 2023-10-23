@@ -15,7 +15,7 @@ interface PokemonTableHeaderProps {
 
 export function PokemonTableHeader({ table }: PokemonTableHeaderProps): JSX.Element {
   return (
-    <TableHeader style={{ height: TABLE_HEADER_HEIGHT }}>
+    <TableHeader style={{ height: TABLE_HEADER_HEIGHT, marginRight: 1, marginLeft: 1 }}>
       {table.getHeaderGroups().map((headerGroup) => (
         <PokemonHeaderRow headerGroup={headerGroup} key={headerGroup.id} />
       ))}
@@ -29,7 +29,7 @@ interface PokemonHeaderRowProps {
 
 function PokemonHeaderRow({ headerGroup }: PokemonHeaderRowProps): JSX.Element {
   return (
-    <TableRow className='flex hover:bg-transparent' key={headerGroup.id}>
+    <TableRow className='flex hover:bg-transparent' key={headerGroup.id} style={{ marginRight: 5 }}>
       {headerGroup.headers.map((header) => {
         const ID = header.getContext().header.id as ColumnID; // Had to cast just for typing
         const colFlexSize = columnsConfig[ID].colFlexSize;

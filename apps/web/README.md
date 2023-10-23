@@ -7,4 +7,4 @@
 - The solution is in this post: https://dev.to/abdulsamad/how-to-use-zustands-persist-middleware-in-nextjs-4lb5
 - But the right approach will be to stop using nextjs, it just isnt the right tool for the job, but changing frameworks is going to take a while
 
-2. Solve double scroll handle at the end of the table
+2. Solve table row and table header widths minor differences

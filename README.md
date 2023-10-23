@@ -10,7 +10,7 @@ Run the following command:
 npx create-turbo@latest -e with-tailwind
 ```
 
-## What's inside?
+## What is inside?
 
 This Turborepo includes the following packages/apps:
 
