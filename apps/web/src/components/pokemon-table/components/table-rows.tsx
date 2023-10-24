@@ -29,6 +29,7 @@ export function PokemonTableRow({ row, start }: PokemonRowProps): JSX.Element {
         width: '100%',
         display: 'flex',
         alignItems: 'center',
+        overflowX: 'hidden',
       }}
     >
       {row.getVisibleCells().map((cell) => {

@@ -6,7 +6,7 @@ import { TABLE_ROW_HEIGHT } from '../components/table-rows';
 import { TABLE_FILTERS_HEIGHT } from '../filters';
 
 const TAILWIND_MB_4 = 16; // To account for Filters div wrapper mb-4
-const MIN = TABLE_HEADER_HEIGHT + TABLE_ROW_HEIGHT; // No pokemon found
+const MIN = TABLE_ROW_HEIGHT; // No pokemon found or only one
 
 export function usePokemonTableHeight(RENDERED_ROWS: number): number {
   const [returnedHeight, setReturnedHeight] = useState(MIN);
