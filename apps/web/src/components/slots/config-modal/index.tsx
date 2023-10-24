@@ -1,11 +1,15 @@
-import { useTeamStore } from '@state/team';
+import withTeamStore, { WithTeamStoreProps } from '@state/hoc/with-store';
 import { DialogContent, DialogDescription, DialogHeader, Tabs, TabsContent, TabsList, TabsTrigger, TypeBadge, Typography } from 'ui';
 import { getCardTitleName } from '../cards/utils/get-card-title';
 import { BASIC_TAB_NAME, BasicTab } from './tabs/basic-tab';
 import { MOVES_TAB_NAME, MovesTab } from './tabs/moves-tab';
 
-export default function SlotConfigModal(): JSX.Element {
-  const [slot] = useTeamStore((state) => [state.slots[state.selectedSlotIndex]]);
+interface SlotConfigModalProps extends WithTeamStoreProps {}
+
+function SlotConfigModal({ teamStore }: SlotConfigModalProps): React.ReactNode {
+  const { slots, selectedSlotIndex } = teamStore;
+
+  const slot = slots[selectedSlotIndex];
 
   return (
     <DialogContent className='max-w-5xl flex flex-col justify-start gap-4 min-h-[90%]'>
@@ -35,3 +39,5 @@ export default function SlotConfigModal(): JSX.Element {
     </DialogContent>
   );
 }
+
+export default withTeamStore(SlotConfigModal);
