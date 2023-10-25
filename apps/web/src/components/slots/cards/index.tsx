@@ -1,8 +1,7 @@
 import { GendersText } from '@components/pokemon-table/components/genders-text';
 import { FilledSlot } from '@state/team/helpers';
 import { calculateHiddenPowerType } from '@utils/pokemon';
-import { Card, CardContent, CardHeader, TypeBadge, Typography } from 'ui';
-import PokemonCardImage from './components/card-image';
+import { Card, CardContent, CardHeader, PokemonSprite, TypeBadge, Typography } from 'ui';
 import PokemonCardMoves from './components/card-moves';
 import PokemonCardStats from './components/card-stats';
 import CardInfoField from './components/info-field';
@@ -28,7 +27,7 @@ export default function PokemonCard({ slot }: PokemonCardProps): JSX.Element {
       <CardContent className='flex flex-col gap-4'>
         <div className='flex gap-7'>
           {/* First column (img) */}
-          <PokemonCardImage pokemon={slot.pokemon} />
+          <PokemonSprite pokemon={slot.pokemon} />
 
           {/* Second column (level - gender - happiness - shiny) */}
           <div className='flex flex-col min-w-[150px] gap-1' style={{ border: '1px solid transparent' }}>
