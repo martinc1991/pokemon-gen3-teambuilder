@@ -5,5 +5,8 @@
   "main": "index.js",
   "devDependencies": {
     "tailwindcss": "^3.3.3"
+  },
+  "scripts": {
+    "prettier:format": "prettier --write \"**/*.{ts,tsx,md}\""
   }
 }

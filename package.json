@@ -5,7 +5,7 @@
     "dev": "turbo dev --no-daemon",
     "lint": "turbo lint --no-daemon",
     "clean": "turbo clean",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "prettier:format": "turbo prettier:format",
     "studio": "turbo studio",
     "ui:add": "pnpm --filter ui ui:add",
     "prisma:generate": "turbo prisma:generate",
