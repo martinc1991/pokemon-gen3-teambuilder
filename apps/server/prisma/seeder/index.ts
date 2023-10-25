@@ -129,9 +129,7 @@ export async function seeder() {
             typeOne: { connect: { name: pkmn.typeOne } },
             typeTwo: { connect: { name: pkmn.typeTwo ?? 'empty' } },
             abilities: {
-              connect: pkmn.abilities
-                .filter((abilityName) => abilitiesNames.includes(abilityName))
-                .map((name) => ({ name })),
+              connect: pkmn.abilities.filter((abilityName) => abilitiesNames.includes(abilityName)).map((name) => ({ name })),
             },
             learnset: {
               connect: LEARNSETS[name].map((moveName) => {
@@ -145,9 +143,7 @@ export async function seeder() {
             typeOne: { connect: { name: pkmn.typeOne } },
             typeTwo: { connect: { name: pkmn.typeTwo ?? 'empty' } },
             abilities: {
-              connect: pkmn.abilities
-                .filter((abilityName) => abilitiesNames.includes(abilityName))
-                .map((name) => ({ name })),
+              connect: pkmn.abilities.filter((abilityName) => abilitiesNames.includes(abilityName)).map((name) => ({ name })),
             },
             learnset: {
               connect: LEARNSETS[name].map((moveName) => {

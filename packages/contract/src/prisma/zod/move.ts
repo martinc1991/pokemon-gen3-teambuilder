@@ -34,5 +34,5 @@ export const RelatedMoveModel: z.ZodSchema<CompleteMove> = z.lazy(() =>
     pokemonMoveTwo: RelatedSlotModel.array(),
     pokemonMoveThree: RelatedSlotModel.array(),
     pokemonMoveFour: RelatedSlotModel.array(),
-  })
+  }),
 );

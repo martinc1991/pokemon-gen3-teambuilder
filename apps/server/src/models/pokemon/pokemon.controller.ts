@@ -1,10 +1,6 @@
 import { NationalPokedexNumberPipe } from '@common/pipes/nationalPokedexNumber.pipe';
 import { Controller, Get, Param, Query } from '@nestjs/common';
-import {
-  NestControllerInterface,
-  TsRest,
-  nestControllerContract,
-} from '@ts-rest/nest';
+import { NestControllerInterface, TsRest, nestControllerContract } from '@ts-rest/nest';
 import { IPokemonContract, pokemonContract } from 'contract';
 import { PokemonPaginationDto } from './dto';
 import { PokemonService } from './pokemon.service';

@@ -21,5 +21,5 @@ export interface CompleteNature extends z.infer<typeof NatureModel> {
 export const RelatedNatureModel: z.ZodSchema<CompleteNature> = z.lazy(() =>
   NatureModel.extend({
     Slot: RelatedSlotModel.array(),
-  })
+  }),
 );

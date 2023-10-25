@@ -28,5 +28,5 @@ export const RelatedTypeModel: z.ZodSchema<CompleteType> = z.lazy(() =>
   TypeModel.extend({
     pokemonTypeOne: RelatedPokemonModel.array(),
     pokemonTypeTwo: RelatedPokemonModel.array(),
-  })
+  }),
 );

@@ -13,7 +13,7 @@ const Command = React.forwardRef<React.ElementRef<typeof CommandPrimitive>, Reac
       className={cn('flex h-full w-full flex-col overflow-hidden rounded-md bg-popover text-popover-foreground', className)}
       {...props}
     />
-  )
+  ),
 );
 Command.displayName = CommandPrimitive.displayName;
 
@@ -41,7 +41,7 @@ const CommandInput = React.forwardRef<
       ref={ref}
       className={cn(
         'flex h-10 w-full rounded-md font-medium bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50',
-        className
+        className,
       )}
       {...props}
     />
@@ -74,7 +74,7 @@ const CommandGroup = React.forwardRef<
     ref={ref}
     className={cn(
       'overflow-auto max-h-60 p-1 text-foreground [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground',
-      className
+      className,
     )}
     {...props}
   />
@@ -96,7 +96,7 @@ const CommandItem = React.forwardRef<
     ref={ref}
     className={cn(
       'relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent aria-selected:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 h-9',
-      className
+      className,
     )}
     {...props}
   />

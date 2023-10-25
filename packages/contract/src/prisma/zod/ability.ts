@@ -22,5 +22,5 @@ export const RelatedAbilityModel: z.ZodSchema<CompleteAbility> = z.lazy(() =>
   AbilityModel.extend({
     Pokemon: RelatedPokemonModel.array(),
     slots: RelatedSlotModel.array(),
-  })
+  }),
 );

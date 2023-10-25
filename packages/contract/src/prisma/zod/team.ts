@@ -18,5 +18,5 @@ export interface CompleteTeam extends z.infer<typeof TeamModel> {
 export const RelatedTeamModel: z.ZodSchema<CompleteTeam> = z.lazy(() =>
   TeamModel.extend({
     slots: RelatedSlotModel.array(),
-  })
+  }),
 );

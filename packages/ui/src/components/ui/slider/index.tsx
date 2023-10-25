@@ -15,11 +15,11 @@ const Slider = React.forwardRef<React.ElementRef<typeof SliderPrimitive.Root>, R
       <SliderPrimitive.Thumb
         className={cn(
           'block w-4 h-4 transition-colors border rounded-full shadow border-primary bg-primary focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50',
-          props.disabled && 'border-border bg-border'
+          props.disabled && 'border-border bg-border',
         )}
       />
     </SliderPrimitive.Root>
-  )
+  ),
 );
 Slider.displayName = SliderPrimitive.Root.displayName;
 

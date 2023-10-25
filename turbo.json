@@ -26,7 +26,7 @@
       "cache": false
     },
     "prettier:format": {
-      "cache": true
+      "cache": false
     }
   }
 }

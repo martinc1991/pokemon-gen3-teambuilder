@@ -165,7 +165,7 @@ export function MovesTab({ slot }: TabProps): JSX.Element {
                   aria-hidden='true'
                   className={clsx(
                     'flex gap-4 min-h-[40px] px-2 items-center rounded-md mr-2',
-                    selectedMovesNames.includes(move.name) ? 'bg-green-800' : 'hover:bg-green-600 hover:cursor-pointer'
+                    selectedMovesNames.includes(move.name) ? 'bg-green-800' : 'hover:bg-green-600 hover:cursor-pointer',
                   )}
                   key={`${move.id}`}
                   onClick={() => {

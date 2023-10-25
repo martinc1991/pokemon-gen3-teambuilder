@@ -1,9 +1,5 @@
 import { Controller, Get, Param } from '@nestjs/common';
-import {
-  NestControllerInterface,
-  TsRest,
-  nestControllerContract,
-} from '@ts-rest/nest';
+import { NestControllerInterface, TsRest, nestControllerContract } from '@ts-rest/nest';
 import { IItemsContract, itemsContract } from 'contract';
 import { ItemsService } from './items.service';
 
