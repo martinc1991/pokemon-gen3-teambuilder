@@ -9,10 +9,12 @@
     "studio": "turbo studio",
     "ui:add": "pnpm --filter ui ui:add",
     "prisma:generate": "turbo prisma:generate",
-    "db:seed": "turbo db:seed"
+    "db:seed": "turbo db:seed",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "eslint": "^8.48.0",
+    "husky": "^8.0.3",
     "prettier": "^3.0.3",
     "prettier-plugin-tailwindcss": "^0.5.3",
     "turbo": "latest"
