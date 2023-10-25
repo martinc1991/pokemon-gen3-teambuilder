@@ -10,8 +10,8 @@ export default function LeftSidebar(): JSX.Element {
       <Link className='flex justify-center' href='/'>
         <Button variant='link'>Home</Button>
       </Link>
-      <Link className='flex justify-center' href='/builder'>
-        <Button variant='link'>Builder</Button>
+      <Link className='flex justify-center' href='/Pokemon'>
+        <Button variant='link'>Pokemon</Button>
       </Link>
       <Link className='flex justify-center' href='/team'>
         <Button variant='link'>Team</Button>
