@@ -1,21 +1,8 @@
 import { BasicPaginationDto } from '@common/dto/basicPagination.dto';
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Patch,
-  Post,
-  Query,
-} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
 import { CreateTeamDto, EditTeamDto } from './dto';
 import { TeamService } from './team.service';
-import {
-  NestControllerInterface,
-  TsRest,
-  nestControllerContract,
-} from '@ts-rest/nest';
+import { NestControllerInterface, TsRest, nestControllerContract } from '@ts-rest/nest';
 import { ITeamsContract, teamsContract } from 'contract';
 
 const c: ITeamsContract = nestControllerContract(teamsContract);

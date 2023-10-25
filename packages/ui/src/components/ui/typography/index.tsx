@@ -15,7 +15,7 @@ export function H2({ className, ...props }: React.HTMLAttributes<HTMLHeadElement
     <h2
       className={cn(
         'pb-2 text-3xl font-semibold tracking-tight transition-colors border-b scroll-m-20 first:mt-0 text-foreground',
-        className
+        className,
       )}
       {...props}
     />

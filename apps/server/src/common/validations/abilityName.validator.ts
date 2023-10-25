@@ -1,11 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import {
-  ValidationArguments,
-  ValidatorConstraint,
-  ValidatorConstraintInterface,
-  isString,
-  registerDecorator,
-} from 'class-validator';
+import { ValidationArguments, ValidatorConstraint, ValidatorConstraintInterface, isString, registerDecorator } from 'class-validator';
 import { ERROR_MESSAGES } from '../constants/errorMessages';
 
 const prisma = new PrismaClient();

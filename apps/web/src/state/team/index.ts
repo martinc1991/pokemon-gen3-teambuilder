@@ -78,5 +78,5 @@ export const useTeamStore = create(
   persist(store, {
     name: TEAM_STORAGE_NAME,
     storage: createJSONStorage(() => sessionStorage),
-  })
+  }),
 );

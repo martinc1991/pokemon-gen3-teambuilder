@@ -18,7 +18,7 @@ export default function CopyButton(): JSX.Element {
     () => {
       setCopied(false);
     },
-    copied ? 10 * 1000 : null // Delay in milliseconds or null to stop it
+    copied ? 10 * 1000 : null, // Delay in milliseconds or null to stop it
   );
 
   async function handleCopy(): Promise<void> {

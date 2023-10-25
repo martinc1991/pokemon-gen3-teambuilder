@@ -51,7 +51,7 @@ function PokemonHeaderRow({ headerGroup }: PokemonHeaderRowProps): JSX.Element {
             <div
               className={clsx(
                 'flex justify-center flex-3 ',
-                canSort ? 'cursor-pointer hover:underline underline-offset-4' : 'cursor-default'
+                canSort ? 'cursor-pointer hover:underline underline-offset-4' : 'cursor-default',
               )}
             >
               {text}

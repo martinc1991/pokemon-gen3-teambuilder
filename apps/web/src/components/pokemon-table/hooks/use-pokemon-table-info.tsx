@@ -31,7 +31,7 @@ export function usePokemonTableInfo() {
       refetchOnWindowFocus: false,
       refetchOnReconnect: false,
       cacheTime: 1000 * 60 * 60 * 24 * 7,
-    }
+    },
   );
 
   const { fetchNextPage, hasNextPage, fetchStatus } = pokemonInfiniteQuery;

@@ -22,5 +22,5 @@ export interface CompleteItem extends z.infer<typeof ItemModel> {
 export const RelatedItemModel: z.ZodSchema<CompleteItem> = z.lazy(() =>
   ItemModel.extend({
     slot: RelatedSlotModel.array(),
-  })
+  }),
 );

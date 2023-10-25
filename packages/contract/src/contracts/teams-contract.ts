@@ -46,7 +46,7 @@ export const teamsContract = c.router({
             evSpeed: z.number().min(0).max(255).optional(),
             itemName: z.string().optional(),
             shiny: z.boolean().optional(),
-          })
+          }),
         )
         .optional(),
     }),
@@ -93,7 +93,7 @@ export const teamsContract = c.router({
             evSpeed: z.number().min(0).max(255).optional(),
             itemName: z.string().optional(),
             shiny: z.boolean().optional(),
-          })
+          }),
         )
         .optional(),
     }),

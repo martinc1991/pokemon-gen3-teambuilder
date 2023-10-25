@@ -1,11 +1,7 @@
 import { Test } from '@nestjs/testing';
 import { TeamController } from '../team.controller';
 import { TeamService } from '../team.service';
-import {
-  createTeamDtoStub,
-  editTeamDtoStub,
-  teamIdStub,
-} from './stubs/createTeamDto.stub';
+import { createTeamDtoStub, editTeamDtoStub, teamIdStub } from './stubs/createTeamDto.stub';
 import { paginationStub } from './stubs/pagination.stub';
 
 const mockedTeamService = {

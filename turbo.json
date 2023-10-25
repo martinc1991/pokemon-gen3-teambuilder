@@ -24,6 +24,9 @@
     },
     "db:seed": {
       "cache": false
+    },
+    "prettier:format": {
+      "cache": false
     }
   }
 }

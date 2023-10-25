@@ -1,16 +1,7 @@
 import { IsValidAbilityName } from '@common/validations/abilityName.validator';
 import { NationalPokedexNumberValidator } from '@common/validations/nationalPokedexNumber.validator';
 import { Gender, NatureNames } from '@prisma/client';
-import {
-  IsBoolean,
-  IsEnum,
-  IsInt,
-  IsOptional,
-  IsString,
-  Max,
-  Min,
-  Validate,
-} from 'class-validator';
+import { IsBoolean, IsEnum, IsInt, IsOptional, IsString, Max, Min, Validate } from 'class-validator';
 
 export class TeamSlotDto {
   @IsInt()

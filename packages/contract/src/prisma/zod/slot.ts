@@ -74,5 +74,5 @@ export const RelatedSlotModel: z.ZodSchema<CompleteSlot> = z.lazy(() =>
     moveTwo: RelatedMoveModel.nullish(),
     moveThree: RelatedMoveModel.nullish(),
     moveFour: RelatedMoveModel.nullish(),
-  })
+  }),
 );

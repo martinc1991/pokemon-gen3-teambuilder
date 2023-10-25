@@ -24,5 +24,5 @@ export const useTrashBinStore = create(
         state.team = null;
       });
     },
-  }))
+  })),
 );

@@ -6,11 +6,7 @@ const RESET = '\x1b[0m';
 
 seeder()
   .then(() => {
-    console.log(
-      `${CYAN} Seeded in: ${(
-        performance.measure('final', 'start', 'end').duration / 1000
-      ).toFixed(2)} s ${RESET}`,
-    );
+    console.log(`${CYAN} Seeded in: ${(performance.measure('final', 'start', 'end').duration / 1000).toFixed(2)} s ${RESET}`);
   })
   .then(async () => {
     await prismaSeederClient.$disconnect();

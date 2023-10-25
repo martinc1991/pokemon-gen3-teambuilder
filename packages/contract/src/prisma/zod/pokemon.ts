@@ -51,5 +51,5 @@ export const RelatedPokemonModel: z.ZodSchema<CompletePokemon> = z.lazy(() =>
     slot: RelatedSlotModel.array(),
     abilities: RelatedAbilityModel.array(),
     learnset: RelatedMoveModel.array(),
-  })
+  }),
 );

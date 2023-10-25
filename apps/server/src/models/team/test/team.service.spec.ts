@@ -1,12 +1,7 @@
 import { NotFoundException } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import { TeamService } from '../team.service';
-import {
-  createTeamDtoStub,
-  editTeamDtoStub,
-  teamIdStub,
-  teamNameStub,
-} from './stubs/createTeamDto.stub';
+import { createTeamDtoStub, editTeamDtoStub, teamIdStub, teamNameStub } from './stubs/createTeamDto.stub';
 import { paginationStub } from './stubs/pagination.stub';
 import { PrismaService } from '@providers/prisma/prisma.service';
 
@@ -24,9 +19,7 @@ const mockedPrismaService = {
     createMany: jest.fn(),
     deleteMany: jest.fn(),
   },
-  $transaction: jest
-    .fn()
-    .mockImplementation((callback) => callback(mockedPrismaService)),
+  $transaction: jest.fn().mockImplementation((callback) => callback(mockedPrismaService)),
 };
 
 describe('Team controller', () => {
@@ -35,10 +28,7 @@ describe('Team controller', () => {
 
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
-      providers: [
-        TeamService,
-        { provide: PrismaService, useValue: mockedPrismaService },
-      ],
+      providers: [TeamService, { provide: PrismaService, useValue: mockedPrismaService }],
     }).compile();
 
     service = moduleRef.get<TeamService>(TeamService);
@@ -78,9 +68,7 @@ describe('Team controller', () => {
         },
       };
 
-      jest
-        .spyOn(prismaService.team, 'findUnique')
-        .mockResolvedValueOnce(mockedTeam);
+      jest.spyOn(prismaService.team, 'findUnique').mockResolvedValueOnce(mockedTeam);
 
       await service.getOneById(teamIdStub);
       expect(prismaService.team.findUnique).toBeCalledWith(expectedParams);
@@ -89,9 +77,7 @@ describe('Team controller', () => {
     it('should throw a not found exception if no team is found', async () => {
       jest.spyOn(prismaService.team, 'findUnique').mockResolvedValueOnce(null);
 
-      await expect(service.getOneById(teamIdStub)).rejects.toThrow(
-        NotFoundException,
-      );
+      await expect(service.getOneById(teamIdStub)).rejects.toThrow(NotFoundException);
     });
   });
 
@@ -126,9 +112,7 @@ describe('Team controller', () => {
 
       await service.create(dto);
 
-      expect(prismaService.slot.createMany).toBeCalledWith(
-        expectedCreateManyParams,
-      );
+      expect(prismaService.slot.createMany).toBeCalledWith(expectedCreateManyParams);
     });
   });
 
@@ -160,12 +144,8 @@ describe('Team controller', () => {
 
       await service.edit(dto);
 
-      expect(prismaService.slot.deleteMany).toBeCalledWith(
-        expectedDeleteManyParams,
-      );
-      expect(prismaService.slot.createMany).toBeCalledWith(
-        expectedCreateManyParams,
-      );
+      expect(prismaService.slot.deleteMany).toBeCalledWith(expectedDeleteManyParams);
+      expect(prismaService.slot.createMany).toBeCalledWith(expectedCreateManyParams);
     });
 
     it("if slots is an empty array, should delete existing slots but shouldn't create new ones", async () => {
@@ -176,9 +156,7 @@ describe('Team controller', () => {
 
       await service.edit(dto);
 
-      expect(prismaService.slot.deleteMany).toBeCalledWith(
-        expectedDeleteManyParams,
-      );
+      expect(prismaService.slot.deleteMany).toBeCalledWith(expectedDeleteManyParams);
       expect(prismaService.slot.createMany).not.toBeCalled();
     });
 

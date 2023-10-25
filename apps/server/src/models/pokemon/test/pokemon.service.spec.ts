@@ -50,9 +50,7 @@ describe('Pokemon service', () => {
       };
       const result = await service.getAll(pokemonPaginationStub());
 
-      expect(prismaService.pokemon.findMany).toHaveBeenCalledWith(
-        expectedPaginationParams,
-      );
+      expect(prismaService.pokemon.findMany).toHaveBeenCalledWith(expectedPaginationParams);
       expect(result[0]).toEqual(pokemonStub());
     });
   });
@@ -63,9 +61,7 @@ describe('Pokemon service', () => {
         nationalPokedexNumber: pokemonStub().nationalPokedexNumber,
       };
 
-      jest
-        .spyOn(prismaService.pokemon, 'findUnique')
-        .mockResolvedValueOnce(pokemonStub());
+      jest.spyOn(prismaService.pokemon, 'findUnique').mockResolvedValueOnce(pokemonStub());
 
       await service.getOne(pokemonStub().nationalPokedexNumber);
 
@@ -77,9 +73,7 @@ describe('Pokemon service', () => {
     });
 
     it('should return a pokemon', async () => {
-      jest
-        .spyOn(prismaService.pokemon, 'findUnique')
-        .mockResolvedValueOnce(pokemonStub());
+      jest.spyOn(prismaService.pokemon, 'findUnique').mockResolvedValueOnce(pokemonStub());
 
       const result = await service.getOne(pokemonStub().nationalPokedexNumber);
 
@@ -87,13 +81,9 @@ describe('Pokemon service', () => {
     });
 
     it('should throw a not found exception if no pokemon is found', async () => {
-      jest
-        .spyOn(prismaService.pokemon, 'findUnique')
-        .mockResolvedValueOnce(null);
+      jest.spyOn(prismaService.pokemon, 'findUnique').mockResolvedValueOnce(null);
 
-      await expect(
-        service.getOne(pokemonStub().nationalPokedexNumber),
-      ).rejects.toThrow(NotFoundException);
+      await expect(service.getOne(pokemonStub().nationalPokedexNumber)).rejects.toThrow(NotFoundException);
     });
   });
 });

@@ -35,7 +35,7 @@ export const statsColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelpe
       return <TableRowStats stats={stats} />;
     },
     sortingFn: (rowA, rowB) => getTotalBaseStatsFromRow(rowA) - getTotalBaseStatsFromRow(rowB),
-  }
+  },
 );
 
 function getTotalBaseStatsFromRow(row: Row<IPokemonGetAllResponseElement>): number {
