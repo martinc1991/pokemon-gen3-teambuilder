@@ -1,6 +1,7 @@
-import { DamageClass, TypeNames } from '@prisma/client';
-import * as z from 'zod';
-import { CompletePokemon, RelatedPokemonModel } from './index';
+import * as z from "zod"
+import * as imports from "../null"
+import { TypeNames, DamageClass, TypeNames, TypeNames, TypeNames, TypeNames, TypeNames, TypeNames } from "@prisma/client"
+import { CompletePokemon, RelatedPokemonModel } from "./index"
 
 export const TypeModel = z.object({
   id: z.string(),
@@ -12,11 +13,11 @@ export const TypeModel = z.object({
   noDamageFrom: z.nativeEnum(TypeNames).array(),
   halfDamageFrom: z.nativeEnum(TypeNames).array(),
   doubleDamageFrom: z.nativeEnum(TypeNames).array(),
-});
+})
 
 export interface CompleteType extends z.infer<typeof TypeModel> {
-  pokemonTypeOne: CompletePokemon[];
-  pokemonTypeTwo: CompletePokemon[];
+  pokemonTypeOne: CompletePokemon[]
+  pokemonTypeTwo: CompletePokemon[]
 }
 
 /**
@@ -24,9 +25,7 @@ export interface CompleteType extends z.infer<typeof TypeModel> {
  *
  * NOTE: Lazy required in case of potential circular dependencies within schema
  */
-export const RelatedTypeModel: z.ZodSchema<CompleteType> = z.lazy(() =>
-  TypeModel.extend({
-    pokemonTypeOne: RelatedPokemonModel.array(),
-    pokemonTypeTwo: RelatedPokemonModel.array(),
-  })
-);
+export const RelatedTypeModel: z.ZodSchema<CompleteType> = z.lazy(() => TypeModel.extend({
+  pokemonTypeOne: RelatedPokemonModel.array(),
+  pokemonTypeTwo: RelatedPokemonModel.array(),
+}))

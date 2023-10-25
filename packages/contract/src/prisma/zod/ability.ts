@@ -1,16 +1,17 @@
-import * as z from 'zod';
-import { CompletePokemon, CompleteSlot, RelatedPokemonModel, RelatedSlotModel } from './index';
+import * as z from "zod"
+import * as imports from "../null"
+import { CompletePokemon, RelatedPokemonModel, CompleteSlot, RelatedSlotModel } from "./index"
 
 export const AbilityModel = z.object({
   id: z.string(),
   name: z.string(),
   shortDescription: z.string(),
   longDescription: z.string(),
-});
+})
 
 export interface CompleteAbility extends z.infer<typeof AbilityModel> {
-  Pokemon: CompletePokemon[];
-  slots: CompleteSlot[];
+  Pokemon: CompletePokemon[]
+  slots: CompleteSlot[]
 }
 
 /**
@@ -18,9 +19,7 @@ export interface CompleteAbility extends z.infer<typeof AbilityModel> {
  *
  * NOTE: Lazy required in case of potential circular dependencies within schema
  */
-export const RelatedAbilityModel: z.ZodSchema<CompleteAbility> = z.lazy(() =>
-  AbilityModel.extend({
-    Pokemon: RelatedPokemonModel.array(),
-    slots: RelatedSlotModel.array(),
-  })
-);
+export const RelatedAbilityModel: z.ZodSchema<CompleteAbility> = z.lazy(() => AbilityModel.extend({
+  Pokemon: RelatedPokemonModel.array(),
+  slots: RelatedSlotModel.array(),
+}))

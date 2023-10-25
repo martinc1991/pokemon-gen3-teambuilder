@@ -1,16 +1,17 @@
-import { NatureNames, StatName } from '@prisma/client';
-import * as z from 'zod';
-import { CompleteSlot, RelatedSlotModel } from './index';
+import * as z from "zod"
+import * as imports from "../null"
+import { NatureNames, StatName, StatName } from "@prisma/client"
+import { CompleteSlot, RelatedSlotModel } from "./index"
 
 export const NatureModel = z.object({
   id: z.string(),
   name: z.nativeEnum(NatureNames),
   increased: z.nativeEnum(StatName).nullish(),
   decreased: z.nativeEnum(StatName).nullish(),
-});
+})
 
 export interface CompleteNature extends z.infer<typeof NatureModel> {
-  Slot: CompleteSlot[];
+  Slot: CompleteSlot[]
 }
 
 /**
@@ -18,8 +19,6 @@ export interface CompleteNature extends z.infer<typeof NatureModel> {
  *
  * NOTE: Lazy required in case of potential circular dependencies within schema
  */
-export const RelatedNatureModel: z.ZodSchema<CompleteNature> = z.lazy(() =>
-  NatureModel.extend({
-    Slot: RelatedSlotModel.array(),
-  })
-);
+export const RelatedNatureModel: z.ZodSchema<CompleteNature> = z.lazy(() => NatureModel.extend({
+  Slot: RelatedSlotModel.array(),
+}))

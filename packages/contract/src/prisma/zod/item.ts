@@ -1,5 +1,6 @@
-import * as z from 'zod';
-import { CompleteSlot, RelatedSlotModel } from './index';
+import * as z from "zod"
+import * as imports from "../null"
+import { CompleteSlot, RelatedSlotModel } from "./index"
 
 export const ItemModel = z.object({
   id: z.string(),
@@ -8,10 +9,10 @@ export const ItemModel = z.object({
   flingEffect: z.string().nullish(),
   flingPower: z.number().int().nullish(),
   sprite: z.string(),
-});
+})
 
 export interface CompleteItem extends z.infer<typeof ItemModel> {
-  slot: CompleteSlot[];
+  slot: CompleteSlot[]
 }
 
 /**
@@ -19,8 +20,6 @@ export interface CompleteItem extends z.infer<typeof ItemModel> {
  *
  * NOTE: Lazy required in case of potential circular dependencies within schema
  */
-export const RelatedItemModel: z.ZodSchema<CompleteItem> = z.lazy(() =>
-  ItemModel.extend({
-    slot: RelatedSlotModel.array(),
-  })
-);
+export const RelatedItemModel: z.ZodSchema<CompleteItem> = z.lazy(() => ItemModel.extend({
+  slot: RelatedSlotModel.array(),
+}))

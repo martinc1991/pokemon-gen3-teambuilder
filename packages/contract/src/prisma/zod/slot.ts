@@ -1,19 +1,7 @@
-import { Gender, NatureNames } from '@prisma/client';
-import * as z from 'zod';
-import {
-  CompleteAbility,
-  CompleteItem,
-  CompleteMove,
-  CompleteNature,
-  CompletePokemon,
-  CompleteTeam,
-  RelatedAbilityModel,
-  RelatedItemModel,
-  RelatedMoveModel,
-  RelatedNatureModel,
-  RelatedPokemonModel,
-  RelatedTeamModel,
-} from './index';
+import * as z from "zod"
+import * as imports from "../null"
+import { NatureNames, Gender } from "@prisma/client"
+import { CompleteTeam, RelatedTeamModel, CompletePokemon, RelatedPokemonModel, CompleteAbility, RelatedAbilityModel, CompleteNature, RelatedNatureModel, CompleteItem, RelatedItemModel, CompleteMove, RelatedMoveModel } from "./index"
 
 export const SlotModel = z.object({
   id: z.string(),
@@ -44,18 +32,18 @@ export const SlotModel = z.object({
   moveTwoName: z.string().nullish(),
   moveThreeName: z.string().nullish(),
   moveFourName: z.string().nullish(),
-});
+})
 
 export interface CompleteSlot extends z.infer<typeof SlotModel> {
-  team: CompleteTeam;
-  pokemon: CompletePokemon;
-  ability: CompleteAbility;
-  nature: CompleteNature;
-  item?: CompleteItem | null;
-  moveOne: CompleteMove;
-  moveTwo?: CompleteMove | null;
-  moveThree?: CompleteMove | null;
-  moveFour?: CompleteMove | null;
+  team: CompleteTeam
+  pokemon: CompletePokemon
+  ability: CompleteAbility
+  nature: CompleteNature
+  item?: CompleteItem | null
+  moveOne: CompleteMove
+  moveTwo?: CompleteMove | null
+  moveThree?: CompleteMove | null
+  moveFour?: CompleteMove | null
 }
 
 /**
@@ -63,16 +51,14 @@ export interface CompleteSlot extends z.infer<typeof SlotModel> {
  *
  * NOTE: Lazy required in case of potential circular dependencies within schema
  */
-export const RelatedSlotModel: z.ZodSchema<CompleteSlot> = z.lazy(() =>
-  SlotModel.extend({
-    team: RelatedTeamModel,
-    pokemon: RelatedPokemonModel,
-    ability: RelatedAbilityModel,
-    nature: RelatedNatureModel,
-    item: RelatedItemModel.nullish(),
-    moveOne: RelatedMoveModel,
-    moveTwo: RelatedMoveModel.nullish(),
-    moveThree: RelatedMoveModel.nullish(),
-    moveFour: RelatedMoveModel.nullish(),
-  })
-);
+export const RelatedSlotModel: z.ZodSchema<CompleteSlot> = z.lazy(() => SlotModel.extend({
+  team: RelatedTeamModel,
+  pokemon: RelatedPokemonModel,
+  ability: RelatedAbilityModel,
+  nature: RelatedNatureModel,
+  item: RelatedItemModel.nullish(),
+  moveOne: RelatedMoveModel,
+  moveTwo: RelatedMoveModel.nullish(),
+  moveThree: RelatedMoveModel.nullish(),
+  moveFour: RelatedMoveModel.nullish(),
+}))
