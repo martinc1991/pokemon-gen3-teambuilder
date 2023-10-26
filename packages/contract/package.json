@@ -7,9 +7,10 @@
   "scripts": {
     "build": "tsc",
     "dev": " tsc --watch",
-    "prisma:generate": "pnpm prisma generate --schema src/prisma/schema.prisma",
+    "prisma:generate": "pnpm prisma generate --schema src/prisma/schema.prisma && pnpm organize:imports && pnpm prettier:format",
     "lint": "tsc --noEmit --skipLibCheck",
-    "prettier:format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "prettier:format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "organize:imports": "pnpm organize-imports-cli ./tsconfig.json"
   },
   "keywords": [],
   "author": "",

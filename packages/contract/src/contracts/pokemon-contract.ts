@@ -1,7 +1,7 @@
 import { Ability, Move } from '@prisma/client';
 import { ClientInferResponseBody, initContract } from '@ts-rest/core';
 import { z } from 'zod';
-import { CompletePokemon, MoveModel } from '../prisma/zod';
+import { CompletePokemon } from '../prisma/zod';
 import { ArrayElementType } from '../utils/types/array-element-type';
 
 const c = initContract();
