@@ -1,7 +1,7 @@
 import { DamageClass, NatureNames, Slot, StatName, TypeNames } from '@prisma/client';
 import { IPokemonGetAllResponseElement } from '../contracts/pokemon-contract';
 
-export { Gender, NatureNames, StatName, TypeNames, Tier } from '@prisma/client';
+export { Gender, NatureNames, StatName, Tier, TypeNames } from '@prisma/client';
 export type { CompleteNature } from '../prisma/zod';
 
 export type EvFieldName = 'evAttack' | 'evDefense' | 'evHp' | 'evSpAttack' | 'evSpDefense' | 'evSpeed';

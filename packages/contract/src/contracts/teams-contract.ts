@@ -1,7 +1,7 @@
+import { NatureNames } from '@prisma/client';
 import { initContract } from '@ts-rest/core';
 import { z } from 'zod';
 import { TeamModel } from '../prisma/zod';
-import { NatureNames } from '@prisma/client';
 
 const c = initContract();
 
