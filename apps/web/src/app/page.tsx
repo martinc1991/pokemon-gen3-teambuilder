@@ -20,7 +20,7 @@ export default function Builder(): JSX.Element {
   return (
     <div className='w-full'>
       <PageHeader description='This is the home: a place where you can chill and relax before anything.' title='Home' />
-      <div className='w-full max-w-full flex flex-col gap-4'>
+      <div className='w-full max-w-full flex flex-col gap-4 items-center'>
         <Typography.H3>Sample Teams</Typography.H3>
         <div className='flex flex-wrap justify-center gap-6'>
           {TEAMS.length > 0 &&
