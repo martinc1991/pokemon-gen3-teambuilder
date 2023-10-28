@@ -46,7 +46,7 @@ function RightSidebarContent({ teamStore }: RightSidebarContentProps): JSX.Eleme
 
       <Separator />
 
-      <CopyButton />
+      <CopyButton slots={slots} />
       <ClearButton />
     </>
   );
