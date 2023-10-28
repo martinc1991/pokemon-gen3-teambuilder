@@ -1,3 +1,4 @@
+import CopyButton from '@components/copy-button';
 import { FilledSlot } from '@state/team/helpers';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, PokemonIcon, Typography } from 'ui';
 
@@ -30,11 +31,7 @@ export default function TeamCard({ team }: TeamCardProps): JSX.Element {
           <Typography.Small>{team.user}</Typography.Small>
         </div>
         <div className='flex gap-4 '>
-          {/* <Button size='sm' variant='outline'>
-            Details
-          </Button>
-          <Button size='sm'>Copy</Button>
-          <CopyButton /> */}
+          <CopyButton slots={team.slots} teamName={team.name} />
         </div>
       </CardFooter>
     </Card>
