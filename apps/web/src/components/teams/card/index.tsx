@@ -1,4 +1,6 @@
 import CopyButton from '@components/copy-button';
+import { RecoverTeamButton } from '@components/recover-team-button';
+import withTeamStore, { WithTeamStoreProps } from '@state/hoc/with-store';
 import { FilledSlot } from '@state/team/helpers';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, PokemonIcon, Typography } from 'ui';
 
@@ -9,11 +11,11 @@ export interface CardTeam {
   slots: FilledSlot[];
 }
 
-interface TeamCardProps {
+interface TeamCardProps extends WithTeamStoreProps {
   team: CardTeam;
 }
 
-export default function TeamCard({ team }: TeamCardProps): JSX.Element {
+function TeamCard({ team }: TeamCardProps): JSX.Element {
   return (
     <Card className='w-[450px]'>
       <CardHeader>
@@ -31,9 +33,12 @@ export default function TeamCard({ team }: TeamCardProps): JSX.Element {
           <Typography.Small>{team.user}</Typography.Small>
         </div>
         <div className='flex gap-4 '>
+          <RecoverTeamButton team={team} />
           <CopyButton slots={team.slots} teamName={team.name} />
         </div>
       </CardFooter>
     </Card>
   );
 }
+
+export default withTeamStore(TeamCard);
