@@ -35,7 +35,7 @@ export function TableContent(): JSX.Element {
   }
 
   return (
-    <div className='w-11/12 flex flex-col'>
+    <div className='w-full flex flex-col'>
       <div className='mb-4'>
         <Filters table={table} />
       </div>
