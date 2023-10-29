@@ -12,7 +12,6 @@ export * from './src/components/ui/dropdown-menu';
 export * from './src/components/ui/input';
 export * from './src/components/ui/label';
 export * from './src/components/ui/pokemon-avatar';
-export * from './src/components/ui/pokemon-icon';
 export * from './src/components/ui/pokemon-sprite';
 export * from './src/components/ui/progress';
 export * from './src/components/ui/separator';
