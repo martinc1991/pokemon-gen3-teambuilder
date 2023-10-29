@@ -34,6 +34,7 @@ function RightSidebarContent({ teamStore }: RightSidebarContentProps): JSX.Eleme
             onClick={() => {
               handleRemoveSlot(slot);
             }}
+            withBackground
           />
         );
       })}
