@@ -3,11 +3,15 @@ import { CreateTeamDto, EditTeamDto, TeamSlotDto } from '../../dto';
 
 export const teamIdStub = 'fake-team-id';
 export const teamNameStub = 'fake-team-id';
+export const teamDescriptionStub = 'fake-team-description';
+export const teamUserNameStub = 'fake-team-username';
 
 export function createTeamDtoStub(num = 1, skipSlots = false): CreateTeamDto {
-  const dto = {
+  const dto: CreateTeamDto = {
     name: teamNameStub,
     slots: slotArr.slice(0, num),
+    description: teamDescriptionStub,
+    userName: teamUserNameStub,
   };
 
   if (skipSlots) {

@@ -1,11 +1,18 @@
 import { NotFoundException } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
-import { TeamService } from '../team.service';
-import { createTeamDtoStub, editTeamDtoStub, teamIdStub, teamNameStub } from './stubs/createTeamDto.stub';
-import { paginationStub } from './stubs/pagination.stub';
 import { PrismaService } from '@providers/prisma/prisma.service';
+import { TeamService } from '../team.service';
+import {
+  createTeamDtoStub,
+  editTeamDtoStub,
+  teamDescriptionStub,
+  teamIdStub,
+  teamNameStub,
+  teamUserNameStub,
+} from './stubs/createTeamDto.stub';
+import { paginationStub } from './stubs/pagination.stub';
 
-const mockedTeam = { name: teamNameStub, id: teamIdStub };
+const mockedTeam = { name: teamNameStub, id: teamIdStub, description: teamDescriptionStub, userName: teamUserNameStub };
 
 const mockedPrismaService = {
   team: {
@@ -88,6 +95,8 @@ describe('Team controller', () => {
         data: {
           name: dto.name,
           slots: {},
+          description: dto.description,
+          userName: dto.userName,
         },
         select: {
           id: true,
