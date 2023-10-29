@@ -206,9 +206,11 @@ model Pokemon {
 
 // Teams
 model Team {
-  id    String  @id @default(uuid())
-  name  String? @default("no-name")
-  slots Slot[]
+  id          String @id @default(uuid())
+  name        String
+  description String
+  userName    String // INFO: just for now, User model not made yet
+  slots       Slot[]
 }
 
 model Slot {
