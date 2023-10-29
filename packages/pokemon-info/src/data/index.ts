@@ -6,5 +6,6 @@ export * from './moves';
 export * from './moves-names';
 export * from './natures';
 export * from './pokemon';
+export * from './sample-teams';
 export * from './tiers';
 export * from './types';

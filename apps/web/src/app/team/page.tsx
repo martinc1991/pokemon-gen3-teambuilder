@@ -28,7 +28,7 @@ function Builder({ teamStore }: BuilderProps): JSX.Element {
           description='Your current team. Click on one card to edit. When you are done, copy it from the right sidebar.'
           title='Team'
         />
-        <div className='flex flex-wrap justify-center w-11/12 gap-6'>
+        <div className='flex flex-wrap justify-center gap-6'>
           {areThereSlots
             ? slots.map((slot) => {
                 return (

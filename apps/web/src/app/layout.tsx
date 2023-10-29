@@ -19,7 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }):
       <body className='flex flex-row'>
         <LeftSidebar />
         <main className='flex justify-center flex-1'>
-          <div className='flex flex-col items-center flex-1 min-h-screen'>{children}</div>
+          <div className='flex flex-col items-center min-h-screen w-11/12 '>{children}</div>
         </main>
         <RightSidebar />
         <Toaster />

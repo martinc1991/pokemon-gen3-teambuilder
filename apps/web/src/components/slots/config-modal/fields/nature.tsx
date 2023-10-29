@@ -1,7 +1,6 @@
 import { useTeamStore } from '@state/team';
-import { FilledSlot } from '@state/team/helpers';
 import { getShortStatName } from '@utils/pokemon';
-import type { INature } from 'contract';
+import type { FilledSlot, INature } from 'contract';
 import { NATURES } from 'pokemon-info';
 import type { ComboboxItem } from 'ui';
 import { FormField } from 'ui';

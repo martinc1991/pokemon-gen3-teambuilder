@@ -1,4 +1,3 @@
-import { FilledSlot } from '@state/team/helpers';
 import { Separator, Typography } from 'ui';
 import AbilityField from '../fields/ability';
 import GenderField from '../fields/gender';
@@ -9,6 +8,7 @@ import NameField from '../fields/name';
 import NatureField from '../fields/nature';
 import ShinyField from '../fields/shiny';
 import StatsFields from '../fields/stats';
+import { FilledSlot } from 'contract';
 
 export const BASIC_TAB_NAME = 'basic';
 

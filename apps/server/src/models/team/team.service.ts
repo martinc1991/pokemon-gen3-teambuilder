@@ -49,6 +49,8 @@ export class TeamService {
     const newTeam = await this.prisma.team.create({
       data: {
         name: dto.name,
+        description: dto.description,
+        userName: dto.userName,
         slots: {},
       },
       select: {

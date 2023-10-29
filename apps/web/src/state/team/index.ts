@@ -1,9 +1,9 @@
 import { TEAM_STORAGE_NAME } from '@state/team/constants';
-import { MAX_TEAM_MEMBERS, type IPokemon } from 'contract';
+import { FilledSlot, MAX_TEAM_MEMBERS, type IPokemon } from 'contract';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
-import type { FilledSlot, TeamState, TrashBinTeam } from './helpers';
+import type { TeamState, TrashBinTeam } from './helpers';
 import { BaseSlot, genLocalTeamId } from './helpers';
 
 interface TeamActions {

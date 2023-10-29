@@ -1,7 +1,7 @@
 import { client } from '@rq-client/index';
 import { useTeamStore } from '@state/team';
-import { FilledSlot } from '@state/team/helpers';
 import clsx from 'clsx';
+import { FilledSlot } from 'contract';
 import { useEffect, useMemo, useState } from 'react';
 import { FormField, Separator, TypeBadge, Typography } from 'ui';
 
