@@ -1,7 +1,6 @@
 import { useTeamStore } from '@state/team';
-import { FilledSlot } from '@state/team/helpers';
 import { capitalize } from '@utils/common';
-import type { Gender } from 'contract';
+import type { FilledSlot, Gender } from 'contract';
 import type { ComboboxItem } from 'ui';
 import { FormField } from 'ui';
 

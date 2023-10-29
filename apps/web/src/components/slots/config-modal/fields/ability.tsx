@@ -1,5 +1,5 @@
 import { useTeamStore } from '@state/team';
-import { FilledSlot } from '@state/team/helpers';
+import { FilledSlot } from 'contract';
 import type { CompleteAbility } from 'contract/dist/prisma/zod';
 import type { ComboboxItem } from 'ui';
 import { FormField } from 'ui';

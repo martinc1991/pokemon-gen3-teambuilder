@@ -1,18 +1,11 @@
 import CopyButton from '@components/copy-button';
 import { RecoverTeamButton } from '@components/recover-team-button';
 import withTeamStore, { WithTeamStoreProps } from '@state/hoc/with-store';
-import { FilledSlot } from '@state/team/helpers';
+import { ITeam } from 'contract';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, PokemonIcon, Typography } from 'ui';
 
-export interface CardTeam {
-  user: string;
-  name: string;
-  description: string;
-  slots: FilledSlot[];
-}
-
 interface TeamCardProps extends WithTeamStoreProps {
-  team: CardTeam;
+  team: ITeam;
 }
 
 function TeamCard({ team }: TeamCardProps): JSX.Element {
@@ -30,7 +23,7 @@ function TeamCard({ team }: TeamCardProps): JSX.Element {
       <CardFooter className='flex justify-between h-14'>
         <div className='flex gap-2'>
           <Typography.Muted>By:</Typography.Muted>
-          <Typography.Small>{team.user}</Typography.Small>
+          <Typography.Small>{team.userName}</Typography.Small>
         </div>
         <div className='flex gap-4 '>
           <RecoverTeamButton team={team} />

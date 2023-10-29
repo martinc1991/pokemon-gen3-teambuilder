@@ -1,11 +1,11 @@
 import { GendersText } from '@components/pokemon-table/components/genders-text';
-import { FilledSlot } from '@state/team/helpers';
 import { calculateHiddenPowerType } from '@utils/pokemon';
 import { Card, CardContent, CardHeader, PokemonSprite, TypeBadge, Typography } from 'ui';
 import PokemonCardMoves from './components/card-moves';
 import PokemonCardStats from './components/card-stats';
 import CardInfoField from './components/info-field';
 import { getCardTitleName } from './utils/get-card-title';
+import { FilledSlot } from 'contract';
 
 interface PokemonCardProps {
   slot: FilledSlot;

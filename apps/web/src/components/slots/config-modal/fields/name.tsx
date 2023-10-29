@@ -1,6 +1,5 @@
 import { useTeamStore } from '@state/team';
-import { FilledSlot } from '@state/team/helpers';
-import { MAX_POKEMON_NAME_LENGTH } from 'contract';
+import { FilledSlot, MAX_POKEMON_NAME_LENGTH } from 'contract';
 import { FormField } from 'ui';
 
 interface NameFieldProps {

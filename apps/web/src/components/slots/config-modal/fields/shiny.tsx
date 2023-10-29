@@ -1,5 +1,5 @@
 import { useTeamStore } from '@state/team';
-import { FilledSlot } from '@state/team/helpers';
+import { FilledSlot } from 'contract';
 import { FormField } from 'ui';
 
 interface ShinyFieldProps {

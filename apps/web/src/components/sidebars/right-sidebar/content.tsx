@@ -1,9 +1,9 @@
 'use client';
 
 import withTeamStore, { WithTeamStoreProps } from '@state/hoc/with-store';
-import { BaseSlot, FilledSlot } from '@state/team/helpers';
+import { BaseSlot } from '@state/team/helpers';
 import { formatPokemonName } from '@utils/pokemon';
-import { MAX_TEAM_MEMBERS } from 'contract';
+import { FilledSlot, MAX_TEAM_MEMBERS } from 'contract';
 import { PokemonAvatar, Separator } from 'ui';
 import ClearButton from '../../clear-button';
 import CopyButton from '../../copy-button';

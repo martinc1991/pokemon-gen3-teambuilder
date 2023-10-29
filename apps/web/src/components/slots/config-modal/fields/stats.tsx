@@ -1,7 +1,6 @@
 import { useTeamStore } from '@state/team';
-import { FilledSlot } from '@state/team/helpers';
 import { calculateStat, getShortStatName, getTotalEvs } from '@utils/pokemon';
-import type { CompleteNature, EvFieldName, IvFieldName, StatName } from 'contract';
+import type { CompleteNature, EvFieldName, FilledSlot, IvFieldName, StatName } from 'contract';
 import { MAX_INDIVIDUAL_EV, MAX_INDIVIDUAL_IV, MAX_POSSIBLE_EVS } from 'contract';
 import { NATURES } from 'pokemon-info';
 import type { ChangeEvent } from 'react';

@@ -1,4 +1,4 @@
-import { FilledSlot } from '@state/team/helpers';
+import { FilledSlot } from 'contract';
 import { Typography } from 'ui';
 
 interface PokemonCardStatsProps {

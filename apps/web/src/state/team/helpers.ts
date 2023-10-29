@@ -1,4 +1,4 @@
-import type { IPokemon, ISlot } from 'contract';
+import type { FilledSlot, IPokemon } from 'contract';
 import { Gender, MAX_HAPPINESS, MAX_INDIVIDUAL_IV, MAX_LEVEL, NatureNames } from 'contract';
 import { nanoid } from 'nanoid';
 
@@ -10,11 +10,6 @@ export interface TeamState {
 }
 
 export type TrashBinTeam = Omit<TeamState, 'selectedSlotIndex'>;
-
-export interface FilledSlot extends Omit<ISlot, 'team' | 'ability' | 'nature' | 'item'> {
-  pokemon: IPokemon;
-  order: number;
-}
 
 // This is used as a base for a empty TeamSlot
 export class BaseSlot implements Omit<FilledSlot, 'pokemon'> {

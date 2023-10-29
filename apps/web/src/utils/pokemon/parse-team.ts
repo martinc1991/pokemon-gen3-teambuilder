@@ -1,5 +1,4 @@
-import { FilledSlot } from '@state/team/helpers';
-import type { StatName } from 'contract';
+import type { FilledSlot, StatName } from 'contract';
 import { capitalize, formatString } from '../common';
 import { calculateHiddenPowerType, getShortStatName } from './stats';
 

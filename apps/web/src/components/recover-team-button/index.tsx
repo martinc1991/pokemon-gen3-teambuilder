@@ -1,5 +1,5 @@
-import { CardTeam } from '@components/teams/card';
 import { useTeamStore } from '@state/team';
+import { ITeam } from 'contract';
 import {
   Button,
   Dialog,
@@ -17,7 +17,7 @@ import { ToastContent } from './toast-content';
 const descriptionTxt = 'This will replace your current team with the selected one.';
 
 interface RecoverTeamButtonProps {
-  team: CardTeam;
+  team: ITeam;
 }
 
 export function RecoverTeamButton({ team }: RecoverTeamButtonProps): JSX.Element {
