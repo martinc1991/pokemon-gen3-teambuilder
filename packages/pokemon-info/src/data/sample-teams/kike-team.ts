@@ -1,7 +1,8 @@
-import { CardTeam } from '@components/teams/card';
+import { ITeam } from 'contract';
 
-export const KIKE_TEAM: CardTeam = {
-  user: 'Kike',
+export const KIKE_TEAM: ITeam = {
+  id: 'sample-team-kike',
+  userName: 'Kike',
   name: 'Initial team',
   description: 'Put together 5 minutes into the game.',
   slots: [

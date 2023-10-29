@@ -1,7 +1,8 @@
-import { CardTeam } from '@components/teams/card';
+import { ITeam } from 'contract';
 
-export const RED_TEAM: CardTeam = {
-  user: 'Red',
+export const RED_TEAM: ITeam = {
+  id: 'sample-team-red',
+  userName: 'Red',
   name: "Red's team",
   description: 'The team Red uses when you first meet him in Mt Silver.',
   slots: [

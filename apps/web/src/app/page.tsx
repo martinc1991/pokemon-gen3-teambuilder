@@ -2,12 +2,8 @@
 
 import PageHeader from '@components/page-header';
 import TeamCard from '@components/teams/card';
-import { KIKE_TEAM } from '@state/kike-team';
-import { MY_TEAM } from '@state/my-team';
-import { RED_TEAM } from '@state/red-team';
-import { WHITNEY_TEAM } from '@state/whitney-team';
-import { YOUNGTER_JOEY_TEAM } from '@state/yougster-joey-team';
 import type { Metadata } from 'next';
+import { KIKE_TEAM, MY_TEAM, RED_TEAM, WHITNEY_TEAM, YOUNGTER_JOEY_TEAM } from 'pokemon-info';
 import { Typography } from 'ui';
 
 export const metadata: Metadata = {

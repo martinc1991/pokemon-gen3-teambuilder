@@ -1,7 +1,8 @@
-import { CardTeam } from '@components/teams/card';
+import { ITeam } from 'contract';
 
-export const WHITNEY_TEAM: CardTeam = {
-  user: 'Whitney',
+export const WHITNEY_TEAM: ITeam = {
+  id: 'sample-team-whitney',
+  userName: 'Whitney',
   name: 'Happy Nightmare',
   description: 'This is why most people stopped playing pokemon.',
   slots: [

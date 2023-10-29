@@ -1,7 +1,8 @@
-import { CardTeam } from '@components/teams/card';
+import { ITeam } from 'contract';
 
-export const YOUNGTER_JOEY_TEAM: CardTeam = {
-  user: 'Youngster Joey',
+export const YOUNGTER_JOEY_TEAM: ITeam = {
+  id: 'sample-team-youngster-joey',
+  userName: 'Youngster Joey',
   name: 'Rattata rules',
   description: 'My Rattata is in the top percentage of all Rattata.',
   slots: [
