@@ -17,7 +17,6 @@
   "license": "ISC",
   "devDependencies": {
     "prisma": "^5.3.1",
-    "typescript": "^5.2.2",
     "zod-prisma": "^0.5.4"
   },
   "dependencies": {
