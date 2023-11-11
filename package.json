@@ -9,6 +9,7 @@
     "studio": "turbo studio",
     "ui:add": "pnpm --filter ui ui:add",
     "prisma:generate": "turbo prisma:generate",
+    "prisma:migrate": "turbo prisma:migrate",
     "db:seed": "turbo db:seed",
     "prepare": "husky install"
   },

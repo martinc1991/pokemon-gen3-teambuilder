@@ -22,6 +22,9 @@
     "prisma:generate": {
       "cache": true
     },
+    "prisma:migrate": {
+      "cache": true
+    },
     "db:seed": {
       "cache": false
     },
