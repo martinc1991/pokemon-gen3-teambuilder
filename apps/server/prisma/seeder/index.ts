@@ -121,9 +121,9 @@ export async function seeder() {
       // Seed pokemon
       console.log('Upserting pokemons');
       const POKEMON__PROMISES = [];
-      allPokemon.forEach(async ({ name, ...pkmn }) => {
+      allPokemon.forEach(async ({ nationalPokedexNumber, ...pkmn }) => {
         const p = client.pokemon.upsert({
-          where: { name },
+          where: { nationalPokedexNumber },
           update: {
             ...pkmn,
             typeOne: { connect: { name: pkmn.typeOne } },
@@ -132,21 +132,21 @@ export async function seeder() {
               connect: pkmn.abilities.filter((abilityName) => abilitiesNames.includes(abilityName)).map((name) => ({ name })),
             },
             learnset: {
-              connect: LEARNSETS[name].map((moveName) => {
+              connect: LEARNSETS[pkmn.name].map((moveName) => {
                 return { name: getMoveName(moveName) };
               }),
             },
           },
           create: {
             ...pkmn,
-            name,
+            nationalPokedexNumber,
             typeOne: { connect: { name: pkmn.typeOne } },
             typeTwo: { connect: { name: pkmn.typeTwo ?? 'empty' } },
             abilities: {
               connect: pkmn.abilities.filter((abilityName) => abilitiesNames.includes(abilityName)).map((name) => ({ name })),
             },
             learnset: {
-              connect: LEARNSETS[name].map((moveName) => {
+              connect: LEARNSETS[pkmn.name].map((moveName) => {
                 return { name: getMoveName(moveName) };
               }),
             },
