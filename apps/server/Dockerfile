@@ -34,14 +34,17 @@ FROM base as server
 
 WORKDIR /usr/src/app
 
-# Copy dist folder generated in the previous step
-COPY --from=builder /usr/src/app/prod/server/dist ./dist
-COPY --from=builder /usr/src/app/prod/server/node_modules ./node_modules
-COPY --from=builder /usr/src/app/prod/server/prisma ./prisma
-COPY --from=builder /usr/src/app/prod/server/package.json .
+# Copy necessary files generated in the previous step
+COPY --chown=node:node --from=builder /usr/src/app/prod/server/dist ./dist
+COPY --chown=node:node --from=builder /usr/src/app/prod/server/node_modules ./node_modules
+COPY --chown=node:node --from=builder /usr/src/app/prod/server/prisma ./prisma
+COPY --chown=node:node --from=builder /usr/src/app/prod/server/package.json .
 
 # TODO: replace this line by just copying the client generated in the build stage before from node_modules/@prisma
 RUN pnpm prisma generate
+
+# Set NODE_ENV to production to optmize performance
+ENV NODE_ENV production
 
 EXPOSE 3333
 
