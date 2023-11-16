@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  pg3t-dev-db:
+    image: postgres:15.4
+    restart: unless-stopped
+    ports:
+      - 5434:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: pokemongen3teambuilderdb
+    networks:
+      - pg3t-network
+  pg3t-server:
+    image: pg3t-server
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: ./apps/server/Dockerfile
+      target: server
+    environment:
+      - ENV_NAME=dev
+      - PORT=3333
+      - DATABASE_URL=postgresql://postgres:123@pg3t-dev-db:5432/pokemongen3teambuilderdb?schema=public
+    ports:
+      - 3333:3333
+    depends_on:
+      - pg3t-dev-db
+    networks:
+      - pg3t-network
+  pg3t-seeder:
+    image: pg3t-seeder
+    restart: on-failure
+    build:
+      context: .
+      dockerfile: ./apps/server/Dockerfile
+      target: seeder
+    environment:
+      - ENV_NAME=dev
+      - PORT=3333
+      - DATABASE_URL=postgresql://postgres:123@pg3t-dev-db:5432/pokemongen3teambuilderdb?schema=public
+    depends_on:
+      - pg3t-server
+    networks:
+      - pg3t-network
+networks:
+  pg3t-network:
