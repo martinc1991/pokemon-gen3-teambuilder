@@ -15,7 +15,7 @@
     "prisma:migrate": "pnpm prisma migrate dev",
     "db:seed": "ts-node prisma/seed.ts",
     "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/main",
+    "start:prod": "pnpm prisma migrate deploy && node dist/src/main",
     "lint": "eslint \"{src,prisma,test}/**/*.ts\" --fix && pnpm typecheck",
     "typecheck": "tsc --noEmit --skipLibCheck",
     "test": "jest",
