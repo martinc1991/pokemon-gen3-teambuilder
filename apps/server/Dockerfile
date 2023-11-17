@@ -17,13 +17,13 @@ WORKDIR /usr/src/app
 COPY . .
 
 # Install dependencies for all apps and packages
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --filter server... --frozen-lockfile
 
 # Generate prisma client
 RUN pnpm prisma:generate
 
 # Build server app and all the packages it depends on 
-RUN pnpm --filter ...server build
+RUN pnpm --filter server... build
 
 # Creates a portable package from a workspace, copying files and installing dependencies (including dependencies from the workspace)
 RUN pnpm deploy --filter=server --prod /usr/src/app/prod/server
