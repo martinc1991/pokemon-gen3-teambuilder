@@ -12,10 +12,8 @@
     "dev": " tsc --watch",
     "lint": "tsc --noEmit --skipLibCheck"
   },
-  "devDependencies": {
-    "pokenode-ts": "^1.20.0"
-  },
   "dependencies": {
-    "contract": "workspace:*"
+    "contract": "workspace:*",
+    "pokenode-ts": "^1.20.0"
   }
 }
