@@ -8,54 +8,46 @@ ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
 
-# Add turbo and prisma globally
-RUN pnpm add -g prisma
+FROM base AS builder
 
-FROM base as builder
-
-WORKDIR /usr/src/app
+# Set working directory
+WORKDIR /app
+RUN pnpm add -g turbo
 COPY . .
+RUN turbo prune server --docker
 
-# Install dependencies for all apps and packages
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --filter server... --frozen-lockfile
+FROM base AS installer
+RUN apt-get update
+WORKDIR /app
 
-# Generate prisma client
+# First install dependencies (as they change less often)
+COPY --from=builder /app/out/json/ .
+COPY --from=builder /app/out/pnpm-lock.yaml .
+RUN pnpm install
+
+# Build the project and its dependencies
+COPY --from=builder /app/out/full/ .
+COPY turbo.json turbo.json
+
+ENV ENV_NAME=dev
+ENV PORT=3333
+ENV DATABASE_URL=postgresql://postgres:123@pg3t-dev-db:5432/pokemongen3teambuilderdb?schema=public
+
 RUN pnpm prisma:generate
 
-# Build server app and all the packages it depends on 
 RUN pnpm --filter server... build
 
-# Creates a portable package from a workspace, copying files and installing dependencies (including dependencies from the workspace)
-RUN pnpm deploy --filter=server --prod /usr/src/app/prod/server
+FROM base AS server
+WORKDIR /app
 
-# 2. From what we built before, we build both server and web apps
-# SERVER
-FROM base as server
+COPY --from=installer /app .
 
-WORKDIR /usr/src/app
+RUN pnpm prisma:generate
 
-# Copy necessary files generated in the previous step
-COPY --chown=node:node --from=builder /usr/src/app/prod/server/dist ./dist
-COPY --chown=node:node --from=builder /usr/src/app/prod/server/node_modules ./node_modules
-COPY --chown=node:node --from=builder /usr/src/app/prod/server/prisma ./prisma
-COPY --chown=node:node --from=builder /usr/src/app/prod/server/package.json .
-
-# TODO: replace this line by just copying the client generated in the build stage before from node_modules/@prisma
-RUN pnpm prisma generate
-
-# Set NODE_ENV to production to optmize performance
 ENV NODE_ENV production
 
 EXPOSE 3333
 
+WORKDIR /app/apps/server
+
 CMD ["pnpm", "start:prod"]
-
-# 3. From the server, we build an image that would run only once to seed the db
-# SEEDER
-FROM builder as seeder
-
-WORKDIR /usr/src/app
-
-RUN pnpm add ts-node --filter=server
-
-CMD ["pnpm", "db:seed"]
