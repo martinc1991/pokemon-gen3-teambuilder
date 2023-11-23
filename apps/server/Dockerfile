@@ -8,8 +8,6 @@ ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
 
-RUN pnpm add -g prisma
-
 FROM base AS builder
 
 # Set working directory
@@ -25,7 +23,7 @@ WORKDIR /app
 # First install dependencies (as they change less often)
 COPY --from=builder /app/out/json/ .
 COPY --from=builder /app/out/pnpm-lock.yaml .
-RUN pnpm install
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install
 
 # Build the project and its dependencies
 COPY --from=builder /app/out/full/ .
@@ -46,10 +44,8 @@ COPY --chown=node:node --from=installer /app/deployed/server/node_modules ./node
 COPY --chown=node:node --from=installer /app/deployed/server/prisma ./prisma
 COPY --chown=node:node --from=installer /app/deployed/server/package.json .
 
-# COPY --chown=node:node --from=installer /app/deployed/server .
-
 # TODO: replace this line by just copying the client generated in the build stage before from node_modules/@prisma
-RUN pnpm prisma generate
+RUN pnpm dlx prisma generate
 
 # Set NODE_ENV to production to optmize performance
 ENV NODE_ENV production
