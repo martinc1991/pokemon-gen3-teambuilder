@@ -20,7 +20,7 @@
     "organize-imports-cli": "^0.10.0",
     "prettier-plugin-tailwindcss": "^0.5.3",
     "prettier": "^3.0.3",
-    "turbo": "latest",
+    "turbo": "^1.10.16",
     "typescript": "^5.2.2"
   },
   "packageManager": "pnpm@8.6.10"
