@@ -1,7 +1,10 @@
 FROM node:20-slim AS base
 
 # Needed for prisma
-RUN apt-get update -y && apt-get install -y openssl
+RUN apt-get update -y \
+    && apt-get install -y openssl \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # Enable pnpm
 ENV PNPM_HOME="/pnpm"
@@ -17,7 +20,10 @@ COPY . .
 RUN turbo prune server --docker
 
 FROM base AS installer
-RUN apt-get update
+RUN apt-get update -y \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
 
 # First install dependencies (as they change less often)
@@ -28,10 +34,6 @@ RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install
 # Build the project and its dependencies
 COPY --from=builder /app/out/full/ .
 COPY turbo.json turbo.json
-
-ENV ENV_NAME=dev
-ENV PORT=3333
-ENV DATABASE_URL=postgresql://postgres:123@pg3t-dev-db:5432/pokemongen3teambuilderdb?schema=public
 
 RUN pnpm prisma:generate && pnpm --filter server... build && pnpm deploy --filter=server --prod /app/deployed/server
 
@@ -45,6 +47,7 @@ COPY --chown=node:node --from=installer /app/deployed/server/prisma ./prisma
 COPY --chown=node:node --from=installer /app/deployed/server/package.json .
 
 # TODO: replace this line by just copying the client generated in the build stage before from node_modules/@prisma
+# TODO: see: https://www.prisma.io/docs/concepts/components/prisma-client/working-with-prismaclient/generating-prisma-client#the-location-of-prisma-client
 RUN pnpm dlx prisma generate
 
 # Set NODE_ENV to production to optmize performance
