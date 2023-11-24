@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "docker compose -f docker-compose-dev.yml up -d",
+    "dev": "docker compose -f docker-compose-dev.yml up",
     "prisma:migrate": "dotenv -e .env.dev -- pnpm prisma migrate dev",
     "db:seed": "dotenv -e .env.dev -- ts-node prisma/seed.ts",
     "studio": "pnpm dev && dotenv -e .env.dev --  prisma studio",
