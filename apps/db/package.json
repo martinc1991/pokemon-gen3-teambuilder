@@ -1,0 +1,35 @@
+{
+  "name": "db",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "dev": "docker compose -f docker-compose-dev.yml up -d",
+    "prisma:generate": "pnpm prisma generate",
+    "prisma:migrate": "pnpm prisma migrate dev",
+    "db:seed": "ts-node prisma/seed.ts",
+    "studio": "prisma studio",
+    "prettier:format": "prettier --write \"prisma/**/*.ts\"",
+    "lint": "eslint \"prisma/**/*.ts\" --fix && pnpm typecheck",
+    "typecheck": "tsc --noEmit --skipLibCheck"
+  },
+  "keywords": [],
+  "author": "MartinC",
+  "license": "ISC",
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
+  "devDependencies": {
+    "@prisma/client": "^5.3.1",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "dotenv-cli": "^7.3.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint": "^8.42.0",
+    "pokemon-info": "workspace:*",
+    "prisma": "^5.3.1",
+    "ts-loader": "^9.4.3",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.2.0"
+  }
+}
