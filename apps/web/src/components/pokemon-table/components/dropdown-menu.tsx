@@ -17,8 +17,6 @@ export default function RowDropdownMenu(props: RowDropdownMenuProps): JSX.Elemen
     if (!addPokemonDisabled) addPokemon(props.pokemon);
   }
 
-  const namePokemon = props.pokemon.name;
-
   return (
     <div className='flex flex-row place-content-center'>
       <DropdownMenu>
@@ -33,7 +31,7 @@ export default function RowDropdownMenu(props: RowDropdownMenuProps): JSX.Elemen
             Add to team
           </DropdownMenuItem>
           <DropdownMenuItem disabled={addPokemonDisabled}>
-            <Link href={`/pokemon/${namePokemon}`}>Details</Link>
+            <Link href={`/pokemon/${props.pokemon.name}`}>Details</Link>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
