@@ -1,0 +1,28 @@
+version: '3.8'
+name: pg3t
+services:
+  pg3t-db:
+    image: postgres:15.4
+    restart: unless-stopped
+    ports:
+      - 5435:5432
+    env_file:
+      - ./apps/db/.env.prod
+    networks:
+      - pg3t-network
+  pg3t-server:
+    image: pg3t-server
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: ./apps/server/Dockerfile
+    env_file:
+      - ./apps/server/.env.prod
+    ports:
+      - 3333:3333
+    depends_on:
+      - pg3t-db
+    networks:
+      - pg3t-network
+networks:
+  pg3t-network:

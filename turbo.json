@@ -22,7 +22,16 @@
     "prisma:generate": {
       "cache": true
     },
+    "prisma:migrate": {
+      "cache": true
+    },
     "db:seed": {
+      "cache": false
+    },
+    "prisma:migrate:prod": {
+      "cache": false
+    },
+    "db:seed:prod": {
       "cache": false
     },
     "prettier:format": {

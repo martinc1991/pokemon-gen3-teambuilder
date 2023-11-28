@@ -1,51 +1,20 @@
-# Turborepo Tailwind CSS starter
+# Pokemon Gen 3 Teambuilder
 
-This is an official starter Turborepo.
+## How to run
 
-## Using this example
+### Local dev environment
 
-Run the following command:
+Node 20 is required. Also pnpm. Don't forget to make the .env.dev files on apps/db and apps/server (see README on both apps).
 
-```sh
-npx create-turbo@latest -e with-tailwind
-```
+- From the root run `pnpm install`
+- From the root run `pnpm prisma:generate`
+- From the root run `pnpm dev` (this is going to run web, server, and db apps)
+- While the db is still running, still from the root (using another terminal) run `pnpm prisma:migrate` and then run `pnpm db:seed`
+- Go to localost:3000
 
-## What is inside?
+### Server on docker
 
-This Turborepo includes the following packages/apps:
-
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app with [Tailwind CSS](https://tailwindcss.com/)
-- `web`: another [Next.js](https://nextjs.org/) app with [Tailwind CSS](https://tailwindcss.com/)
-- `ui`: a stub React component library with [Tailwind CSS](https://tailwindcss.com/) shared by both `web` and `docs` applications
-- `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `tsconfig`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Building packages/ui
-
-This example is setup to build `packages/ui` and output the transpiled source and compiled styles to `dist/`. This was chosen to make sharing one `tailwind.config.js` as easy as possible, and to ensure only the CSS that is used by the current application and its dependencies is generated.
-
-Another option is to consume `packages/ui` directly from source without building. If using this option, you will need to update your `tailwind.config.js` to be aware of your package locations, so it can find all usages of the `tailwindcss` class names.
-
-For example, in [tailwind.config.js](packages/tailwind-config/tailwind.config.js):
-
-```js
-  content: [
-    // app content
-    `src/**/*.{js,ts,jsx,tsx}`,
-    // include packages if not transpiling
-    "../../packages/**/*.{js,ts,jsx,tsx}",
-  ],
-```
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [Tailwind CSS](https://tailwindcss.com/) for styles
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+- From the root run `docker compose up`
+- From the root (using another terminal) run `pnpm prisma:migrate:prod` and then run `pnpm db:seed:prod`
+- Install dependencies for apps/web and run the app
+- Go to localost:3000

@@ -9,6 +9,7 @@ import {
   getMovesPromises,
   getPokemonPromises,
 } from 'pokemon-info';
+import { isDbSeeded } from './helpers';
 import { prismaSeederClient } from './seederClient';
 
 const CYAN = '\x1b[36m';
@@ -20,6 +21,14 @@ export async function seeder() {
   await prismaSeederClient.$transaction(
     async (client) => {
       performance.mark('start');
+
+      const dbSeeded = await isDbSeeded();
+
+      if (dbSeeded) {
+        // Dont seed db if already seeded
+        console.log('DB already seeded');
+        return;
+      }
 
       // Send pokemon promises
       const pokemonPromises = getPokemonPromises();
