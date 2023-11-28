@@ -1,14 +1,4 @@
-import {
-  ABILITIES,
-  DEOXYS_VARIATIONS,
-  ITEMS,
-  LEARNSETS,
-  NATURES,
-  TYPES,
-  getMoveName,
-  getMovesPromises,
-  getPokemonPromises,
-} from 'pokemon-info';
+import { ABILITIES, ITEMS, LEARNSETS, NATURES, TYPES, getMoveName, getMovesPromises, pokemon_data as allPokemon } from 'pokemon-info';
 import { isDbSeeded } from './helpers';
 import { prismaSeederClient } from './seederClient';
 
@@ -30,8 +20,7 @@ export async function seeder() {
         return;
       }
 
-      // Send pokemon promises
-      const pokemonPromises = getPokemonPromises();
+      // Send promises
       const movesPromises = getMovesPromises();
 
       // Seed types
@@ -106,9 +95,9 @@ export async function seeder() {
       await Promise.all(ABILITIES__PROMISES);
       console.log('Upserting abilities finished');
 
-      const pokemons = await pokemonPromises;
+      console.log('Awaiting move promises');
       const moves = await movesPromises;
-      const allPokemon = pokemons.concat(DEOXYS_VARIATIONS);
+      console.log('Move promises fullfilled');
 
       // Seed moves
       console.log('Upserting moves');
