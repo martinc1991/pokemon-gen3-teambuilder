@@ -1,5 +1,4 @@
 export * from './abilities';
-export * from './deoxys';
 export * from './items';
 export * from './learnsets';
 export * from './moves';

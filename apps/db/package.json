@@ -8,7 +8,7 @@
     "db:seed": "dotenv -e .env.dev -- ts-node prisma/seed.ts",
     "prisma:migrate:prod": "dotenv -e .env.prod -- pnpm prisma migrate deploy",
     "db:seed:prod": "dotenv -e .env.prod -- ts-node prisma/seed.ts",
-    "studio": "pnpm dev && dotenv -e .env.dev --  prisma studio",
+    "studio": "dotenv -e .env.dev --  prisma studio",
     "prettier:format": "prettier --write \"prisma/**/*.ts\"",
     "lint": "eslint \"prisma/**/*.ts\" --fix && pnpm typecheck",
     "typecheck": "tsc --noEmit --skipLibCheck"
