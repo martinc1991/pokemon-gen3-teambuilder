@@ -1,0 +1,3532 @@
+[
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "absorb",
+    "description": "Drains half the damage inflicted to heal the user.",
+    "power": 20,
+    "pp": 25,
+    "target": "selectedPokemon",
+    "type": "grass"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "acid-armor",
+    "description": "Raises the user's Defense by two stages.",
+    "power": 0,
+    "pp": 20,
+    "target": "user",
+    "type": "poison"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "acid",
+    "description": "Has a 10% chance to lower the target's Special Defense by one stage.",
+    "power": 40,
+    "pp": 30,
+    "target": "allOpponents",
+    "type": "poison"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "physical",
+    "name": "aerial-ace",
+    "description": "Never misses.",
+    "power": 60,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "flying"
+  },
+  {
+    "accuracy": 95,
+    "damageClass": "physical",
+    "name": "aero-blast",
+    "description": "Has an increased chance for a critical hit.",
+    "power": 100,
+    "pp": 5,
+    "target": "selectedPokemon",
+    "type": "flying"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "agility",
+    "description": "Raises the user's Speed by two stages.",
+    "power": 0,
+    "pp": 30,
+    "target": "user",
+    "type": "psychic"
+  },
+  {
+    "accuracy": 95,
+    "damageClass": "physical",
+    "name": "air-cutter",
+    "description": "Has an increased chance for a critical hit.",
+    "power": 60,
+    "pp": 25,
+    "target": "allOpponents",
+    "type": "flying"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "amnesia",
+    "description": "Raises the user's Special Defense by two stages.",
+    "power": 0,
+    "pp": 20,
+    "target": "user",
+    "type": "psychic"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "ancient-power",
+    "description": "Has a 10% chance to raise all of the user's stats by one stage.",
+    "power": 60,
+    "pp": 5,
+    "target": "selectedPokemon",
+    "type": "rock"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "arm-thrust",
+    "description": "Hits 2-5 times in one turn.",
+    "power": 15,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "fighting"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "aromatherapy",
+    "description": "Cures the entire party of major status effects.",
+    "power": 0,
+    "pp": 5,
+    "target": "userAndAllies",
+    "type": "grass"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "assist",
+    "description": "Randomly selects and uses one of the trainer's other Pokémon's moves.",
+    "power": 0,
+    "pp": 20,
+    "target": "user",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "astonish",
+    "description": "Has a 30% chance to make the target flinch.",
+    "power": 30,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "ghost"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "status",
+    "name": "attract",
+    "description": "Target falls in love if it has the opposite gender, and has a 50% chance to refuse attacking the user.",
+    "power": 0,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "aurora-beam",
+    "description": "Has a 10% chance to lower the target's Attack by one stage.",
+    "power": 65,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "ice"
+  },
+  {
+    "accuracy": 85,
+    "damageClass": "physical",
+    "name": "barrage",
+    "description": "Hits 2-5 times in one turn.",
+    "power": 15,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "barrier",
+    "description": "Raises the user's Defense by two stages.",
+    "power": 0,
+    "pp": 20,
+    "target": "user",
+    "type": "psychic"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "baton-pass",
+    "description": "Allows the trainer to switch out the user and pass effects along to its replacement.",
+    "power": 0,
+    "pp": 40,
+    "target": "user",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "beat-up",
+    "description": "Hits once for every conscious Pokémon the trainer has.",
+    "power": 0,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "dark"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "belly-drum",
+    "description": "User pays half its max HP to max out its Attack.",
+    "power": 0,
+    "pp": 10,
+    "target": "user",
+    "type": "normal"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "physical",
+    "name": "bide",
+    "description": "User waits for two turns, then hits back for twice the damage it took.",
+    "power": 0,
+    "pp": 10,
+    "target": "user",
+    "type": "normal"
+  },
+  {
+    "accuracy": 85,
+    "damageClass": "physical",
+    "name": "bind",
+    "description": "Prevents the target from fleeing and inflicts damage for 2-5 turns.",
+    "power": 15,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "bite",
+    "description": "Has a 30% chance to make the target flinch.",
+    "power": 60,
+    "pp": 25,
+    "target": "selectedPokemon",
+    "type": "dark"
+  },
+  {
+    "accuracy": 90,
+    "damageClass": "special",
+    "name": "blast-burn",
+    "description": "User foregoes its next turn to recharge.",
+    "power": 150,
+    "pp": 5,
+    "target": "selectedPokemon",
+    "type": "fire"
+  },
+  {
+    "accuracy": 90,
+    "damageClass": "special",
+    "name": "blaze-kick",
+    "description": "Has an increased chance for a critical hit and a 10% chance to burn the target.",
+    "power": 85,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "fire"
+  },
+  {
+    "accuracy": 70,
+    "damageClass": "special",
+    "name": "blizzard",
+    "description": "Has a 10% chance to freeze the target.",
+    "power": 110,
+    "pp": 5,
+    "target": "allOpponents",
+    "type": "ice"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "block",
+    "description": "Prevents the target from leaving battle.",
+    "power": 0,
+    "pp": 5,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "body-slam",
+    "description": "Has a 30% chance to paralyze the target.",
+    "power": 85,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 85,
+    "damageClass": "physical",
+    "name": "bone-club",
+    "description": "Has a 10% chance to make the target flinch.",
+    "power": 65,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "ground"
+  },
+  {
+    "accuracy": 90,
+    "damageClass": "physical",
+    "name": "bonemerang",
+    "description": "Hits twice in one turn.",
+    "power": 50,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "ground"
+  },
+  {
+    "accuracy": 90,
+    "damageClass": "physical",
+    "name": "bone-rush",
+    "description": "Hits 2-5 times in one turn.",
+    "power": 25,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "ground"
+  },
+  {
+    "accuracy": 85,
+    "damageClass": "physical",
+    "name": "bounce",
+    "description": "User bounces high into the air, dodging all attacks, and hits next turn.",
+    "power": 85,
+    "pp": 5,
+    "target": "selectedPokemon",
+    "type": "flying"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "brick-break",
+    "description": "Destroys Reflect and Light Screen.",
+    "power": 75,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "fighting"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "bubble-beam",
+    "description": "Has a 10% chance to lower the target's Speed by one stage.",
+    "power": 65,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "water"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "bubble",
+    "description": "Has a 10% chance to lower the target's Speed by one stage.",
+    "power": 40,
+    "pp": 30,
+    "target": "allOpponents",
+    "type": "water"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "bulk-up",
+    "description": "Raises the user's Attack and Defense by one stage.",
+    "power": 0,
+    "pp": 20,
+    "target": "user",
+    "type": "fighting"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "bullet-seed",
+    "description": "Hits 2-5 times in one turn.",
+    "power": 25,
+    "pp": 30,
+    "target": "selectedPokemon",
+    "type": "grass"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "calm-mind",
+    "description": "Raises the user's Special Attack and Special Defense by one stage.",
+    "power": 0,
+    "pp": 20,
+    "target": "user",
+    "type": "psychic"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "camouflage",
+    "description": "User's type changes to match the terrain.",
+    "power": 0,
+    "pp": 20,
+    "target": "user",
+    "type": "normal"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "charge",
+    "description": "Raises the user's Special Defense by one stage.  User's Electric moves have doubled power next turn.",
+    "power": 0,
+    "pp": 20,
+    "target": "user",
+    "type": "electric"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "status",
+    "name": "charm",
+    "description": "Lowers the target's Attack by two stages.",
+    "power": 0,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 85,
+    "damageClass": "special",
+    "name": "clamp",
+    "description": "Prevents the target from fleeing and inflicts damage for 2-5 turns.",
+    "power": 35,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "water"
+  },
+  {
+    "accuracy": 85,
+    "damageClass": "physical",
+    "name": "comet-punch",
+    "description": "Hits 2-5 times in one turn.",
+    "power": 18,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "status",
+    "name": "confuse-ray",
+    "description": "Confuses the target.",
+    "power": 0,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "ghost"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "confusion",
+    "description": "Has a 10% chance to confuse the target.",
+    "power": 50,
+    "pp": 25,
+    "target": "selectedPokemon",
+    "type": "psychic"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "constrict",
+    "description": "Has a 10% chance to lower the target's Speed by one stage.",
+    "power": 10,
+    "pp": 35,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "conversion",
+    "description": "User's type changes to the type of one of its moves at random.",
+    "power": 0,
+    "pp": 30,
+    "target": "user",
+    "type": "normal"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "conversion2",
+    "description": "Changes the user's type to a random type either resistant or immune to the last move used against it.",
+    "power": 0,
+    "pp": 30,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "cosmic-power",
+    "description": "Raises the user's Defense and Special Defense by one stage.",
+    "power": 0,
+    "pp": 20,
+    "target": "user",
+    "type": "psychic"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "status",
+    "name": "cotton-spore",
+    "description": "Lowers the target's Speed by two stages.",
+    "power": 0,
+    "pp": 40,
+    "target": "allOpponents",
+    "type": "grass"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "counter",
+    "description": "Inflicts twice the damage the user received from the last physical hit it took.",
+    "power": 0,
+    "pp": 20,
+    "target": "specificMove",
+    "type": "fighting"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "covet",
+    "description": "Takes the target's item.",
+    "power": 60,
+    "pp": 25,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 90,
+    "damageClass": "special",
+    "name": "crab-hammer",
+    "description": "Has an increased chance for a critical hit.",
+    "power": 100,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "water"
+  },
+  {
+    "accuracy": 80,
+    "damageClass": "physical",
+    "name": "cross-chop",
+    "description": "Has an increased chance for a critical hit.",
+    "power": 100,
+    "pp": 5,
+    "target": "selectedPokemon",
+    "type": "fighting"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "crunch",
+    "description": "Has a 20% chance to lower the target's Defense by one stage.",
+    "power": 80,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "dark"
+  },
+  {
+    "accuracy": 95,
+    "damageClass": "physical",
+    "name": "crush-claw",
+    "description": "Has a 50% chance to lower the target's Defense by one stage.",
+    "power": 75,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "curse",
+    "description": "Ghosts pay half their max HP to hurt the target every turn.  Others decrease Speed but raise Attack and Defense.",
+    "power": 0,
+    "pp": 10,
+    "target": "specificMove",
+    "type": "ghost"
+  },
+  {
+    "accuracy": 95,
+    "damageClass": "physical",
+    "name": "cut",
+    "description": "Inflicts regular damage with no additional effect.",
+    "power": 50,
+    "pp": 30,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "defense-curl",
+    "description": "Raises user's Defense by one stage.",
+    "power": 0,
+    "pp": 40,
+    "target": "user",
+    "type": "normal"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "destiny-bond",
+    "description": "If the user faints this turn, the target automatically will, too.",
+    "power": 0,
+    "pp": 5,
+    "target": "user",
+    "type": "ghost"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "detect",
+    "description": "Prevents any moves from hitting the user this turn.",
+    "power": 0,
+    "pp": 5,
+    "target": "user",
+    "type": "fighting"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "dig",
+    "description": "User digs underground, dodging all attacks, and hits next turn.",
+    "power": 80,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "ground"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "status",
+    "name": "disable",
+    "description": "Disables the target's last used move for 1-8 turns.",
+    "power": 0,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "dive",
+    "description": "User dives underwater, dodging all attacks, and hits next turn.",
+    "power": 80,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "water"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "dizzy-punch",
+    "description": "Has a 20% chance to confuse the target.",
+    "power": 70,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "doom-desire",
+    "description": "Hits the target two turns later.",
+    "power": 140,
+    "pp": 5,
+    "target": "selectedPokemon",
+    "type": "steel"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "double-edge",
+    "description": "User receives 1/3 the damage inflicted in recoil.",
+    "power": 120,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "double-kick",
+    "description": "Hits twice in one turn.",
+    "power": 30,
+    "pp": 30,
+    "target": "selectedPokemon",
+    "type": "fighting"
+  },
+  {
+    "accuracy": 85,
+    "damageClass": "physical",
+    "name": "double-slap",
+    "description": "Hits 2-5 times in one turn.",
+    "power": 15,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "double-team",
+    "description": "Raises the user's evasion by one stage.",
+    "power": 0,
+    "pp": 15,
+    "target": "user",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "dragon-breath",
+    "description": "Has a 30% chance to paralyze the target.",
+    "power": 60,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "dragon"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "dragon-claw",
+    "description": "Inflicts regular damage with no additional effect.",
+    "power": 80,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "dragon"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "dragon-dance",
+    "description": "Raises the user's Attack and Speed by one stage.",
+    "power": 0,
+    "pp": 20,
+    "target": "user",
+    "type": "dragon"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "dragon-rage",
+    "description": "Inflicts 40 points of damage.",
+    "power": 0,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "dragon"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "dream-eater",
+    "description": "Only works on sleeping Pokémon.  Drains half the damage inflicted to heal the user.",
+    "power": 100,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "psychic"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "drill-peck",
+    "description": "Inflicts regular damage with no additional effect.",
+    "power": 80,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "flying"
+  },
+  {
+    "accuracy": 50,
+    "damageClass": "physical",
+    "name": "dynamic-punch",
+    "description": "Has a 100% chance to confuse the target.",
+    "power": 100,
+    "pp": 5,
+    "target": "selectedPokemon",
+    "type": "fighting"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "earthquake",
+    "description": "Inflicts regular damage and can hit Dig users.",
+    "power": 100,
+    "pp": 10,
+    "target": "allOtherPokemon",
+    "type": "ground"
+  },
+  {
+    "accuracy": 75,
+    "damageClass": "physical",
+    "name": "egg-bomb",
+    "description": "Inflicts regular damage with no additional effect.",
+    "power": 100,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "ember",
+    "description": "Has a 10% chance to burn the target.",
+    "power": 40,
+    "pp": 25,
+    "target": "selectedPokemon",
+    "type": "fire"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "status",
+    "name": "encore",
+    "description": "Forces the target to repeat its last used move every turn for 2 to 6 turns.",
+    "power": 0,
+    "pp": 5,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "endeavor",
+    "description": "Lowers the target's HP to equal the user's.",
+    "power": 0,
+    "pp": 5,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "endure",
+    "description": "Prevents the user's HP from lowering below 1 this turn.",
+    "power": 0,
+    "pp": 10,
+    "target": "user",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "eruption",
+    "description": "Inflicts more damage when the user has more HP remaining, with a maximum of 150 power.",
+    "power": 150,
+    "pp": 5,
+    "target": "allOpponents",
+    "type": "fire"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "explosion",
+    "description": "User faints.",
+    "power": 250,
+    "pp": 5,
+    "target": "allOtherPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "extrasensory",
+    "description": "Has a 10% chance to make the target flinch.",
+    "power": 80,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "psychic"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "extreme-speed",
+    "description": "Inflicts regular damage with no additional effect.",
+    "power": 80,
+    "pp": 5,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "facade",
+    "description": "Power doubles if user is burned, paralyzed, or poisoned.",
+    "power": 70,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "fake-out",
+    "description": "Can only be used as the first move after the user enters battle.  Causes the target to flinch.",
+    "power": 40,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "status",
+    "name": "fake-tears",
+    "description": "Lowers the target's Special Defense by two stages.",
+    "power": 0,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "dark"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "false-swipe",
+    "description": "Cannot lower the target's HP below 1.",
+    "power": 40,
+    "pp": 40,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "status",
+    "name": "feather-dance",
+    "description": "Lowers the target's Attack by two stages.",
+    "power": 0,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "flying"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "special",
+    "name": "feint-attack",
+    "description": "Never misses.",
+    "power": 60,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "dark"
+  },
+  {
+    "accuracy": 85,
+    "damageClass": "special",
+    "name": "fire-blast",
+    "description": "Has a 10% chance to burn the target.",
+    "power": 110,
+    "pp": 5,
+    "target": "selectedPokemon",
+    "type": "fire"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "fire-punch",
+    "description": "Has a 10% chance to burn the target.",
+    "power": 75,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "fire"
+  },
+  {
+    "accuracy": 85,
+    "damageClass": "special",
+    "name": "fire-spin",
+    "description": "Prevents the target from fleeing and inflicts damage for 2-5 turns.",
+    "power": 35,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "fire"
+  },
+  {
+    "accuracy": 30,
+    "damageClass": "physical",
+    "name": "fissure",
+    "description": "Causes a one-hit KO.",
+    "power": 0,
+    "pp": 5,
+    "target": "selectedPokemon",
+    "type": "ground"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "flail",
+    "description": "Inflicts more damage when the user has less HP remaining, with a maximum of 200 power.",
+    "power": 0,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "flame-thrower",
+    "description": "Has a 10% chance to burn the target.",
+    "power": 90,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "fire"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "flame-wheel",
+    "description": "Has a 10% chance to burn the target.  Lets frozen Pokémon thaw themselves.",
+    "power": 60,
+    "pp": 25,
+    "target": "selectedPokemon",
+    "type": "fire"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "status",
+    "name": "flash",
+    "description": "Lowers the target's accuracy by one stage.",
+    "power": 0,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "status",
+    "name": "flatter",
+    "description": "Raises the target's Special Attack by one stage and confuses the target.",
+    "power": 0,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "dark"
+  },
+  {
+    "accuracy": 95,
+    "damageClass": "physical",
+    "name": "fly",
+    "description": "User flies high into the air, dodging all attacks, and hits next turn.",
+    "power": 90,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "flying"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "focus-energy",
+    "description": "Increases the user's chance to score a critical hit.",
+    "power": 0,
+    "pp": 30,
+    "target": "user",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "focus-punch",
+    "description": "If the user takes damage before attacking, the attack is canceled.",
+    "power": 150,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "fighting"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "follow-me",
+    "description": "Redirects the target's single-target effects to the user for this turn.",
+    "power": 0,
+    "pp": 20,
+    "target": "user",
+    "type": "normal"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "foresight",
+    "description": "Forces the target to have no Evade, and allows it to be hit by Normal and Fighting moves even if it's a Ghost.",
+    "power": 0,
+    "pp": 40,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 90,
+    "damageClass": "special",
+    "name": "frenzy-plant",
+    "description": "User foregoes its next turn to recharge.",
+    "power": 150,
+    "pp": 5,
+    "target": "selectedPokemon",
+    "type": "grass"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "frustration",
+    "description": "Power increases as happiness decreases, up to a maximum of 102.",
+    "power": 0,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 85,
+    "damageClass": "physical",
+    "name": "fury-attack",
+    "description": "Hits 2-5 times in one turn.",
+    "power": 15,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 95,
+    "damageClass": "physical",
+    "name": "fury-cutter",
+    "description": "Power doubles every turn this move is used in succession after the first, maxing out after five turns.",
+    "power": 40,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "bug"
+  },
+  {
+    "accuracy": 80,
+    "damageClass": "physical",
+    "name": "fury-swipes",
+    "description": "Hits 2-5 times in one turn.",
+    "power": 18,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "future-sight",
+    "description": "Hits the target two turns later.",
+    "power": 120,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "psychic"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "giga-drain",
+    "description": "Drains half the damage inflicted to heal the user.",
+    "power": 75,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "grass"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "status",
+    "name": "glare",
+    "description": "Paralyzes the target.",
+    "power": 0,
+    "pp": 30,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 55,
+    "damageClass": "status",
+    "name": "grass-whistle",
+    "description": "Puts the target to sleep.",
+    "power": 0,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "grass"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "status",
+    "name": "growl",
+    "description": "Lowers the target's Attack by one stage.",
+    "power": 0,
+    "pp": 40,
+    "target": "allOpponents",
+    "type": "normal"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "growth",
+    "description": "Raises the user's Attack and Special Attack by one stage.",
+    "power": 0,
+    "pp": 20,
+    "target": "user",
+    "type": "normal"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "grudge",
+    "description": "If the user faints this turn, the PP of the move that fainted it drops to 0.",
+    "power": 0,
+    "pp": 5,
+    "target": "user",
+    "type": "ghost"
+  },
+  {
+    "accuracy": 30,
+    "damageClass": "physical",
+    "name": "guillotine",
+    "description": "Causes a one-hit KO.",
+    "power": 0,
+    "pp": 5,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "gust",
+    "description": "Inflicts regular damage and can hit Pokémon in the air.",
+    "power": 40,
+    "pp": 35,
+    "target": "selectedPokemon",
+    "type": "flying"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "hail",
+    "description": "Changes the weather to a hailstorm for five turns.",
+    "power": 0,
+    "pp": 10,
+    "target": "entireField",
+    "type": "ice"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "harden",
+    "description": "Raises the user's Defense by one stage.",
+    "power": 0,
+    "pp": 30,
+    "target": "user",
+    "type": "normal"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "haze",
+    "description": "Resets all Pokémon's stats, accuracy, and evasion.",
+    "power": 0,
+    "pp": 30,
+    "target": "entireField",
+    "type": "ice"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "headbutt",
+    "description": "Has a 30% chance to make the target flinch.",
+    "power": 70,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "heal-bell",
+    "description": "Cures the entire party of major status effects.",
+    "power": 0,
+    "pp": 5,
+    "target": "userAndAllies",
+    "type": "normal"
+  },
+  {
+    "accuracy": 90,
+    "damageClass": "special",
+    "name": "heat-wave",
+    "description": "Has a 10% chance to burn the target.",
+    "power": 95,
+    "pp": 10,
+    "target": "allOpponents",
+    "type": "fire"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "helping-hand",
+    "description": "Ally's next move inflicts half more damage.",
+    "power": 0,
+    "pp": 20,
+    "target": "ally",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "hidden-power",
+    "description": "Power and type depend upon user's IVs.  Power can range from 30 to 70.",
+    "power": 60,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 90,
+    "damageClass": "physical",
+    "name": "high-jump-kick",
+    "description": "If the user misses, it takes half the damage it would have inflicted in recoil.",
+    "power": 130,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "fighting"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "horn-attack",
+    "description": "Inflicts regular damage with no additional effect.",
+    "power": 65,
+    "pp": 25,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 30,
+    "damageClass": "physical",
+    "name": "horn-drill",
+    "description": "Causes a one-hit KO.",
+    "power": 0,
+    "pp": 5,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "howl",
+    "description": "Raises the user's Attack by one stage.",
+    "power": 0,
+    "pp": 40,
+    "target": "userAndAllies",
+    "type": "normal"
+  },
+  {
+    "accuracy": 90,
+    "damageClass": "special",
+    "name": "hydro-cannon",
+    "description": "User foregoes its next turn to recharge.",
+    "power": 150,
+    "pp": 5,
+    "target": "selectedPokemon",
+    "type": "water"
+  },
+  {
+    "accuracy": 80,
+    "damageClass": "special",
+    "name": "hydro-pump",
+    "description": "Inflicts regular damage with no additional effect.",
+    "power": 110,
+    "pp": 5,
+    "target": "selectedPokemon",
+    "type": "water"
+  },
+  {
+    "accuracy": 90,
+    "damageClass": "physical",
+    "name": "hyper-beam",
+    "description": "User foregoes its next turn to recharge.",
+    "power": 150,
+    "pp": 5,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 90,
+    "damageClass": "physical",
+    "name": "hyper-fang",
+    "description": "Has a 10% chance to make the target flinch.",
+    "power": 80,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "hyper-voice",
+    "description": "Inflicts regular damage with no additional effect.",
+    "power": 90,
+    "pp": 10,
+    "target": "allOpponents",
+    "type": "normal"
+  },
+  {
+    "accuracy": 60,
+    "damageClass": "status",
+    "name": "hypnosis",
+    "description": "Puts the target to sleep.",
+    "power": 0,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "psychic"
+  },
+  {
+    "accuracy": 90,
+    "damageClass": "special",
+    "name": "ice-ball",
+    "description": "Power doubles every turn this move is used in succession after the first, resetting after five turns.",
+    "power": 30,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "ice"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "ice-beam",
+    "description": "Has a 10% chance to freeze the target.",
+    "power": 90,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "ice"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "ice-punch",
+    "description": "Has a 10% chance to freeze the target.",
+    "power": 75,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "ice"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "icicle-spear",
+    "description": "Hits 2-5 times in one turn.",
+    "power": 25,
+    "pp": 30,
+    "target": "selectedPokemon",
+    "type": "ice"
+  },
+  {
+    "accuracy": 95,
+    "damageClass": "special",
+    "name": "icy-wind",
+    "description": "Has a 100% chance to lower the target's Speed by one stage.",
+    "power": 55,
+    "pp": 15,
+    "target": "allOpponents",
+    "type": "ice"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "imprison",
+    "description": "Prevents the target from using any moves that the user also knows.",
+    "power": 0,
+    "pp": 10,
+    "target": "user",
+    "type": "psychic"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "ingrain",
+    "description": "Prevents the user from leaving battle.  User regains 1/16 of its max HP every turn.",
+    "power": 0,
+    "pp": 20,
+    "target": "user",
+    "type": "grass"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "iron-defense",
+    "description": "Raises the user's Defense by two stages.",
+    "power": 0,
+    "pp": 15,
+    "target": "user",
+    "type": "steel"
+  },
+  {
+    "accuracy": 75,
+    "damageClass": "physical",
+    "name": "iron-tail",
+    "description": "Has a 30% chance to lower the target's Defense by one stage.",
+    "power": 100,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "steel"
+  },
+  {
+    "accuracy": 95,
+    "damageClass": "physical",
+    "name": "jump-kick",
+    "description": "If the user misses, it takes half the damage it would have inflicted in recoil.",
+    "power": 100,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "fighting"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "karate-chop",
+    "description": "Has an increased chance for a critical hit.",
+    "power": 50,
+    "pp": 25,
+    "target": "selectedPokemon",
+    "type": "fighting"
+  },
+  {
+    "accuracy": 80,
+    "damageClass": "status",
+    "name": "kinesis",
+    "description": "Lowers the target's accuracy by one stage.",
+    "power": 0,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "psychic"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "knock-off",
+    "description": "Target drops its held item.",
+    "power": 65,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "dark"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "leaf-blade",
+    "description": "Has an increased chance for a critical hit.",
+    "power": 90,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "grass"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "leech-life",
+    "description": "Drains half the damage inflicted to heal the user.",
+    "power": 80,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "bug"
+  },
+  {
+    "accuracy": 90,
+    "damageClass": "status",
+    "name": "leech-seed",
+    "description": "Seeds the target, stealing HP from it every turn.",
+    "power": 0,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "grass"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "status",
+    "name": "leer",
+    "description": "Lowers the target's Defense by one stage.",
+    "power": 0,
+    "pp": 30,
+    "target": "allOpponents",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "lick",
+    "description": "Has a 30% chance to paralyze the target.",
+    "power": 30,
+    "pp": 30,
+    "target": "selectedPokemon",
+    "type": "ghost"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "light-screen",
+    "description": "Reduces damage from special attacks by 50% for five turns.",
+    "power": 0,
+    "pp": 30,
+    "target": "usersField",
+    "type": "psychic"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "lock-on",
+    "description": "Ensures that the user's next move will hit the target.",
+    "power": 0,
+    "pp": 5,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 75,
+    "damageClass": "status",
+    "name": "lovely-kiss",
+    "description": "Puts the target to sleep.",
+    "power": 0,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "low-kick",
+    "description": "Inflicts more damage to heavier targets, with a maximum of 120 power.",
+    "power": 0,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "fighting"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "luster-purge",
+    "description": "Has a 50% chance to lower the target's Special Defense by one stage.",
+    "power": 70,
+    "pp": 5,
+    "target": "selectedPokemon",
+    "type": "psychic"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "mach-punch",
+    "description": "Inflicts regular damage with no additional effect.",
+    "power": 40,
+    "pp": 30,
+    "target": "selectedPokemon",
+    "type": "fighting"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "magic-coat",
+    "description": "Reflects back the first effect move used on the user this turn.",
+    "power": 0,
+    "pp": 15,
+    "target": "user",
+    "type": "psychic"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "special",
+    "name": "magical-leaf",
+    "description": "Never misses.",
+    "power": 60,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "grass"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "magnitude",
+    "description": "Power varies randomly from 10 to 150.",
+    "power": 0,
+    "pp": 30,
+    "target": "allOtherPokemon",
+    "type": "ground"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "mean-look",
+    "description": "Prevents the target from leaving battle.",
+    "power": 0,
+    "pp": 5,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "meditate",
+    "description": "Raises the user's Attack by one stage.",
+    "power": 0,
+    "pp": 40,
+    "target": "user",
+    "type": "psychic"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "mega-drain",
+    "description": "Drains half the damage inflicted to heal the user.",
+    "power": 40,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "grass"
+  },
+  {
+    "accuracy": 85,
+    "damageClass": "physical",
+    "name": "mega-horn",
+    "description": "Inflicts regular damage with no additional effect.",
+    "power": 120,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "bug"
+  },
+  {
+    "accuracy": 75,
+    "damageClass": "physical",
+    "name": "mega-kick",
+    "description": "Inflicts regular damage with no additional effect.",
+    "power": 120,
+    "pp": 5,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 85,
+    "damageClass": "physical",
+    "name": "mega-punch",
+    "description": "Inflicts regular damage with no additional effect.",
+    "power": 80,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "status",
+    "name": "memento",
+    "description": "Lowers the target's Attack and Special Attack by two stages.  User faints.",
+    "power": 0,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "dark"
+  },
+  {
+    "accuracy": 95,
+    "damageClass": "physical",
+    "name": "metal-claw",
+    "description": "Has a 10% chance to raise the user's Attack by one stage.",
+    "power": 50,
+    "pp": 35,
+    "target": "selectedPokemon",
+    "type": "steel"
+  },
+  {
+    "accuracy": 85,
+    "damageClass": "status",
+    "name": "metal-sound",
+    "description": "Lowers the target's Special Defense by two stages.",
+    "power": 0,
+    "pp": 40,
+    "target": "selectedPokemon",
+    "type": "steel"
+  },
+  {
+    "accuracy": 90,
+    "damageClass": "physical",
+    "name": "meteor-mash",
+    "description": "Has a 20% chance to raise the user's Attack by one stage.",
+    "power": 90,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "steel"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "metronome",
+    "description": "Randomly selects and uses any move in the game.",
+    "power": 0,
+    "pp": 10,
+    "target": "user",
+    "type": "normal"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "milk-drink",
+    "description": "Heals the user by half its max HP.",
+    "power": 0,
+    "pp": 10,
+    "target": "user",
+    "type": "normal"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "mimic",
+    "description": "Copies the target's last used move.",
+    "power": 0,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "mind-reader",
+    "description": "Ensures that the user's next move will hit the target.",
+    "power": 0,
+    "pp": 5,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "minimize",
+    "description": "Raises the user's evasion by two stages.",
+    "power": 0,
+    "pp": 10,
+    "target": "user",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "mirror-coat",
+    "description": "Inflicts twice the damage the user received from the last special hit it took.",
+    "power": 0,
+    "pp": 20,
+    "target": "specificMove",
+    "type": "psychic"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "mirror-move",
+    "description": "Uses the target's last used move.",
+    "power": 0,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "flying"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "mist-ball",
+    "description": "Has a 50% chance to lower the target's Special Attack by one stage.",
+    "power": 70,
+    "pp": 5,
+    "target": "selectedPokemon",
+    "type": "psychic"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "mist",
+    "description": "Protects the user's stats from being changed by enemy moves.",
+    "power": 0,
+    "pp": 30,
+    "target": "usersField",
+    "type": "ice"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "moonlight",
+    "description": "Heals the user by half its max HP.  Affected by weather.",
+    "power": 0,
+    "pp": 5,
+    "target": "user",
+    "type": "normal"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "morning-sun",
+    "description": "Heals the user by half its max HP.  Affected by weather.",
+    "power": 0,
+    "pp": 5,
+    "target": "user",
+    "type": "normal"
+  },
+  {
+    "accuracy": 95,
+    "damageClass": "physical",
+    "name": "mud-shot",
+    "description": "Has a 100% chance to lower the target's Speed by one stage.",
+    "power": 55,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "ground"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "mud-slap",
+    "description": "Has a 100% chance to lower the target's accuracy by one stage.",
+    "power": 20,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "ground"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "mud-sport",
+    "description": "Halves all Electric-type damage.",
+    "power": 0,
+    "pp": 15,
+    "target": "entireField",
+    "type": "ground"
+  },
+  {
+    "accuracy": 85,
+    "damageClass": "special",
+    "name": "muddy-water",
+    "description": "Has a 30% chance to lower the target's accuracy by one stage.",
+    "power": 90,
+    "pp": 10,
+    "target": "allOpponents",
+    "type": "water"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "nature-power",
+    "description": "Uses a move which depends upon the terrain.",
+    "power": 0,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "needle-arm",
+    "description": "Has a 30% chance to make the target flinch.",
+    "power": 60,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "grass"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "night-shade",
+    "description": "Inflicts damage equal to the user's level.",
+    "power": 0,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "ghost"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "status",
+    "name": "nightmare",
+    "description": "Target loses 1/4 its max HP every turn as long as it's asleep.",
+    "power": 0,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "ghost"
+  },
+  {
+    "accuracy": 85,
+    "damageClass": "special",
+    "name": "octazooka",
+    "description": "Has a 50% chance to lower the target's accuracy by one stage.",
+    "power": 65,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "water"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "odor-sleuth",
+    "description": "Forces the target to have no Evade, and allows it to be hit by Normal and Fighting moves even if it's a Ghost.",
+    "power": 0,
+    "pp": 40,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "outrage",
+    "description": "Hits every turn for 2-3 turns, then confuses the user.",
+    "power": 120,
+    "pp": 10,
+    "target": "randomOpponent",
+    "type": "dragon"
+  },
+  {
+    "accuracy": 90,
+    "damageClass": "special",
+    "name": "overheat",
+    "description": "Lowers the user's Special Attack by two stages after inflicting damage.",
+    "power": 130,
+    "pp": 5,
+    "target": "selectedPokemon",
+    "type": "fire"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "pain-split",
+    "description": "Sets the user's and targets's HP to the average of their current HP.",
+    "power": 0,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "payday",
+    "description": "Scatters money on the ground worth five times the user's level.",
+    "power": 40,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "peck",
+    "description": "Inflicts regular damage with no additional effect.",
+    "power": 35,
+    "pp": 35,
+    "target": "selectedPokemon",
+    "type": "flying"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "perish-song",
+    "description": "User and target both faint after three turns.",
+    "power": 0,
+    "pp": 5,
+    "target": "allPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "petal-dance",
+    "description": "Hits every turn for 2-3 turns, then confuses the user.",
+    "power": 120,
+    "pp": 10,
+    "target": "randomOpponent",
+    "type": "grass"
+  },
+  {
+    "accuracy": 95,
+    "damageClass": "physical",
+    "name": "pin-missile",
+    "description": "Hits 2-5 times in one turn.",
+    "power": 25,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "bug"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "poison-fang",
+    "description": "Has a 50% chance to badly poison the target.",
+    "power": 50,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "poison"
+  },
+  {
+    "accuracy": 90,
+    "damageClass": "status",
+    "name": "poison-gas",
+    "description": "Poisons the target.",
+    "power": 0,
+    "pp": 40,
+    "target": "allOpponents",
+    "type": "poison"
+  },
+  {
+    "accuracy": 75,
+    "damageClass": "status",
+    "name": "poison-powder",
+    "description": "Poisons the target.",
+    "power": 0,
+    "pp": 35,
+    "target": "selectedPokemon",
+    "type": "poison"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "poison-sting",
+    "description": "Has a 30% chance to poison the target.",
+    "power": 15,
+    "pp": 35,
+    "target": "selectedPokemon",
+    "type": "poison"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "poison-tail",
+    "description": "Has an increased chance for a critical hit and a 10% chance to poison the target.",
+    "power": 50,
+    "pp": 25,
+    "target": "selectedPokemon",
+    "type": "poison"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "pound",
+    "description": "Inflicts regular damage with no additional effect.",
+    "power": 40,
+    "pp": 35,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "powder-snow",
+    "description": "Has a 10% chance to freeze the target.",
+    "power": 40,
+    "pp": 25,
+    "target": "allOpponents",
+    "type": "ice"
+  },
+  {
+    "accuracy": 90,
+    "damageClass": "physical",
+    "name": "present",
+    "description": "Randomly inflicts damage with power from 40 to 120 or heals the target for 1/4 its max HP.",
+    "power": 0,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "protect",
+    "description": "Prevents any moves from hitting the user this turn.",
+    "power": 0,
+    "pp": 10,
+    "target": "user",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "psybeam",
+    "description": "Has a 10% chance to confuse the target.",
+    "power": 65,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "psychic"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "psych-up",
+    "description": "Discards the user's stat changes and copies the target's.",
+    "power": 0,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "psychic",
+    "description": "Has a 10% chance to lower the target's Special Defense by one stage.",
+    "power": 90,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "psychic"
+  },
+  {
+    "accuracy": 90,
+    "damageClass": "special",
+    "name": "psycho-boost",
+    "description": "Lowers the user's Special Attack by two stages after inflicting damage.",
+    "power": 140,
+    "pp": 5,
+    "target": "selectedPokemon",
+    "type": "psychic"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "psywave",
+    "description": "Inflicts damage between 50% and 150% of the user's level.",
+    "power": 0,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "psychic"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "pursuit",
+    "description": "Has double power against, and can hit, Pokémon attempting to switch out.",
+    "power": 40,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "dark"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "quick-attack",
+    "description": "Inflicts regular damage with no additional effect.",
+    "power": 40,
+    "pp": 30,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "rage",
+    "description": "If the user is hit after using this move, its Attack rises by one stage.",
+    "power": 20,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "rain-dance",
+    "description": "Changes the weather to rain for five turns.",
+    "power": 0,
+    "pp": 5,
+    "target": "entireField",
+    "type": "water"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "rapid-spin",
+    "description": "Frees the user from binding moves, removes Leech Seed, and blows away Spikes.",
+    "power": 50,
+    "pp": 40,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 95,
+    "damageClass": "special",
+    "name": "razor-leaf",
+    "description": "Has an increased chance for a critical hit.",
+    "power": 55,
+    "pp": 25,
+    "target": "allOpponents",
+    "type": "grass"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "razor-wind",
+    "description": "Requires a turn to charge before attacking.",
+    "power": 80,
+    "pp": 10,
+    "target": "allOpponents",
+    "type": "normal"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "recover",
+    "description": "Heals the user by half its max HP.",
+    "power": 0,
+    "pp": 10,
+    "target": "user",
+    "type": "normal"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "recycle",
+    "description": "User recovers the item it last used up.",
+    "power": 0,
+    "pp": 10,
+    "target": "user",
+    "type": "normal"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "reflect",
+    "description": "Reduces damage from physical attacks by half.",
+    "power": 0,
+    "pp": 20,
+    "target": "usersField",
+    "type": "psychic"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "refresh",
+    "description": "Cleanses the user of a burn, paralysis, or poison.",
+    "power": 0,
+    "pp": 20,
+    "target": "user",
+    "type": "normal"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "rest",
+    "description": "User sleeps for two turns, completely healing itself.",
+    "power": 0,
+    "pp": 10,
+    "target": "user",
+    "type": "psychic"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "return",
+    "description": "Power increases with happiness, up to a maximum of 102.",
+    "power": 0,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "revenge",
+    "description": "Inflicts double damage if the user takes damage before attacking this turn.",
+    "power": 60,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "fighting"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "reversal",
+    "description": "Inflicts more damage when the user has less HP remaining, with a maximum of 200 power.",
+    "power": 0,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "fighting"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "roar",
+    "description": "Immediately ends wild battles.  Forces trainers to switch Pokémon.",
+    "power": 0,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 90,
+    "damageClass": "physical",
+    "name": "rock-blast",
+    "description": "Hits 2-5 times in one turn.",
+    "power": 25,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "rock"
+  },
+  {
+    "accuracy": 90,
+    "damageClass": "physical",
+    "name": "rock-slide",
+    "description": "Has a 30% chance to make the target flinch.",
+    "power": 75,
+    "pp": 10,
+    "target": "allOpponents",
+    "type": "rock"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "rock-smash",
+    "description": "Has a 50% chance to lower the target's Defense by one stage.",
+    "power": 40,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "fighting"
+  },
+  {
+    "accuracy": 90,
+    "damageClass": "physical",
+    "name": "rock-throw",
+    "description": "Inflicts regular damage with no additional effect.",
+    "power": 50,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "rock"
+  },
+  {
+    "accuracy": 95,
+    "damageClass": "physical",
+    "name": "rock-tomb",
+    "description": "Has a 100% chance to lower the target's Speed by one stage.",
+    "power": 60,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "rock"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "role-play",
+    "description": "Copies the target's ability.",
+    "power": 0,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "psychic"
+  },
+  {
+    "accuracy": 85,
+    "damageClass": "physical",
+    "name": "rolling-kick",
+    "description": "Has a 30% chance to make the target flinch.",
+    "power": 60,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "fighting"
+  },
+  {
+    "accuracy": 90,
+    "damageClass": "physical",
+    "name": "rollout",
+    "description": "Power doubles every turn this move is used in succession after the first, resetting after five turns.",
+    "power": 30,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "rock"
+  },
+  {
+    "accuracy": 95,
+    "damageClass": "special",
+    "name": "sacred-fire",
+    "description": "Has a 50% chance to burn the target.  Lets frozen Pokémon thaw themselves.",
+    "power": 100,
+    "pp": 5,
+    "target": "selectedPokemon",
+    "type": "fire"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "safeguard",
+    "description": "Protects the user's field from major status ailments and confusion for five turns.",
+    "power": 0,
+    "pp": 25,
+    "target": "usersField",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "status",
+    "name": "sand-attack",
+    "description": "Lowers the target's accuracy by one stage.",
+    "power": 0,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "ground"
+  },
+  {
+    "accuracy": 85,
+    "damageClass": "physical",
+    "name": "sand-tomb",
+    "description": "Prevents the target from fleeing and inflicts damage for 2-5 turns.",
+    "power": 35,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "ground"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "sandstorm",
+    "description": "Changes the weather to a sandstorm for five turns.",
+    "power": 0,
+    "pp": 10,
+    "target": "entireField",
+    "type": "rock"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "status",
+    "name": "scary-face",
+    "description": "Lowers the target's Speed by two stages.",
+    "power": 0,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "scratch",
+    "description": "Inflicts regular damage with no additional effect.",
+    "power": 40,
+    "pp": 35,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 85,
+    "damageClass": "status",
+    "name": "screech",
+    "description": "Lowers the target's Defense by two stages.",
+    "power": 0,
+    "pp": 40,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "secret-power",
+    "description": "Has a 30% chance to inflict a status effect which depends upon the terrain.",
+    "power": 70,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "seismic-toss",
+    "description": "Inflicts damage equal to the user's level.",
+    "power": 0,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "fighting"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "self-destruct",
+    "description": "User faints.",
+    "power": 200,
+    "pp": 5,
+    "target": "allOtherPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "shadow-ball",
+    "description": "Has a 20% chance to lower the target's Special Defense by one stage.",
+    "power": 80,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "ghost"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "physical",
+    "name": "shadow-punch",
+    "description": "Never misses.",
+    "power": 60,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "ghost"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "sharpen",
+    "description": "Raises the user's Attack by one stage.",
+    "power": 0,
+    "pp": 30,
+    "target": "user",
+    "type": "normal"
+  },
+  {
+    "accuracy": 30,
+    "damageClass": "special",
+    "name": "sheer-cold",
+    "description": "Causes a one-hit KO.",
+    "power": 0,
+    "pp": 5,
+    "target": "selectedPokemon",
+    "type": "ice"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "special",
+    "name": "shock-wave",
+    "description": "Never misses.",
+    "power": 60,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "electric"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "signal-beam",
+    "description": "Has a 10% chance to confuse the target.",
+    "power": 75,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "bug"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "silver-wind",
+    "description": "Has a 10% chance to raise all of the user's stats by one stage.",
+    "power": 60,
+    "pp": 5,
+    "target": "selectedPokemon",
+    "type": "bug"
+  },
+  {
+    "accuracy": 55,
+    "damageClass": "status",
+    "name": "sing",
+    "description": "Puts the target to sleep.",
+    "power": 0,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "sketch",
+    "description": "Permanently becomes the target's last used move.",
+    "power": 0,
+    "pp": 1,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "skill-swap",
+    "description": "User and target swap abilities.",
+    "power": 0,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "psychic"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "skull-bash",
+    "description": "Raises the user's Defense by one stage.  User charges for one turn before attacking.",
+    "power": 130,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 90,
+    "damageClass": "physical",
+    "name": "sky-attack",
+    "description": "User charges for one turn before attacking.  Has a 30% chance to make the target flinch.",
+    "power": 140,
+    "pp": 5,
+    "target": "selectedPokemon",
+    "type": "flying"
+  },
+  {
+    "accuracy": 90,
+    "damageClass": "physical",
+    "name": "sky-uppercut",
+    "description": "Inflicts regular damage and can hit Bounce and Fly users.",
+    "power": 85,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "fighting"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "slack-off",
+    "description": "Heals the user by half its max HP.",
+    "power": 0,
+    "pp": 10,
+    "target": "user",
+    "type": "normal"
+  },
+  {
+    "accuracy": 75,
+    "damageClass": "physical",
+    "name": "slam",
+    "description": "Inflicts regular damage with no additional effect.",
+    "power": 80,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "slash",
+    "description": "Has an increased chance for a critical hit.",
+    "power": 70,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 75,
+    "damageClass": "status",
+    "name": "sleep-powder",
+    "description": "Puts the target to sleep.",
+    "power": 0,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "grass"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "sleep-talk",
+    "description": "Randomly uses one of the user's other three moves.  Only works if the user is sleeping.",
+    "power": 0,
+    "pp": 10,
+    "target": "user",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "sludge-bomb",
+    "description": "Has a 30% chance to poison the target.",
+    "power": 90,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "poison"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "sludge",
+    "description": "Has a 30% chance to poison the target.",
+    "power": 65,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "poison"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "smelling-salts",
+    "description": "If the target is paralyzed, inflicts double damage and cures the paralysis.",
+    "power": 70,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 70,
+    "damageClass": "physical",
+    "name": "smog",
+    "description": "Has a 40% chance to poison the target.",
+    "power": 30,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "poison"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "status",
+    "name": "smoke-screen",
+    "description": "Lowers the target's accuracy by one stage.",
+    "power": 0,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "snatch",
+    "description": "Steals the target's move, if it's self-targeted.",
+    "power": 0,
+    "pp": 10,
+    "target": "user",
+    "type": "dark"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "snore",
+    "description": "Has a 30% chance to make the target flinch.  Only works if the user is sleeping.",
+    "power": 50,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "soft-boiled",
+    "description": "Heals the user by half its max HP.",
+    "power": 0,
+    "pp": 10,
+    "target": "user",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "solar-beam",
+    "description": "Requires a turn to charge before attacking.",
+    "power": 120,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "grass"
+  },
+  {
+    "accuracy": 90,
+    "damageClass": "physical",
+    "name": "sonic-boom",
+    "description": "Inflicts 20 points of damage.",
+    "power": 0,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "spark",
+    "description": "Has a 30% chance to paralyze the target.",
+    "power": 65,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "electric"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "spider-web",
+    "description": "Prevents the target from leaving battle.",
+    "power": 0,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "bug"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "spike-cannon",
+    "description": "Hits 2-5 times in one turn.",
+    "power": 20,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "spikes",
+    "description": "Scatters Spikes, hurting opposing Pokémon that switch in.",
+    "power": 0,
+    "pp": 20,
+    "target": "opponentsField",
+    "type": "ground"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "spit-up",
+    "description": "Power is 100 times the amount of energy Stockpiled.",
+    "power": 0,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "status",
+    "name": "spite",
+    "description": "Lowers the PP of the target's last used move by 4.",
+    "power": 0,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "ghost"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "splash",
+    "description": "Does nothing.",
+    "power": 0,
+    "pp": 40,
+    "target": "user",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "status",
+    "name": "spore",
+    "description": "Puts the target to sleep.",
+    "power": 0,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "grass"
+  },
+  {
+    "accuracy": 90,
+    "damageClass": "physical",
+    "name": "steel-wing",
+    "description": "Has a 10% chance to raise the user's Defense by one stage.",
+    "power": 70,
+    "pp": 25,
+    "target": "selectedPokemon",
+    "type": "steel"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "stockpile",
+    "description": "Stores energy up to three times for use with Spit Up and Swallow.",
+    "power": 0,
+    "pp": 20,
+    "target": "user",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "stomp",
+    "description": "Has a 30% chance to make the target flinch.",
+    "power": 65,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "strength",
+    "description": "Inflicts regular damage with no additional effect.",
+    "power": 80,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 95,
+    "damageClass": "status",
+    "name": "string-shot",
+    "description": "Lowers the target's Speed by two stages.",
+    "power": 0,
+    "pp": 40,
+    "target": "allOpponents",
+    "type": "bug"
+  },
+  {
+    "accuracy": 75,
+    "damageClass": "status",
+    "name": "stun-spore",
+    "description": "Paralyzes the target.",
+    "power": 0,
+    "pp": 30,
+    "target": "selectedPokemon",
+    "type": "grass"
+  },
+  {
+    "accuracy": 80,
+    "damageClass": "physical",
+    "name": "submission",
+    "description": "User receives 1/4 the damage it inflicts in recoil.",
+    "power": 80,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "fighting"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "substitute",
+    "description": "Transfers 1/4 of the user's max HP into a doll, protecting the user from further damage or status changes until it breaks.",
+    "power": 0,
+    "pp": 10,
+    "target": "user",
+    "type": "normal"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "sunny-day",
+    "description": "Changes the weather to sunny for five turns.",
+    "power": 0,
+    "pp": 5,
+    "target": "entireField",
+    "type": "fire"
+  },
+  {
+    "accuracy": 90,
+    "damageClass": "physical",
+    "name": "super-fang",
+    "description": "Inflicts damage equal to half the target's HP.",
+    "power": 0,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "super-power",
+    "description": "Lowers the user's Attack and Defense by one stage after inflicting damage.",
+    "power": 120,
+    "pp": 5,
+    "target": "selectedPokemon",
+    "type": "fighting"
+  },
+  {
+    "accuracy": 55,
+    "damageClass": "status",
+    "name": "super-sonic",
+    "description": "Confuses the target.",
+    "power": 0,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "surf",
+    "description": "Inflicts regular damage and can hit Dive users.",
+    "power": 90,
+    "pp": 15,
+    "target": "allOtherPokemon",
+    "type": "water"
+  },
+  {
+    "accuracy": 85,
+    "damageClass": "status",
+    "name": "swagger",
+    "description": "Raises the target's Attack by two stages and confuses the target.",
+    "power": 0,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "swallow",
+    "description": "Recovers 1/4 HP after one Stockpile, 1/2 HP after two Stockpiles, or full HP after three Stockpiles.",
+    "power": 0,
+    "pp": 10,
+    "target": "user",
+    "type": "normal"
+  },
+  {
+    "accuracy": 75,
+    "damageClass": "status",
+    "name": "sweet-kiss",
+    "description": "Confuses the target.",
+    "power": 0,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "status",
+    "name": "sweet-scent",
+    "description": "Lowers the target's evasion by one stage.",
+    "power": 0,
+    "pp": 20,
+    "target": "allOpponents",
+    "type": "normal"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "physical",
+    "name": "swift",
+    "description": "Never misses.",
+    "power": 60,
+    "pp": 20,
+    "target": "allOpponents",
+    "type": "normal"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "swords-dance",
+    "description": "Raises the user's Attack by two stages.",
+    "power": 0,
+    "pp": 20,
+    "target": "user",
+    "type": "normal"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "synthesis",
+    "description": "Heals the user by half its max HP.  Affected by weather.",
+    "power": 0,
+    "pp": 5,
+    "target": "user",
+    "type": "grass"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "tackle",
+    "description": "Inflicts regular damage with no additional effect.",
+    "power": 40,
+    "pp": 35,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "tail-glow",
+    "description": "Raises the user's Special Attack by three stages.",
+    "power": 0,
+    "pp": 20,
+    "target": "user",
+    "type": "bug"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "status",
+    "name": "tail-whip",
+    "description": "Lowers the target's Defense by one stage.",
+    "power": 0,
+    "pp": 30,
+    "target": "allOpponents",
+    "type": "normal"
+  },
+  {
+    "accuracy": 85,
+    "damageClass": "physical",
+    "name": "take-down",
+    "description": "User receives 1/4 the damage it inflicts in recoil.",
+    "power": 90,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "status",
+    "name": "taunt",
+    "description": "For the next few turns, the target can only use damaging moves.",
+    "power": 0,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "dark"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "status",
+    "name": "teeter-dance",
+    "description": "Confuses the target.",
+    "power": 0,
+    "pp": 20,
+    "target": "allOtherPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "teleport",
+    "description": "Immediately ends wild battles.  No effect otherwise.",
+    "power": 0,
+    "pp": 20,
+    "target": "user",
+    "type": "psychic"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "thief",
+    "description": "Takes the target's item.",
+    "power": 60,
+    "pp": 25,
+    "target": "selectedPokemon",
+    "type": "dark"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "thrash",
+    "description": "Hits every turn for 2-3 turns, then confuses the user.",
+    "power": 120,
+    "pp": 10,
+    "target": "randomOpponent",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "thunder-punch",
+    "description": "Has a 10% chance to paralyze the target.",
+    "power": 75,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "electric"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "thunder-shock",
+    "description": "Has a 10% chance to paralyze the target.",
+    "power": 40,
+    "pp": 30,
+    "target": "selectedPokemon",
+    "type": "electric"
+  },
+  {
+    "accuracy": 90,
+    "damageClass": "status",
+    "name": "thunder-wave",
+    "description": "Paralyzes the target.",
+    "power": 0,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "electric"
+  },
+  {
+    "accuracy": 70,
+    "damageClass": "special",
+    "name": "thunder",
+    "description": "Has a 30% chance to paralyze the target.",
+    "power": 110,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "electric"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "thunderbolt",
+    "description": "Has a 10% chance to paralyze the target.",
+    "power": 90,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "electric"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "status",
+    "name": "tickle",
+    "description": "Lowers the target's Attack and Defense by one stage.",
+    "power": 0,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "status",
+    "name": "torment",
+    "description": "Prevents the target from using the same move twice in a row.",
+    "power": 0,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "dark"
+  },
+  {
+    "accuracy": 90,
+    "damageClass": "status",
+    "name": "toxic",
+    "description": "Badly poisons the target, inflicting more damage every turn.",
+    "power": 0,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "poison"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "transform",
+    "description": "User becomes a copy of the target until it leaves battle.",
+    "power": 0,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "tri-attack",
+    "description": "Has a 20% chance to burn, freeze, or paralyze the target.",
+    "power": 80,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "status",
+    "name": "trick",
+    "description": "User and target swap items.",
+    "power": 0,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "psychic"
+  },
+  {
+    "accuracy": 90,
+    "damageClass": "physical",
+    "name": "triple-kick",
+    "description": "Hits three times, increasing power by 100% with each successful hit.",
+    "power": 10,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "fighting"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "twineedle",
+    "description": "Hits twice in the same turn.  Has a 20% chance to poison the target.",
+    "power": 25,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "bug"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "twister",
+    "description": "Has a 20% chance to make the target flinch.",
+    "power": 40,
+    "pp": 20,
+    "target": "allOpponents",
+    "type": "dragon"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "uproar",
+    "description": "Forced to use this move for several turns.  Pokémon cannot fall asleep in that time.",
+    "power": 90,
+    "pp": 10,
+    "target": "randomOpponent",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "vice-grip",
+    "description": "Inflicts regular damage with no additional effect.",
+    "power": 55,
+    "pp": 30,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "vine-whip",
+    "description": "Inflicts regular damage with no additional effect.",
+    "power": 45,
+    "pp": 25,
+    "target": "selectedPokemon",
+    "type": "grass"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "physical",
+    "name": "vital-throw",
+    "description": "Never misses.",
+    "power": 70,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "fighting"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "volt-tackle",
+    "description": "User takes 1/3 the damage inflicted in recoil.  Has a 10% chance to paralyze the target.",
+    "power": 120,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "electric"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "water-gun",
+    "description": "Inflicts regular damage with no additional effect.",
+    "power": 40,
+    "pp": 25,
+    "target": "selectedPokemon",
+    "type": "water"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "water-pulse",
+    "description": "Has a 20% chance to confuse the target.",
+    "power": 60,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "water"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "water-sport",
+    "description": "Halves all Fire-type damage.",
+    "power": 0,
+    "pp": 15,
+    "target": "entireField",
+    "type": "water"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "water-spout",
+    "description": "Inflicts more damage when the user has more HP remaining, with a maximum of 150 power.",
+    "power": 150,
+    "pp": 5,
+    "target": "allOpponents",
+    "type": "water"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "special",
+    "name": "waterfall",
+    "description": "Has a 20% chance to make the target flinch.",
+    "power": 80,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "water"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "weather-ball",
+    "description": "If there be weather, this move has doubled power and the weather's type.",
+    "power": 50,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 85,
+    "damageClass": "special",
+    "name": "whirlpool",
+    "description": "Prevents the target from leaving battle and inflicts 1/16 its max HP in damage for 2-5 turns.",
+    "power": 35,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "water"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "whirlwind",
+    "description": "Immediately ends wild battles.  Forces trainers to switch Pokémon.",
+    "power": 0,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 85,
+    "damageClass": "status",
+    "name": "will-o-wisp",
+    "description": "Burns the target.",
+    "power": 0,
+    "pp": 15,
+    "target": "selectedPokemon",
+    "type": "fire"
+  },
+  {
+    "accuracy": 100,
+    "damageClass": "physical",
+    "name": "wing-attack",
+    "description": "Inflicts regular damage with no additional effect.",
+    "power": 60,
+    "pp": 35,
+    "target": "selectedPokemon",
+    "type": "flying"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "wish",
+    "description": "User will recover half its max HP at the end of the next turn.",
+    "power": 0,
+    "pp": 10,
+    "target": "user",
+    "type": "normal"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "withdraw",
+    "description": "Raises the user's Defense by one stage.",
+    "power": 0,
+    "pp": 40,
+    "target": "user",
+    "type": "water"
+  },
+  {
+    "accuracy": 90,
+    "damageClass": "physical",
+    "name": "wrap",
+    "description": "Prevents the target from fleeing and inflicts damage for 2-5 turns.",
+    "power": 15,
+    "pp": 20,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 0,
+    "damageClass": "status",
+    "name": "yawn",
+    "description": "Target sleeps at the end of the next turn.",
+    "power": 0,
+    "pp": 10,
+    "target": "selectedPokemon",
+    "type": "normal"
+  },
+  {
+    "accuracy": 50,
+    "damageClass": "special",
+    "name": "zap-cannon",
+    "description": "Has a 100% chance to paralyze the target.",
+    "power": 120,
+    "pp": 5,
+    "target": "selectedPokemon",
+    "type": "electric"
+  }
+]
