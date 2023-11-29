@@ -30,9 +30,9 @@ export default function RowDropdownMenu(props: RowDropdownMenuProps): JSX.Elemen
           <DropdownMenuItem disabled={addPokemonDisabled} onClick={handleClick}>
             Add to team
           </DropdownMenuItem>
-          <DropdownMenuItem disabled={addPokemonDisabled}>
-            <Link href={`/pokemon/${props.pokemon.name}`}>Details</Link>
-          </DropdownMenuItem>
+          <Link href={`/pokemon/${props.pokemon.name}`}>
+            <DropdownMenuItem disabled={addPokemonDisabled}>Details</DropdownMenuItem>
+          </Link>
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
