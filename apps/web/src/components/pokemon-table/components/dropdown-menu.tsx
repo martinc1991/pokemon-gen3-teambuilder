@@ -1,6 +1,7 @@
 import { DotsHorizontalIcon } from '@radix-ui/react-icons';
 import { useTeamStore } from '@state/team';
 import { MAX_TEAM_MEMBERS, type IPokemon } from 'contract';
+import Link from 'next/link';
 import { Button, DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from 'ui';
 
 interface RowDropdownMenuProps {
@@ -29,6 +30,9 @@ export default function RowDropdownMenu(props: RowDropdownMenuProps): JSX.Elemen
           <DropdownMenuItem disabled={addPokemonDisabled} onClick={handleClick}>
             Add to team
           </DropdownMenuItem>
+          <Link href={`/pokemon/${props.pokemon.name}`}>
+            <DropdownMenuItem>Details</DropdownMenuItem>
+          </Link>
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
