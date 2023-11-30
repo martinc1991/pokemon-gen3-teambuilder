@@ -38,11 +38,11 @@ function RightSidebarContent({ teamStore }: RightSidebarContentProps): JSX.Eleme
           />
         );
       })}
-      {emptySlots.map((slot, i) => {
+      {emptySlots.map((_, i) => {
         const iconUrl = null;
         const key = `empty-slot-${i}`;
         const name = 'empty slot';
-        return <PokemonAvatar iconUrl={iconUrl} key={key} name={name} />;
+        return <PokemonAvatar iconUrl={iconUrl} key={key} name={name} withBackground />;
       })}
 
       <Separator />
