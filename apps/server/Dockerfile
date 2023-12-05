@@ -48,7 +48,7 @@ COPY --chown=node:node --from=installer /app/deployed/server/package.json .
 
 # TODO: replace this line by just copying the client generated in the build stage before from node_modules/@prisma
 # TODO: see: https://www.prisma.io/docs/concepts/components/prisma-client/working-with-prismaclient/generating-prisma-client#the-location-of-prisma-client
-RUN pnpm dlx prisma generate
+RUN pnpm dlx prisma generate --generator client
 
 # Set NODE_ENV to production to optmize performance
 ENV NODE_ENV production
