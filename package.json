@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.5.9",
+    "dotenv-cli": "^7.3.0",
     "eslint": "^8.48.0",
     "husky": "^8.0.3",
     "organize-imports-cli": "^0.10.0",

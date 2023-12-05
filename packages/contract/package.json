@@ -2,19 +2,23 @@
   "name": "contract",
   "version": "1.0.0",
   "description": "",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsc",
     "dev": " tsc --watch",
-    "prisma:generate": "pnpm prisma generate --schema src/prisma/schema.prisma && pnpm organize:imports && pnpm prettier:format",
+    "prisma:generate": "dotenv -e .env.dev -- pnpm prisma generate && pnpm organize:imports && pnpm prettier:format",
+    "prisma:generate:prod": "dotenv -e .env.prod -- pnpm prisma generate",
     "lint": "tsc --noEmit --skipLibCheck",
     "prettier:format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "organize:imports": "pnpm organize-imports-cli ./tsconfig.json"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "prisma": {
+    "schema": "./node_modules/schema/schema.prisma"
+  },
   "devDependencies": {
     "prisma": "^5.3.1",
     "zod-prisma": "^0.5.4"
@@ -22,6 +26,7 @@
   "dependencies": {
     "@prisma/client": "^5.3.1",
     "@ts-rest/core": "^3.30.1",
+    "schema": "workspace:*",
     "zod": "^3.22.2"
   }
 }
