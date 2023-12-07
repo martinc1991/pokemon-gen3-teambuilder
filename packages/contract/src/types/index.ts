@@ -1,4 +1,4 @@
-import { NatureNames, Slot, StatName, Team } from '@prisma/client';
+import { Slot, StatName, Team } from '@prisma/client';
 import { IPokemonGetAllResponseElement } from '../contracts/pokemon-contract';
 
 export type EvFieldName = 'evAttack' | 'evDefense' | 'evHp' | 'evSpAttack' | 'evSpDefense' | 'evSpeed';
@@ -13,12 +13,6 @@ export type IBaseStats = {
   baseSpdefense: number;
   baseSpeed: number;
 };
-
-export interface INature {
-  name: NatureNames;
-  increased: StatName | null;
-  decreased: StatName | null;
-}
 
 // The type of the web slot WITH pokemon
 export interface FilledSlot extends Omit<Slot, 'team' | 'ability' | 'nature' | 'item'> {
