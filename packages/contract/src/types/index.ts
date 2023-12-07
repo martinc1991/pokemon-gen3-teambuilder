@@ -1,5 +1,6 @@
-import { Slot, StatName, Team } from '@prisma/client';
+import { StatName, Team } from '@prisma/client';
 import { IPokemonGetAllResponseElement } from '../contracts/pokemon-contract';
+import { Slot } from '../prisma/zod';
 
 export type EvFieldName = 'evAttack' | 'evDefense' | 'evHp' | 'evSpAttack' | 'evSpDefense' | 'evSpeed';
 export type IvFieldName = 'ivAttack' | 'ivDefense' | 'ivHp' | 'ivSpAttack' | 'ivSpDefense' | 'ivSpeed';
@@ -15,11 +16,11 @@ export type IBaseStats = {
 };
 
 // The type of the web slot WITH pokemon
-export interface FilledSlot extends Omit<Slot, 'team' | 'ability' | 'nature' | 'item'> {
+export interface FilledSlot extends Slot {
   pokemon: IPokemon;
   order: number;
 }
 
-export interface ITeam extends Team {
+export interface FilledTeam extends Team {
   slots: FilledSlot[];
 }

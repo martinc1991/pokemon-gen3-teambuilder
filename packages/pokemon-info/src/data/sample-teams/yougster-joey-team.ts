@@ -1,6 +1,6 @@
-import { ITeam } from 'contract';
+import { FilledTeam } from 'contract';
 
-export const YOUNGTER_JOEY_TEAM: ITeam = {
+export const YOUNGTER_JOEY_TEAM: FilledTeam = {
   id: 'sample-team-youngster-joey',
   userName: 'Youngster Joey',
   name: 'Rattata rules',
