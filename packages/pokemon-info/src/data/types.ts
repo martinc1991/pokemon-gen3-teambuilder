@@ -1,7 +1,8 @@
-import { DamageClass, IType, TypeNames } from 'contract';
+import { DamageClass, Type, TypeNames } from 'contract';
 
-export const TYPES: IType[] = [
+export const TYPES: Type[] = [
   {
+    id: `type-${TypeNames.normal}`,
     name: TypeNames.normal,
     damageClass: DamageClass.physical,
     doubleDamageFrom: [TypeNames.fighting],
@@ -12,6 +13,7 @@ export const TYPES: IType[] = [
     noDamageTo: [TypeNames.ghost],
   },
   {
+    id: `type-${TypeNames.ice}`,
     name: TypeNames.ice,
     damageClass: DamageClass.special,
     doubleDamageFrom: [TypeNames.fighting, TypeNames.rock, TypeNames.steel, TypeNames.fire],
@@ -22,6 +24,7 @@ export const TYPES: IType[] = [
     noDamageTo: [],
   },
   {
+    id: `type-${TypeNames.ghost}`,
     name: TypeNames.ghost,
     damageClass: DamageClass.physical,
     doubleDamageFrom: [TypeNames.ghost, TypeNames.dark],
@@ -32,6 +35,7 @@ export const TYPES: IType[] = [
     noDamageTo: [TypeNames.normal],
   },
   {
+    id: `type-${TypeNames.dark}`,
     name: TypeNames.dark,
     damageClass: DamageClass.special,
     doubleDamageFrom: [TypeNames.fighting, TypeNames.bug],
@@ -42,6 +46,7 @@ export const TYPES: IType[] = [
     noDamageTo: [],
   },
   {
+    id: `type-${TypeNames.grass}`,
     name: TypeNames.grass,
     damageClass: DamageClass.special,
     doubleDamageFrom: [TypeNames.flying, TypeNames.poison, TypeNames.bug, TypeNames.fire, TypeNames.ice],
@@ -52,6 +57,7 @@ export const TYPES: IType[] = [
     noDamageTo: [],
   },
   {
+    id: `type-${TypeNames.electric}`,
     name: TypeNames.electric,
     damageClass: DamageClass.special,
     doubleDamageFrom: [TypeNames.ground],
@@ -62,6 +68,7 @@ export const TYPES: IType[] = [
     noDamageTo: [TypeNames.ground],
   },
   {
+    id: `type-${TypeNames.steel}`,
     name: TypeNames.steel,
     damageClass: DamageClass.physical,
     doubleDamageFrom: [TypeNames.fighting, TypeNames.ground, TypeNames.fire],
@@ -84,6 +91,7 @@ export const TYPES: IType[] = [
     noDamageTo: [],
   },
   {
+    id: `type-${TypeNames.ground}`,
     name: TypeNames.ground,
     damageClass: DamageClass.physical,
     doubleDamageFrom: [TypeNames.water, TypeNames.grass, TypeNames.ice],
@@ -94,6 +102,7 @@ export const TYPES: IType[] = [
     noDamageTo: [TypeNames.flying],
   },
   {
+    id: `type-${TypeNames.fighting}`,
     name: TypeNames.fighting,
     damageClass: DamageClass.physical,
     doubleDamageFrom: [TypeNames.flying, TypeNames.psychic],
@@ -104,6 +113,7 @@ export const TYPES: IType[] = [
     noDamageTo: [TypeNames.ghost],
   },
   {
+    id: `type-${TypeNames.bug}`,
     name: TypeNames.bug,
     damageClass: DamageClass.physical,
     doubleDamageFrom: [TypeNames.flying, TypeNames.rock, TypeNames.fire],
@@ -114,6 +124,7 @@ export const TYPES: IType[] = [
     noDamageTo: [],
   },
   {
+    id: `type-${TypeNames.poison}`,
     name: TypeNames.poison,
     damageClass: DamageClass.physical,
     doubleDamageFrom: [TypeNames.ground, TypeNames.psychic],
@@ -124,6 +135,7 @@ export const TYPES: IType[] = [
     noDamageTo: [TypeNames.steel],
   },
   {
+    id: `type-${TypeNames.rock}`,
     name: TypeNames.rock,
     damageClass: DamageClass.physical,
     doubleDamageFrom: [TypeNames.fighting, TypeNames.ground, TypeNames.steel, TypeNames.water, TypeNames.grass],
@@ -134,6 +146,7 @@ export const TYPES: IType[] = [
     noDamageTo: [],
   },
   {
+    id: `type-${TypeNames.water}`,
     name: TypeNames.water,
     damageClass: DamageClass.special,
     doubleDamageFrom: [TypeNames.grass, TypeNames.electric],
@@ -144,6 +157,7 @@ export const TYPES: IType[] = [
     noDamageTo: [],
   },
   {
+    id: `type-${TypeNames.flying}`,
     name: TypeNames.flying,
     damageClass: DamageClass.physical,
     doubleDamageFrom: [TypeNames.rock, TypeNames.electric, TypeNames.ice],
@@ -154,6 +168,7 @@ export const TYPES: IType[] = [
     noDamageTo: [],
   },
   {
+    id: `type-${TypeNames.fire}`,
     name: TypeNames.fire,
     damageClass: DamageClass.special,
     doubleDamageFrom: [TypeNames.ground, TypeNames.rock, TypeNames.water],
@@ -164,6 +179,7 @@ export const TYPES: IType[] = [
     noDamageTo: [],
   },
   {
+    id: `type-${TypeNames.dragon}`,
     name: TypeNames.dragon,
     damageClass: DamageClass.special,
     doubleDamageFrom: [TypeNames.ice, TypeNames.dragon],
@@ -174,6 +190,7 @@ export const TYPES: IType[] = [
     noDamageTo: [],
   },
   {
+    id: `type-${TypeNames.psychic}`,
     name: TypeNames.psychic,
     damageClass: DamageClass.special,
     doubleDamageFrom: [TypeNames.bug, TypeNames.ghost, TypeNames.dark],
@@ -184,6 +201,7 @@ export const TYPES: IType[] = [
     noDamageTo: [TypeNames.dark],
   },
   {
+    id: `type-${TypeNames.empty}`,
     name: TypeNames.empty,
     damageClass: DamageClass.status,
     doubleDamageFrom: [],

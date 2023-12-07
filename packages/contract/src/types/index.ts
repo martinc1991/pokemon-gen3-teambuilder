@@ -1,4 +1,4 @@
-import { DamageClass, NatureNames, Slot, StatName, Team, TypeNames } from '@prisma/client';
+import { NatureNames, Slot, StatName, Team } from '@prisma/client';
 import { IPokemonGetAllResponseElement } from '../contracts/pokemon-contract';
 
 export type EvFieldName = 'evAttack' | 'evDefense' | 'evHp' | 'evSpAttack' | 'evSpDefense' | 'evSpeed';
@@ -13,17 +13,6 @@ export type IBaseStats = {
   baseSpdefense: number;
   baseSpeed: number;
 };
-
-export interface IType {
-  name: TypeNames;
-  damageClass: DamageClass | null;
-  doubleDamageFrom: TypeNames[];
-  doubleDamageTo: TypeNames[];
-  halfDamageFrom: TypeNames[];
-  halfDamageTo: TypeNames[];
-  noDamageFrom: TypeNames[];
-  noDamageTo: TypeNames[];
-}
 
 export interface INature {
   name: NatureNames;

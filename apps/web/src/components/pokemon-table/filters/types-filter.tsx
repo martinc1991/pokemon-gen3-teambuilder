@@ -4,7 +4,7 @@ import { Cross2Icon } from '@radix-ui/react-icons';
 import { client } from '@rq-client/index';
 import type { Table } from '@tanstack/react-table';
 import { capitalize } from '@utils/common';
-import type { IPokemonGetAllResponseElement, IType, TypeNames } from 'contract';
+import type { IPokemonGetAllResponseElement, Type, TypeNames } from 'contract';
 import { useEffect, useState } from 'react';
 import type { ComboboxItem } from 'ui';
 import { Combobox, TypeBadge } from 'ui';
@@ -14,24 +14,24 @@ interface TypeFiltersProps {
   table: Table<IPokemonGetAllResponseElement>;
 }
 
-const initialValue = { id: '', label: '', payload: {} } as ComboboxItem<IType>; // INFO: Cast because I dont want to fill payload, its just a dummy empty item
+const initialValue = { id: '', label: '', payload: {} } as ComboboxItem<Type>; // INFO: Cast because I dont want to fill payload, its just a dummy empty item
 
 export function TypesFilter({ table }: TypeFiltersProps): JSX.Element {
-  const [selectedTypes, setSelectedTypes] = useState<ComboboxItem<IType>[]>([]);
-  const [selectedValue, setSelectedValue] = useState<ComboboxItem<IType>>(initialValue);
+  const [selectedTypes, setSelectedTypes] = useState<ComboboxItem<Type>[]>([]);
+  const [selectedValue, setSelectedValue] = useState<ComboboxItem<Type>>(initialValue);
   const { data, isFetching, isError } = client.types.getAll.useQuery(['get-all-types']);
 
-  const DATA: ComboboxItem<IType>[] =
+  const DATA: ComboboxItem<Type>[] =
     data?.body.map((type) => {
       return { id: type.name, label: capitalize(type.name), payload: type };
     }) || [];
 
-  function setNewFilterValues(types: ComboboxItem<IType>[], filterValues: TypeNames[]): void {
+  function setNewFilterValues(types: ComboboxItem<Type>[], filterValues: TypeNames[]): void {
     table.getColumn(ColumnID.TYPES)?.setFilterValue(filterValues);
     setSelectedTypes(types);
   }
 
-  function handleChange(item: ComboboxItem<IType>): void {
+  function handleChange(item: ComboboxItem<Type>): void {
     // Dont add the same type twice
     if (selectedTypes.length && selectedTypes[0].id === item.id) return;
 
@@ -42,7 +42,7 @@ export function TypesFilter({ table }: TypeFiltersProps): JSX.Element {
     setNewFilterValues(newSelectedTypes, newFilterValues);
   }
 
-  function handleRemoveOne(deletedTypeItem: ComboboxItem<IType>): void {
+  function handleRemoveOne(deletedTypeItem: ComboboxItem<Type>): void {
     const newSelectedTypes = selectedTypes.filter((type) => type.label !== deletedTypeItem.label);
     const newFilterValues = newSelectedTypes.map((type) => type.payload.name);
     if (newSelectedTypes.length < 1) setSelectedValue(initialValue);
