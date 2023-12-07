@@ -6,7 +6,9 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
     },
-    "lint": {},
+    "lint": {
+      "cache": false
+    },
     "check-types": {},
     "dev": {
       "cache": false,
@@ -20,7 +22,7 @@
       "persistent": true
     },
     "prisma:generate": {
-      "cache": true
+      "cache": false
     },
     "prisma:migrate": {
       "cache": true
