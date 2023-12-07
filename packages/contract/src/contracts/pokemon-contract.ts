@@ -1,4 +1,4 @@
-import { ClientInferResponseBody, initContract } from '@ts-rest/core';
+import { initContract } from '@ts-rest/core';
 import { z } from 'zod';
 import { AbilitySchema, MoveSchema, PokemonSchema } from '../prisma/zod';
 import { ArrayElementType } from '../utils/types/array-element-type';
@@ -12,14 +12,14 @@ const queryParamsSchema = z.object({
   sortOrder: z.string().optional(),
 });
 
-// type GetAllPokemonResponse = Omit<CompletePokemon, 'typeOne' | 'typeTwo' | 'slot' | 'abilities' | 'learnset'> & { abilities: Ability[] };
-// const getAllPokemonResponseSchema = z.custom<GetAllPokemonResponse>();
-
-// type GetOnePokemonResponse = Omit<CompletePokemon, 'typeOne' | 'typeTwo' | 'slot' | 'abilities' | 'learnset'> & { abilities: Ability[] } & {
-//   learnset: Move[];
-// };
+// Zod schemas
 const getOnePokemonResponseSchema = PokemonSchema.merge(z.object({ abilities: z.array(AbilitySchema), learnset: z.array(MoveSchema) }));
 const getAllPokemonResponseSchema = z.array(PokemonSchema.merge(z.object({ abilities: z.array(AbilitySchema) })));
+
+// Responses types
+export type IPokemonGetOneResponse = z.infer<typeof getOnePokemonResponseSchema>;
+export type IPokemonGetAllResponse = z.infer<typeof getAllPokemonResponseSchema>;
+export type IPokemonGetAllResponseElement = ArrayElementType<IPokemonGetAllResponse>; // Type for each element of the getAll method response
 
 export const pokemonContract = c.router({
   getAll: {
@@ -41,10 +41,6 @@ export const pokemonContract = c.router({
   },
 });
 
-// Contract type
+// Contract types
 export type IPokemonContract = typeof pokemonContract;
 export type IPokemonGetAllQueryParams = z.infer<Required<typeof queryParamsSchema>>;
-
-// Responses types
-export type IPokemonGetAllResponse = ClientInferResponseBody<typeof pokemonContract.getAll, 200>;
-export type IPokemonGetAllResponseElement = ArrayElementType<IPokemonGetAllResponse>;

@@ -1,7 +1,7 @@
 import { Gender, TypeNames } from '@prisma/client';
-import { IPokemon } from 'contract';
+import { IPokemonGetAllResponseElement } from 'contract';
 
-export function pokemonStub(): IPokemon {
+export function pokemonStub(): IPokemonGetAllResponseElement {
   return {
     id: '83035ed6-e712-4146-b70d-16361ef035ef',
     name: 'ivysaur',

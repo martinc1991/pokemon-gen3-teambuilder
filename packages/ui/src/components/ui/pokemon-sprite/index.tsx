@@ -1,8 +1,8 @@
-import type { IPokemon } from 'contract';
+import type { IPokemonGetAllResponseElement } from 'contract';
 import Image from 'next/image';
 
 interface PokemonSpriteProps {
-  pokemon: IPokemon;
+  pokemon: Pick<IPokemonGetAllResponseElement, 'name' | 'sprite'>;
   size?: number;
 }
 
