@@ -1,7 +1,7 @@
 import { NatureNames } from '@prisma/client';
 import { initContract } from '@ts-rest/core';
 import { z } from 'zod';
-import { TeamModel } from '../prisma/zod';
+import { TeamSchema } from '../prisma/zod';
 
 const c = initContract();
 
@@ -14,7 +14,7 @@ export const teamsContract = c.router({
       skip: z.string().transform(Number).optional().default('0'),
     }),
     responses: {
-      200: z.array(TeamModel),
+      200: z.array(TeamSchema),
     },
     summary: 'Get all teams',
   },
@@ -22,7 +22,7 @@ export const teamsContract = c.router({
     method: 'GET',
     path: `/teams/:teamId`,
     responses: {
-      200: TeamModel,
+      200: TeamSchema,
     },
     summary: 'Get a team by id',
   },

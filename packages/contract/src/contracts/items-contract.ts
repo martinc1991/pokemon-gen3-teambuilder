@@ -1,6 +1,6 @@
 import { ClientInferResponseBody, initContract } from '@ts-rest/core';
 import { z } from 'zod';
-import { ItemModel } from '../prisma/zod';
+import { ItemSchema } from '../prisma/zod';
 import { ArrayElementType } from '../utils/types/array-element-type';
 
 const c = initContract();
@@ -10,7 +10,7 @@ export const itemsContract = c.router({
     method: 'GET',
     path: '/items',
     responses: {
-      200: z.array(ItemModel),
+      200: z.array(ItemSchema),
     },
     summary: 'Get all items',
   },
@@ -18,7 +18,7 @@ export const itemsContract = c.router({
     method: 'GET',
     path: `/items/:itemName`,
     responses: {
-      200: ItemModel,
+      200: ItemSchema,
     },
     summary: 'Get a item by name',
   },

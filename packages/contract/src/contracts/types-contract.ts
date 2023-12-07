@@ -1,6 +1,6 @@
 import { initContract } from '@ts-rest/core';
 import { z } from 'zod';
-import { TypeModel } from '../prisma/zod';
+import { TypeSchema } from '../prisma/zod';
 
 const c = initContract();
 
@@ -9,7 +9,7 @@ export const typesContract = c.router({
     method: 'GET',
     path: '/types',
     responses: {
-      200: z.array(TypeModel),
+      200: z.array(TypeSchema),
     },
     summary: 'Get all types',
   },
@@ -17,7 +17,7 @@ export const typesContract = c.router({
     method: 'GET',
     path: `/types/:typeName`,
     responses: {
-      200: TypeModel,
+      200: TypeSchema,
     },
     summary: 'Get a type by name',
   },

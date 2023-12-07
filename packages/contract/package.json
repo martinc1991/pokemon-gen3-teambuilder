@@ -10,7 +10,7 @@
   "scripts": {
     "build": "tsc",
     "dev": " tsc --watch",
-    "prisma:generate": "dotenv -e .env.dev -- pnpm prisma generate && pnpm organize:imports && pnpm prettier:format",
+    "prisma:generate": "dotenv -e .env.dev -- pnpm prisma generate --generator zod && pnpm organize:imports && pnpm prettier:format",
     "prisma:generate:prod": "dotenv -e .env.prod -- pnpm prisma generate",
     "lint": "tsc --noEmit --skipLibCheck",
     "prettier:format": "prettier --write \"**/*.{ts,tsx,md}\"",
@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "prisma": "^5.3.1",
-    "zod-prisma": "^0.5.4"
+    "zod-prisma-types": "^3.1.6"
   },
   "dependencies": {
     "@prisma/client": "^5.3.1",

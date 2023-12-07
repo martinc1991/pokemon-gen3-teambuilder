@@ -1,6 +1,6 @@
 import { ClientInferResponseBody, initContract } from '@ts-rest/core';
 import { z } from 'zod';
-import { NatureModel } from '../prisma/zod';
+import { NatureSchema } from '../prisma/zod';
 import { ArrayElementType } from '../utils/types/array-element-type';
 
 const c = initContract();
@@ -10,7 +10,7 @@ export const naturesContract = c.router({
     method: 'GET',
     path: '/natures',
     responses: {
-      200: z.array(NatureModel),
+      200: z.array(NatureSchema),
     },
     summary: 'Get all natures',
   },
@@ -18,7 +18,7 @@ export const naturesContract = c.router({
     method: 'GET',
     path: `/natures/:natureName`,
     responses: {
-      200: NatureModel,
+      200: NatureSchema,
     },
     summary: 'Get a nature by name',
   },
