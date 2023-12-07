@@ -1,8 +1,6 @@
 import { DamageClass, NatureNames, Slot, StatName, Team, TypeNames } from '@prisma/client';
 import { IPokemonGetAllResponseElement } from '../contracts/pokemon-contract';
 
-export { Gender, NatureNames, StatName, Tier, TypeNames } from '@prisma/client';
-
 export type EvFieldName = 'evAttack' | 'evDefense' | 'evHp' | 'evSpAttack' | 'evSpDefense' | 'evSpeed';
 export type IvFieldName = 'ivAttack' | 'ivDefense' | 'ivHp' | 'ivSpAttack' | 'ivSpDefense' | 'ivSpeed';
 export type IPokemon = IPokemonGetAllResponseElement; // This type is in sync with the response of the get all pokemon endpoint
