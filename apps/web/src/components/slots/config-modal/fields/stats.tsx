@@ -1,6 +1,6 @@
 import { useTeamStore } from '@state/team';
 import { calculateStat, getShortStatName, getTotalEvs } from '@utils/pokemon';
-import type { CompleteNature, EvFieldName, FilledSlot, IvFieldName, StatName } from 'contract';
+import type { EvFieldName, FilledSlot, IvFieldName, Nature, StatName } from 'contract';
 import { MAX_INDIVIDUAL_EV, MAX_INDIVIDUAL_IV, MAX_POSSIBLE_EVS } from 'contract';
 import { NATURES } from 'pokemon-info';
 import type { ChangeEvent } from 'react';
@@ -129,7 +129,7 @@ interface SlotStatFieldProps {
   ev: number;
   iv: number;
   level: number;
-  nature: Pick<CompleteNature, 'increased' | 'decreased'>;
+  nature: Pick<Nature, 'increased' | 'decreased'>;
   onChangeEv?: (value: number) => void;
   onChangeIv?: (value: number) => void;
   totalEvs: number;

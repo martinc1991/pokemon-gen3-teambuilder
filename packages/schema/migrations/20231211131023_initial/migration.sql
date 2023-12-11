@@ -92,7 +92,9 @@ CREATE TABLE "Pokemon" (
 -- CreateTable
 CREATE TABLE "Team" (
     "id" TEXT NOT NULL,
-    "name" TEXT DEFAULT 'no-name',
+    "name" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
+    "userName" TEXT NOT NULL,
 
     CONSTRAINT "Team_pkey" PRIMARY KEY ("id")
 );
@@ -105,7 +107,7 @@ CREATE TABLE "Slot" (
     "nationalPokedexNumber" INTEGER NOT NULL,
     "order" INTEGER NOT NULL,
     "abilityName" TEXT NOT NULL,
-    "natureName" "NatureNames",
+    "natureName" "NatureNames" NOT NULL,
     "evHp" INTEGER NOT NULL DEFAULT 0,
     "evAttack" INTEGER NOT NULL DEFAULT 0,
     "evDefense" INTEGER NOT NULL DEFAULT 0,
@@ -119,14 +121,14 @@ CREATE TABLE "Slot" (
     "ivSpDefense" INTEGER NOT NULL DEFAULT 31,
     "ivSpeed" INTEGER NOT NULL DEFAULT 31,
     "itemName" TEXT,
-    "shiny" BOOLEAN DEFAULT false,
+    "shiny" BOOLEAN NOT NULL DEFAULT false,
     "gender" "Gender" NOT NULL,
     "level" INTEGER NOT NULL DEFAULT 100,
     "happiness" INTEGER NOT NULL DEFAULT 255,
     "moveOneName" TEXT NOT NULL,
-    "moveTwoName" TEXT NOT NULL,
-    "moveThreeName" TEXT NOT NULL,
-    "moveFourName" TEXT NOT NULL,
+    "moveTwoName" TEXT,
+    "moveThreeName" TEXT,
+    "moveFourName" TEXT,
 
     CONSTRAINT "Slot_pkey" PRIMARY KEY ("id")
 );
@@ -210,7 +212,7 @@ ALTER TABLE "Slot" ADD CONSTRAINT "Slot_nationalPokedexNumber_fkey" FOREIGN KEY 
 ALTER TABLE "Slot" ADD CONSTRAINT "Slot_abilityName_fkey" FOREIGN KEY ("abilityName") REFERENCES "Ability"("name") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Slot" ADD CONSTRAINT "Slot_natureName_fkey" FOREIGN KEY ("natureName") REFERENCES "Nature"("name") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Slot" ADD CONSTRAINT "Slot_natureName_fkey" FOREIGN KEY ("natureName") REFERENCES "Nature"("name") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Slot" ADD CONSTRAINT "Slot_itemName_fkey" FOREIGN KEY ("itemName") REFERENCES "Item"("name") ON DELETE SET NULL ON UPDATE CASCADE;
@@ -219,13 +221,13 @@ ALTER TABLE "Slot" ADD CONSTRAINT "Slot_itemName_fkey" FOREIGN KEY ("itemName") 
 ALTER TABLE "Slot" ADD CONSTRAINT "Slot_moveOneName_fkey" FOREIGN KEY ("moveOneName") REFERENCES "Move"("name") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Slot" ADD CONSTRAINT "Slot_moveTwoName_fkey" FOREIGN KEY ("moveTwoName") REFERENCES "Move"("name") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Slot" ADD CONSTRAINT "Slot_moveTwoName_fkey" FOREIGN KEY ("moveTwoName") REFERENCES "Move"("name") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Slot" ADD CONSTRAINT "Slot_moveThreeName_fkey" FOREIGN KEY ("moveThreeName") REFERENCES "Move"("name") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Slot" ADD CONSTRAINT "Slot_moveThreeName_fkey" FOREIGN KEY ("moveThreeName") REFERENCES "Move"("name") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Slot" ADD CONSTRAINT "Slot_moveFourName_fkey" FOREIGN KEY ("moveFourName") REFERENCES "Move"("name") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Slot" ADD CONSTRAINT "Slot_moveFourName_fkey" FOREIGN KEY ("moveFourName") REFERENCES "Move"("name") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "_AbilityToPokemon" ADD CONSTRAINT "_AbilityToPokemon_A_fkey" FOREIGN KEY ("A") REFERENCES "Ability"("id") ON DELETE CASCADE ON UPDATE CASCADE;

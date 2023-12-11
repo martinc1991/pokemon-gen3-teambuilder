@@ -1,6 +1,6 @@
 import { useTeamStore } from '@state/team';
+import type { Ability } from 'contract';
 import { FilledSlot } from 'contract';
-import type { CompleteAbility } from 'contract/dist/prisma/zod';
 import type { ComboboxItem } from 'ui';
 import { FormField } from 'ui';
 
@@ -17,7 +17,7 @@ export default function AbilityField({ slot }: AbilityFieldProps): JSX.Element {
     payload: ability,
   }));
 
-  function handleAbilityChange(item: ComboboxItem<CompleteAbility>): void {
+  function handleAbilityChange(item: ComboboxItem<Ability>): void {
     setSlotFieldValue(slot, 'abilityName', item.payload.name);
   }
 

@@ -13,6 +13,7 @@
     "prisma:generate": "dotenv -e .env.dev -- pnpm prisma generate --generator client",
     "db:seed:prod": "dotenv -e .env.prod -- ts-node prisma/seed.ts",
     "studio": "dotenv -e .env.dev --  prisma studio",
+    "studio:prod": "dotenv -e .env.prod --  prisma studio",
     "prettier:format": "prettier --write \"prisma/**/*.ts\"",
     "lint": "eslint \"prisma/**/*.ts\" --fix && pnpm typecheck",
     "typecheck": "tsc --noEmit --skipLibCheck"

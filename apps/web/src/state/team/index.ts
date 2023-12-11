@@ -1,5 +1,5 @@
 import { TEAM_STORAGE_NAME } from '@state/team/constants';
-import { FilledSlot, MAX_TEAM_MEMBERS, type IPokemon } from 'contract';
+import { FilledSlot, MAX_TEAM_MEMBERS, type IPokemonGetAllResponseElement } from 'contract';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
@@ -7,7 +7,7 @@ import type { TeamState, TrashBinTeam } from './helpers';
 import { BaseSlot, genLocalTeamId } from './helpers';
 
 interface TeamActions {
-  addSlot: (pokemon: IPokemon) => void;
+  addSlot: (pokemon: IPokemonGetAllResponseElement) => void;
   removeSlot: (slot: FilledSlot) => void;
   clearTeam: () => void;
   setSelectedSlotIndex: (index: number) => void;

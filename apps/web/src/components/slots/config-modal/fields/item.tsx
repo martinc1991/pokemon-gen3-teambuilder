@@ -1,6 +1,6 @@
 import { client } from '@rq-client/index';
 import { useTeamStore } from '@state/team';
-import type { FilledSlot, IItemGetAllResponseElement } from 'contract';
+import type { FilledSlot, IItemsGetAllResponseElement } from 'contract';
 import type { ComboboxItem } from 'ui';
 import { FormField } from 'ui';
 
@@ -15,13 +15,13 @@ export default function ItemField({ slot }: ItemFieldProps): JSX.Element {
   if (error) return <div>error</div>;
   if (isLoading) return <div>loading</div>;
 
-  const itemsData: ComboboxItem<IItemGetAllResponseElement>[] = data.body.map((item) => ({
+  const itemsData: ComboboxItem<IItemsGetAllResponseElement>[] = data.body.map((item) => ({
     id: item.name,
     label: item.name.replace('-', ' '),
     payload: item,
   }));
 
-  function handleItemChange(item: ComboboxItem<IItemGetAllResponseElement>): void {
+  function handleItemChange(item: ComboboxItem<IItemsGetAllResponseElement>): void {
     setSlotFieldValue(slot, 'itemName', item.payload.name);
   }
 

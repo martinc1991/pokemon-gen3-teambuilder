@@ -1,4 +1,4 @@
-import type { CompleteNature, EvFieldName, IBaseStats, IvFieldName, StatName, TypeNames } from 'contract';
+import type { EvFieldName, IBaseStats, IvFieldName, Nature, StatName, TypeNames } from 'contract';
 import { SORTED_TYPES_NAMES } from 'pokemon-info';
 import { getValues } from '../common';
 
@@ -37,7 +37,7 @@ export interface CalculateStatProps {
   ev: number;
   iv: number;
   level: number;
-  nature: Pick<CompleteNature, 'increased' | 'decreased'>;
+  nature: Pick<Nature, 'increased' | 'decreased'>;
 }
 
 // See: https://pokemon.fandom.com/wiki/Statistics#Formula

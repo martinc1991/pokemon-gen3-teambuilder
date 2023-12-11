@@ -15,4 +15,5 @@ export const mainContract = c.router({
   types: typesContract,
 });
 
+// Contract types
 export type IMainContract = typeof mainContract;

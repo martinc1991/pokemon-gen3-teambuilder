@@ -1,6 +1,6 @@
-import { ITeam } from 'contract';
+import { FilledTeam } from 'contract';
 
-export const WHITNEY_TEAM: ITeam = {
+export const WHITNEY_TEAM: FilledTeam = {
   id: 'sample-team-whitney',
   userName: 'Whitney',
   name: 'Happy Nightmare',

@@ -1,6 +1,6 @@
 import { useTeamStore } from '@state/team';
 import { getShortStatName } from '@utils/pokemon';
-import type { FilledSlot, INature } from 'contract';
+import type { FilledSlot, Nature } from 'contract';
 import { NATURES } from 'pokemon-info';
 import type { ComboboxItem } from 'ui';
 import { FormField } from 'ui';
@@ -12,11 +12,11 @@ interface NatureFieldProps {
 export default function NatureField({ slot }: NatureFieldProps): JSX.Element {
   const setSlotFieldValue = useTeamStore((state) => state.setSlotFieldValue);
 
-  const naturesData: ComboboxItem<INature>[] = NATURES.map((nature) => {
+  const naturesData: ComboboxItem<Nature>[] = NATURES.map((nature) => {
     return { id: nature.name, label: getNatureSelectLabel(nature), payload: nature };
   });
 
-  function handleItemChange(item: ComboboxItem<INature>): void {
+  function handleItemChange(item: ComboboxItem<Nature>): void {
     setSlotFieldValue(slot, 'natureName', item.payload.name);
   }
 
@@ -35,7 +35,7 @@ export default function NatureField({ slot }: NatureFieldProps): JSX.Element {
   );
 }
 
-export function getNatureSelectLabel({ name, decreased, increased }: INature): string {
+export function getNatureSelectLabel({ name, decreased, increased }: Nature): string {
   const basic = `${name.replace('-', ' ')}`;
 
   if (increased && decreased) {
