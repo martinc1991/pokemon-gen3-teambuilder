@@ -5,10 +5,12 @@ export const MY_TEAM: FilledTeam = {
   userName: 'bit90s',
   name: 'My Emerald Team',
   description: 'The team I used in the Battle Frontier.',
+  sample: true,
+  public: true,
   slots: [
     {
       id: 'local-slot-eah3oh',
-      teamId: 'local-team-D0EJpU',
+      teamId: 'sample-team-bit90s',
       nationalPokedexNumber: 330,
       name: '',
       abilityName: 'levitate',
@@ -66,7 +68,7 @@ export const MY_TEAM: FilledTeam = {
     },
     {
       id: 'local-slot-G7vtgE',
-      teamId: 'local-team-D0EJpU',
+      teamId: 'sample-team-bit90s',
       nationalPokedexNumber: 103,
       name: '',
       abilityName: 'chlorophyll',
@@ -123,7 +125,7 @@ export const MY_TEAM: FilledTeam = {
     },
     {
       id: 'local-slot-FPNz6M',
-      teamId: 'local-team-D0EJpU',
+      teamId: 'sample-team-bit90s',
       nationalPokedexNumber: 57,
       name: '',
       abilityName: 'vital-spirit',
@@ -181,7 +183,7 @@ export const MY_TEAM: FilledTeam = {
     },
     {
       id: 'local-slot-z5qwhS',
-      teamId: 'local-team-D0EJpU',
+      teamId: 'sample-team-bit90s',
       nationalPokedexNumber: 142,
       name: '',
       abilityName: 'rock-head',
@@ -246,7 +248,7 @@ export const MY_TEAM: FilledTeam = {
     },
     {
       id: 'local-slot-cwKxqQ',
-      teamId: 'local-team-D0EJpU',
+      teamId: 'sample-team-bit90s',
       nationalPokedexNumber: 121,
       name: '',
       abilityName: 'natural-cure',
@@ -311,7 +313,7 @@ export const MY_TEAM: FilledTeam = {
     },
     {
       id: 'local-slot-f7RLuc',
-      teamId: 'local-team-D0EJpU',
+      teamId: 'sample-team-bit90s',
       nationalPokedexNumber: 235,
       name: '',
       abilityName: 'own-tempo',

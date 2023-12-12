@@ -1,6 +1,7 @@
 import { NotFoundException } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import { PrismaService } from '@providers/prisma/prisma.service';
+import { Team } from 'contract';
 import { TeamService } from '../team.service';
 import {
   createTeamDtoStub,
@@ -12,7 +13,14 @@ import {
 } from './stubs/createTeamDto.stub';
 import { paginationStub } from './stubs/pagination.stub';
 
-const mockedTeam = { name: teamNameStub, id: teamIdStub, description: teamDescriptionStub, userName: teamUserNameStub };
+const mockedTeam: Team = {
+  name: teamNameStub,
+  id: teamIdStub,
+  description: teamDescriptionStub,
+  userName: teamUserNameStub,
+  public: true,
+  sample: true,
+};
 
 const mockedPrismaService = {
   team: {

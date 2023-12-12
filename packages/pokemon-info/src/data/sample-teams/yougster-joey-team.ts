@@ -5,10 +5,12 @@ export const YOUNGTER_JOEY_TEAM: FilledTeam = {
   userName: 'Youngster Joey',
   name: 'Rattata rules',
   description: 'My Rattata is in the top percentage of all Rattata.',
+  sample: true,
+  public: true,
   slots: [
     {
       id: 'local-slot-t3ra_X',
-      teamId: 'local-team-D0EJpU',
+      teamId: 'sample-team-youngster-joey',
       nationalPokedexNumber: 19,
       name: '',
       abilityName: 'run-away',
@@ -47,7 +49,7 @@ export const YOUNGTER_JOEY_TEAM: FilledTeam = {
         ],
       },
       natureName: 'docile',
-      itemName: '',
+      itemName: null,
       shiny: false,
       evHp: 0,
       evAttack: 9,

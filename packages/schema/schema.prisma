@@ -197,16 +197,18 @@ model Pokemon {
 
 // Teams
 model Team {
-  id          String @id @default(uuid())
-  name        String
-  description String
+  id          String  @id @default(uuid())
+  name        String  @default("")
+  description String  @default("")
   userName    String // INFO: just for now, User model not made yet
   slots       Slot[]
+  sample      Boolean @default(false)
+  public      Boolean @default(false)
 }
 
 model Slot {
   id                    String      @id @default(uuid())
-  name                  String?     @default("no-name")
+  name                  String      @default("")
   team                  Team        @relation(fields: [teamId], references: [id], onDelete: Cascade)
   teamId                String
   pokemon               Pokemon     @relation(fields: [nationalPokedexNumber], references: [nationalPokedexNumber])
@@ -215,7 +217,7 @@ model Slot {
   ability               Ability     @relation(fields: [abilityName], references: [name])
   abilityName           String
   nature                Nature      @relation(fields: [natureName], references: [name])
-  natureName            NatureNames
+  natureName            NatureNames @default(docile)
   evHp                  Int         @default(0)
   evAttack              Int         @default(0)
   evDefense             Int         @default(0)

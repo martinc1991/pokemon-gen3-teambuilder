@@ -10,7 +10,7 @@ export const SlotSchema = z.object({
   natureName: NatureNamesSchema,
   gender: GenderSchema,
   id: z.string().uuid(),
-  name: z.string().nullable(),
+  name: z.string(),
   teamId: z.string(),
   nationalPokedexNumber: z.number().int(),
   order: z.number().int(),

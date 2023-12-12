@@ -29,7 +29,7 @@
       "cache": false
     },
     "prisma:migrate": {
-      "cache": true
+      "cache": false
     },
     "db:seed": {
       "cache": false
