@@ -1,24 +1,19 @@
 import { initContract } from '@ts-rest/core';
 import { z } from 'zod';
 import { TypeSchema } from '../prisma/zod';
-import { ArrayElementType } from '../utils/types/array-element-type';
 
 const c = initContract();
 
-// Zod schemas
-const getOneTypeResponseSchema = TypeSchema;
-const getAllTypesResponseSchema = z.array(TypeSchema);
-
 // Responses types
-export type ITypesGetAllResponse = z.infer<typeof getAllTypesResponseSchema>;
-export type ITypesGetAllResponseElement = ArrayElementType<ITypesGetAllResponse>;
+const GetOneTypeResponseSchema = TypeSchema;
+const GetAllTypesResponseSchema = z.array(TypeSchema);
 
 export const typesContract = c.router({
   getAll: {
     method: 'GET',
     path: '/types',
     responses: {
-      200: getAllTypesResponseSchema,
+      200: GetAllTypesResponseSchema,
     },
     summary: 'Get all types',
   },
@@ -26,7 +21,7 @@ export const typesContract = c.router({
     method: 'GET',
     path: `/types/:typeName`,
     responses: {
-      200: getOneTypeResponseSchema,
+      200: GetOneTypeResponseSchema,
     },
     summary: 'Get a type by name',
   },
