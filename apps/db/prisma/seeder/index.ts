@@ -1,4 +1,18 @@
-import { ABILITIES, ITEMS, LEARNSETS, NATURES, TYPES, getMoveName, pokemon_data as allPokemon, moves_data as moves } from 'pokemon-info';
+import {
+  ABILITIES,
+  ITEMS,
+  KIKE_TEAM,
+  LEARNSETS,
+  MY_TEAM,
+  NATURES,
+  RED_TEAM,
+  TYPES,
+  WHITNEY_TEAM,
+  YOUNGTER_JOEY_TEAM,
+  pokemon_data as allPokemon,
+  getMoveName,
+  moves_data as moves,
+} from 'pokemon-info';
 import { isDbSeeded } from './helpers';
 import { prismaSeederClient } from './seederClient';
 
@@ -96,7 +110,7 @@ export async function seeder() {
       console.log('Upserting moves');
       const MOVES__PROMISES = [];
       moves.forEach(({ name, ...move }) => {
-        const p = prismaSeederClient.move.upsert({
+        const p = client.move.upsert({
           where: {
             name,
           },
@@ -150,6 +164,38 @@ export async function seeder() {
       await Promise.all(POKEMON__PROMISES);
 
       console.log('Upserting pokemons finished');
+
+      // Seed teams
+      console.log('Upserting sample teams');
+      const teams = [KIKE_TEAM, MY_TEAM, RED_TEAM, WHITNEY_TEAM, YOUNGTER_JOEY_TEAM];
+      const TEAMS__PROMISES = [];
+
+      teams.forEach(({ id, description, name, userName, isSample, isPublic }) => {
+        const p = client.team.upsert({
+          where: { id },
+          create: { id, description, name, userName, isSample, isPublic },
+          update: { description, name, userName, isSample, isPublic },
+        });
+        TEAMS__PROMISES.push(p);
+      });
+      await Promise.all(TEAMS__PROMISES);
+
+      const SLOTS__PROMISES = [];
+
+      teams.forEach((team) => {
+        team.slots.forEach(({ pokemon, ...slot }, i) => {
+          console.log(pokemon);
+          const p = client.slot.upsert({
+            where: { id: slot.id },
+            create: { ...slot, id: slot.id, teamId: team.id, order: i },
+            update: { ...slot, teamId: team.id, order: i },
+          });
+          SLOTS__PROMISES.push(p);
+        });
+      });
+      await Promise.all(SLOTS__PROMISES);
+
+      console.log('Upserting sample teams finished');
     },
     {
       maxWait: 1000 * 60 * 2,

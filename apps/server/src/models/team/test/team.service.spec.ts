@@ -1,6 +1,7 @@
 import { NotFoundException } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import { PrismaService } from '@providers/prisma/prisma.service';
+import { Team } from 'contract';
 import { TeamService } from '../team.service';
 import {
   createTeamDtoStub,
@@ -12,7 +13,14 @@ import {
 } from './stubs/createTeamDto.stub';
 import { paginationStub } from './stubs/pagination.stub';
 
-const mockedTeam = { name: teamNameStub, id: teamIdStub, description: teamDescriptionStub, userName: teamUserNameStub };
+const mockedTeam: Team = {
+  name: teamNameStub,
+  id: teamIdStub,
+  description: teamDescriptionStub,
+  userName: teamUserNameStub,
+  isPublic: true,
+  isSample: true,
+};
 
 const mockedPrismaService = {
   team: {
@@ -58,6 +66,31 @@ describe('Team controller', () => {
         take: paginationStub().take,
       };
       await service.getAll(paginationStub());
+      expect(prismaService.team.findMany).toHaveBeenCalledWith(expectedParams);
+    });
+  });
+
+  describe('getSampleTeams method', () => {
+    it('should call prisma team service findMany method with the correct configuration passing pagination params', async () => {
+      const expectedParams = {
+        where: {
+          isSample: true,
+        },
+        include: {
+          slots: {
+            include: {
+              pokemon: {
+                include: {
+                  abilities: true,
+                },
+              },
+            },
+          },
+        },
+        skip: paginationStub().skip,
+        take: paginationStub().take,
+      };
+      await service.getSampleTeams(paginationStub());
       expect(prismaService.team.findMany).toHaveBeenCalledWith(expectedParams);
     });
   });

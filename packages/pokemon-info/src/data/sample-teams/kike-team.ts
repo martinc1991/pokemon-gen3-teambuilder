@@ -5,10 +5,12 @@ export const KIKE_TEAM: FilledTeam = {
   userName: 'Kike',
   name: 'Initial team',
   description: 'Put together 5 minutes into the game.',
+  isSample: true,
+  isPublic: true,
   slots: [
     {
       id: 'local-slot-_JZJ6E',
-      teamId: 'local-team-D0EJpU',
+      teamId: 'sample-team-kike',
       nationalPokedexNumber: 255,
       name: '',
       abilityName: 'blaze',
@@ -41,7 +43,7 @@ export const KIKE_TEAM: FilledTeam = {
         ],
       },
       natureName: 'hasty',
-      itemName: '',
+      itemName: null,
       shiny: false,
       evHp: 21,
       evAttack: 26,
@@ -66,7 +68,7 @@ export const KIKE_TEAM: FilledTeam = {
     },
     {
       id: 'local-slot-ZYrc1J',
-      teamId: 'local-team-D0EJpU',
+      teamId: 'sample-team-kike',
       nationalPokedexNumber: 263,
       name: '',
       abilityName: 'pickup',
@@ -124,7 +126,7 @@ export const KIKE_TEAM: FilledTeam = {
     },
     {
       id: 'local-slot-mieKdd',
-      teamId: 'local-team-D0EJpU',
+      teamId: 'sample-team-kike',
       nationalPokedexNumber: 263,
       name: '',
       abilityName: 'pickup',
@@ -182,7 +184,7 @@ export const KIKE_TEAM: FilledTeam = {
     },
     {
       id: 'local-slot-lmVaYn',
-      teamId: 'local-team-D0EJpU',
+      teamId: 'sample-team-kike',
       nationalPokedexNumber: 263,
       name: '',
       abilityName: 'pickup',
@@ -240,7 +242,7 @@ export const KIKE_TEAM: FilledTeam = {
     },
     {
       id: 'local-slot-XpJZ98',
-      teamId: 'local-team-D0EJpU',
+      teamId: 'sample-team-kike',
       nationalPokedexNumber: 263,
       name: '',
       abilityName: 'pickup',
@@ -298,7 +300,7 @@ export const KIKE_TEAM: FilledTeam = {
     },
     {
       id: 'local-slot-w2jbPS',
-      teamId: 'local-team-D0EJpU',
+      teamId: 'sample-team-kike',
       nationalPokedexNumber: 263,
       name: '',
       abilityName: 'pickup',
