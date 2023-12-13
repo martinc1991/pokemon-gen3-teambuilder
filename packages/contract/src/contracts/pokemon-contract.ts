@@ -1,15 +1,12 @@
 import { initContract } from '@ts-rest/core';
 import { z } from 'zod';
-import { PokemonWithAbilitiesAndLearnsetSchema, PokemonWithAbilitiesSchema } from '../index';
+import { PaginationParamsSchema, SortOrderParamsSchema } from '../common';
+import { PokemonWithAbilitiesAndLearnsetSchema, PokemonWithAbilitiesSchema } from '../types';
 
 const c = initContract();
 
-const queryParamsSchema = z.object({
-  take: z.number().optional(),
-  skip: z.number().optional(),
-  orderBy: z.string().optional(),
-  sortOrder: z.string().optional(),
-});
+// Params schemas
+const GetAllPokemonQueryParamsSchema = PaginationParamsSchema.merge(SortOrderParamsSchema);
 
 // Response schemas
 const GetOnePokemonResponseSchema = PokemonWithAbilitiesAndLearnsetSchema;
@@ -22,7 +19,7 @@ export const pokemonContract = c.router({
     responses: {
       200: GetAllPokemonResponseSchema,
     },
-    query: queryParamsSchema,
+    query: GetAllPokemonQueryParamsSchema,
     summary: 'Get all pokemon',
   },
   getOne: {
@@ -37,4 +34,4 @@ export const pokemonContract = c.router({
 
 // Contract types
 export type IPokemonContract = typeof pokemonContract;
-export type IPokemonGetAllQueryParams = z.infer<Required<typeof queryParamsSchema>>;
+export type IPokemonGetAllQueryParams = z.infer<Required<typeof GetAllPokemonQueryParamsSchema>>;

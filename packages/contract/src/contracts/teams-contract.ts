@@ -1,21 +1,18 @@
 import { initContract } from '@ts-rest/core';
 import { z } from 'zod';
-import { FilledSlotSchema, TeamWithFilledSlotsSchema } from '../index';
+import { CommonResponseSchema, PaginationParamsSchema } from '../common';
 import { TeamSchema } from '../prisma/zod';
+import { FilledSlotSchema, TeamWithFilledSlotsSchema } from '../types';
 
 const c = initContract();
 
 // Params schemas
-const QueryParamsSchema = z.object({
-  take: z.string().transform(Number).optional().default('10'),
-  skip: z.string().transform(Number).optional().default('0'),
-});
+const GetTeamsQueryParamsSchema = PaginationParamsSchema;
 
 // Responses schemas
 const GetOneTeamResponseSchema = TeamSchema;
 const GetAllTeamsResponseSchema = z.array(TeamSchema);
 const GetSampleTeamsResponseSchema = z.array(TeamWithFilledSlotsSchema);
-const CommonResponseSchema = z.object({ id: z.string(), name: z.string() });
 
 // Body schemas
 const CreateTeamBodySchema = TeamSchema.omit({ id: true }).merge(z.object({ slots: FilledSlotSchema })); // TODO: Make it better when time comes
@@ -26,7 +23,7 @@ export const teamsContract = c.router({
   getAll: {
     method: 'GET',
     path: '/teams',
-    query: QueryParamsSchema,
+    query: GetTeamsQueryParamsSchema,
     responses: {
       200: GetAllTeamsResponseSchema,
     },
@@ -43,7 +40,7 @@ export const teamsContract = c.router({
   getSampleTeams: {
     method: 'GET',
     path: `/teams/sample`,
-    query: QueryParamsSchema,
+    query: GetTeamsQueryParamsSchema,
     responses: {
       200: GetSampleTeamsResponseSchema,
     },
