@@ -1,11 +1,11 @@
 import CopyButton from '@components/copy-button';
 import { RecoverTeamButton } from '@components/recover-team-button';
 import withTeamStore, { WithTeamStoreProps } from '@state/hoc/with-store';
-import { FilledTeam } from 'contract';
+import { TeamWithFilledSlots } from 'contract';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, PokemonAvatar, Typography } from 'ui';
 
 interface TeamCardProps extends WithTeamStoreProps {
-  team: FilledTeam;
+  team: TeamWithFilledSlots;
 }
 
 function TeamCard({ team }: TeamCardProps): JSX.Element {
