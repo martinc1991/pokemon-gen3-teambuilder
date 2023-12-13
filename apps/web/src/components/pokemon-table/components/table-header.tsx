@@ -2,7 +2,7 @@ import { ArrowDownIcon, ArrowUpIcon } from '@radix-ui/react-icons';
 import type { HeaderGroup, Table } from '@tanstack/react-table';
 import { flexRender } from '@tanstack/react-table';
 import clsx from 'clsx';
-import type { IPokemonGetAllResponseElement } from 'contract';
+import type { PokemonWithAbilities } from 'contract';
 import { TableHead, TableHeader, TableRow } from 'ui';
 import type { ColumnID } from '../columns/constants';
 import { columnsConfig } from '../columns/constants';
@@ -10,7 +10,7 @@ import { columnsConfig } from '../columns/constants';
 export const TABLE_HEADER_HEIGHT = 40;
 
 interface PokemonTableHeaderProps {
-  table: Table<IPokemonGetAllResponseElement>;
+  table: Table<PokemonWithAbilities>;
 }
 
 export function PokemonTableHeader({ table }: PokemonTableHeaderProps): JSX.Element {
@@ -24,7 +24,7 @@ export function PokemonTableHeader({ table }: PokemonTableHeaderProps): JSX.Elem
 }
 
 interface PokemonHeaderRowProps {
-  headerGroup: HeaderGroup<IPokemonGetAllResponseElement>;
+  headerGroup: HeaderGroup<PokemonWithAbilities>;
 }
 
 function PokemonHeaderRow({ headerGroup }: PokemonHeaderRowProps): JSX.Element {

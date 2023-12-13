@@ -1,11 +1,11 @@
 import { DotsHorizontalIcon } from '@radix-ui/react-icons';
 import { useTeamStore } from '@state/team';
-import { MAX_TEAM_MEMBERS, type IPokemonGetAllResponseElement } from 'contract';
+import { MAX_TEAM_MEMBERS, type PokemonWithAbilities } from 'contract';
 import Link from 'next/link';
 import { Button, DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from 'ui';
 
 interface RowDropdownMenuProps {
-  pokemon: IPokemonGetAllResponseElement;
+  pokemon: PokemonWithAbilities;
 }
 
 export default function RowDropdownMenu(props: RowDropdownMenuProps): JSX.Element {

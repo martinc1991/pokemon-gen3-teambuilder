@@ -4,14 +4,14 @@ import { Cross2Icon } from '@radix-ui/react-icons';
 import { client } from '@rq-client/index';
 import type { Table } from '@tanstack/react-table';
 import { capitalize } from '@utils/common';
-import type { IPokemonGetAllResponseElement, Type, TypeNames } from 'contract';
+import type { PokemonWithAbilities, Type, TypeNames } from 'contract';
 import { useEffect, useState } from 'react';
 import type { ComboboxItem } from 'ui';
 import { Combobox, TypeBadge } from 'ui';
 import { ColumnID } from '../columns/constants';
 
 interface TypeFiltersProps {
-  table: Table<IPokemonGetAllResponseElement>;
+  table: Table<PokemonWithAbilities>;
 }
 
 const initialValue = { id: '', label: '', payload: {} } as ComboboxItem<Type>; // INFO: Cast because I dont want to fill payload, its just a dummy empty item

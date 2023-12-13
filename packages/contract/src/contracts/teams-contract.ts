@@ -1,68 +1,31 @@
-import { NatureNames } from '@prisma/client';
 import { initContract } from '@ts-rest/core';
 import { z } from 'zod';
-import { LAST_POKEMON_DEX_NUMBER_WITH_DEOXYS, MAX_INDIVIDUAL_EV } from '../constants';
-import { AbilitySchema, PokemonSchema, SlotSchema, TeamSchema } from '../prisma/zod';
-import { ArrayElementType } from '../utils/types/array-element-type';
+import { CommonResponseSchema, PaginationParamsSchema } from '../common';
+import { TeamSchema } from '../prisma/zod';
+import { FilledSlotSchema, TeamWithFilledSlotsSchema } from '../types';
 
 const c = initContract();
 
-const queryParamsSchema = z.object({
-  take: z.string().transform(Number).optional().default('10'),
-  skip: z.string().transform(Number).optional().default('0'),
-});
+// Params schemas
+const GetTeamsQueryParamsSchema = PaginationParamsSchema;
 
-const commonResponseSchema = z.object({
-  id: z.string(),
-  name: z.string(),
-});
+// Responses schemas
+const GetOneTeamResponseSchema = TeamSchema;
+const GetAllTeamsResponseSchema = z.array(TeamSchema);
+const GetSampleTeamsResponseSchema = z.array(TeamWithFilledSlotsSchema);
 
-// Zod schemas
-const getOneTeamResponseSchema = TeamSchema;
-const getAllTeamResponseSchema = z.array(TeamSchema);
-const getSampleTeamsResponseSchema = z.array(
-  TeamSchema.merge(
-    z.object({
-      slots: z.array(SlotSchema.merge(z.object({ pokemon: PokemonSchema.merge(z.object({ abilities: z.array(AbilitySchema) })) }))),
-    }),
-  ),
-);
-const createTeamBodySchema = z.object({
-  name: z.string().optional(),
-  slots: z
-    .array(
-      z.object({
-        nationalPokedexNumber: z.number().min(1).max(LAST_POKEMON_DEX_NUMBER_WITH_DEOXYS),
-        name: z.string().optional(),
-        abilityName: z.string().optional(),
-        natureName: z.nativeEnum(NatureNames).optional(),
-        evHp: z.number().min(0).max(MAX_INDIVIDUAL_EV).optional(),
-        evAttack: z.number().min(0).max(MAX_INDIVIDUAL_EV).optional(),
-        evDefense: z.number().min(0).max(MAX_INDIVIDUAL_EV).optional(),
-        evSpAttack: z.number().min(0).max(MAX_INDIVIDUAL_EV).optional(),
-        evSpDefense: z.number().min(0).max(MAX_INDIVIDUAL_EV).optional(),
-        evSpeed: z.number().min(0).max(MAX_INDIVIDUAL_EV).optional(),
-        itemName: z.string().optional(),
-        shiny: z.boolean().optional(),
-      }),
-    )
-    .optional(),
-}); // TODO: replace with SlotSchema
-const editTeamBodySchema = createTeamBodySchema.merge(z.object({ id: z.string() }));
-const deleteTeamBodySchema = z.object({ id: z.string() });
-
-// Responses types
-export type ITeamGetOneResponse = z.infer<typeof getOneTeamResponseSchema>;
-export type ITeamGetAllResponse = z.infer<typeof getAllTeamResponseSchema>;
-export type ITeamGetAllResponseElement = ArrayElementType<ITeamGetAllResponse>; // Type for each element of the getAll method response
+// Body schemas
+const CreateTeamBodySchema = TeamSchema.omit({ id: true }).merge(z.object({ slots: FilledSlotSchema })); // TODO: Make it better when time comes
+const EditTeamBodySchema = TeamSchema.merge(z.object({ slots: FilledSlotSchema })).optional(); // TODO: Make it better when time comes
+const DeleteTeamBodySchema = TeamSchema.pick({ id: true });
 
 export const teamsContract = c.router({
   getAll: {
     method: 'GET',
     path: '/teams',
-    query: queryParamsSchema,
+    query: GetTeamsQueryParamsSchema,
     responses: {
-      200: getAllTeamResponseSchema,
+      200: GetAllTeamsResponseSchema,
     },
     summary: 'Get all teams',
   },
@@ -70,43 +33,43 @@ export const teamsContract = c.router({
     method: 'GET',
     path: `/teams/:teamId`,
     responses: {
-      200: getOneTeamResponseSchema,
+      200: GetOneTeamResponseSchema,
     },
     summary: 'Get a team by id',
   },
   getSampleTeams: {
     method: 'GET',
     path: `/teams/sample`,
-    query: queryParamsSchema,
+    query: GetTeamsQueryParamsSchema,
     responses: {
-      200: getSampleTeamsResponseSchema,
+      200: GetSampleTeamsResponseSchema,
     },
     summary: 'Get sample teams',
   },
   create: {
     method: 'POST',
     path: `/teams`,
-    body: createTeamBodySchema,
+    body: CreateTeamBodySchema,
     responses: {
-      201: commonResponseSchema,
+      201: CommonResponseSchema,
     },
     summary: 'Create a team',
   },
   edit: {
     method: 'PATCH',
     path: `/teams`,
-    body: editTeamBodySchema,
+    body: EditTeamBodySchema,
     responses: {
-      200: commonResponseSchema,
+      200: CommonResponseSchema,
     },
     summary: 'Edit a team by id',
   },
   delete: {
     method: 'DELETE',
     path: `/teams`,
-    body: deleteTeamBodySchema,
+    body: DeleteTeamBodySchema,
     responses: {
-      200: commonResponseSchema,
+      200: CommonResponseSchema,
     },
     summary: 'Delete a team by id',
   },

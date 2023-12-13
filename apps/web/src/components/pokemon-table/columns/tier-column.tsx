@@ -1,12 +1,12 @@
 import { type ColumnDef } from '@tanstack/react-table';
-import { type IPokemonGetAllResponseElement } from 'contract';
+import { getTierText } from '@utils/pokemon';
+import { type PokemonWithAbilities } from 'contract';
 import { SORTED_TIERS } from 'pokemon-info';
 import { Typography } from 'ui';
 import { ColumnID } from './constants';
 import { columnHelper } from './get-column-helper';
-import { getTierText } from '@utils/pokemon';
 
-export const tierColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor('tier', {
+export const tierColumn: ColumnDef<PokemonWithAbilities> = columnHelper.accessor('tier', {
   id: ColumnID.TIER,
   header: () => <div>Tier</div>,
   cell: (info) => <Typography.Small>{getTierText(info.getValue())}</Typography.Small>,

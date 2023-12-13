@@ -3,12 +3,12 @@
 import { type ColumnDef } from '@tanstack/react-table';
 import { replaceHyphensWithSpaces } from '@utils/common';
 import { formatPokemonName } from '@utils/pokemon';
-import { type IPokemonGetAllResponseElement } from 'contract';
+import { type PokemonWithAbilities } from 'contract';
 import { Typography } from 'ui';
 import { ColumnID } from './constants';
 import { columnHelper } from './get-column-helper';
 
-export const nameColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor('name', {
+export const nameColumn: ColumnDef<PokemonWithAbilities> = columnHelper.accessor('name', {
   id: ColumnID.NAME,
   header: () => {
     return <div>Name</div>;

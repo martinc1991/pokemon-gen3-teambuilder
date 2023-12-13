@@ -1,12 +1,12 @@
 'use client';
 
 import { type ColumnDef } from '@tanstack/react-table';
-import type { IPokemonGetAllResponseElement } from 'contract';
+import type { PokemonWithAbilities } from 'contract';
 import { TypeBadge } from 'ui';
 import { ColumnID } from './constants';
 import { columnHelper } from './get-column-helper';
 
-export const typesColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor((row) => [row.typeOneName, row.typeTwoName], {
+export const typesColumn: ColumnDef<PokemonWithAbilities> = columnHelper.accessor((row) => [row.typeOneName, row.typeTwoName], {
   id: ColumnID.TYPES,
   header: () => {
     return <div>Type</div>;

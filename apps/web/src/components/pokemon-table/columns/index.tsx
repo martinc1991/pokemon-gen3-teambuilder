@@ -1,7 +1,7 @@
 'use client';
 
 import { type ColumnDef } from '@tanstack/react-table';
-import { type IPokemonGetAllResponseElement } from 'contract';
+import { type PokemonWithAbilities } from 'contract';
 import { abilitiesColumn } from './abilities-column';
 import { actionsColumn } from './actions-column';
 import { gendersColumn } from './genders-column';
@@ -14,7 +14,7 @@ import { tierColumn } from './tier-column';
 import { typesColumn } from './types-column';
 import { weightColumn } from './weight-column';
 
-const TABLE_COLUMNS: ColumnDef<IPokemonGetAllResponseElement>[] = [
+const TABLE_COLUMNS: ColumnDef<PokemonWithAbilities>[] = [
   nationalDexColumn,
   tierColumn,
   nameColumn,

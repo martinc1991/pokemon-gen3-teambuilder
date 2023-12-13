@@ -1,4 +1,4 @@
-import type { FilledSlot, IPokemonGetAllResponseElement } from 'contract';
+import type { FilledSlot, PokemonWithAbilities } from 'contract';
 import { Gender, MAX_HAPPINESS, MAX_INDIVIDUAL_IV, MAX_LEVEL, NatureNames } from 'contract';
 import { nanoid } from 'nanoid';
 
@@ -49,7 +49,7 @@ export class BaseSlot implements Omit<FilledSlot, 'pokemon'> {
   moveThreeName: string | null;
   moveFourName: string | null;
 
-  constructor(order?: number, pokemon?: IPokemonGetAllResponseElement) {
+  constructor(order?: number, pokemon?: PokemonWithAbilities) {
     const isSlotFilled = pokemon && order !== undefined;
 
     this.id = genLocalSlotId();
