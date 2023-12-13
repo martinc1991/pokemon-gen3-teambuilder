@@ -70,6 +70,31 @@ describe('Team controller', () => {
     });
   });
 
+  describe('getSampleTeams method', () => {
+    it('should call prisma team service findMany method with the correct configuration passing pagination params', async () => {
+      const expectedParams = {
+        where: {
+          isSample: true,
+        },
+        include: {
+          slots: {
+            include: {
+              pokemon: {
+                include: {
+                  abilities: true,
+                },
+              },
+            },
+          },
+        },
+        skip: paginationStub().skip,
+        take: paginationStub().take,
+      };
+      await service.getSampleTeams(paginationStub());
+      expect(prismaService.team.findMany).toHaveBeenCalledWith(expectedParams);
+    });
+  });
+
   describe('getOneById method', () => {
     it('should call prisma team service getOneById method passing teamId param', async () => {
       const expectedParams = {
