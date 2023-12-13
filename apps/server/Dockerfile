@@ -43,7 +43,6 @@ WORKDIR /app
 # Copy necessary files generated in the previous step
 COPY --chown=node:node --from=installer /app/deployed/server/dist ./dist
 COPY --chown=node:node --from=installer /app/deployed/server/node_modules ./node_modules
-COPY --chown=node:node --from=installer /app/deployed/server/prisma ./prisma
 COPY --chown=node:node --from=installer /app/deployed/server/package.json .
 
 # TODO: replace this line by just copying the client generated in the build stage before from node_modules/@prisma
