@@ -170,11 +170,11 @@ export async function seeder() {
       const teams = [KIKE_TEAM, MY_TEAM, RED_TEAM, WHITNEY_TEAM, YOUNGTER_JOEY_TEAM];
       const TEAMS__PROMISES = [];
 
-      teams.forEach(({ id, description, name, userName }) => {
+      teams.forEach(({ id, description, name, userName, isSample, isPublic }) => {
         const p = client.team.upsert({
           where: { id },
-          create: { id, description, name, userName },
-          update: { description, name, userName },
+          create: { id, description, name, userName, isSample, isPublic },
+          update: { description, name, userName, isSample, isPublic },
         });
         TEAMS__PROMISES.push(p);
       });

@@ -5,8 +5,8 @@ export const KIKE_TEAM: FilledTeam = {
   userName: 'Kike',
   name: 'Initial team',
   description: 'Put together 5 minutes into the game.',
-  sample: true,
-  public: true,
+  isSample: true,
+  isPublic: true,
   slots: [
     {
       id: 'local-slot-_JZJ6E',

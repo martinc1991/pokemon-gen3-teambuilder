@@ -18,8 +18,8 @@ const mockedTeam: Team = {
   id: teamIdStub,
   description: teamDescriptionStub,
   userName: teamUserNameStub,
-  public: true,
-  sample: true,
+  isPublic: true,
+  isSample: true,
 };
 
 const mockedPrismaService = {

@@ -202,8 +202,8 @@ model Team {
   description String  @default("")
   userName    String // INFO: just for now, User model not made yet
   slots       Slot[]
-  sample      Boolean @default(false)
-  public      Boolean @default(false)
+  isSample    Boolean @default(false)
+  isPublic    Boolean @default(false)
 }
 
 model Slot {

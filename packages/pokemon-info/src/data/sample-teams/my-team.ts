@@ -5,8 +5,8 @@ export const MY_TEAM: FilledTeam = {
   userName: 'bit90s',
   name: 'My Emerald Team',
   description: 'The team I used in the Battle Frontier.',
-  sample: true,
-  public: true,
+  isSample: true,
+  isPublic: true,
   slots: [
     {
       id: 'local-slot-eah3oh',

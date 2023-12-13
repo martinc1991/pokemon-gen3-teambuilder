@@ -18,6 +18,13 @@ export class TeamController implements NestControllerInterface<typeof c> {
     return { status: 200 as const, body: teams };
   }
 
+  @TsRest(c.getSampleTeams)
+  @Get('sample')
+  async getSampleTeams(@Query() pagination: BasicPaginationDto) {
+    const teams = await this.teamService.getSampleTeams(pagination);
+    return { status: 200 as const, body: teams };
+  }
+
   @TsRest(c.getOne)
   @Get(':teamId')
   async getOne(@Param('teamId') teamId: string) {

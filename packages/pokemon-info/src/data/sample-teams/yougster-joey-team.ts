@@ -5,8 +5,8 @@ export const YOUNGTER_JOEY_TEAM: FilledTeam = {
   userName: 'Youngster Joey',
   name: 'Rattata rules',
   description: 'My Rattata is in the top percentage of all Rattata.',
-  sample: true,
-  public: true,
+  isSample: true,
+  isPublic: true,
   slots: [
     {
       id: 'local-slot-t3ra_X',

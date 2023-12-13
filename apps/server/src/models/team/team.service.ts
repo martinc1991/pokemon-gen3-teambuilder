@@ -45,6 +45,27 @@ export class TeamService {
     return team;
   }
 
+  async getSampleTeams(pagination: BasicPaginationDto) {
+    return this.prisma.team.findMany({
+      where: {
+        isSample: true,
+      },
+      include: {
+        slots: {
+          include: {
+            pokemon: {
+              include: {
+                abilities: true,
+              },
+            },
+          },
+        },
+      },
+      skip: pagination.skip,
+      take: pagination.take,
+    });
+  }
+
   async create(dto: CreateTeamDto) {
     const newTeam = await this.prisma.team.create({
       data: {

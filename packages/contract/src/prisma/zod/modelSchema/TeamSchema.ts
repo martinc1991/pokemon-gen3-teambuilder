@@ -9,8 +9,8 @@ export const TeamSchema = z.object({
   name: z.string(),
   description: z.string(),
   userName: z.string(),
-  sample: z.boolean(),
-  public: z.boolean(),
+  isSample: z.boolean(),
+  isPublic: z.boolean(),
 });
 
 export type Team = z.infer<typeof TeamSchema>;

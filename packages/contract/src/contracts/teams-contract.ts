@@ -2,7 +2,7 @@ import { NatureNames } from '@prisma/client';
 import { initContract } from '@ts-rest/core';
 import { z } from 'zod';
 import { LAST_POKEMON_DEX_NUMBER_WITH_DEOXYS, MAX_INDIVIDUAL_EV } from '../constants';
-import { TeamSchema } from '../prisma/zod';
+import { AbilitySchema, PokemonSchema, SlotSchema, TeamSchema } from '../prisma/zod';
 import { ArrayElementType } from '../utils/types/array-element-type';
 
 const c = initContract();
@@ -20,6 +20,13 @@ const commonResponseSchema = z.object({
 // Zod schemas
 const getOneTeamResponseSchema = TeamSchema;
 const getAllTeamResponseSchema = z.array(TeamSchema);
+const getSampleTeamsResponseSchema = z.array(
+  TeamSchema.merge(
+    z.object({
+      slots: z.array(SlotSchema.merge(z.object({ pokemon: PokemonSchema.merge(z.object({ abilities: z.array(AbilitySchema) })) }))),
+    }),
+  ),
+);
 const createTeamBodySchema = z.object({
   name: z.string().optional(),
   slots: z
@@ -66,6 +73,15 @@ export const teamsContract = c.router({
       200: getOneTeamResponseSchema,
     },
     summary: 'Get a team by id',
+  },
+  getSampleTeams: {
+    method: 'GET',
+    path: `/teams/sample`,
+    query: queryParamsSchema,
+    responses: {
+      200: getSampleTeamsResponseSchema,
+    },
+    summary: 'Get sample teams',
   },
   create: {
     method: 'POST',

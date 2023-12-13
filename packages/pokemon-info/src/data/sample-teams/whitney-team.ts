@@ -5,8 +5,8 @@ export const WHITNEY_TEAM: FilledTeam = {
   userName: 'Whitney',
   name: 'Happy Nightmare',
   description: 'This is why most people stopped playing pokemon.',
-  sample: true,
-  public: true,
+  isSample: true,
+  isPublic: true,
   slots: [
     {
       id: 'local-slot-cXevkm',

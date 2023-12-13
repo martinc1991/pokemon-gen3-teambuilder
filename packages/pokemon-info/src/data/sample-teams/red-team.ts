@@ -5,8 +5,8 @@ export const RED_TEAM: FilledTeam = {
   userName: 'Red',
   name: "Red's team",
   description: 'The team Red uses when you first meet him in Mt Silver.',
-  sample: true,
-  public: true,
+  isSample: true,
+  isPublic: true,
   slots: [
     {
       id: 'local-slot-c-y7ii',
