@@ -2,14 +2,14 @@
 
 import type { Table } from '@tanstack/react-table';
 import { getTierText } from '@utils/pokemon';
-import type { IPokemonGetAllResponseElement, Tier } from 'contract';
+import type { PokemonWithAbilities, Tier } from 'contract';
 import { SORTED_TIERS } from 'pokemon-info';
 import type { ComboboxItem } from 'ui';
 import { Combobox } from 'ui';
 import { ColumnID } from '../columns/constants';
 
 interface TierFiltersProps {
-  table: Table<IPokemonGetAllResponseElement>;
+  table: Table<PokemonWithAbilities>;
 }
 
 export function TierFilter({ table }: TierFiltersProps): JSX.Element {

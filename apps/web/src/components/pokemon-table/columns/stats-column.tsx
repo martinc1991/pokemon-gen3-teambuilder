@@ -2,7 +2,7 @@
 
 import type { ColumnDef, Row } from '@tanstack/react-table';
 import { getValues } from '@utils/common';
-import type { IPokemonGetAllResponseElement } from 'contract';
+import type { PokemonWithAbilities } from 'contract';
 import { TableRowStats } from '../../stats/table-row-stats';
 import { ColumnID } from './constants';
 import { columnHelper } from './get-column-helper';
@@ -16,7 +16,7 @@ interface StatsType {
   baseSpeed: number;
 }
 
-export const statsColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor(
+export const statsColumn: ColumnDef<PokemonWithAbilities> = columnHelper.accessor(
   ({ baseHp, baseAttack, baseDefense, baseSpattack, baseSpdefense, baseSpeed }): StatsType => ({
     baseHp,
     baseAttack,
@@ -38,7 +38,7 @@ export const statsColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelpe
   },
 );
 
-function getTotalBaseStatsFromRow(row: Row<IPokemonGetAllResponseElement>): number {
+function getTotalBaseStatsFromRow(row: Row<PokemonWithAbilities>): number {
   const stats = row.getValue<StatsType>('stats');
   return getValues(stats).reduce((a, b) => a + b, 0);
 }

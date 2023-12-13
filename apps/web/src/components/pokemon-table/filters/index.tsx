@@ -1,14 +1,14 @@
 import type { Table } from '@tanstack/react-table';
-import type { IPokemonGetAllResponseElement } from 'contract';
+import type { PokemonWithAbilities } from 'contract';
+import { AbilitiesFilter } from './abilities-filter';
 import { NameFilter } from './name-filter';
 import { TierFilter } from './tier-filter';
 import { TypesFilter } from './types-filter';
-import { AbilitiesFilter } from './abilities-filter';
 
 export const TABLE_FILTERS_HEIGHT = 40;
 
 interface FilterProps {
-  table: Table<IPokemonGetAllResponseElement>;
+  table: Table<PokemonWithAbilities>;
 }
 
 export function Filters({ table }: FilterProps): JSX.Element {

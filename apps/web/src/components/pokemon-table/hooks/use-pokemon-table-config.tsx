@@ -1,13 +1,13 @@
 import type { ColumnFiltersState, SortingState, Table, VisibilityState } from '@tanstack/react-table';
 import { getCoreRowModel, getFilteredRowModel, getSortedRowModel, useReactTable } from '@tanstack/react-table';
-import type { IPokemonGetAllResponse, IPokemonGetAllResponseElement } from 'contract';
+import type { PokemonWithAbilities } from 'contract';
 import { useEffect, useState } from 'react';
 import TABLE_COLUMNS from '../columns';
 import { usePokemonTableMediaQueries } from './use-pokemon-table-media-queries';
 
-type Props = IPokemonGetAllResponse;
+type Props = PokemonWithAbilities[];
 
-export function usePokemonTableConfig(data: Props): Table<IPokemonGetAllResponseElement> {
+export function usePokemonTableConfig(data: Props): Table<PokemonWithAbilities> {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});

@@ -1,7 +1,6 @@
 import { initContract } from '@ts-rest/core';
 import { z } from 'zod';
-import { AbilitySchema, MoveSchema, PokemonSchema } from '../prisma/zod';
-import { ArrayElementType } from '../utils/types/array-element-type';
+import { PokemonWithAbilitiesAndLearnsetSchema, PokemonWithAbilitiesSchema } from '../index';
 
 const c = initContract();
 
@@ -12,21 +11,16 @@ const queryParamsSchema = z.object({
   sortOrder: z.string().optional(),
 });
 
-// Zod schemas
-const getOnePokemonResponseSchema = PokemonSchema.merge(z.object({ abilities: z.array(AbilitySchema), learnset: z.array(MoveSchema) }));
-const getAllPokemonResponseSchema = z.array(PokemonSchema.merge(z.object({ abilities: z.array(AbilitySchema) })));
-
-// Responses types
-export type IPokemonGetOneResponse = z.infer<typeof getOnePokemonResponseSchema>;
-export type IPokemonGetAllResponse = z.infer<typeof getAllPokemonResponseSchema>;
-export type IPokemonGetAllResponseElement = ArrayElementType<IPokemonGetAllResponse>; // Type for each element of the getAll method response
+// Response schemas
+const GetOnePokemonResponseSchema = PokemonWithAbilitiesAndLearnsetSchema;
+const GetAllPokemonResponseSchema = z.array(PokemonWithAbilitiesSchema);
 
 export const pokemonContract = c.router({
   getAll: {
     method: 'GET',
     path: '/pokemon',
     responses: {
-      200: getAllPokemonResponseSchema,
+      200: GetAllPokemonResponseSchema,
     },
     query: queryParamsSchema,
     summary: 'Get all pokemon',
@@ -35,7 +29,7 @@ export const pokemonContract = c.router({
     method: 'GET',
     path: `/pokemon/:nationalDexNumber`,
     responses: {
-      200: getOnePokemonResponseSchema,
+      200: GetOnePokemonResponseSchema,
     },
     summary: 'Get a pokemon by national pokedex number',
   },
