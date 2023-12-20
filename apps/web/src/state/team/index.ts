@@ -45,6 +45,7 @@ const store = immer<TeamStore>((set) => ({
         newSlots[i].order = i;
       }
 
+      state.selectedSlotIndex = 0;
       state.slots = newSlots;
     });
   },
