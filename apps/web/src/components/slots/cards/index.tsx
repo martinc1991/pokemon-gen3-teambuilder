@@ -1,19 +1,20 @@
 import { GendersText } from '@components/pokemon-table/components/genders-text';
 import { calculateHiddenPowerType } from '@utils/pokemon';
-import { Card, CardContent, CardHeader, PokemonSprite, TypeBadge, Typography } from 'ui';
+import { Button, Card, CardContent, CardHeader, PokemonSprite, TypeBadge, Typography } from 'ui';
 import PokemonCardMoves from './components/card-moves';
 import PokemonCardStats from './components/card-stats';
 import CardInfoField from './components/info-field';
 import { getCardTitleName } from './utils/get-card-title';
 import { FilledSlot } from 'contract';
+import Link from 'next/link';
 
 interface PokemonCardProps {
   slot: FilledSlot;
 }
 
-export default function PokemonCard({ slot }: PokemonCardProps): JSX.Element {
+export function FilledPokemonCard({ slot }: PokemonCardProps): JSX.Element {
   return (
-    <Card className='w-[500px] hover:bg-slate-700 hover:cursor-pointer transition duration-150 ease-in-out'>
+    <Card className='w-[500px] min-h-[332px] hover:bg-primary-foreground hover:cursor-pointer transition duration-150 ease-in-out'>
       <CardHeader>
         <div className='flex items-center justify-between gap-5'>
           <Typography.H3 className='truncate'>{getCardTitleName(slot)}</Typography.H3>
@@ -52,6 +53,19 @@ export default function PokemonCard({ slot }: PokemonCardProps): JSX.Element {
           <PokemonCardStats slot={slot} />
         </div>
       </CardContent>
+    </Card>
+  );
+}
+
+export function EmptyPokemonCard(): JSX.Element {
+  return (
+    <Card className='flex min-h-[332px] justify-center items-center w-[500px] p-6'>
+      <Typography.Muted className='text-center'>Empty.</Typography.Muted>
+      <Link href={`/pokemon`}>
+        <Button className='px-2' variant='link'>
+          Add pokemon.
+        </Button>
+      </Link>
     </Card>
   );
 }
