@@ -3,13 +3,11 @@
 import LoadingState from '@components/loading-state';
 import { client } from '@rq-client/index';
 import { capitalize } from '@utils/common';
+import clsx from 'clsx';
 import { Type } from 'contract';
-import type { Metadata } from 'next';
 import { Tooltip, TooltipContent, TooltipTrigger, TypeBadge, Typography } from 'ui';
 
-export const metadata: Metadata = {
-  title: 'Pokemon Gen 3 TeamBuilder',
-};
+const cellMaxSize = '70px'; // height on first row, width on first column
 
 export function TypesChart(): JSX.Element {
   const { data, isFetching, isError, isLoading } = client.types.getAll.useQuery(['get-all-types']);
@@ -26,11 +24,19 @@ export function TypesChart(): JSX.Element {
     // TODO: make it responsive (how?)
     <table>
       {data.body.sort(sortEmptyTypeFirst).map((type, rowIndex, arr) => {
+        const isFirstRow = rowIndex === 0;
         return (
           <tr key={type.id}>
             {arr.map((_, columnIndex) => {
+              const isFirstColumn = columnIndex === 0;
               return (
-                <td className='border border-white h-11 w-11' key={`${rowIndex}-${columnIndex}`}>
+                <td
+                  className={clsx(
+                    'border border-white',
+                    isFirstRow ? `h-[${cellMaxSize}] w-11` : isFirstColumn ? `h-11 w-[${cellMaxSize}]` : '',
+                  )}
+                  key={`${rowIndex}-${columnIndex}`}
+                >
                   <TableCellContent types={arr} columnIndex={columnIndex} rowIndex={rowIndex} />
                 </td>
               );
@@ -52,18 +58,20 @@ function TableCellContent({ types, rowIndex, columnIndex }: TableCellContentProp
   const ofensiveType: Type = types[rowIndex]; // Defensive type
   const defensiveType: Type = types[columnIndex]; // Ofensive type
 
-  if (rowIndex === 0 && columnIndex === 0) {
+  const isFirstRow = rowIndex === 0;
+  const isFirstColumn = columnIndex === 0;
+
+  if (isFirstRow && isFirstColumn) {
     return <></>;
-  } else if (rowIndex === 0) {
-    // TODO: rotate defensive types
+  } else if (isFirstRow) {
     return (
-      <div className='p-1'>
+      <div className='p-1 -rotate-90 -translate-x-[12px] -translate-y-[17px] absolute'>
         <TypeBadge type={defensiveType.name} />
       </div>
     );
-  } else if (columnIndex === 0) {
+  } else if (isFirstColumn) {
     return (
-      <div className='p-1'>
+      <div className='p-1 text-center'>
         <TypeBadge type={ofensiveType.name} />
       </div>
     );
