@@ -3,11 +3,8 @@
 import LoadingState from '@components/loading-state';
 import { client } from '@rq-client/index';
 import { capitalize } from '@utils/common';
-import clsx from 'clsx';
 import { Type } from 'contract';
 import { Tooltip, TooltipContent, TooltipTrigger, TypeBadge, Typography } from 'ui';
-
-const cellMaxSize = '70px'; // height on first row, width on first column
 
 export function TypesChart(): JSX.Element {
   const { data, isFetching, isError, isLoading } = client.types.getAll.useQuery(['get-all-types']);
@@ -20,23 +17,14 @@ export function TypesChart(): JSX.Element {
   }
 
   return (
-    // TODO: round corners
     // TODO: make it responsive (how?)
-    <table>
+    <table className='type-chart-table'>
       {data.body.sort(sortEmptyTypeFirst).map((type, rowIndex, arr) => {
-        const isFirstRow = rowIndex === 0;
         return (
-          <tr key={type.id}>
+          <tr className='type-chart-tr' key={type.id}>
             {arr.map((_, columnIndex) => {
-              const isFirstColumn = columnIndex === 0;
               return (
-                <td
-                  className={clsx(
-                    'border border-white',
-                    isFirstRow ? `h-[${cellMaxSize}] w-11` : isFirstColumn ? `h-11 w-[${cellMaxSize}]` : '',
-                  )}
-                  key={`${rowIndex}-${columnIndex}`}
-                >
+                <td className='type-chart-td' key={`${rowIndex}-${columnIndex}`}>
                   <TableCellContent types={arr} columnIndex={columnIndex} rowIndex={rowIndex} />
                 </td>
               );
