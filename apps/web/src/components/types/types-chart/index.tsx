@@ -16,10 +16,29 @@ export function TypesChart(): JSX.Element {
     return <Typography.P>error...</Typography.P>;
   }
 
+  // TODO: add filters
+  // TODO: add pokemon examples with that typing combination
+  return (
+    <div className='grid grid-cols-[50px_1fr] grid-rows-[50px_1fr]'>
+      <div></div>
+      <div className='flex justify-center items-center'>
+        <Typography.H4>Defending</Typography.H4>
+      </div>
+      <div className='flex justify-center items-center'>
+        <Typography.H4 className='absolute -rotate-90'>Attacking</Typography.H4>
+      </div>
+      <div className=' flex justify-center items-center'>
+        <Chart types={data.body} />
+      </div>
+    </div>
+  );
+}
+
+function Chart({ types }: { types: Type[] }): JSX.Element {
   return (
     // TODO: make it responsive (how?)
     <table className='type-chart-table'>
-      {data.body.sort(sortEmptyTypeFirst).map((type, rowIndex, arr) => {
+      {types.sort(sortEmptyTypeFirst).map((type, rowIndex, arr) => {
         return (
           <tr className='type-chart-tr' key={type.id}>
             {arr.map((_, columnIndex) => {

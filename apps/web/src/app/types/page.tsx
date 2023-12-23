@@ -9,12 +9,7 @@ export default function Types(): JSX.Element {
   return (
     <QueryClientProvider client={queryClient}>
       <PageHeader description='Types chart. Hold over a multiplier for detailed explanation.' title='Types' />
-      <div className='flex flex-1 w-full justify-center items-center'>
-        {/* TODO: add ofensive and defensive type texts */}
-        {/* TODO: add filters */}
-        <TypesChart />
-        {/* TODO: add pokemon examples with that typing combination */}
-      </div>
+      <TypesChart />
     </QueryClientProvider>
   );
 }
