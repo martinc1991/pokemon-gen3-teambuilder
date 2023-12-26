@@ -1,6 +1,6 @@
 'use client';
 
-import withTeamStore, { WithTeamStoreProps } from '@state/hoc/with-store';
+import withTeamStore, { WithTeamStoreProps } from '@state/hoc/with-team-store';
 import { BaseSlot } from '@state/team/helpers';
 import { formatPokemonName } from '@utils/pokemon';
 import { FilledSlot, MAX_TEAM_MEMBERS } from 'contract';

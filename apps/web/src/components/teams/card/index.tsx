@@ -1,6 +1,6 @@
 import CopyButton from '@components/copy-button';
 import { RecoverTeamButton } from '@components/recover-team-button';
-import withTeamStore, { WithTeamStoreProps } from '@state/hoc/with-store';
+import withTeamStore, { WithTeamStoreProps } from '@state/hoc/with-team-store';
 import { TeamWithFilledSlots } from 'contract';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, PokemonAvatar, Typography } from 'ui';
 

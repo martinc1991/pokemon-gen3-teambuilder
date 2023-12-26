@@ -5,7 +5,7 @@ import PageHeader from '@components/page-header';
 import { EmptyPokemonCard, FilledPokemonCard } from '@components/slots/cards';
 import SlotConfigModal from '@components/slots/config-modal';
 import { queryClient } from '@rq-client/index';
-import withTeamStore, { WithTeamStoreProps } from '@state/hoc/with-store';
+import withTeamStore, { WithTeamStoreProps } from '@state/hoc/with-team-store';
 import { BaseSlot } from '@state/team/helpers';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { MAX_TEAM_MEMBERS } from 'contract';

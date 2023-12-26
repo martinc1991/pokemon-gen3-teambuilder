@@ -1,4 +1,4 @@
-import withTeamStore, { WithTeamStoreProps } from '@state/hoc/with-store';
+import withTeamStore, { WithTeamStoreProps } from '@state/hoc/with-team-store';
 import {
   DialogContent,
   DialogDescription,
