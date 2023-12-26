@@ -2,39 +2,48 @@
 
 import LoadingState from '@components/loading-state';
 import { client } from '@rq-client/index';
+import { useTypeChartStore } from '@state/type-chart';
+import clsx from 'clsx';
 import { Type } from 'contract';
 import { Tooltip, TooltipContent, TooltipTrigger, TypeBadge, Typography } from 'ui';
+import { AttackingFilters } from './filters';
 import { getDamageMultiplier, getTooltipText, sortEmptyTypeFirst } from './helpers';
 
 export function TypesChart(): JSX.Element {
-  const { data, isFetching, isError, isLoading } = client.types.getAll.useQuery(['get-all-types']);
+  const { data, isError, isLoading } = client.types.getAll.useQuery(['get-all-types']);
 
-  if (isFetching || isLoading) {
+  if (isLoading) {
     return <LoadingState />;
   }
   if (isError) {
     return <Typography.P>error...</Typography.P>;
   }
 
-  // TODO: add filters
   // TODO: add pokemon examples with that typing combination
   return (
-    <div className='grid grid-cols-[50px_1fr] grid-rows-[50px_1fr]'>
-      <div></div>
-      <div className='flex justify-center items-center'>
-        <Typography.H4>Defending</Typography.H4>
+    <div className='flex w-full'>
+      <div className='flex-1'>
+        <AttackingFilters types={data.body} />
       </div>
-      <div className='flex justify-center items-center'>
-        <Typography.H4 className='absolute -rotate-90'>Attacking</Typography.H4>
-      </div>
-      <div className=' flex justify-center items-center'>
-        <Chart types={data.body} />
+      <div className='grid grid-cols-[50px_1fr] grid-rows-[50px_1fr]'>
+        <div></div>
+        <div className='flex justify-center items-center'>
+          <Typography.H4>Defending</Typography.H4>
+        </div>
+        <div className='flex justify-center items-center'>
+          <Typography.H4 className='absolute -rotate-90'>Attacking</Typography.H4>
+        </div>
+        <div className=' flex justify-center items-center'>
+          <Chart types={data.body} />
+        </div>
       </div>
     </div>
   );
 }
 
 function Chart({ types }: { types: Type[] }): JSX.Element {
+  const [attackingType] = useTypeChartStore((state) => [state.attackingType]);
+
   return (
     // TODO: make it responsive (how?)
     <table className='type-chart-table'>
@@ -43,7 +52,10 @@ function Chart({ types }: { types: Type[] }): JSX.Element {
           <tr className='type-chart-tr' key={type.id}>
             {arr.map((_, columnIndex) => {
               return (
-                <td className='type-chart-td' key={`${rowIndex}-${columnIndex}`}>
+                <td
+                  className={clsx('type-chart-td h-[45px] w-[45px]', attackingType?.name === type.name && 'bg-primary')}
+                  key={`${rowIndex}-${columnIndex}`}
+                >
                   <TableCellContent types={arr} columnIndex={columnIndex} rowIndex={rowIndex} />
                 </td>
               );
@@ -93,6 +105,9 @@ interface MultiplierProps {
 }
 
 function Multiplier({ ofensiveType, defensiveType }: MultiplierProps): JSX.Element {
+  const [attackingType] = useTypeChartStore((state) => [state.attackingType]);
+  const isSelected = attackingType?.name === ofensiveType.name;
+
   const multiplier = getDamageMultiplier(ofensiveType, defensiveType);
   const tooltipText = getTooltipText(ofensiveType, defensiveType);
 
@@ -103,7 +118,7 @@ function Multiplier({ ofensiveType, defensiveType }: MultiplierProps): JSX.Eleme
   return (
     <Tooltip>
       <TooltipTrigger className='p-2 w-full h-full'>
-        <Typography.Muted className='align-middle text-center'>{multiplier}</Typography.Muted>
+        <Typography.Muted className={clsx('align-middle text-center', isSelected && 'text-white')}>{multiplier}</Typography.Muted>
       </TooltipTrigger>
       <TooltipContent>
         <p>{tooltipText}</p>
