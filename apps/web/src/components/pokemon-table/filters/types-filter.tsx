@@ -13,6 +13,7 @@ interface TypeFiltersProps {
   onRemove?: (selectedTypes: ComboboxItem<Type>[], deletedType: ComboboxItem<Type>) => void;
   types: Type[];
   disabled?: boolean;
+  maxSelectedTypes?: number;
 }
 
 const initialValue = { id: '', label: '', payload: {} } as ComboboxItem<Type>; // INFO: Cast because I dont want to fill payload, its just a dummy empty item
@@ -23,6 +24,7 @@ export function TypesFilter({
   onClear = () => {},
   types,
   disabled = false,
+  maxSelectedTypes = 2,
 }: TypeFiltersProps): JSX.Element {
   const [selectedTypes, setSelectedTypes] = useState<ComboboxItem<Type>[]>([]);
   const [currentSelectedType, setCurrentSelectedType] = useState<ComboboxItem<Type>>(initialValue);
@@ -67,10 +69,10 @@ export function TypesFilter({
     <div className='flex items-center'>
       <Combobox
         className='min-w-[150px]'
-        clearDisabled={selectedTypes.length < 1}
+        clearDisabled={!selectedTypes.length}
         cleareable
         data={TYPES}
-        disabled={disabled || selectedTypes.length > 1}
+        disabled={disabled || selectedTypes.length >= maxSelectedTypes}
         onChange={handleChange}
         onClear={handleClear}
         placeholder='Types'
