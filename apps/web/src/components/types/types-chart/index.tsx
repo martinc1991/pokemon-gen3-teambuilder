@@ -3,10 +3,12 @@
 import LoadingState from '@components/loading-state';
 import { client } from '@rq-client/index';
 import { useTypeChartStore } from '@state/type-chart';
+import { useSelectedDefendingTypesNames } from '@state/type-chart/use-selected-defending-types-names';
 import clsx from 'clsx';
 import { Type } from 'contract';
-import { Tooltip, TooltipContent, TooltipTrigger, TypeBadge, Typography } from 'ui';
-import { AttackingFilters } from './filters';
+import { Separator, Tooltip, TooltipContent, TooltipTrigger, TypeBadge, Typography } from 'ui';
+import { AttackingFilters } from './filters/attacking';
+import { DefendingFilters } from './filters/defending';
 import { getDamageMultiplier, getTooltipText, sortEmptyTypeFirst } from './helpers';
 
 export function TypesChart(): JSX.Element {
@@ -19,11 +21,12 @@ export function TypesChart(): JSX.Element {
     return <Typography.P>error...</Typography.P>;
   }
 
-  // TODO: add pokemon examples with that typing combination
   return (
     <div className='flex w-full'>
-      <div className='flex-1'>
+      <div className='flex-1 flex gap-2 flex-col justify-start'>
         <AttackingFilters types={data.body} />
+        <Separator></Separator>
+        <DefendingFilters types={data.body} />
       </div>
       <div className='grid grid-cols-[50px_1fr] grid-rows-[50px_1fr]'>
         <div></div>
@@ -43,6 +46,7 @@ export function TypesChart(): JSX.Element {
 
 function Chart({ types }: { types: Type[] }): JSX.Element {
   const [attackingType] = useTypeChartStore((state) => [state.attackingType]);
+  const defensiveTypesNames = useSelectedDefendingTypesNames();
 
   return (
     // TODO: make it responsive (how?)
@@ -50,10 +54,14 @@ function Chart({ types }: { types: Type[] }): JSX.Element {
       {types.sort(sortEmptyTypeFirst).map((type, rowIndex, arr) => {
         return (
           <tr className='type-chart-tr' key={type.id}>
-            {arr.map((_, columnIndex) => {
+            {arr.map((t, columnIndex) => {
               return (
                 <td
-                  className={clsx('type-chart-td h-[45px] w-[45px]', attackingType?.name === type.name && 'bg-primary')}
+                  className={clsx(
+                    'type-chart-td h-[45px] w-[45px]',
+                    attackingType?.name === type.name && 'bg-primary',
+                    defensiveTypesNames.includes(t.name) && 'bg-primary',
+                  )}
                   key={`${rowIndex}-${columnIndex}`}
                 >
                   <TableCellContent types={arr} columnIndex={columnIndex} rowIndex={rowIndex} />
@@ -83,12 +91,14 @@ function TableCellContent({ types, rowIndex, columnIndex }: TableCellContentProp
   if (isFirstRow && isFirstColumn) {
     return <></>;
   } else if (isFirstRow) {
+    // CASE: defending types
     return (
       <div className='p-1 -rotate-90 -translate-x-[12px] -translate-y-[17px] absolute'>
         <TypeBadge type={defensiveType.name} />
       </div>
     );
   } else if (isFirstColumn) {
+    // CASE: attacking types
     return (
       <div className='p-1 text-center'>
         <TypeBadge type={ofensiveType.name} />
@@ -106,7 +116,8 @@ interface MultiplierProps {
 
 function Multiplier({ ofensiveType, defensiveType }: MultiplierProps): JSX.Element {
   const [attackingType] = useTypeChartStore((state) => [state.attackingType]);
-  const isSelected = attackingType?.name === ofensiveType.name;
+  const defensiveTypesNames = useSelectedDefendingTypesNames();
+  const isSelected = attackingType?.name === ofensiveType.name || defensiveTypesNames.includes(defensiveType.name);
 
   const multiplier = getDamageMultiplier(ofensiveType, defensiveType);
   const tooltipText = getTooltipText(ofensiveType, defensiveType);

@@ -4,22 +4,22 @@ import { immer } from 'zustand/middleware/immer';
 
 export interface TypeChartState {
   attackingType: Type | null;
-  // selectedTypes: Type[];
+  defendingTypes: Type[];
 }
 
 interface TypeChartActions {
   setAttackingType: (type: Type) => void;
   clearAttackingType: () => void;
-  // addSelectedTypes: (type: Type) => void;
-  // removeSelectedTypes: (type: Type) => void;
-  // clearSelectedTypes: () => void;
+  addDefendingType: (type: Type) => void;
+  removeDefendingType: (type: Type) => void;
+  clearDefendingTypes: () => void;
 }
 
 export type TypeChartStore = TypeChartState & TypeChartActions;
 
 const store = immer<TypeChartStore>((set) => ({
   attackingType: null,
-  selectedTypes: [],
+  defendingTypes: [],
   setAttackingType: (type) => {
     set((state) => {
       state.attackingType = type;
@@ -30,25 +30,25 @@ const store = immer<TypeChartStore>((set) => ({
       state.attackingType = null;
     });
   },
-  // addSelectedTypes: (type) => {
-  //   set((state) => {
-  //     const newSelectedTypes = state.selectedTypes.concat(type);
+  addDefendingType: (type) => {
+    set((state) => {
+      const newSelectedTypes = state.defendingTypes.concat(type);
 
-  //     state.selectedTypes = newSelectedTypes;
-  //   });
-  // },
-  // removeSelectedTypes: (type) => {
-  //   set((state) => {
-  //     const newSelectedTypes = state.selectedTypes.filter((t) => t.id !== type.id);
+      state.defendingTypes = newSelectedTypes;
+    });
+  },
+  removeDefendingType: (type) => {
+    set((state) => {
+      const newSelectedTypes = state.defendingTypes.filter((t) => t.id !== type.id);
 
-  //     state.selectedTypes = newSelectedTypes;
-  //   });
-  // },
-  // clearSelectedTypes: () => {
-  //   set((state) => {
-  //     state.selectedTypes = [];
-  //   });
-  // },
+      state.defendingTypes = newSelectedTypes;
+    });
+  },
+  clearDefendingTypes: () => {
+    set((state) => {
+      state.defendingTypes = [];
+    });
+  },
 }));
 
 export const useTypeChartStore = create(store);

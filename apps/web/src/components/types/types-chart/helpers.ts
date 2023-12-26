@@ -1,5 +1,5 @@
-import { capitalize } from '@utils/common';
-import { Type } from 'contract';
+import { capitalize, combineAndRemoveDuplicates, findDuplicateStrings } from '@utils/common';
+import { Type, TypeNames } from 'contract';
 
 export function sortEmptyTypeFirst(typeA: Type, typeB: Type): number {
   if (typeA.name === 'empty') {
@@ -41,4 +41,54 @@ export function getTooltipText(ofensiveType: Type, defensiveType: Type): string 
     default:
       return '';
   }
+}
+
+interface TypeCombinationDefensiveDamageInfo {
+  cuadrupleDamageFrom: TypeNames[];
+  doubleDamageFrom: TypeNames[];
+  halfDamageFrom: TypeNames[];
+  quarterDamageFrom: TypeNames[];
+  noDamageFrom: TypeNames[];
+}
+
+export function getTypeCombinationDefensiveDamageInfo(typeOne: Type, typeTwo?: Type): TypeCombinationDefensiveDamageInfo {
+  const damageInfo: TypeCombinationDefensiveDamageInfo = {
+    cuadrupleDamageFrom: [],
+    doubleDamageFrom: [],
+    halfDamageFrom: [],
+    quarterDamageFrom: [],
+    noDamageFrom: [],
+  };
+
+  if (!typeTwo) {
+    damageInfo.doubleDamageFrom = typeOne.doubleDamageFrom;
+    damageInfo.halfDamageFrom = typeOne.halfDamageFrom;
+    damageInfo.noDamageFrom = typeOne.noDamageFrom;
+
+    return damageInfo;
+  }
+
+  const double = combineAndRemoveDuplicates(typeOne.doubleDamageFrom, typeTwo.doubleDamageFrom);
+  const half = combineAndRemoveDuplicates(typeOne.halfDamageFrom, typeTwo.halfDamageFrom);
+  const zero = combineAndRemoveDuplicates(typeOne.noDamageFrom, typeTwo.noDamageFrom);
+
+  damageInfo.noDamageFrom = zero;
+  damageInfo.cuadrupleDamageFrom = findDuplicateStrings(typeOne.doubleDamageFrom, typeTwo.doubleDamageFrom); // If a type is present in both doubleDamageFrom arrays
+  damageInfo.quarterDamageFrom = findDuplicateStrings(typeOne.halfDamageFrom, typeTwo.halfDamageFrom); // If a type is present in both doubleDamageFrom arrays
+
+  // doubleDamageFrom
+  double.forEach((type) => {
+    if (!half.includes(type) && !zero.includes(type) && !damageInfo.cuadrupleDamageFrom.includes(type)) {
+      damageInfo.doubleDamageFrom.push(type);
+    }
+  });
+
+  // halfDamageFrom
+  half.forEach((type) => {
+    if (!double.includes(type) && !zero.includes(type) && !damageInfo.quarterDamageFrom.includes(type)) {
+      damageInfo.halfDamageFrom.push(type);
+    }
+  });
+
+  return damageInfo;
 }
