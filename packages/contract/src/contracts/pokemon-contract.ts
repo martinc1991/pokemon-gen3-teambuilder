@@ -5,8 +5,13 @@ import { PokemonWithAbilitiesAndLearnsetSchema, PokemonWithAbilitiesSchema } fro
 
 const c = initContract();
 
+const TypesParamsSchema = z.object({
+  typeOne: z.string().optional(),
+  typeTwo: z.string().optional(),
+});
+
 // Params schemas
-const GetAllPokemonQueryParamsSchema = PaginationParamsSchema.merge(SortOrderParamsSchema);
+const GetAllPokemonQueryParamsSchema = PaginationParamsSchema.merge(SortOrderParamsSchema).merge(TypesParamsSchema);
 
 // Response schemas
 const GetOnePokemonResponseSchema = PokemonWithAbilitiesAndLearnsetSchema;

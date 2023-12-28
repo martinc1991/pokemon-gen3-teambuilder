@@ -16,7 +16,7 @@ export function Filters({ types }: FiltersProps): JSX.Element {
   const biggerThan1600 = width > 1600;
 
   return (
-    <div className={clsx('flex-1 flex gap-2 flex-col justify-start', biggerThan1600 ? 'max-w-md' : 'w-full max-w-2xl')}>
+    <div className={clsx('flex-1 flex gap-2 flex-col justify-start', biggerThan1600 ? 'max-w-md' : 'w-full max-w-3xl')}>
       <AttackingFilters types={types} />
       <Separator></Separator>
       <DefendingFilters types={types} />
