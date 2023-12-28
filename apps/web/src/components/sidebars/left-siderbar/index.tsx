@@ -7,15 +7,23 @@ import BasicSidebar from '../basic-sidebar';
 export default function LeftSidebar(): JSX.Element {
   return (
     <BasicSidebar side='left'>
-      <Link className='flex justify-center' href='/'>
-        <Button variant='link'>Home</Button>
-      </Link>
-      <Link className='flex justify-center' href='/pokemon'>
-        <Button variant='link'>Pokemon</Button>
-      </Link>
-      <Link className='flex justify-center' href='/team'>
-        <Button variant='link'>Team</Button>
-      </Link>
+      <SidebarLink text='Home' href='/' />
+      <SidebarLink text='Pokemon' href='/pokemon' />
+      <SidebarLink text='Team' href='/team' />
+      <SidebarLink text='Types' href='/types' />
     </BasicSidebar>
+  );
+}
+
+interface SidebarLinkProps {
+  href: string;
+  text: string;
+}
+
+function SidebarLink({ href, text }: SidebarLinkProps): JSX.Element {
+  return (
+    <Link className='flex justify-center' href={href}>
+      <Button variant='link'>{text}</Button>
+    </Link>
   );
 }

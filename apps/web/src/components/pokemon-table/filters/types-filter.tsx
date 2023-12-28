@@ -1,65 +1,67 @@
 'use client';
 
 import { Cross2Icon } from '@radix-ui/react-icons';
-import { client } from '@rq-client/index';
-import type { Table } from '@tanstack/react-table';
 import { capitalize } from '@utils/common';
-import type { PokemonWithAbilities, Type, TypeNames } from 'contract';
+import type { Type } from 'contract';
 import { useEffect, useState } from 'react';
 import type { ComboboxItem } from 'ui';
 import { Combobox, TypeBadge } from 'ui';
-import { ColumnID } from '../columns/constants';
 
 interface TypeFiltersProps {
-  table: Table<PokemonWithAbilities>;
+  onChange?: (selectedTypes: ComboboxItem<Type>[], selectedType: ComboboxItem<Type>) => void;
+  onClear?: (selectedTypes: ComboboxItem<Type>[]) => void;
+  onRemove?: (selectedTypes: ComboboxItem<Type>[], deletedType: ComboboxItem<Type>) => void;
+  types: Type[];
+  disabled?: boolean;
+  maxSelectedTypes?: number;
 }
 
 const initialValue = { id: '', label: '', payload: {} } as ComboboxItem<Type>; // INFO: Cast because I dont want to fill payload, its just a dummy empty item
 
-export function TypesFilter({ table }: TypeFiltersProps): JSX.Element {
+export function TypesFilter({
+  onChange = () => {},
+  onRemove = () => {},
+  onClear = () => {},
+  types,
+  disabled = false,
+  maxSelectedTypes = 2,
+}: TypeFiltersProps): JSX.Element {
   const [selectedTypes, setSelectedTypes] = useState<ComboboxItem<Type>[]>([]);
-  const [selectedValue, setSelectedValue] = useState<ComboboxItem<Type>>(initialValue);
-  const { data, isFetching, isError } = client.types.getAll.useQuery(['get-all-types']);
+  const [currentSelectedType, setCurrentSelectedType] = useState<ComboboxItem<Type>>(initialValue);
 
-  const DATA: ComboboxItem<Type>[] =
-    data?.body.map((type) => {
-      return { id: type.name, label: capitalize(type.name), payload: type };
-    }) || [];
-
-  function setNewFilterValues(types: ComboboxItem<Type>[], filterValues: TypeNames[]): void {
-    table.getColumn(ColumnID.TYPES)?.setFilterValue(filterValues);
-    setSelectedTypes(types);
-  }
+  const TYPES: ComboboxItem<Type>[] = types.map((type) => {
+    return { id: type.id, label: capitalize(type.name), payload: type };
+  });
 
   function handleChange(item: ComboboxItem<Type>): void {
     // Dont add the same type twice
     if (selectedTypes.length && selectedTypes[0].id === item.id) return;
-
-    setSelectedValue(item);
     const newSelectedTypes = selectedTypes.concat([item]);
-    const newFilterValues = newSelectedTypes.map((type) => type.payload.name);
 
-    setNewFilterValues(newSelectedTypes, newFilterValues);
+    setCurrentSelectedType(item);
+    setSelectedTypes(newSelectedTypes);
+    onChange(newSelectedTypes, item);
   }
 
   function handleRemoveOne(deletedTypeItem: ComboboxItem<Type>): void {
     const newSelectedTypes = selectedTypes.filter((type) => type.label !== deletedTypeItem.label);
-    const newFilterValues = newSelectedTypes.map((type) => type.payload.name);
-    if (newSelectedTypes.length < 1) setSelectedValue(initialValue);
+    if (newSelectedTypes.length < 1) setCurrentSelectedType(initialValue);
 
-    setNewFilterValues(newSelectedTypes, newFilterValues);
+    setSelectedTypes(newSelectedTypes);
+    onRemove(newSelectedTypes, deletedTypeItem);
   }
 
   function handleClear(): void {
-    setNewFilterValues([], []);
-    setSelectedValue(initialValue);
+    setSelectedTypes([]);
+    setCurrentSelectedType(initialValue);
+    onClear(selectedTypes);
   }
 
   useEffect(() => {
     if (selectedTypes.length > 0) {
-      setSelectedValue(selectedTypes[selectedTypes.length - 1]);
+      setCurrentSelectedType(selectedTypes[selectedTypes.length - 1]);
     } else {
-      setSelectedValue(initialValue);
+      setCurrentSelectedType(initialValue);
     }
   }, [selectedTypes]);
 
@@ -67,15 +69,15 @@ export function TypesFilter({ table }: TypeFiltersProps): JSX.Element {
     <div className='flex items-center'>
       <Combobox
         className='min-w-[150px]'
-        clearDisabled={selectedTypes.length < 1}
+        clearDisabled={!selectedTypes.length}
         cleareable
-        data={DATA}
-        disabled={isFetching || isError || selectedTypes.length > 1}
+        data={TYPES}
+        disabled={disabled || selectedTypes.length >= maxSelectedTypes}
         onChange={handleChange}
         onClear={handleClear}
         placeholder='Types'
         searchBox
-        value={selectedValue}
+        value={currentSelectedType}
       />
       <div className='flex gap-4'>
         {selectedTypes.length > 0 &&

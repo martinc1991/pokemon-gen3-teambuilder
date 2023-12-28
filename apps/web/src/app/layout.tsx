@@ -4,7 +4,7 @@ import LeftSidebar from '@components/sidebars/left-siderbar';
 import RightSidebar from '@components/sidebars/right-sidebar';
 import type { Metadata } from 'next';
 import 'tailwind-config/global.css';
-import { Toaster } from 'ui';
+import { Toaster, TooltipProvider } from 'ui';
 // include styles from the ui package
 import 'ui/style';
 
@@ -17,12 +17,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }):
   return (
     <html className='bg-zinc-900' lang='en'>
       <body className='flex flex-row'>
-        <LeftSidebar />
-        <main className='flex justify-center flex-1'>
-          <div className='flex flex-col items-center min-h-screen w-11/12 '>{children}</div>
-        </main>
-        <RightSidebar />
-        <Toaster />
+        <TooltipProvider>
+          <LeftSidebar />
+          <main className='flex justify-center flex-1 pb-8'>
+            <div className='flex flex-col items-center min-h-screen w-11/12 '>{children}</div>
+          </main>
+          <RightSidebar />
+          <Toaster />
+        </TooltipProvider>
       </body>
     </html>
   );
