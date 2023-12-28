@@ -8,6 +8,7 @@ export interface TypeChartState {
 }
 
 interface TypeChartActions {
+  resetState: () => void;
   setAttackingType: (type: Type) => void;
   clearAttackingType: () => void;
   addDefendingType: (type: Type) => void;
@@ -17,9 +18,16 @@ interface TypeChartActions {
 
 export type TypeChartStore = TypeChartState & TypeChartActions;
 
-const store = immer<TypeChartStore>((set) => ({
+const initialState: TypeChartState = {
   attackingType: null,
   defendingTypes: [],
+};
+
+const store = immer<TypeChartStore>((set) => ({
+  ...initialState,
+  resetState: () => {
+    set(initialState);
+  },
   setAttackingType: (type) => {
     set((state) => {
       state.attackingType = type;
@@ -32,15 +40,15 @@ const store = immer<TypeChartStore>((set) => ({
   },
   addDefendingType: (type) => {
     set((state) => {
-      const newSelectedTypes = state.defendingTypes.concat(type);
+      if (state.defendingTypes.length === 2) return;
 
+      const newSelectedTypes = state.defendingTypes.concat(type);
       state.defendingTypes = newSelectedTypes;
     });
   },
   removeDefendingType: (type) => {
     set((state) => {
       const newSelectedTypes = state.defendingTypes.filter((t) => t.id !== type.id);
-
       state.defendingTypes = newSelectedTypes;
     });
   },
