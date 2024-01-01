@@ -14,7 +14,9 @@
     "db:seed": "turbo db:seed",
     "prisma:migrate:prod": "turbo prisma:migrate:prod",
     "db:seed:prod": "turbo db:seed:prod",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "test": "turbo test",
+    "test:watch": "turbo test"
   },
   "devDependencies": {
     "@types/node": "^20.5.9",
