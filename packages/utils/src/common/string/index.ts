@@ -1,3 +1,5 @@
+import { Tier } from 'contract';
+
 /**
  * Capitalizes first letter of a string.
  *
@@ -35,4 +37,14 @@ export function replaceHyphensWithSpaces(str: string): string {
  */
 export function formatString(str: string): string {
   return capitalizeEach(replaceHyphensWithSpaces(str));
+}
+
+/**
+ * Returns the formatted named of a tier.
+ *
+ * @param tier - tier
+ */
+export function getTierText(tier: Tier): string {
+  if (tier === 'uber') return capitalize(tier);
+  return tier.toUpperCase();
 }

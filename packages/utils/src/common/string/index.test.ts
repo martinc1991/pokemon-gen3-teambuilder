@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { capitalize, capitalizeEach, replaceHyphensWithSpaces, formatString } from './index';
+import { capitalize, capitalizeEach, formatString, getTierText, replaceHyphensWithSpaces } from './index';
 
 describe('capitalize', () => {
   test('should capitalize the first letter of any given string', () => {
@@ -46,5 +46,19 @@ describe('formatString', () => {
   });
   test('should return an empty string if an empty string is provided', () => {
     expect(formatString('')).toBe('');
+  });
+});
+
+describe('getTierText', () => {
+  test('should return the correct formatted name of each tier', () => {
+    expect(getTierText('lc')).toBe('LC');
+    expect(getTierText('nfe')).toBe('NFE');
+    expect(getTierText('nu')).toBe('NU');
+    expect(getTierText('ou')).toBe('OU');
+    expect(getTierText('pu')).toBe('PU');
+    expect(getTierText('publ')).toBe('PUBL');
+    expect(getTierText('uber')).toBe('Uber');
+    expect(getTierText('uu')).toBe('UU');
+    expect(getTierText('uubl')).toBe('UUBL');
   });
 });
