@@ -1,8 +1,8 @@
 import { useTeamStore } from '@state/team';
-import { capitalize } from '@utils/common';
 import type { FilledSlot, Gender } from 'contract';
 import type { ComboboxItem } from 'ui';
 import { FormField } from 'ui';
+import { capitalize } from 'utils';
 
 interface GenderFieldProps {
   slot: FilledSlot;

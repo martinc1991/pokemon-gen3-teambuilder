@@ -1,11 +1,11 @@
 'use client';
 
 import { Cross2Icon } from '@radix-ui/react-icons';
-import { capitalize } from '@utils/common';
 import type { Type } from 'contract';
 import { useEffect, useState } from 'react';
 import type { ComboboxItem } from 'ui';
 import { Combobox, TypeBadge } from 'ui';
+import { capitalize } from 'utils';
 
 interface TypeFiltersProps {
   onChange?: (selectedTypes: ComboboxItem<Type>[], selectedType: ComboboxItem<Type>) => void;

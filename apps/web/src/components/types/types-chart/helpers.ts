@@ -1,5 +1,6 @@
-import { capitalize, combineAndRemoveDuplicates, findDuplicateStrings } from '@utils/common';
+import { combineAndRemoveDuplicates, findDuplicateStrings } from '@utils/common';
 import { Type, TypeNames } from 'contract';
+import { capitalize } from 'utils';
 
 export function sortEmptyTypeFirst(typeA: Type, typeB: Type): number {
   if (typeA.name === 'empty') {

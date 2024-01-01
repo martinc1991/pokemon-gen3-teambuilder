@@ -1,5 +1,5 @@
 import type { FilledSlot, StatName } from 'contract';
-import { capitalize, formatString } from '../common';
+import { capitalize, formatString } from 'utils';
 import { calculateHiddenPowerType, getShortStatName } from './stats';
 
 export function parseTeam(team: FilledSlot[]): string {
