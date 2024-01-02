@@ -9,7 +9,6 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "postbuild": "echo 'Finised building contract'",
     "dev": " tsc --watch",
     "prisma:generate": "dotenv -e .env.dev -- pnpm prisma generate --generator zod && pnpm organize:imports && pnpm prettier:format",
     "prisma:generate:prod": "dotenv -e .env.prod -- pnpm prisma generate",

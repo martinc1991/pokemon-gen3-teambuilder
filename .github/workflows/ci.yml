@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    name: Build and Test
+    name: Unit tests
     timeout-minutes: 15
     runs-on: ubuntu-20.04
 
@@ -27,13 +27,13 @@ jobs:
           cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm install --filter=utils... --filter=server...
+        run: pnpm install --filter=utils... --filter=server... # Only these have unit tests
 
       - name: Generate prisma client
         run: pnpm prisma:generate
 
       - name: Build
-        run: pnpm build --filter=utils... --filter=server...
+        run: pnpm build --filter=utils... --filter=server... # Only these have unit tests
 
       - name: Test
         run: pnpm test
