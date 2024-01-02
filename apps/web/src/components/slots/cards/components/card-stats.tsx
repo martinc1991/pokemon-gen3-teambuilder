@@ -1,7 +1,7 @@
 import { client } from '@rq-client/index';
-import { CalculateStatProps, calculateStat } from '@utils/pokemon';
 import { FilledSlot } from 'contract';
 import { Typography } from 'ui';
+import { CalculateStatProps, calculateStat } from 'utils';
 
 interface PokemonCardStatsProps {
   slot: FilledSlot;

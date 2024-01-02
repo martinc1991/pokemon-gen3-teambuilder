@@ -42,6 +42,10 @@
     },
     "prettier:format": {
       "cache": false
+    },
+    "test": {
+      "cache": false,
+      "persistent": true
     }
   }
 }

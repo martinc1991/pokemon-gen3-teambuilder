@@ -1,11 +1,11 @@
 'use client';
 
 import type { Table } from '@tanstack/react-table';
-import { getTierText } from '@utils/pokemon';
 import type { PokemonWithAbilities, Tier } from 'contract';
 import { SORTED_TIERS } from 'pokemon-info';
 import type { ComboboxItem } from 'ui';
 import { Combobox } from 'ui';
+import { getTierText } from 'utils';
 import { ColumnID } from '../columns/constants';
 
 interface TierFiltersProps {

@@ -1,8 +1,8 @@
 import { type ColumnDef } from '@tanstack/react-table';
-import { getTierText } from '@utils/pokemon';
 import { type PokemonWithAbilities } from 'contract';
 import { SORTED_TIERS } from 'pokemon-info';
 import { Typography } from 'ui';
+import { getTierText } from 'utils';
 import { ColumnID } from './constants';
 import { columnHelper } from './get-column-helper';
 

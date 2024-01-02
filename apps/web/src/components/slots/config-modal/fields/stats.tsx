@@ -1,11 +1,11 @@
 import { useTeamStore } from '@state/team';
-import { calculateStat, getShortStatName, getTotalEvs } from '@utils/pokemon';
 import type { EvFieldName, FilledSlot, IvFieldName, Nature, StatName } from 'contract';
 import { MAX_INDIVIDUAL_EV, MAX_INDIVIDUAL_IV, MAX_POSSIBLE_EVS } from 'contract';
 import { NATURES } from 'pokemon-info';
 import type { ChangeEvent } from 'react';
 import { useEffect, useState } from 'react';
 import { Input, Progress, Slider, Typography } from 'ui';
+import { calculateStat, getShortStatName, getTotalEvs } from 'utils';
 
 interface StatsFieldsProps {
   slot: FilledSlot;

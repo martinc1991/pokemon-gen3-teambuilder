@@ -2,9 +2,9 @@
 
 import withTeamStore, { WithTeamStoreProps } from '@state/hoc/with-team-store';
 import { BaseSlot } from '@state/team/helpers';
-import { formatPokemonName } from '@utils/pokemon';
 import { FilledSlot, MAX_TEAM_MEMBERS } from 'contract';
 import { PokemonAvatar, Separator } from 'ui';
+import { formatPokemonName } from 'utils';
 import ClearButton from '../../clear-button';
 import CopyButton from '../../copy-button';
 

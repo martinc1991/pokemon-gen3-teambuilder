@@ -1,5 +1,5 @@
-import { capitalize, combineAndRemoveDuplicates, findDuplicateStrings } from '@utils/common';
 import { Type, TypeNames } from 'contract';
+import { capitalize, combineAndRemoveDuplicates, findDuplicates } from 'utils';
 
 export function sortEmptyTypeFirst(typeA: Type, typeB: Type): number {
   if (typeA.name === 'empty') {
@@ -73,8 +73,8 @@ export function getTypeCombinationDefensiveDamageInfo(typeOne: Type, typeTwo?: T
   const zero = combineAndRemoveDuplicates(typeOne.noDamageFrom, typeTwo.noDamageFrom);
 
   damageInfo.noDamageFrom = zero;
-  damageInfo.cuadrupleDamageFrom = findDuplicateStrings(typeOne.doubleDamageFrom, typeTwo.doubleDamageFrom); // If a type is present in both doubleDamageFrom arrays
-  damageInfo.quarterDamageFrom = findDuplicateStrings(typeOne.halfDamageFrom, typeTwo.halfDamageFrom); // If a type is present in both doubleDamageFrom arrays
+  damageInfo.cuadrupleDamageFrom = findDuplicates(typeOne.doubleDamageFrom, typeTwo.doubleDamageFrom); // If a type is present in both doubleDamageFrom arrays
+  damageInfo.quarterDamageFrom = findDuplicates(typeOne.halfDamageFrom, typeTwo.halfDamageFrom); // If a type is present in both doubleDamageFrom arrays
 
   // doubleDamageFrom
   double.forEach((type) => {

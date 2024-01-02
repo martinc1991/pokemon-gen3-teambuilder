@@ -1,9 +1,9 @@
 import { useTeamStore } from '@state/team';
-import { getShortStatName } from '@utils/pokemon';
 import type { FilledSlot, Nature } from 'contract';
 import { NATURES } from 'pokemon-info';
 import type { ComboboxItem } from 'ui';
 import { FormField } from 'ui';
+import { getShortStatName } from 'utils';
 
 interface NatureFieldProps {
   slot: FilledSlot;
