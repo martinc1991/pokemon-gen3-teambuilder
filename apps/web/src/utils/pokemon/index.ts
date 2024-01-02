@@ -1,1 +1,1 @@
-export * from './format-table-data';
+export * from './parse-team';

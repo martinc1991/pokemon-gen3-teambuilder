@@ -1,7 +1,7 @@
 'use client';
 
 import PageHeader from '@components/page-header';
-import { formatPokemonName } from '@utils/pokemon';
+import { formatPokemonName } from 'utils';
 
 interface PageProps {
   params: {

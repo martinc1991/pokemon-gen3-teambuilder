@@ -1,10 +1,9 @@
 'use client';
 
 import { type ColumnDef } from '@tanstack/react-table';
-import { formatPokemonName } from '@utils/pokemon';
 import { type PokemonWithAbilities } from 'contract';
 import { Typography } from 'ui';
-import { replaceHyphensWithSpaces } from 'utils';
+import { formatPokemonName, replaceHyphensWithSpaces } from 'utils';
 import { ColumnID } from './constants';
 import { columnHelper } from './get-column-helper';
 

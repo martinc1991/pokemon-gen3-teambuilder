@@ -1,6 +1,6 @@
 // sum.test.js
-import { expect, test, describe } from 'vitest';
-import { isValidNationalPokedexNumber } from './index';
+import { describe, expect, test } from 'vitest';
+import { formatPokemonName, isValidNationalPokedexNumber } from './index';
 
 describe('isValidNationalPokedexNumber', () => {
   test('should return true if it receives an integer between 1 and 389', () => {
@@ -26,5 +26,36 @@ describe('isValidNationalPokedexNumber', () => {
     expect(isValidNationalPokedexNumber(false)).toBe(false);
     expect(isValidNationalPokedexNumber([])).toBe(false);
     expect(isValidNationalPokedexNumber({ key: 'value' })).toBe(false);
+  });
+});
+
+describe('formatPokemonName', () => {
+  test('should work with empty strings', () => {
+    expect(formatPokemonName('')).toBe('');
+  });
+  test('should work with valid strings', () => {
+    expect(formatPokemonName('deoxys-speed')).toBe('Deoxys-Speed');
+    expect(formatPokemonName('pikachu')).toBe('Pikachu');
+    expect(formatPokemonName('ho-oh')).toBe('Ho-Oh');
+    expect(formatPokemonName('charizard-mega-x')).toBe('Charizard-Mega-X');
+    expect(formatPokemonName('mewtwo-mega-y')).toBe('Mewtwo-Mega-Y');
+    expect(formatPokemonName('mewtwo-mega-x-y')).toBe('Mewtwo-Mega-X-Y');
+    expect(formatPokemonName('mewtwo-mega-x-y-z')).toBe('Mewtwo-Mega-X-Y-Z');
+    expect(formatPokemonName('mewtwo-mega-x-y-z-a')).toBe('Mewtwo-Mega-X-Y-Z-A');
+  });
+  test('should work with strings containing spaces instead of hyphens', () => {
+    expect(formatPokemonName('deoxys speed')).toBe('Deoxys-Speed');
+    expect(formatPokemonName('pikachu')).toBe('Pikachu');
+    expect(formatPokemonName('ho oh')).toBe('Ho-Oh');
+    expect(formatPokemonName('charizard mega x')).toBe('Charizard-Mega-X');
+    expect(formatPokemonName('mewtwo mega y')).toBe('Mewtwo-Mega-Y');
+    expect(formatPokemonName('mewtwo mega x y')).toBe('Mewtwo-Mega-X-Y');
+    expect(formatPokemonName('mewtwo mega x y z')).toBe('Mewtwo-Mega-X-Y-Z');
+    expect(formatPokemonName('mewtwo mega x y z a')).toBe('Mewtwo-Mega-X-Y-Z-A');
+  });
+  test('should work with strings containing spaces and hyphens', () => {
+    expect(formatPokemonName('mewtwo mega x-y')).toBe('Mewtwo-Mega-X-Y');
+    expect(formatPokemonName('mewtwo-mega x y z')).toBe('Mewtwo-Mega-X-Y-Z');
+    expect(formatPokemonName('mewtwo mega x-y z a')).toBe('Mewtwo-Mega-X-Y-Z-A');
   });
 });

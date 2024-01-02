@@ -10,7 +10,7 @@ export function capitalize(str: string): string {
 }
 
 /**
- * Capitalizes each word in a string.
+ * Capitalizes each word in a string separated by whitespaces.
  *
  * @param str - string to capitalize each word
  */
@@ -21,12 +21,20 @@ export function capitalizeEach(str: string): string {
 // Remove hyphens
 
 /**
- * Replaces hyphens with spaces.
+ * Replaces hyphens with whitespaces.
  *
  * @param str - string
  */
 export function replaceHyphensWithSpaces(str: string): string {
   return str.replace(/-/g, ' ');
+}
+/**
+ * Replaces whitespaces with hyphens.
+ *
+ * @param str - string
+ */
+export function replaceSpacesWithHyphens(str: string): string {
+  return str.replace(/\s+/g, '-');
 }
 
 /**
