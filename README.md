@@ -4,7 +4,7 @@
 
 ### Local dev environment
 
-Node 20 is required. Also pnpm. Don't forget to make the .env.dev files on apps/db and apps/server (see README on both apps).
+Node 20 is required. Also pnpm. Don't forget to make the .env.dev files on apps/db and apps/server (see README on both apps!).
 
 - From the root run `pnpm install`
 - From the root run `pnpm prisma:generate`
