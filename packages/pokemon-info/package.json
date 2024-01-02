@@ -9,6 +9,7 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsc",
+    "postbuild": "echo 'Finised building pokemon-info'",
     "dev": " tsc --watch",
     "lint": "tsc --noEmit --skipLibCheck"
   },

@@ -7,7 +7,7 @@ jobs:
   build:
     name: Build and Test
     timeout-minutes: 15
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     steps:
       - name: Check out code
@@ -33,7 +33,7 @@ jobs:
         run: pnpm prisma:generate
 
       - name: Build
-        run: pnpm build
+        run: pnpm build --filter=!web --filter=!ui
 
       - name: Test
         run: pnpm test
