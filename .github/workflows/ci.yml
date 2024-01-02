@@ -27,13 +27,13 @@ jobs:
           cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --filter=utils... --filter=server...
 
       - name: Generate prisma client
         run: pnpm prisma:generate
 
       - name: Build
-        run: pnpm build --filter=!web --filter=!ui
+        run: pnpm build --filter=utils... --filter=server...
 
       - name: Test
         run: pnpm test
