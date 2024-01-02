@@ -44,8 +44,7 @@
       "cache": false
     },
     "test": {
-      "cache": false,
-      "persistent": true
+      "dependsOn": ["server#build", "utils#build"]
     }
   }
 }
