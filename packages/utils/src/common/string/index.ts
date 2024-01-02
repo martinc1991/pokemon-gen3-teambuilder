@@ -39,7 +39,9 @@ export function replaceSpacesWithHyphens(str: string): string {
 
 /**
  * Removes hyphens and the capitalize each word.
- * Usually it is the format used to display pokemon, items, abilities, moves, etc.
+ * Usually it is the format used to display items, abilities, moves, etc, but not for pokemon.
+ *
+ * To format pokemon names use formatPokemonName function.
  *
  * @param str - string
  */
