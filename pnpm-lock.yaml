@@ -428,6 +428,9 @@ importers:
       contract:
         specifier: workspace:*
         version: link:../contract
+      pokemon-info:
+        specifier: workspace:*
+        version: link:../pokemon-info
       vitest:
         specifier: ^1.1.1
         version: 1.1.1(@types/node@20.5.9)
