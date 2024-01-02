@@ -1,6 +1,6 @@
 import type { EvFieldName, IBaseStats, IvFieldName, Nature, StatName, TypeNames } from 'contract';
 import { SORTED_TYPES_NAMES } from 'pokemon-info';
-import { getValues } from '../common';
+import { getValues } from 'utils';
 
 export function getShortStatName(statName: keyof IBaseStats | StatName): string {
   switch (statName) {

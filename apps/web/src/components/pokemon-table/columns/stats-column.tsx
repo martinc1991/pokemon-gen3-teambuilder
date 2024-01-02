@@ -1,8 +1,8 @@
 'use client';
 
 import type { ColumnDef, Row } from '@tanstack/react-table';
-import { getValues } from '@utils/common';
 import type { PokemonWithAbilities } from 'contract';
+import { getValues } from 'utils';
 import { TableRowStats } from '../../stats/table-row-stats';
 import { ColumnID } from './constants';
 import { columnHelper } from './get-column-helper';
