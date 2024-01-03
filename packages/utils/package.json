@@ -13,7 +13,7 @@
     "lint": "tsc --noEmit --skipLibCheck",
     "test": "vitest --run",
     "test:watch": "vitest",
-    "test:coverage": "vitest --coverage --run"
+    "test:coverage": "vitest --coverage"
   },
   "dependencies": {
     "contract": "workspace:*",
