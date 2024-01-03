@@ -15,8 +15,7 @@
     "db:seed:prod": "turbo db:seed:prod",
     "prepare": "husky install",
     "test": "turbo test",
-    "test:watch": "turbo test:watch",
-    "test:coverage": "turbo test:coverage"
+    "test:watch": "turbo test:watch"
   },
   "devDependencies": {
     "@types/node": "^20.5.9",
