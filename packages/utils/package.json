@@ -14,9 +14,12 @@
     "test": "vitest --run",
     "test:watch": "vitest"
   },
-  "devDependencies": {
+  "dependencies": {
     "contract": "workspace:*",
     "pokemon-info": "workspace:*",
+    "vitest": "^1.1.1"
+  },
+  "devDependencies": {
     "vitest": "^1.1.1"
   }
 }
