@@ -46,9 +46,6 @@
     "test:watch": {
       "dependsOn": ["server#build", "utils#build"],
       "persistent": true
-    },
-    "test:coverage": {
-      "dependsOn": ["server#build", "utils#build"]
     }
   }
 }
