@@ -4,7 +4,6 @@
     "build": "turbo build",
     "dev": "turbo dev --no-daemon",
     "lint": "turbo lint --no-daemon",
-    "clean": "turbo clean",
     "prettier:format": "turbo prettier:format",
     "studio": "turbo studio",
     "studio:prod": "turbo studio:prod",
@@ -16,7 +15,8 @@
     "db:seed:prod": "turbo db:seed:prod",
     "prepare": "husky install",
     "test": "turbo test",
-    "test:watch": "turbo test"
+    "test:watch": "turbo test:watch",
+    "test:coverage": "turbo test:coverage"
   },
   "devDependencies": {
     "@types/node": "^20.5.9",

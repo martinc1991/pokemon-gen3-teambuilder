@@ -12,7 +12,8 @@
     "dev": " tsc --watch",
     "lint": "tsc --noEmit --skipLibCheck",
     "test": "vitest --run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "test:coverage": "vitest --coverage --run"
   },
   "dependencies": {
     "contract": "workspace:*",
@@ -20,6 +21,7 @@
     "vitest": "^1.1.1"
   },
   "devDependencies": {
+    "@vitest/coverage-v8": "^1.1.1",
     "vitest": "^1.1.1"
   }
 }

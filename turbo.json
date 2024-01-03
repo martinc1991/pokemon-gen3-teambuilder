@@ -14,9 +14,6 @@
       "cache": false,
       "persistent": true
     },
-    "clean": {
-      "cache": false
-    },
     "studio": {
       "cache": false,
       "persistent": true
@@ -44,6 +41,13 @@
       "cache": false
     },
     "test": {
+      "dependsOn": ["server#build", "utils#build"]
+    },
+    "test:watch": {
+      "dependsOn": ["server#build", "utils#build"],
+      "persistent": true
+    },
+    "test:coverage": {
       "dependsOn": ["server#build", "utils#build"]
     }
   }
