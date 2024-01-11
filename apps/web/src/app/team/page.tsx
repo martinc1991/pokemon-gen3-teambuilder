@@ -6,22 +6,21 @@ import { EmptyPokemonCard, FilledPokemonCard } from '@components/slots/cards';
 import SlotConfigModal from '@components/slots/config-modal';
 import { queryClient } from '@rq-client/index';
 import withTeamStore, { WithTeamStoreProps } from '@state/hoc/with-team-store';
-import { BaseSlot } from '@state/team/helpers';
 import { QueryClientProvider } from '@tanstack/react-query';
-import { MAX_TEAM_MEMBERS } from 'contract';
+import { LocalSlot, MAX_TEAM_MEMBERS } from 'contract';
 import Link from 'next/link';
 import { Button, Dialog, DialogTrigger, Typography } from 'ui';
 
 interface BuilderProps extends WithTeamStoreProps {}
 
 function Builder({ teamStore }: BuilderProps): JSX.Element {
-  const { slots, setSelectedSlotIndex } = teamStore;
+  const { slots, setSelectedSlot } = teamStore;
 
   const areThereSlots = slots.length > 0;
   const emptySlots = MAX_TEAM_MEMBERS - slots.length;
 
-  function handleSetSelectedSlotIndex(index: number): void {
-    setSelectedSlotIndex(index);
+  function handleSetSelectedSlotIndex(slot: LocalSlot): void {
+    setSelectedSlot(slot);
   }
 
   return (
@@ -33,22 +32,22 @@ function Builder({ teamStore }: BuilderProps): JSX.Element {
         />
         {areThereSlots ? (
           <div className='flex flex-wrap justify-center gap-6'>
-            {slots.map((slot) => {
+            {slots.map((slot, order) => {
               return (
                 <DialogTrigger
-                  key={slot.id}
+                  key={slot.meta.id}
                   onClick={() => {
                     // FIX: este handler esta generando un bug al abrir el config modal
                     // de un pokemon diferente al del index que esta seleccionado
-                    handleSetSelectedSlotIndex(slot.order);
+                    handleSetSelectedSlotIndex(slot);
                   }}
                 >
-                  <FilledPokemonCard slot={slot} />
+                  <FilledPokemonCard slot={slot} order={order} />
                 </DialogTrigger>
               );
             })}
             {Array(emptySlots)
-              .fill(new BaseSlot())
+              .fill(null)
               .map((_, i) => {
                 return <EmptyPokemonCard key={i} />;
               })}

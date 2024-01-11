@@ -1,4 +1,9 @@
+import LoadingState from '@components/loading-state';
+import { client } from '@rq-client/index';
 import withTeamStore, { WithTeamStoreProps } from '@state/hoc/with-team-store';
+import { useSlotConfigModalStore } from '@state/slot-config-modal';
+import { LocalSlot } from 'contract';
+import React from 'react';
 import {
   DialogContent,
   DialogDescription,
@@ -11,6 +16,7 @@ import {
   TypeBadge,
   Typography,
 } from 'ui';
+import { getPokemonSpriteUrl } from 'utils';
 import { getCardTitleName } from '../cards/utils/get-card-title';
 import { BASIC_TAB_NAME, BasicTab } from './tabs/basic-tab';
 import { MOVES_TAB_NAME, MovesTab } from './tabs/moves-tab';
@@ -18,20 +24,45 @@ import { MOVES_TAB_NAME, MovesTab } from './tabs/moves-tab';
 interface SlotConfigModalProps extends WithTeamStoreProps {}
 
 function SlotConfigModal({ teamStore }: SlotConfigModalProps): React.ReactNode {
-  const { slots, selectedSlotIndex } = teamStore;
-
-  const slot = slots[selectedSlotIndex];
+  const { selectedSlot } = teamStore;
 
   return (
     <DialogContent className='max-w-5xl flex flex-col justify-start gap-4 min-h-[90%]'>
+      {!selectedSlot ? <LoadingState /> : <ModalContent slot={selectedSlot} />}
+    </DialogContent>
+  );
+}
+
+export default withTeamStore(SlotConfigModal);
+
+interface ModalContentProps {
+  slot: LocalSlot;
+}
+
+function ModalContent(props: ModalContentProps): JSX.Element {
+  const { isError, isLoading, data } = client.pokemon.getOne.useQuery([`get-one-pokemon-${props.slot.nationalPokedexNumber}`], {
+    params: { nationalDexNumber: props.slot.nationalPokedexNumber.toString() },
+  });
+  const addPokemon = useSlotConfigModalStore((state) => state.addPokemon);
+  const addSlot = useSlotConfigModalStore((state) => state.addSlot);
+
+  if (isLoading) return <LoadingState />;
+  if (isError) return <p>error...</p>;
+
+  const pokemon = data.body;
+  addSlot(props.slot);
+  addPokemon(pokemon);
+
+  return (
+    <>
       <div className='flex flex-row gap-4'>
-        <PokemonSprite pokemon={slot.pokemon} />
+        <PokemonSprite url={getPokemonSpriteUrl(props.slot.nationalPokedexNumber)} />
         <DialogHeader className='overflow-auto flex-1'>
           <div className='flex items-center justify-between gap-5'>
-            <Typography.H3 className='truncate'>{getCardTitleName({ ...slot })}</Typography.H3>
+            <Typography.H3 className='truncate'>{getCardTitleName({ ...props.slot }, 0)}</Typography.H3>
             <div className='flex gap-2 mr-5'>
-              <TypeBadge type={slot.pokemon.typeOneName} />
-              {slot.pokemon.typeTwoName !== 'empty' && <TypeBadge type={slot.pokemon.typeTwoName} />}
+              <TypeBadge type={pokemon.typeOneName} />
+              {pokemon.typeTwoName !== 'empty' && <TypeBadge type={pokemon.typeTwoName} />}
             </div>
           </div>
           <DialogDescription>Customize your pokemon here. No need to save.</DialogDescription>
@@ -44,14 +75,12 @@ function SlotConfigModal({ teamStore }: SlotConfigModalProps): React.ReactNode {
           <TabsTrigger value={MOVES_TAB_NAME}>Moves</TabsTrigger>
         </TabsList>
         <TabsContent value={BASIC_TAB_NAME}>
-          <BasicTab slot={slot} />
+          <BasicTab />
         </TabsContent>
         <TabsContent value={MOVES_TAB_NAME}>
-          <MovesTab slot={slot} />
+          <MovesTab slot={props.slot} />
         </TabsContent>
       </Tabs>
-    </DialogContent>
+    </>
   );
 }
-
-export default withTeamStore(SlotConfigModal);

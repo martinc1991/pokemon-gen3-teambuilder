@@ -1,9 +1,9 @@
 import { useTeamStore } from '@state/team';
-import { FilledSlot, MAX_LEVEL, MIN_LEVEL } from 'contract';
+import { LocalSlot, MAX_LEVEL, MIN_LEVEL } from 'contract';
 import { FormField } from 'ui';
 
 interface LevelFieldProps {
-  slot: FilledSlot;
+  slot: LocalSlot;
 }
 
 export default function LevelField({ slot }: LevelFieldProps): JSX.Element {

@@ -2,7 +2,7 @@ import { initContract } from '@ts-rest/core';
 import { z } from 'zod';
 import { CommonResponseSchema, PaginationParamsSchema } from '../common';
 import { TeamSchema } from '../prisma/zod';
-import { FilledSlotSchema, TeamWithFilledSlotsSchema } from '../types';
+import { CompleteTeamSchema, JSONSlotSchema, JSONTeamSchema } from '../types';
 
 const c = initContract();
 
@@ -10,13 +10,13 @@ const c = initContract();
 const GetTeamsQueryParamsSchema = PaginationParamsSchema;
 
 // Responses schemas
-const GetOneTeamResponseSchema = TeamSchema;
-const GetAllTeamsResponseSchema = z.array(TeamSchema);
-const GetSampleTeamsResponseSchema = z.array(TeamWithFilledSlotsSchema);
+const GetOneTeamResponseSchema = CompleteTeamSchema;
+const GetAllTeamsResponseSchema = z.array(JSONTeamSchema);
+const GetSampleTeamsResponseSchema = z.array(JSONTeamSchema);
 
 // Body schemas
-const CreateTeamBodySchema = TeamSchema.omit({ id: true }).merge(z.object({ slots: FilledSlotSchema })); // TODO: Make it better when time comes
-const EditTeamBodySchema = TeamSchema.merge(z.object({ slots: FilledSlotSchema })).optional(); // TODO: Make it better when time comes
+const CreateTeamBodySchema = TeamSchema.omit({ id: true }).merge(z.object({ slots: JSONSlotSchema }));
+const EditTeamBodySchema = TeamSchema.merge(z.object({ slots: JSONSlotSchema })).optional();
 const DeleteTeamBodySchema = TeamSchema.pick({ id: true });
 
 export const teamsContract = c.router({

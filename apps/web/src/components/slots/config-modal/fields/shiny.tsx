@@ -1,9 +1,9 @@
 import { useTeamStore } from '@state/team';
-import { FilledSlot } from 'contract';
+import { LocalSlot } from 'contract';
 import { FormField } from 'ui';
 
 interface ShinyFieldProps {
-  slot: FilledSlot;
+  slot: LocalSlot;
 }
 
 export default function ShinyField({ slot }: ShinyFieldProps): JSX.Element {

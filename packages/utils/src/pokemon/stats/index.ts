@@ -1,4 +1,4 @@
-import { EvFieldName, IBaseStats, Nature, StatName } from 'contract';
+import { EvFieldName, IBaseStats, Nature, StatID, StatName, StatsTable } from 'contract';
 import { getValues } from '../../common/object';
 
 /**
@@ -7,25 +7,31 @@ import { getValues } from '../../common/object';
  * @example getShortStatName('baseHp'); // 'HP'
  *
  */
-export function getShortStatName(statName: keyof IBaseStats | StatName): string {
+export function getShortStatName(statName: keyof IBaseStats | StatName | StatID): string {
   switch (statName) {
     case 'baseHp':
     case StatName.hp:
+    case 'hp':
       return 'HP';
     case 'baseAttack':
     case StatName.attack:
+    case 'atk':
       return 'Atk';
     case 'baseDefense':
     case StatName.defense:
+    case 'def':
       return 'Def';
     case 'baseSpattack':
     case StatName.spattack:
+    case 'spa':
       return 'SpA';
     case 'baseSpdefense':
     case StatName.spdefense:
+    case 'spd':
       return 'SpD';
     case 'baseSpeed':
     case StatName.speed:
+    case 'spe':
       return 'Spe';
     default:
       return '-';
@@ -78,15 +84,6 @@ export function calculateStat({ statName, base, ev, iv, level, nature }: Calcula
  * @param EVs - object representing EVs
  *
  */
-export function getTotalEvs({
-  evAttack,
-  evDefense,
-  evHp,
-  evSpAttack,
-  evSpDefense,
-  evSpeed,
-}: {
-  [K in EvFieldName]: number;
-}): number {
-  return evAttack + evDefense + evHp + evSpAttack + evSpDefense + evSpeed;
+export function getTotalEvs({ hp, atk, def, spa, spd, spe }: StatsTable): number {
+  return atk + def + hp + spa + spd + spe;
 }

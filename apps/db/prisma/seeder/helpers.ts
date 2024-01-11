@@ -1,7 +1,7 @@
 import { prismaSeederClient } from './seederClient';
 
 export async function isDbSeeded() {
-  const [abilitiesCount, itemCount, moveCount, natureCount, pokemonCount, typeCount, teamCount, slotCount] = await Promise.all([
+  const [abilitiesCount, itemCount, moveCount, natureCount, pokemonCount, typeCount, teamCount] = await Promise.all([
     prismaSeederClient.ability.count(),
     prismaSeederClient.item.count(),
     prismaSeederClient.move.count(),
@@ -9,7 +9,6 @@ export async function isDbSeeded() {
     prismaSeederClient.pokemon.count(),
     prismaSeederClient.type.count(),
     prismaSeederClient.team.count(),
-    prismaSeederClient.slot.count(),
   ]);
 
   return (
@@ -19,7 +18,6 @@ export async function isDbSeeded() {
     natureCount === 25 &&
     pokemonCount === 389 &&
     typeCount === 18 &&
-    teamCount === 5 &&
-    slotCount === 21
+    teamCount === 5
   );
 }

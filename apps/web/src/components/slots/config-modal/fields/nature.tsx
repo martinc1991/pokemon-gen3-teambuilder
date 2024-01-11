@@ -1,12 +1,12 @@
 import { useTeamStore } from '@state/team';
-import type { FilledSlot, Nature } from 'contract';
+import type { LocalSlot, Nature } from 'contract';
 import { NATURES } from 'pokemon-info';
 import type { ComboboxItem } from 'ui';
 import { FormField } from 'ui';
 import { getShortStatName } from 'utils';
 
 interface NatureFieldProps {
-  slot: FilledSlot;
+  slot: LocalSlot;
 }
 
 export default function NatureField({ slot }: NatureFieldProps): JSX.Element {

@@ -96,7 +96,13 @@ function ExamplePokemon({ types }: ExamplePokemonProps): JSX.Element {
   });
 
   function handleAdd(pokemon: PokemonWithAbilities): void {
-    if (!addPokemonDisabled) addPokemon(pokemon);
+    if (!addPokemonDisabled)
+      addPokemon({
+        abilityName: pokemon.abilities[0].name,
+        gender: pokemon.genders[0],
+        nationalPokedexNumber: pokemon.nationalPokedexNumber,
+        species: pokemon.name,
+      });
   }
 
   if (isLoading) {

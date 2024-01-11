@@ -13,6 +13,8 @@ import {
   getMoveName,
   moves_data as moves,
 } from 'pokemon-info';
+import { packSlots } from 'utils';
+import { JSONTeam } from '../../../../packages/contract/dist';
 import { isDbSeeded } from './helpers';
 import { prismaSeederClient } from './seederClient';
 
@@ -167,33 +169,18 @@ export async function seeder() {
 
       // Seed teams
       console.log('Upserting sample teams');
-      const teams = [KIKE_TEAM, MY_TEAM, RED_TEAM, WHITNEY_TEAM, YOUNGTER_JOEY_TEAM];
+      const teams: JSONTeam[] = [KIKE_TEAM, MY_TEAM, RED_TEAM, WHITNEY_TEAM, YOUNGTER_JOEY_TEAM];
       const TEAMS__PROMISES = [];
 
-      teams.forEach(({ id, description, name, userName, isSample, isPublic }) => {
+      teams.forEach(({ id, description, name, userName, isSample, isPublic, slots }) => {
         const p = client.team.upsert({
           where: { id },
-          create: { id, description, name, userName, isSample, isPublic },
-          update: { description, name, userName, isSample, isPublic },
+          create: { id, description, name, userName, isSample, isPublic, slots: packSlots(slots) },
+          update: { description, name, userName, isSample, isPublic, slots: packSlots(slots) },
         });
         TEAMS__PROMISES.push(p);
       });
       await Promise.all(TEAMS__PROMISES);
-
-      const SLOTS__PROMISES = [];
-
-      teams.forEach((team) => {
-        team.slots.forEach(({ pokemon, ...slot }, i) => {
-          console.log(pokemon);
-          const p = client.slot.upsert({
-            where: { id: slot.id },
-            create: { ...slot, id: slot.id, teamId: team.id, order: i },
-            update: { ...slot, teamId: team.id, order: i },
-          });
-          SLOTS__PROMISES.push(p);
-        });
-      });
-      await Promise.all(SLOTS__PROMISES);
 
       console.log('Upserting sample teams finished');
     },

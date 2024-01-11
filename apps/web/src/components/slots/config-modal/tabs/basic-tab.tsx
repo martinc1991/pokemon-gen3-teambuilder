@@ -1,3 +1,4 @@
+import { useSlotConfigModalStore } from '@state/slot-config-modal';
 import { Separator, Typography } from 'ui';
 import AbilityField from '../fields/ability';
 import GenderField from '../fields/gender';
@@ -8,15 +9,15 @@ import NameField from '../fields/name';
 import NatureField from '../fields/nature';
 import ShinyField from '../fields/shiny';
 import StatsFields from '../fields/stats';
-import { FilledSlot } from 'contract';
 
 export const BASIC_TAB_NAME = 'basic';
 
-interface TabProps {
-  slot: FilledSlot;
-}
+export function BasicTab(): JSX.Element {
+  const pokemon = useSlotConfigModalStore((state) => state.pokemon);
+  const slot = useSlotConfigModalStore((state) => state.slot);
 
-export function BasicTab({ slot }: TabProps): JSX.Element {
+  if (!pokemon || !slot) return <></>;
+
   return (
     <div className='flex flex-col items-start w-full gap-4'>
       <Typography.H4 className='truncate'>Basic</Typography.H4>
@@ -25,7 +26,7 @@ export function BasicTab({ slot }: TabProps): JSX.Element {
         <ShinyField slot={slot} />
       </div>
       <div className='flex flex-col items-center justify-between w-full gap-4 sm:flex-row'>
-        <GenderField slot={slot} />
+        <GenderField slot={slot} pokemon={pokemon} />
         <LevelField slot={slot} />
         <HappinessField slot={slot} />
       </div>
@@ -36,7 +37,7 @@ export function BasicTab({ slot }: TabProps): JSX.Element {
       <div className='flex flex-col items-start w-full gap-4'>
         <Typography.H4 className='truncate'>Abilitiy, item and nature</Typography.H4>
         <div className='flex flex-col items-start w-full gap-4 sm:flex-row sm:items-center'>
-          <AbilityField slot={slot} />
+          <AbilityField slot={slot} pokemon={pokemon} />
           <ItemField slot={slot} />
         </div>
         <div className='flex items-center w-full gap-4'>
@@ -49,7 +50,7 @@ export function BasicTab({ slot }: TabProps): JSX.Element {
       <div className='flex flex-col items-start w-full gap-4'>
         <Typography.H4>Stats (EVs, IVs)</Typography.H4>
 
-        <StatsFields slot={slot} />
+        <StatsFields slot={slot} pokemon={pokemon} />
       </div>
     </div>
   );

@@ -9,6 +9,7 @@ export const TeamSchema = z.object({
   name: z.string(),
   description: z.string(),
   userName: z.string(),
+  slots: z.string(),
   isSample: z.boolean(),
   isPublic: z.boolean(),
 });

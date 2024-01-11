@@ -1,24 +1,22 @@
 import { useTeamStore } from '@state/team';
 import type { Ability } from 'contract';
-import { FilledSlot } from 'contract';
 import type { ComboboxItem } from 'ui';
 import { FormField } from 'ui';
+import { GenericFieldProps } from './types';
 
-interface AbilityFieldProps {
-  slot: FilledSlot;
-}
+interface AbilityFieldProps extends GenericFieldProps {}
 
-export default function AbilityField({ slot }: AbilityFieldProps): JSX.Element {
+export default function AbilityField(props: AbilityFieldProps): JSX.Element {
   const setSlotFieldValue = useTeamStore((state) => state.setSlotFieldValue);
 
-  const abilitiesData = slot.pokemon.abilities.map((ability) => ({
+  const abilitiesData = props.pokemon.abilities.map((ability) => ({
     id: ability.name,
     label: ability.name.replace('-', ' '),
     payload: ability,
   }));
 
   function handleAbilityChange(item: ComboboxItem<Ability>): void {
-    setSlotFieldValue(slot, 'abilityName', item.payload.name);
+    setSlotFieldValue(props.slot, 'abilityName', item.payload.name);
   }
 
   return (
@@ -30,7 +28,7 @@ export default function AbilityField({ slot }: AbilityFieldProps): JSX.Element {
       name='ability'
       onChange={handleAbilityChange}
       value={abilitiesData.find((ability) => {
-        return ability.payload.name === slot.abilityName;
+        return ability.payload.name === props.slot.abilityName;
       })}
     />
   );

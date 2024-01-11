@@ -1,9 +1,9 @@
 import { useTeamStore } from '@state/team';
-import { FilledSlot, MAX_HAPPINESS, MIN_HAPPINESS } from 'contract';
+import { LocalSlot, MAX_HAPPINESS, MIN_HAPPINESS } from 'contract';
 import { FormField } from 'ui';
 
 interface HappinessFieldProps {
-  slot: FilledSlot;
+  slot: LocalSlot;
 }
 
 export default function HappinessField({ slot }: HappinessFieldProps): JSX.Element {

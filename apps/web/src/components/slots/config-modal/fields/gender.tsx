@@ -1,17 +1,16 @@
 import { useTeamStore } from '@state/team';
-import type { FilledSlot, Gender } from 'contract';
+import type { Gender } from 'contract';
 import type { ComboboxItem } from 'ui';
 import { FormField } from 'ui';
 import { capitalize } from 'utils';
+import { GenericFieldProps } from './types';
 
-interface GenderFieldProps {
-  slot: FilledSlot;
-}
+interface GenderFieldProps extends GenericFieldProps {}
 
-export default function GenderField({ slot }: GenderFieldProps): JSX.Element {
+export default function GenderField({ slot, pokemon }: GenderFieldProps): JSX.Element {
   const setSlotFieldValue = useTeamStore((state) => state.setSlotFieldValue);
 
-  const gendersData = slot.pokemon.genders.map((gender) => ({
+  const gendersData = pokemon.genders.map((gender) => ({
     id: gender.toString(),
     label: capitalize(gender.toString()),
     payload: gender,

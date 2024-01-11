@@ -91,12 +91,12 @@ describe('calculateStat', () => {
 describe('getTotalEvs', () => {
   test('should return the correct total base stat value', () => {
     const evs = {
-      evAttack: 50,
-      evDefense: 75,
-      evHp: 35,
-      evSpAttack: 70,
-      evSpDefense: 30,
-      evSpeed: 40,
+      atk: 50,
+      def: 75,
+      hp: 35,
+      spa: 70,
+      spd: 30,
+      spe: 40,
     };
     const expectedResult = 300;
     expect(getTotalEvs(evs)).toBe(expectedResult);

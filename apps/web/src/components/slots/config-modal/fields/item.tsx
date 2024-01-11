@@ -1,11 +1,11 @@
 import { client } from '@rq-client/index';
 import { useTeamStore } from '@state/team';
-import type { FilledSlot, Item } from 'contract';
+import type { LocalSlot, Item } from 'contract';
 import type { ComboboxItem } from 'ui';
 import { FormField } from 'ui';
 
 interface ItemFieldProps {
-  slot: FilledSlot;
+  slot: LocalSlot;
 }
 
 export default function ItemField({ slot }: ItemFieldProps): JSX.Element {

@@ -1,7 +1,7 @@
-import type { FilledSlot, StatName } from 'contract';
+import type { JSONSlot, StatID } from 'contract';
 import { calculateHiddenPowerType, capitalize, formatString, getShortStatName } from 'utils';
 
-export function parseTeam(team: FilledSlot[]): string {
+export function parseTeam(team: JSONSlot[]): string {
   let output = '';
   for (const set of team) {
     output += `${parseSlot(set)}\n`;
@@ -9,14 +9,14 @@ export function parseTeam(team: FilledSlot[]): string {
   return output;
 }
 
-function parseSlot(slot: FilledSlot): string {
+function parseSlot(slot: JSONSlot): string {
   let out = ``;
 
   // Name
-  if (slot.name) {
-    out += `${slot.name} (${formatString(slot.pokemon.name)})`;
+  if (slot.nickname) {
+    out += `${slot.nickname} (${formatString(slot.species)})`;
   } else {
-    out += formatString(slot.pokemon.name);
+    out += formatString(slot.species);
   }
 
   // Gender
@@ -54,19 +54,9 @@ function parseSlot(slot: FilledSlot): string {
   // }
 
   // evs
-  if (slot.evHp || slot.evAttack || slot.evDefense || slot.evSpAttack || slot.evSpDefense || slot.evSpeed) {
-    const evs: Record<StatName, number> = {
-      hp: slot.evHp,
-      attack: slot.evAttack,
-      defense: slot.evDefense,
-      spattack: slot.evSpAttack,
-      spdefense: slot.evSpDefense,
-      speed: slot.evSpeed,
-    };
-
-    const stats = ['hp', 'attack', 'defense', 'spattack', 'spdefense', 'speed']
-      .map((stat) => (evs[stat] ? `${evs[stat]} ${getShortStatName(stat as StatName)}` : ``))
-      .filter(Boolean);
+  const statKeys: StatID[] = ['hp', 'atk', 'def', 'spa', 'spd', 'spe'];
+  if (slot.evs.hp || slot.evs.atk || slot.evs.def || slot.evs.spa || slot.evs.spd || slot.evs.spe) {
+    const stats = statKeys.map((stat) => (slot.evs[stat] ? `${slot.evs[stat]} ${getShortStatName(stat)}` : ``)).filter(Boolean);
 
     if (stats.length) {
       out += `EVs: ${stats.join(' / ')}  \n`;
@@ -78,18 +68,9 @@ function parseSlot(slot: FilledSlot): string {
   // }
 
   // ivs
-  if (slot.ivHp || slot.ivAttack || slot.ivDefense || slot.ivSpAttack || slot.ivSpDefense || slot.ivSpeed) {
-    const ivs: Record<StatName, number> = {
-      hp: slot.ivHp,
-      attack: slot.ivAttack,
-      defense: slot.ivDefense,
-      spattack: slot.ivSpAttack,
-      spdefense: slot.ivSpDefense,
-      speed: slot.ivSpeed,
-    };
-
-    const stats = ['hp', 'attack', 'defense', 'spattack', 'spdefense', 'speed']
-      .map((stat) => (ivs[stat] !== 31 && ivs[stat] !== undefined ? `${ivs[stat] || 0} ${getShortStatName(stat as StatName)}` : ``))
+  if (slot.ivs.hp || slot.ivs.atk || slot.ivs.def || slot.ivs.spa || slot.ivs.spd || slot.ivs.spe) {
+    const stats = statKeys
+      .map((stat) => (slot.ivs[stat] !== 31 && slot.ivs[stat] !== undefined ? `${slot.ivs[stat] || 0} ${getShortStatName(stat)}` : ``))
       .filter(Boolean);
 
     if (stats.length) {
@@ -98,12 +79,10 @@ function parseSlot(slot: FilledSlot): string {
   }
 
   // moves
-  const moves = [slot.moveOneName, slot.moveTwoName, slot.moveThreeName, slot.moveFourName];
-
-  for (let move of moves) {
+  for (let move of slot.moves) {
     if (move) {
       if (move.toLowerCase().includes(`hidden`) && move.toLowerCase().includes(`power`) && move.charAt(13) !== '[') {
-        move = `Hidden Power [${formatString(calculateHiddenPowerType(slot))}]`;
+        move = `Hidden Power [${formatString(calculateHiddenPowerType(slot.ivs))}]`;
       }
       out += `- ${formatString(move)}  \n`;
     }

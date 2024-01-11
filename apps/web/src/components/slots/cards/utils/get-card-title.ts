@@ -1,9 +1,14 @@
-import { FilledSlot } from 'contract';
+import { LocalSlot } from 'contract';
 import { formatPokemonName } from 'utils';
 
-export function getCardTitleName({ pokemon, name, order }: Pick<FilledSlot, 'pokemon' | 'name' | 'order'>): string {
-  if (name && name.trim().length > 0) {
-    return `${order + 1}. ${name} (${formatPokemonName(pokemon.name)})`;
+/**
+ * @param order - zero based
+ */
+export function getCardTitleName({ species, nickname }: Pick<LocalSlot, 'species' | 'nickname'>, order: number): string {
+  const num = order + 1;
+
+  if (nickname && nickname.trim().length > 0) {
+    return `${num + '. '}${nickname} (${formatPokemonName(species)})`;
   }
-  return `${order + 1}. ${formatPokemonName(pokemon.name)}`;
+  return `${num + '. '}${formatPokemonName(species)}`;
 }

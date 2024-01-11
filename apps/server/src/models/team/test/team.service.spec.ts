@@ -20,6 +20,7 @@ const mockedTeam: Team = {
   userName: teamUserNameStub,
   isPublic: true,
   isSample: true,
+  slots: '[]',
 };
 
 const mockedPrismaService = {
@@ -141,21 +142,6 @@ describe('Team controller', () => {
 
       expect(prismaService.team.create).toBeCalledWith(expectedCreateParams);
     });
-
-    it('if slots are provided, should call prisma slot service createMany method passing slots dto', async () => {
-      const dto = createTeamDtoStub(2);
-      const expectedCreateManyParams = {
-        data: dto.slots.map((slot, i) => ({
-          ...slot,
-          teamId: teamIdStub,
-          order: i,
-        })),
-      };
-
-      await service.create(dto);
-
-      expect(prismaService.slot.createMany).toBeCalledWith(expectedCreateManyParams);
-    });
   });
 
   describe('delete method', () => {
@@ -171,46 +157,6 @@ describe('Team controller', () => {
   });
 
   describe('edit method', () => {
-    it('if slots are provided, should delete existing slots and create new ones', async () => {
-      const dto = editTeamDtoStub(2);
-      const expectedDeleteManyParams = {
-        where: { teamId: dto.id },
-      };
-      const expectedCreateManyParams = {
-        data: dto.slots.map((slot, i) => ({
-          ...slot,
-          teamId: dto.id,
-          order: i,
-        })),
-      };
-
-      await service.edit(dto);
-
-      expect(prismaService.slot.deleteMany).toBeCalledWith(expectedDeleteManyParams);
-      expect(prismaService.slot.createMany).toBeCalledWith(expectedCreateManyParams);
-    });
-
-    it("if slots is an empty array, should delete existing slots but shouldn't create new ones", async () => {
-      const dto = editTeamDtoStub(0);
-      const expectedDeleteManyParams = {
-        where: { teamId: dto.id },
-      };
-
-      await service.edit(dto);
-
-      expect(prismaService.slot.deleteMany).toBeCalledWith(expectedDeleteManyParams);
-      expect(prismaService.slot.createMany).not.toBeCalled();
-    });
-
-    it("if slots are not provided, shouldn't delete existing slots or create new ones", async () => {
-      const dto = editTeamDtoStub(0, true);
-
-      await service.edit(dto);
-
-      expect(prismaService.slot.deleteMany).not.toBeCalled();
-      expect(prismaService.slot.createMany).not.toBeCalled();
-    });
-
     it('should call prisma team service update method passing edit team dto', async () => {
       const dto = editTeamDtoStub(2);
       const expectedUpdateParams = {
