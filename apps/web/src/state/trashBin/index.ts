@@ -1,6 +1,8 @@
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
-import type { TrashBinTeam } from '../team/helpers';
+import { TeamState } from '@state/team';
+
+export type TrashBinTeam = Omit<TeamState, 'selectedSlotIndex'>;
 
 interface TrashBinState {
   team: TrashBinTeam | null;

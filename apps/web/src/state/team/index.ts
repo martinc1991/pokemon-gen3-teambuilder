@@ -1,19 +1,21 @@
 import { TEAM_STORAGE_NAME } from '@state/team/constants';
-import { JSONTeam, LocalSlot, MAX_TEAM_MEMBERS } from 'contract';
+import { JSONTeam, LocalSlot, LocalTeam, MAX_TEAM_MEMBERS } from 'contract';
 import { CreateSlotParams } from 'utils';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
-import type { TeamState } from './helpers';
 import { createCurrentTeamSlot, genLocalTeamId } from './helpers';
 
-// TODO: mover esto a helpers
+export interface TeamState extends LocalTeam {
+  selectedSlotIndex: number;
+}
+
 interface TeamActions {
   addSlot: (slot: CreateSlotParams) => void;
   removeSlot: (slotId: string) => void;
   clearTeam: () => void;
-  setSelectedSlot: (slot: LocalSlot) => void; // TODO: make this select the index, not the slot
-  setSlotFieldValue: <T extends keyof LocalSlot>(slot: LocalSlot, fieldName: T, fieldValue: LocalSlot[T]) => void;
+  setSelectedSlotIndex: (index: number) => void;
+  setSlotFieldValue: <T extends keyof LocalSlot>(slotId: string, fieldName: T, fieldValue: LocalSlot[T]) => void;
   recoverFromTrash: (team: JSONTeam) => void;
 }
 
@@ -24,7 +26,7 @@ const store = immer<TeamStore>((set) => ({
   name: '',
   description: '',
   slots: [],
-  selectedSlot: null,
+  selectedSlotIndex: 0,
   userName: '',
   isSample: false,
   isPublic: false,
@@ -43,7 +45,7 @@ const store = immer<TeamStore>((set) => ({
     set((state) => {
       const newSlots: LocalSlot[] = state.slots.filter((s) => s.meta.id !== slotId);
 
-      state.selectedSlot = null;
+      state.selectedSlotIndex = 0;
       state.slots = newSlots;
     });
   },
@@ -51,17 +53,18 @@ const store = immer<TeamStore>((set) => ({
     set((state) => {
       state.slots = [];
       state.name = '';
-      state.selectedSlot = null;
+      state.selectedSlotIndex = 0;
     });
   },
-  setSelectedSlot: (slot) => {
+  setSelectedSlotIndex: (slot) => {
     set((state) => {
-      state.selectedSlot = slot;
+      state.selectedSlotIndex = slot;
     });
   },
-  setSlotFieldValue: (slot, field, value) => {
+  setSlotFieldValue: (slotId, field, value) => {
     set((state) => {
-      const index = state.slots.findIndex((s) => s.meta.id === slot.meta.id);
+      const index = state.slots.findIndex((s) => s.meta.id === slotId);
+
       state.slots[index][field] = value;
     });
   },
@@ -76,7 +79,7 @@ const store = immer<TeamStore>((set) => ({
       state.isPublic = team.isPublic;
       state.description = team.description;
       state.userName = team.userName;
-      state.selectedSlot = null;
+      state.selectedSlotIndex = 0;
     });
   },
 }));

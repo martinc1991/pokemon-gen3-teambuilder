@@ -1,12 +1,13 @@
 import { useTeamStore } from '@state/team';
-import { LocalSlot, MAX_LEVEL, MIN_LEVEL } from 'contract';
+import { MAX_LEVEL, MIN_LEVEL } from 'contract';
 import { FormField } from 'ui';
+import { GenericFieldProps } from './types';
 
-interface LevelFieldProps {
-  slot: LocalSlot;
+interface LevelFieldProps extends Pick<GenericFieldProps, 'slotId'> {
+  level: number;
 }
 
-export default function LevelField({ slot }: LevelFieldProps): JSX.Element {
+export default function LevelField({ level, slotId }: LevelFieldProps): JSX.Element {
   const setSlotFieldValue = useTeamStore((state) => state.setSlotFieldValue);
 
   return (
@@ -16,9 +17,9 @@ export default function LevelField({ slot }: LevelFieldProps): JSX.Element {
       min={MIN_LEVEL}
       name='level'
       onChange={(value: number) => {
-        setSlotFieldValue(slot, 'level', value);
+        setSlotFieldValue(slotId, 'level', value);
       }}
-      value={slot.level}
+      value={level}
     />
   );
 }

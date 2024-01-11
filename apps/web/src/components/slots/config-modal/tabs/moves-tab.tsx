@@ -71,17 +71,17 @@ export function MovesTab({ slot }: TabProps): JSX.Element {
     if (learnsetMovesNames.includes(e.target.value.toLowerCase())) {
       // CASE: the move belongs to this pokemon learnset
       const newMoves = replaceElementInArray(slot.moves, e.target.value.toLowerCase(), selectedMoveIndex);
-      setSlotFieldValue(slot, 'moves', newMoves);
+      setSlotFieldValue(slot.meta.id, 'moves', newMoves);
     } else {
       const newMoves = replaceElementInArray(slot.moves, '', selectedMoveIndex);
-      setSlotFieldValue(slot, 'moves', newMoves);
+      setSlotFieldValue(slot.meta.id, 'moves', newMoves);
     }
   }
 
   function handleAddMove(moveFieldName: MoveSlotIndex, moveName: string): void {
     const newMoves = replaceElementInArray(slot.moves, moveName, moveFieldName);
 
-    setSlotFieldValue(slot, 'moves', newMoves);
+    setSlotFieldValue(slot.meta.id, 'moves', newMoves);
     if (selectedMoveIndex === 0) {
       setMoveOneName(moveName);
       document.getElementById(MovesNameFields.TWO)?.focus();

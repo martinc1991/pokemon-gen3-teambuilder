@@ -5,22 +5,22 @@ import PageHeader from '@components/page-header';
 import { EmptyPokemonCard, FilledPokemonCard } from '@components/slots/cards';
 import SlotConfigModal from '@components/slots/config-modal';
 import { queryClient } from '@rq-client/index';
-import withTeamStore, { WithTeamStoreProps } from '@state/hoc/with-team-store';
+import withTeamStore, { WithTeamStoreProps } from '@state/team/with-team-store';
 import { QueryClientProvider } from '@tanstack/react-query';
-import { LocalSlot, MAX_TEAM_MEMBERS } from 'contract';
+import { MAX_TEAM_MEMBERS } from 'contract';
 import Link from 'next/link';
 import { Button, Dialog, DialogTrigger, Typography } from 'ui';
 
 interface BuilderProps extends WithTeamStoreProps {}
 
 function Builder({ teamStore }: BuilderProps): JSX.Element {
-  const { slots, setSelectedSlot } = teamStore;
+  const { slots, setSelectedSlotIndex } = teamStore;
 
   const areThereSlots = slots.length > 0;
   const emptySlots = MAX_TEAM_MEMBERS - slots.length;
 
-  function handleSetSelectedSlotIndex(slot: LocalSlot): void {
-    setSelectedSlot(slot);
+  function handleSetSelectedSlotIndex(index: number): void {
+    setSelectedSlotIndex(index);
   }
 
   return (
@@ -39,7 +39,7 @@ function Builder({ teamStore }: BuilderProps): JSX.Element {
                   onClick={() => {
                     // FIX: este handler esta generando un bug al abrir el config modal
                     // de un pokemon diferente al del index que esta seleccionado
-                    handleSetSelectedSlotIndex(slot);
+                    handleSetSelectedSlotIndex(order);
                   }}
                 >
                   <FilledPokemonCard slot={slot} order={order} />

@@ -1,4 +1,4 @@
-import { useSlotConfigModalStore } from '@state/slot-config-modal';
+import { LocalSlot, PokemonWithAbilitiesAndLearnset } from 'contract';
 import { Separator, Typography } from 'ui';
 import AbilityField from '../fields/ability';
 import GenderField from '../fields/gender';
@@ -12,23 +12,23 @@ import StatsFields from '../fields/stats';
 
 export const BASIC_TAB_NAME = 'basic';
 
-export function BasicTab(): JSX.Element {
-  const pokemon = useSlotConfigModalStore((state) => state.pokemon);
-  const slot = useSlotConfigModalStore((state) => state.slot);
+interface BasicTabProps {
+  slot: LocalSlot;
+  pokemon: PokemonWithAbilitiesAndLearnset;
+}
 
-  if (!pokemon || !slot) return <></>;
-
+export function BasicTab(props: BasicTabProps): JSX.Element {
   return (
     <div className='flex flex-col items-start w-full gap-4'>
       <Typography.H4 className='truncate'>Basic</Typography.H4>
       <div className='flex items-center w-full gap-4'>
-        <NameField slot={slot} />
-        <ShinyField slot={slot} />
+        <NameField slotId={props.slot.meta.id} nickname={props.slot.nickname} />
+        <ShinyField slotId={props.slot.meta.id} shiny={props.slot.shiny} />
       </div>
       <div className='flex flex-col items-center justify-between w-full gap-4 sm:flex-row'>
-        <GenderField slot={slot} pokemon={pokemon} />
-        <LevelField slot={slot} />
-        <HappinessField slot={slot} />
+        <GenderField slotId={props.slot.meta.id} pokemon={props.pokemon} gender={props.slot.gender} />
+        <LevelField slotId={props.slot.meta.id} level={props.slot.level} />
+        <HappinessField slotId={props.slot.meta.id} happiness={props.slot.happiness} />
       </div>
       <div className='flex items-center w-full gap-4' />
 
@@ -37,11 +37,11 @@ export function BasicTab(): JSX.Element {
       <div className='flex flex-col items-start w-full gap-4'>
         <Typography.H4 className='truncate'>Abilitiy, item and nature</Typography.H4>
         <div className='flex flex-col items-start w-full gap-4 sm:flex-row sm:items-center'>
-          <AbilityField slot={slot} pokemon={pokemon} />
-          <ItemField slot={slot} />
+          <AbilityField slotId={props.slot.meta.id} pokemon={props.pokemon} abilityName={props.slot.abilityName} />
+          <ItemField slotId={props.slot.meta.id} itemName={props.slot.itemName} pokemon={props.pokemon} />
         </div>
         <div className='flex items-center w-full gap-4'>
-          <NatureField slot={slot} />
+          <NatureField slotId={props.slot.meta.id} natureName={props.slot.natureName} />
         </div>
       </div>
 
@@ -50,7 +50,14 @@ export function BasicTab(): JSX.Element {
       <div className='flex flex-col items-start w-full gap-4'>
         <Typography.H4>Stats (EVs, IVs)</Typography.H4>
 
-        <StatsFields slot={slot} pokemon={pokemon} />
+        <StatsFields
+          slotId={props.slot.meta.id}
+          pokemon={props.pokemon}
+          evs={props.slot.evs}
+          ivs={props.slot.ivs}
+          level={props.slot.level}
+          natureName={props.slot.natureName}
+        />
       </div>
     </div>
   );

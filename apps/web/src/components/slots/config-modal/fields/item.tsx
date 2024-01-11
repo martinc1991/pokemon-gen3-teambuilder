@@ -1,32 +1,38 @@
 import { client } from '@rq-client/index';
 import { useTeamStore } from '@state/team';
-import type { LocalSlot, Item } from 'contract';
+import type { Item } from 'contract';
+import { useMemo } from 'react';
 import type { ComboboxItem } from 'ui';
 import { FormField } from 'ui';
+import { GenericFieldProps } from './types';
 
-interface ItemFieldProps {
-  slot: LocalSlot;
+interface ItemFieldProps extends GenericFieldProps {
+  itemName: string | null;
 }
 
-export default function ItemField({ slot }: ItemFieldProps): JSX.Element {
+export default function ItemField({ itemName, slotId }: ItemFieldProps): JSX.Element {
   const { data, isFetching, error, isLoading } = client.items.getAll.useQuery(['all-items']);
   const [setSlotFieldValue] = useTeamStore((state) => [state.setSlotFieldValue]);
+
+  const itemsData: ComboboxItem<Item>[] = useMemo(() => {
+    if (!data?.body) return [];
+
+    return data?.body.map((item) => ({
+      id: item.name,
+      label: item.name.replace('-', ' '),
+      payload: item,
+    }));
+  }, [data?.body]);
 
   if (error) return <div>error</div>;
   if (isLoading) return <div>loading</div>;
 
-  const itemsData: ComboboxItem<Item>[] = data.body.map((item) => ({
-    id: item.name,
-    label: item.name.replace('-', ' '),
-    payload: item,
-  }));
-
   function handleItemChange(item: ComboboxItem<Item>): void {
-    setSlotFieldValue(slot, 'itemName', item.payload.name);
+    setSlotFieldValue(slotId, 'itemName', item.payload.name);
   }
 
   function handleRemoveitem(): void {
-    setSlotFieldValue(slot, 'itemName', null);
+    setSlotFieldValue(slotId, 'itemName', null);
   }
 
   return (
@@ -43,7 +49,7 @@ export default function ItemField({ slot }: ItemFieldProps): JSX.Element {
       onClear={handleRemoveitem}
       searchBox
       value={itemsData.find((ability) => {
-        return ability.payload.name === slot.itemName;
+        return ability.payload.name === itemName;
       })}
     />
   );

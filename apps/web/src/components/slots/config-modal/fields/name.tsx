@@ -1,12 +1,13 @@
 import { useTeamStore } from '@state/team';
-import { LocalSlot, MAX_POKEMON_NAME_LENGTH } from 'contract';
+import { MAX_POKEMON_NAME_LENGTH } from 'contract';
 import { FormField } from 'ui';
+import { GenericFieldProps } from './types';
 
-interface NameFieldProps {
-  slot: LocalSlot;
+interface NameFieldProps extends Pick<GenericFieldProps, 'slotId'> {
+  nickname: string;
 }
 
-export default function NameField({ slot }: NameFieldProps): JSX.Element {
+export default function NameField({ slotId, nickname }: NameFieldProps): JSX.Element {
   const setSlotFieldValue = useTeamStore((state) => state.setSlotFieldValue);
 
   return (
@@ -15,11 +16,11 @@ export default function NameField({ slot }: NameFieldProps): JSX.Element {
       name='name'
       onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.value.length <= MAX_POKEMON_NAME_LENGTH) {
-          setSlotFieldValue(slot, 'nickname', e.target.value);
+          setSlotFieldValue(slotId, 'nickname', e.target.value);
         }
       }}
       placeholder='Change the name here'
-      value={slot.nickname || ''}
+      value={nickname || ''}
     />
   );
 }

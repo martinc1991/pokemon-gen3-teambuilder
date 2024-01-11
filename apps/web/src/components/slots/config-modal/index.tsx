@@ -1,7 +1,6 @@
 import LoadingState from '@components/loading-state';
 import { client } from '@rq-client/index';
-import withTeamStore, { WithTeamStoreProps } from '@state/hoc/with-team-store';
-import { useSlotConfigModalStore } from '@state/slot-config-modal';
+import withTeamStore, { WithTeamStoreProps } from '@state/team/with-team-store';
 import { LocalSlot } from 'contract';
 import React from 'react';
 import {
@@ -24,10 +23,12 @@ import { MOVES_TAB_NAME, MovesTab } from './tabs/moves-tab';
 interface SlotConfigModalProps extends WithTeamStoreProps {}
 
 function SlotConfigModal({ teamStore }: SlotConfigModalProps): React.ReactNode {
-  const { selectedSlot } = teamStore;
+  const { selectedSlotIndex, slots } = teamStore;
+
+  const selectedSlot = slots[selectedSlotIndex];
 
   return (
-    <DialogContent className='max-w-5xl flex flex-col justify-start gap-4 min-h-[90%]'>
+    <DialogContent className='max-w-5xl flex flex-col justify-start gap-4 h-[90%]'>
       {!selectedSlot ? <LoadingState /> : <ModalContent slot={selectedSlot} />}
     </DialogContent>
   );
@@ -43,15 +44,11 @@ function ModalContent(props: ModalContentProps): JSX.Element {
   const { isError, isLoading, data } = client.pokemon.getOne.useQuery([`get-one-pokemon-${props.slot.nationalPokedexNumber}`], {
     params: { nationalDexNumber: props.slot.nationalPokedexNumber.toString() },
   });
-  const addPokemon = useSlotConfigModalStore((state) => state.addPokemon);
-  const addSlot = useSlotConfigModalStore((state) => state.addSlot);
 
   if (isLoading) return <LoadingState />;
   if (isError) return <p>error...</p>;
 
   const pokemon = data.body;
-  addSlot(props.slot);
-  addPokemon(pokemon);
 
   return (
     <>
@@ -75,7 +72,7 @@ function ModalContent(props: ModalContentProps): JSX.Element {
           <TabsTrigger value={MOVES_TAB_NAME}>Moves</TabsTrigger>
         </TabsList>
         <TabsContent value={BASIC_TAB_NAME}>
-          <BasicTab />
+          <BasicTab pokemon={pokemon} slot={props.slot} />
         </TabsContent>
         <TabsContent value={MOVES_TAB_NAME}>
           <MovesTab slot={props.slot} />

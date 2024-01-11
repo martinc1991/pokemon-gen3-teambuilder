@@ -1,23 +1,29 @@
 import { useTeamStore } from '@state/team';
-import type { LocalSlot, Nature } from 'contract';
+import type { Nature, NatureNames } from 'contract';
 import { NATURES } from 'pokemon-info';
+import { useMemo } from 'react';
 import type { ComboboxItem } from 'ui';
 import { FormField } from 'ui';
 import { getShortStatName } from 'utils';
+import { GenericFieldProps } from './types';
 
-interface NatureFieldProps {
-  slot: LocalSlot;
+interface NatureFieldProps extends Pick<GenericFieldProps, 'slotId'> {
+  natureName: NatureNames;
 }
 
-export default function NatureField({ slot }: NatureFieldProps): JSX.Element {
+export default function NatureField({ natureName, slotId }: NatureFieldProps): JSX.Element {
   const setSlotFieldValue = useTeamStore((state) => state.setSlotFieldValue);
 
-  const naturesData: ComboboxItem<Nature>[] = NATURES.map((nature) => {
-    return { id: nature.name, label: getNatureSelectLabel(nature), payload: nature };
-  });
+  const naturesData: ComboboxItem<Nature>[] = useMemo(
+    () =>
+      NATURES.map((nature) => {
+        return { id: nature.name, label: getNatureSelectLabel(nature), payload: nature };
+      }),
+    [NATURES],
+  );
 
   function handleItemChange(item: ComboboxItem<Nature>): void {
-    setSlotFieldValue(slot, 'natureName', item.payload.name);
+    setSlotFieldValue(slotId, 'natureName', item.payload.name);
   }
 
   return (
@@ -29,7 +35,7 @@ export default function NatureField({ slot }: NatureFieldProps): JSX.Element {
       onChange={handleItemChange}
       searchBox
       value={naturesData.find((nature) => {
-        return nature.payload.name === slot.natureName;
+        return nature.payload.name === natureName;
       })}
     />
   );

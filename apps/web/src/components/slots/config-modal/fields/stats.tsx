@@ -1,5 +1,5 @@
 import { useTeamStore } from '@state/team';
-import type { Nature, StatName, StatsTable } from 'contract';
+import type { Nature, NatureNames, StatName, StatsTable } from 'contract';
 import { MAX_INDIVIDUAL_EV, MAX_INDIVIDUAL_IV, MAX_POSSIBLE_EVS } from 'contract';
 import { NATURES } from 'pokemon-info';
 import type { ChangeEvent } from 'react';
@@ -8,112 +8,117 @@ import { Input, Progress, Slider, Typography } from 'ui';
 import { calculateStat, getShortStatName, getTotalEvs } from 'utils';
 import { GenericFieldProps } from './types';
 
-interface StatsFieldsProps extends GenericFieldProps {}
+interface StatsFieldsProps extends GenericFieldProps {
+  evs: StatsTable;
+  ivs: StatsTable;
+  natureName: NatureNames;
+  level: number;
+}
 
-export default function StatsFields({ slot, pokemon }: StatsFieldsProps): JSX.Element {
+export default function StatsFields({ slotId, pokemon, evs, ivs, natureName, level }: StatsFieldsProps): JSX.Element {
   const [setSlotFieldValue] = useTeamStore((state) => [state.setSlotFieldValue]);
 
-  const totalEvs = getTotalEvs(slot.evs);
+  const totalEvs = getTotalEvs(evs);
 
   function handleEvChange(newEvs: StatsTable): void {
-    setSlotFieldValue(slot, 'evs', newEvs);
+    setSlotFieldValue(slotId, 'evs', newEvs);
   }
 
   function handleIvChange(newIvs: StatsTable): void {
-    setSlotFieldValue(slot, 'ivs', newIvs);
+    setSlotFieldValue(slotId, 'ivs', newIvs);
   }
 
-  const nature = NATURES.find((nat) => nat.name === slot.natureName) || { increased: null, decreased: null }; // DEFAULT: docile nature
+  const nature = NATURES.find((nat) => nat.name === natureName) || { increased: null, decreased: null }; // DEFAULT: docile nature
 
   return (
     <div className='flex flex-col w-full gap-1'>
       <StatsHeader />
       <StatField
         base={pokemon.baseHp}
-        ev={slot.evs.hp}
-        iv={slot.ivs.hp}
-        level={slot.level}
+        ev={evs.hp}
+        iv={ivs.hp}
+        level={level}
         nature={nature}
         onChangeEv={(value) => {
-          handleEvChange({ ...slot.evs, hp: value });
+          handleEvChange({ ...evs, hp: value });
         }}
         onChangeIv={(value) => {
-          handleIvChange({ ...slot.ivs, hp: value });
+          handleIvChange({ ...ivs, hp: value });
         }}
         statName='hp'
         totalEvs={totalEvs}
       />
       <StatField
         base={pokemon.baseAttack}
-        ev={slot.evs.atk}
-        iv={slot.ivs.atk}
-        level={slot.level}
+        ev={evs.atk}
+        iv={ivs.atk}
+        level={level}
         nature={nature}
         onChangeEv={(value) => {
-          handleEvChange({ ...slot.evs, atk: value });
+          handleEvChange({ ...evs, atk: value });
         }}
         onChangeIv={(value) => {
-          handleIvChange({ ...slot.ivs, atk: value });
+          handleIvChange({ ...ivs, atk: value });
         }}
         statName='attack'
         totalEvs={totalEvs}
       />
       <StatField
         base={pokemon.baseDefense}
-        ev={slot.evs.def}
-        iv={slot.ivs.def}
-        level={slot.level}
+        ev={evs.def}
+        iv={ivs.def}
+        level={level}
         nature={nature}
         onChangeEv={(value) => {
-          handleEvChange({ ...slot.evs, def: value });
+          handleEvChange({ ...evs, def: value });
         }}
         onChangeIv={(value) => {
-          handleIvChange({ ...slot.ivs, def: value });
+          handleIvChange({ ...ivs, def: value });
         }}
         statName='defense'
         totalEvs={totalEvs}
       />
       <StatField
         base={pokemon.baseSpattack}
-        ev={slot.evs.spa}
-        iv={slot.ivs.spa}
-        level={slot.level}
+        ev={evs.spa}
+        iv={ivs.spa}
+        level={level}
         nature={nature}
         onChangeEv={(value) => {
-          handleEvChange({ ...slot.evs, spa: value });
+          handleEvChange({ ...evs, spa: value });
         }}
         onChangeIv={(value) => {
-          handleIvChange({ ...slot.ivs, spa: value });
+          handleIvChange({ ...ivs, spa: value });
         }}
         statName='spattack'
         totalEvs={totalEvs}
       />
       <StatField
         base={pokemon.baseSpdefense}
-        ev={slot.evs.spd}
-        iv={slot.ivs.spd}
-        level={slot.level}
+        ev={evs.spd}
+        iv={ivs.spd}
+        level={level}
         nature={nature}
         onChangeEv={(value) => {
-          handleEvChange({ ...slot.evs, spd: value });
+          handleEvChange({ ...evs, spd: value });
         }}
         onChangeIv={(value) => {
-          handleIvChange({ ...slot.ivs, spd: value });
+          handleIvChange({ ...ivs, spd: value });
         }}
         statName='spdefense'
         totalEvs={totalEvs}
       />
       <StatField
         base={pokemon.baseSpeed}
-        ev={slot.evs.spe}
-        iv={slot.ivs.spe}
-        level={slot.level}
+        ev={evs.spe}
+        iv={ivs.spe}
+        level={level}
         nature={nature}
         onChangeEv={(value) => {
-          handleEvChange({ ...slot.evs, spe: value });
+          handleEvChange({ ...evs, spe: value });
         }}
         onChangeIv={(value) => {
-          handleIvChange({ ...slot.ivs, spe: value });
+          handleIvChange({ ...ivs, spe: value });
         }}
         statName='speed'
         totalEvs={totalEvs}

@@ -1,14 +1,7 @@
-import type { LocalSlot, LocalTeam } from 'contract';
+import type { LocalSlot } from 'contract';
 import { nanoid } from 'nanoid';
 import { CreateSlotParams, createSlot } from 'utils';
 
-export interface TeamState extends LocalTeam {
-  selectedSlot: LocalSlot | null;
-}
-
-export type TrashBinTeam = Omit<TeamState, 'selectedSlot'>;
-
-// Aux
 export function genLocalSlotId(): string {
   return `local-slot-${nanoid(6)}`;
 }

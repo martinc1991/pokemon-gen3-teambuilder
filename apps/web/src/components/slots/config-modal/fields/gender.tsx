@@ -1,23 +1,30 @@
 import { useTeamStore } from '@state/team';
 import type { Gender } from 'contract';
+import { useMemo } from 'react';
 import type { ComboboxItem } from 'ui';
 import { FormField } from 'ui';
 import { capitalize } from 'utils';
 import { GenericFieldProps } from './types';
 
-interface GenderFieldProps extends GenericFieldProps {}
+interface GenderFieldProps extends GenericFieldProps {
+  gender: Gender;
+}
 
-export default function GenderField({ slot, pokemon }: GenderFieldProps): JSX.Element {
+export default function GenderField({ slotId, pokemon, gender }: GenderFieldProps): JSX.Element {
   const setSlotFieldValue = useTeamStore((state) => state.setSlotFieldValue);
 
-  const gendersData = pokemon.genders.map((gender) => ({
-    id: gender.toString(),
-    label: capitalize(gender.toString()),
-    payload: gender,
-  }));
+  const gendersData = useMemo(
+    () =>
+      pokemon.genders.map((gender) => ({
+        id: gender.toString(),
+        label: capitalize(gender.toString()),
+        payload: gender,
+      })),
+    [pokemon.genders],
+  );
 
   function handleGenderChange(item: ComboboxItem<Gender>): void {
-    setSlotFieldValue(slot, 'gender', item.payload);
+    setSlotFieldValue(slotId, 'gender', item.payload);
   }
 
   return (
@@ -28,8 +35,8 @@ export default function GenderField({ slot, pokemon }: GenderFieldProps): JSX.El
       name='gender'
       onChange={handleGenderChange}
       value={
-        gendersData.find((gender) => {
-          return gender.payload === slot.gender;
+        gendersData.find((g) => {
+          return g.payload === gender;
         }) || gendersData[0]
       }
     />
