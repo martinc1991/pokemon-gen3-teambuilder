@@ -1,6 +1,5 @@
-// sum.test.js
 import { describe, expect, test } from 'vitest';
-import { formatPokemonName, isValidNationalPokedexNumber } from './index';
+import { formatPokemonName, getPokemonIconUrl, getPokemonSpriteUrl, isValidNationalPokedexNumber } from './index';
 
 describe('isValidNationalPokedexNumber', () => {
   test('should return true if it receives an integer between 1 and 389', () => {
@@ -57,5 +56,65 @@ describe('formatPokemonName', () => {
     expect(formatPokemonName('mewtwo mega x-y')).toBe('Mewtwo-Mega-X-Y');
     expect(formatPokemonName('mewtwo-mega x y z')).toBe('Mewtwo-Mega-X-Y-Z');
     expect(formatPokemonName('mewtwo mega x-y z a')).toBe('Mewtwo-Mega-X-Y-Z-A');
+  });
+});
+
+describe('getPokemonIconUrl', () => {
+  test.each([
+    [1, 9],
+    [10, 99],
+    [100, 389],
+  ])('should return a valid url for a valid input between %i and %i', async (start, end) => {
+    const response_start = await fetch(getPokemonIconUrl(start));
+    const response_end = await fetch(getPokemonIconUrl(end));
+
+    expect(response_start.status).toBe(200);
+    expect(response_end.status).toBe(200);
+  });
+  test('should return a valid url for every deoxys variation', async () => {
+    const responses = await Promise.all(
+      [386, 387, 388, 389].map((npn) => {
+        return fetch(getPokemonIconUrl(npn));
+      }),
+    );
+
+    responses.forEach((response) => {
+      expect(response.status).toBe(200);
+    });
+  });
+  test('should return an empty string if the input is outside 1 and 389', () => {
+    [-450, 0, 390, 450].forEach((npn) => {
+      expect(getPokemonSpriteUrl(npn)).toBe('');
+    });
+  });
+});
+
+describe('getPokemonSpriteUrl', () => {
+  test.each([
+    [1, 9],
+    [10, 99],
+    [100, 389],
+  ])('should return a valid url for a valid input between %i and %i', async (start, end) => {
+    const response_start = await fetch(getPokemonSpriteUrl(start));
+    const response_end = await fetch(getPokemonSpriteUrl(end));
+
+    expect(response_start.status).toBe(200);
+    expect(response_end.status).toBe(200);
+  });
+  test('should return a valid url for every deoxys variation', async () => {
+    const responses = await Promise.all(
+      [386, 387, 388, 389].map((npn) => {
+        return fetch(getPokemonSpriteUrl(npn));
+      }),
+    );
+
+    responses.forEach((response) => {
+      expect(response.status).toBe(200);
+    });
+  });
+  test('should return an empty string if the input is outside 1 and 389', () => {
+    [-450, 0, 390, 450].forEach((npn) => {
+      expect(getPokemonSpriteUrl(npn)).toBe('');
+    });
   });
 });
