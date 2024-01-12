@@ -2,14 +2,14 @@
 
 import { CheckIcon, CopyIcon } from '@radix-ui/react-icons';
 import { parseTeam } from '@utils/pokemon';
-import { FilledSlot } from 'contract';
+import { JSONSlot } from 'contract';
 import { useState } from 'react';
 import { Button, useToast } from 'ui';
 import { useCopyToClipboard, useInterval } from 'usehooks-ts';
 import CopyButtonToastContent from './toast-content';
 
 interface CopyButtonProps {
-  slots: FilledSlot[];
+  slots: JSONSlot[];
   teamName?: string;
 }
 

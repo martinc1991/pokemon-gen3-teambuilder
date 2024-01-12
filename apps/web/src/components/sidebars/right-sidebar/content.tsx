@@ -1,10 +1,9 @@
 'use client';
 
-import withTeamStore, { WithTeamStoreProps } from '@state/hoc/with-team-store';
-import { BaseSlot } from '@state/team/helpers';
-import { FilledSlot, MAX_TEAM_MEMBERS } from 'contract';
+import withTeamStore, { WithTeamStoreProps } from '@state/team/with-team-store';
+import { LocalSlot, MAX_TEAM_MEMBERS } from 'contract';
 import { PokemonAvatar, Separator } from 'ui';
-import { formatPokemonName } from 'utils';
+import { formatPokemonName, getPokemonIconUrl } from 'utils';
 import ClearButton from '../../clear-button';
 import CopyButton from '../../copy-button';
 
@@ -13,19 +12,19 @@ interface RightSidebarContentProps extends WithTeamStoreProps {}
 function RightSidebarContent({ teamStore }: RightSidebarContentProps): JSX.Element {
   const { slots, removeSlot } = teamStore;
 
-  function handleRemoveSlot(slot: FilledSlot): void {
-    removeSlot(slot);
+  function handleRemoveSlot(slot: LocalSlot): void {
+    removeSlot(slot.meta.id);
   }
 
   // Pad team to show always 6 slots
-  const emptySlots = Array(MAX_TEAM_MEMBERS - slots.length).fill(new BaseSlot());
+  const emptySlots = Array(MAX_TEAM_MEMBERS - slots.length).fill(null);
 
   return (
     <>
       {slots.map((slot) => {
-        const iconUrl = slot.pokemon.icon;
-        const key = slot.id;
-        const name = formatPokemonName(slot.pokemon.name);
+        const iconUrl = getPokemonIconUrl(slot.nationalPokedexNumber);
+        const key = slot.meta.id;
+        const name = formatPokemonName(slot.species);
         return (
           <PokemonAvatar
             iconUrl={iconUrl}

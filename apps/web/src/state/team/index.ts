@@ -1,49 +1,49 @@
 import { TEAM_STORAGE_NAME } from '@state/team/constants';
-import { FilledSlot, MAX_TEAM_MEMBERS, type PokemonWithAbilities } from 'contract';
+import { JSONTeam, LocalSlot, LocalTeam, MAX_TEAM_MEMBERS } from 'contract';
+import { CreateSlotParams } from 'utils';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
-import type { TeamState, TrashBinTeam } from './helpers';
-import { BaseSlot, genLocalTeamId } from './helpers';
+import { createCurrentTeamSlot, genLocalTeamId } from './helpers';
+
+export interface TeamState extends LocalTeam {
+  selectedSlotIndex: number;
+}
 
 interface TeamActions {
-  addSlot: (pokemon: PokemonWithAbilities) => void;
-  removeSlot: (slot: FilledSlot) => void;
+  addSlot: (slot: CreateSlotParams) => void;
+  removeSlot: (slotId: string) => void;
   clearTeam: () => void;
   setSelectedSlotIndex: (index: number) => void;
-  setSlotFieldValue: <T extends keyof FilledSlot>(slot: FilledSlot, fieldName: T, fieldValue: FilledSlot[T]) => void;
-  recoverFromTrash: (team: TrashBinTeam) => void;
+  setSlotFieldValue: <T extends keyof LocalSlot>(slotId: string, fieldName: T, fieldValue: LocalSlot[T]) => void;
+  recoverFromTrash: (team: JSONTeam) => void;
 }
 
 export type TeamStore = TeamState & TeamActions;
 
 const store = immer<TeamStore>((set) => ({
-  teamId: genLocalTeamId(),
+  id: genLocalTeamId(),
   name: '',
+  description: '',
   slots: [],
   selectedSlotIndex: 0,
+  userName: '',
+  isSample: false,
+  isPublic: false,
   addSlot: (pokemon) => {
     set((state) => {
       if (state.slots.length >= MAX_TEAM_MEMBERS) return;
 
-      const newSlot: FilledSlot = {
-        ...new BaseSlot(state.slots.length, pokemon),
-        teamId: state.teamId,
-        pokemon,
-      };
+      const newSlot: LocalSlot = createCurrentTeamSlot(pokemon);
 
       const newSlots = state.slots.concat(newSlot);
 
       state.slots = newSlots;
     });
   },
-  removeSlot: (slot: FilledSlot) => {
+  removeSlot: (slotId: string) => {
     set((state) => {
-      const newSlots: FilledSlot[] = state.slots.filter((s) => s.id !== slot.id);
-
-      for (let i = 0; i < newSlots.length; i++) {
-        newSlots[i].order = i;
-      }
+      const newSlots: LocalSlot[] = state.slots.filter((s) => s.meta.id !== slotId);
 
       state.selectedSlotIndex = 0;
       state.slots = newSlots;
@@ -56,21 +56,30 @@ const store = immer<TeamStore>((set) => ({
       state.selectedSlotIndex = 0;
     });
   },
-  setSelectedSlotIndex: (index) => {
+  setSelectedSlotIndex: (slot) => {
     set((state) => {
-      state.selectedSlotIndex = index;
+      state.selectedSlotIndex = slot;
     });
   },
-  setSlotFieldValue: (slot, field, value) => {
+  setSlotFieldValue: (slotId, field, value) => {
     set((state) => {
-      state.slots[slot.order][field] = value;
+      const index = state.slots.findIndex((s) => s.meta.id === slotId);
+
+      state.slots[index][field] = value;
     });
   },
   recoverFromTrash: (team) => {
     set((state) => {
+      const newSlots = team.slots.map((s) => createCurrentTeamSlot(s));
+
       state.name = team.name;
-      state.slots = team.slots;
-      state.teamId = team.teamId;
+      state.slots = newSlots;
+      state.id = team.id;
+      state.isSample = team.isSample;
+      state.isPublic = team.isPublic;
+      state.description = team.description;
+      state.userName = team.userName;
+      state.selectedSlotIndex = 0;
     });
   },
 }));

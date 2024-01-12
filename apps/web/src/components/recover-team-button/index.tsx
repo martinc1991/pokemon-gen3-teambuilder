@@ -1,5 +1,5 @@
 import { useTeamStore } from '@state/team';
-import { TeamWithFilledSlots } from 'contract';
+import { JSONTeam } from 'contract';
 import {
   Button,
   Dialog,
@@ -17,7 +17,7 @@ import { ToastContent } from './toast-content';
 const descriptionTxt = 'This will replace your current team with the selected one.';
 
 interface RecoverTeamButtonProps {
-  team: TeamWithFilledSlots;
+  team: JSONTeam;
 }
 
 export function RecoverTeamButton({ team }: RecoverTeamButtonProps): JSX.Element {
@@ -26,11 +26,7 @@ export function RecoverTeamButton({ team }: RecoverTeamButtonProps): JSX.Element
   const { toast } = useToast();
 
   function recoverTeam(): void {
-    recoverFromTrash({
-      name: team.name,
-      teamId: 'idk',
-      slots: team.slots,
-    });
+    recoverFromTrash(team);
     toast({ title: team.name ? `${team.name} set as current` : 'Copied to clipboard', description: <ToastContent /> });
   }
 

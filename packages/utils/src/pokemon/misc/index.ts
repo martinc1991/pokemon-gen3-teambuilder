@@ -25,3 +25,38 @@ export function formatPokemonName(name: string): string {
     })
     .join('-');
 }
+
+/**
+ * Return the icon url from the nationalPokedexNumber.
+ */
+export function getPokemonIconUrl(nationalPokedexNumber: number): string {
+  if (!isValidNationalPokedexNumber(nationalPokedexNumber)) return '';
+
+  const base = 'https://www.serebii.net/pokedex-rs/icon/';
+  switch (true) {
+    case nationalPokedexNumber >= 386:
+      return `${base}386.gif`;
+    default:
+      const num = nationalPokedexNumber.toString().padStart(3, '0');
+      return `${base}${num}.gif`;
+  }
+}
+
+/**
+ * Return the sprite url from the nationalPokedexNumber.
+ */
+export function getPokemonSpriteUrl(nationalPokedexNumber: number): string {
+  if (!isValidNationalPokedexNumber(nationalPokedexNumber)) return '';
+
+  const base = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/';
+  switch (true) {
+    case nationalPokedexNumber === 387:
+      return `${base}firered-leafgreen/386-attack.png`;
+    case nationalPokedexNumber === 388:
+      return `${base}firered-leafgreen/386-defense.png`;
+    case nationalPokedexNumber === 389:
+      return `${base}firered-leafgreen/386-speed.png`;
+    default:
+      return `${base}emerald/${nationalPokedexNumber}.png`;
+  }
+}

@@ -1,12 +1,13 @@
 import { useTeamStore } from '@state/team';
-import { FilledSlot, MAX_HAPPINESS, MIN_HAPPINESS } from 'contract';
+import { MAX_HAPPINESS, MIN_HAPPINESS } from 'contract';
 import { FormField } from 'ui';
+import { GenericFieldProps } from './types';
 
-interface HappinessFieldProps {
-  slot: FilledSlot;
+interface HappinessFieldProps extends Pick<GenericFieldProps, 'slotId'> {
+  happiness: number;
 }
 
-export default function HappinessField({ slot }: HappinessFieldProps): JSX.Element {
+export default function HappinessField({ slotId, happiness }: HappinessFieldProps): JSX.Element {
   const setSlotFieldValue = useTeamStore((state) => state.setSlotFieldValue);
 
   return (
@@ -16,9 +17,9 @@ export default function HappinessField({ slot }: HappinessFieldProps): JSX.Eleme
       min={MIN_HAPPINESS}
       name='happiness'
       onChange={(value: number) => {
-        setSlotFieldValue(slot, 'happiness', value);
+        setSlotFieldValue(slotId, 'happiness', value);
       }}
-      value={slot.happiness}
+      value={happiness}
     />
   );
 }

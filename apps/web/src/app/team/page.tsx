@@ -5,8 +5,7 @@ import PageHeader from '@components/page-header';
 import { EmptyPokemonCard, FilledPokemonCard } from '@components/slots/cards';
 import SlotConfigModal from '@components/slots/config-modal';
 import { queryClient } from '@rq-client/index';
-import withTeamStore, { WithTeamStoreProps } from '@state/hoc/with-team-store';
-import { BaseSlot } from '@state/team/helpers';
+import withTeamStore, { WithTeamStoreProps } from '@state/team/with-team-store';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { MAX_TEAM_MEMBERS } from 'contract';
 import Link from 'next/link';
@@ -33,22 +32,22 @@ function Builder({ teamStore }: BuilderProps): JSX.Element {
         />
         {areThereSlots ? (
           <div className='flex flex-wrap justify-center gap-6'>
-            {slots.map((slot) => {
+            {slots.map((slot, order) => {
               return (
                 <DialogTrigger
-                  key={slot.id}
+                  key={slot.meta.id}
                   onClick={() => {
                     // FIX: este handler esta generando un bug al abrir el config modal
                     // de un pokemon diferente al del index que esta seleccionado
-                    handleSetSelectedSlotIndex(slot.order);
+                    handleSetSelectedSlotIndex(order);
                   }}
                 >
-                  <FilledPokemonCard slot={slot} />
+                  <FilledPokemonCard slot={slot} order={order} />
                 </DialogTrigger>
               );
             })}
             {Array(emptySlots)
-              .fill(new BaseSlot())
+              .fill(null)
               .map((_, i) => {
                 return <EmptyPokemonCard key={i} />;
               })}

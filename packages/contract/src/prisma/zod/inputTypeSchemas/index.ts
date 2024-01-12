@@ -9,7 +9,6 @@ export { NatureScalarFieldEnumSchema } from './NatureScalarFieldEnumSchema';
 export { NullsOrderSchema } from './NullsOrderSchema';
 export { PokemonScalarFieldEnumSchema } from './PokemonScalarFieldEnumSchema';
 export { QueryModeSchema } from './QueryModeSchema';
-export { SlotScalarFieldEnumSchema } from './SlotScalarFieldEnumSchema';
 export { SortOrderSchema } from './SortOrderSchema';
 export { StatNameSchema } from './StatNameSchema';
 export { TeamScalarFieldEnumSchema } from './TeamScalarFieldEnumSchema';
