@@ -1,7 +1,8 @@
 import { NotFoundException } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import { PrismaService } from '@providers/prisma/prisma.service';
-import { Team } from 'contract';
+import { CompleteTeam, Team } from 'contract';
+import { packSlots } from 'utils';
 import { TeamService } from '../team.service';
 import {
   createTeamDtoStub,
@@ -22,23 +23,23 @@ const mockedTeam: Team = {
   isSample: true,
   slots: '[]',
 };
+const mockedCompleteTeam: CompleteTeam = {
+  ...mockedTeam,
+  slots: [],
+};
 
 const mockedPrismaService = {
   team: {
-    findMany: jest.fn(),
+    findMany: jest.fn().mockResolvedValue([]),
     findUnique: jest.fn(),
     create: jest.fn().mockResolvedValue(mockedTeam),
     delete: jest.fn(),
     update: jest.fn(),
   },
-  slot: {
-    createMany: jest.fn(),
-    deleteMany: jest.fn(),
-  },
   $transaction: jest.fn().mockImplementation((callback) => callback(mockedPrismaService)),
 };
 
-describe('Team controller', () => {
+describe('Team service', () => {
   let prismaService: PrismaService;
   let service: TeamService;
 
@@ -52,17 +53,8 @@ describe('Team controller', () => {
   });
 
   describe('getAll method', () => {
-    it('should call prisma team service findMany method with the correct configuration passing pagination params', async () => {
+    it('should call prisma service team.findMany method with the correct configuration passing pagination params', async () => {
       const expectedParams = {
-        include: {
-          slots: {
-            select: {
-              name: true,
-              order: true,
-              pokemon: { select: { name: true } },
-            },
-          },
-        },
         skip: paginationStub().skip,
         take: paginationStub().take,
       };
@@ -77,17 +69,6 @@ describe('Team controller', () => {
         where: {
           isSample: true,
         },
-        include: {
-          slots: {
-            include: {
-              pokemon: {
-                include: {
-                  abilities: true,
-                },
-              },
-            },
-          },
-        },
         skip: paginationStub().skip,
         take: paginationStub().take,
       };
@@ -100,16 +81,10 @@ describe('Team controller', () => {
     it('should call prisma team service getOneById method passing teamId param', async () => {
       const expectedParams = {
         where: { id: teamIdStub },
-        include: {
-          slots: {
-            include: {
-              pokemon: true,
-            },
-          },
-        },
       };
 
       jest.spyOn(prismaService.team, 'findUnique').mockResolvedValueOnce(mockedTeam);
+      jest.spyOn(service, 'getCompleteTeamFromJson').mockResolvedValueOnce(mockedCompleteTeam);
 
       await service.getOneById(teamIdStub);
       expect(prismaService.team.findUnique).toBeCalledWith(expectedParams);
@@ -128,9 +103,11 @@ describe('Team controller', () => {
       const expectedCreateParams = {
         data: {
           name: dto.name,
-          slots: {},
           description: dto.description,
           userName: dto.userName,
+          slots: packSlots(dto.slots),
+          isPublic: dto.isPublic,
+          isSample: dto.isSample,
         },
         select: {
           id: true,

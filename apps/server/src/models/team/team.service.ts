@@ -27,9 +27,7 @@ export class TeamService {
     if (!team) throw new NotFoundException();
 
     const jsonTeam = unpackTeam(team);
-
     const completeTeam = await this.getCompleteTeamFromJson(jsonTeam);
-
     return completeTeam;
   }
 
@@ -53,6 +51,8 @@ export class TeamService {
         description: dto.description,
         userName: dto.userName,
         slots: packSlots(dto.slots),
+        isPublic: dto.isPublic,
+        isSample: dto.isSample,
       },
       select: {
         id: true,
