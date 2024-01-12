@@ -17,8 +17,7 @@
   },
   "dependencies": {
     "contract": "workspace:*",
-    "pokemon-info": "workspace:*",
-    "vitest": "^1.1.1"
+    "pokemon-info": "workspace:*"
   },
   "devDependencies": {
     "@vitest/coverage-v8": "^1.1.1",

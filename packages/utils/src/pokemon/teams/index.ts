@@ -5,7 +5,6 @@ import {
   ExportTeam,
   JSONTeam,
   PackedSlots,
-  type CompleteSlot,
   type JSONSlot,
   type PackedTeam,
   type StatName,
@@ -17,7 +16,7 @@ import { capitalize, formatString } from '../../common';
 /**
  * Transforms a team **from JSON to export** format.
  */
-export function exportTeam(team: CompleteSlot[]): ExportSlot {
+export function exportTeam(team: JSONSlot[]): ExportSlot {
   // TODO: add security guard clauses
   let output = '';
   for (const set of team) {
@@ -29,16 +28,16 @@ export function exportTeam(team: CompleteSlot[]): ExportSlot {
 /**
  * Transforms a slot **from JSON to export** format.
  */
-function exportSlot(slot: CompleteSlot): ExportTeam {
+function exportSlot(slot: JSONSlot): ExportTeam {
   // TODO: add security guard clauses
 
   let out = ``;
 
   // Name
   if (slot.nickname) {
-    out += `${slot.nickname} (${formatString(slot.pokemon.name)})`;
+    out += `${slot.nickname} (${formatString(slot.nickname)})`;
   } else {
-    out += formatString(slot.pokemon.name);
+    out += formatString(slot.species);
   }
 
   // Gender
