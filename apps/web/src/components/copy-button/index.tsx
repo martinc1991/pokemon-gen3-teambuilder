@@ -1,11 +1,11 @@
 'use client';
 
 import { CheckIcon, CopyIcon } from '@radix-ui/react-icons';
-import { parseTeam } from '@utils/pokemon';
 import { JSONSlot } from 'contract';
 import { useState } from 'react';
 import { Button, useToast } from 'ui';
 import { useCopyToClipboard, useInterval } from 'usehooks-ts';
+import { exportTeam } from 'utils';
 import CopyButtonToastContent from './toast-content';
 
 interface CopyButtonProps {
@@ -26,7 +26,7 @@ export default function CopyButton({ slots, teamName }: CopyButtonProps): JSX.El
   );
 
   async function handleCopy(): Promise<void> {
-    const txt = parseTeam(slots);
+    const txt = exportTeam(slots);
     await copy(txt);
 
     if (!copied) {

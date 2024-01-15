@@ -55,7 +55,7 @@ export function getPokemonSpriteUrl(nationalPokedexNumber: number): string {
     case nationalPokedexNumber === 388:
       return `${base}firered-leafgreen/386-defense.png`;
     case nationalPokedexNumber === 389:
-      return `${base}firered-leafgreen/386-speed.png`;
+      return `${base}emerald/386-speed.png`;
     default:
       return `${base}emerald/${nationalPokedexNumber}.png`;
   }
