@@ -1,7 +1,9 @@
 import { DEFAULT_EVS, DEFAULT_IVS, JSONSlot, MAX_HAPPINESS, MAX_LEVEL } from 'contract';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 import { exportSlot } from '.';
+import { calculateHiddenPowerType } from '../..';
 import { formatString } from '../../../common';
+import { getMovesText } from './moves';
 import { getStatsText } from './stats';
 
 vi.mock('../../../common', async (importOriginal) => {
@@ -17,15 +19,22 @@ vi.mock('../../stats', () => {
   };
 });
 
-vi.mock('../../types', () => {
+vi.mock('../../types', async (importOriginal) => {
+  const mod = await importOriginal<typeof import('../../types')>();
   return {
-    calculateHiddenPowerType: vi.fn(),
+    ...mod,
   };
 });
 
 vi.mock('./stats', () => {
   return {
     getStatsText: vi.fn(),
+  };
+});
+
+vi.mock('./moves', () => {
+  return {
+    getMovesText: vi.fn(),
   };
 });
 
@@ -45,11 +54,7 @@ const completeJsonSlot: JSONSlot = {
   evs: DEFAULT_EVS,
 };
 
-function hyphenCount(str: string) {
-  return str.split('-').length - 1;
-}
-
-describe.only('exportSlot', () => {
+describe('exportSlot', () => {
   let slot: JSONSlot;
 
   beforeEach(() => {
@@ -146,23 +151,14 @@ describe.only('exportSlot', () => {
     expect(getStatsText).toHaveBeenCalledWith(slot.ivs, 'iv');
     expect(getStatsText).toHaveBeenCalledOnce();
   });
-  test('should add as many lines of moves as moves are provided', () => {
-    while (slot.moves.length > 0) {
-      const withMoves = exportSlot(slot);
-      const count = hyphenCount(withMoves);
-
-      expect(count).toBe(slot.moves.length);
-      slot.moves.pop();
-    }
-  });
-  test('should not add any line if no moves are provided', () => {
+  test('should not call getMovesText if no moves are provided', () => {
     slot.moves = [];
-
-    const withoutMoves = exportSlot(slot);
-    const count = hyphenCount(withoutMoves);
-    expect(count).toBe(slot.moves.length);
+    exportSlot(slot);
+    expect(getMovesText).not.toHaveBeenCalled();
   });
-  test('should handle the case of having hidden power', () => {
-    // TODO: extract this functionality into own function
+  test('should call getMovesText with provided moves', () => {
+    exportSlot(slot);
+    expect(getMovesText).toHaveBeenCalled();
+    expect(getMovesText).toHaveBeenCalledWith(slot.moves, calculateHiddenPowerType(slot.ivs));
   });
 });

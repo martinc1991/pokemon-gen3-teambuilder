@@ -1,6 +1,7 @@
 import { ExportTeam, MAX_HAPPINESS, MAX_INDIVIDUAL_IV, MAX_LEVEL, type JSONSlot } from 'contract';
 import { capitalize, formatString } from '../../../common';
 import { calculateHiddenPowerType } from '../../types';
+import { getMovesText } from './moves';
 import { getStatsText } from './stats';
 
 /**
@@ -67,13 +68,8 @@ export function exportSlot(slot: JSONSlot): ExportTeam {
     out += getStatsText(slot.ivs, 'iv');
   }
 
-  for (let move of slot.moves) {
-    if (move) {
-      if (move.toLowerCase().includes(`hidden`) && move.toLowerCase().includes(`power`) && move.charAt(13) !== '[') {
-        move = `Hidden Power [${formatString(calculateHiddenPowerType(slot.ivs))}]`;
-      }
-      out += `- ${formatString(move)}  \n`;
-    }
+  if (slot.moves.length > 0) {
+    out += getMovesText(slot.moves, calculateHiddenPowerType(slot.ivs));
   }
 
   return out;
