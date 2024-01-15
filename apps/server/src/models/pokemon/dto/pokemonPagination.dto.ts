@@ -1,5 +1,6 @@
 import { BasicPaginationDto } from '@common/dto/basicPagination.dto';
 import { IsEnum, IsOptional, IsString } from 'class-validator';
+import { TypeNames } from 'contract';
 
 export enum OrderBy {
   NPN = 'nationalPokedexNumber',
@@ -20,4 +21,12 @@ export class PokemonPaginationDto extends BasicPaginationDto {
   @IsOptional()
   @IsEnum(SortOrder)
   sortOrder = SortOrder.ASC;
+
+  @IsEnum(TypeNames)
+  @IsOptional()
+  typeOne = null;
+
+  @IsEnum(TypeNames)
+  @IsOptional()
+  typeTwo = null;
 }

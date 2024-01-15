@@ -1,20 +1,31 @@
 import { initContract } from '@ts-rest/core';
 import { z } from 'zod';
-import { TeamModel } from '../prisma/zod';
-import { NatureNames } from '@prisma/client';
+import { CommonResponseSchema, PaginationParamsSchema } from '../common';
+import { TeamSchema } from '../prisma/zod';
+import { CompleteTeamSchema, JSONSlotSchema, JSONTeamSchema } from '../types';
 
 const c = initContract();
+
+// Params schemas
+const GetTeamsQueryParamsSchema = PaginationParamsSchema;
+
+// Responses schemas
+const GetOneTeamResponseSchema = CompleteTeamSchema;
+const GetAllTeamsResponseSchema = z.array(JSONTeamSchema);
+const GetSampleTeamsResponseSchema = z.array(JSONTeamSchema);
+
+// Body schemas
+const CreateTeamBodySchema = TeamSchema.omit({ id: true }).merge(z.object({ slots: JSONSlotSchema }));
+const EditTeamBodySchema = TeamSchema.merge(z.object({ slots: JSONSlotSchema })).optional();
+const DeleteTeamBodySchema = TeamSchema.pick({ id: true });
 
 export const teamsContract = c.router({
   getAll: {
     method: 'GET',
     path: '/teams',
-    query: z.object({
-      take: z.string().transform(Number).optional().default('10'),
-      skip: z.string().transform(Number).optional().default('0'),
-    }),
+    query: GetTeamsQueryParamsSchema,
     responses: {
-      200: z.array(TeamModel),
+      200: GetAllTeamsResponseSchema,
     },
     summary: 'Get all teams',
   },
@@ -22,89 +33,47 @@ export const teamsContract = c.router({
     method: 'GET',
     path: `/teams/:teamId`,
     responses: {
-      200: TeamModel,
+      200: GetOneTeamResponseSchema,
     },
     summary: 'Get a team by id',
+  },
+  getSampleTeams: {
+    method: 'GET',
+    path: `/teams/sample`,
+    query: GetTeamsQueryParamsSchema,
+    responses: {
+      200: GetSampleTeamsResponseSchema,
+    },
+    summary: 'Get sample teams',
   },
   create: {
     method: 'POST',
     path: `/teams`,
-    body: z.object({
-      name: z.string().optional(),
-      slots: z
-        .array(
-          z.object({
-            nationalPokedexNumber: z.number().min(1).max(386),
-            name: z.string().optional(),
-            abilityName: z.string().optional(),
-            natureName: z.nativeEnum(NatureNames).optional(),
-            evHp: z.number().min(0).max(255).optional(),
-            evAttack: z.number().min(0).max(255).optional(),
-            evDefense: z.number().min(0).max(255).optional(),
-            evSpAttack: z.number().min(0).max(255).optional(),
-            evSpDefense: z.number().min(0).max(255).optional(),
-            evSpeed: z.number().min(0).max(255).optional(),
-            itemName: z.string().optional(),
-            shiny: z.boolean().optional(),
-          })
-        )
-        .optional(),
-    }),
+    body: CreateTeamBodySchema,
     responses: {
-      201: z.object({
-        id: z.string(),
-        name: z.string(),
-      }),
+      201: CommonResponseSchema,
     },
     summary: 'Create a team',
-  },
-  delete: {
-    method: 'DELETE',
-    path: `/teams`,
-    body: z.object({
-      id: z.string(),
-    }),
-    responses: {
-      200: z.object({
-        id: z.string(),
-        name: z.string(),
-      }),
-    },
-    summary: 'Delete a team by id',
   },
   edit: {
     method: 'PATCH',
     path: `/teams`,
-    body: z.object({
-      id: z.string(),
-      name: z.string().optional(),
-      slots: z
-        .array(
-          z.object({
-            nationalPokedexNumber: z.number().min(1).max(386),
-            name: z.string().optional(),
-            abilityName: z.string().optional(),
-            natureName: z.nativeEnum(NatureNames).optional(),
-            evHp: z.number().min(0).max(255).optional(),
-            evAttack: z.number().min(0).max(255).optional(),
-            evDefense: z.number().min(0).max(255).optional(),
-            evSpAttack: z.number().min(0).max(255).optional(),
-            evSpDefense: z.number().min(0).max(255).optional(),
-            evSpeed: z.number().min(0).max(255).optional(),
-            itemName: z.string().optional(),
-            shiny: z.boolean().optional(),
-          })
-        )
-        .optional(),
-    }),
+    body: EditTeamBodySchema,
     responses: {
-      200: z.object({
-        id: z.string(),
-        name: z.string(),
-      }),
+      200: CommonResponseSchema,
     },
     summary: 'Edit a team by id',
   },
+  delete: {
+    method: 'DELETE',
+    path: `/teams`,
+    body: DeleteTeamBodySchema,
+    responses: {
+      200: CommonResponseSchema,
+    },
+    summary: 'Delete a team by id',
+  },
 });
 
+// Contract types
 export type ITeamsContract = typeof teamsContract;

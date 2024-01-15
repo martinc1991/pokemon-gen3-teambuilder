@@ -6,24 +6,46 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
     },
-    "lint": {},
+    "lint": {
+      "cache": false
+    },
     "check-types": {},
     "dev": {
       "cache": false,
       "persistent": true
     },
-    "clean": {
-      "cache": false
-    },
     "studio": {
       "cache": false,
       "persistent": true
     },
+    "studio:prod": {
+      "cache": false,
+      "persistent": true
+    },
     "prisma:generate": {
-      "cache": true
+      "cache": false
+    },
+    "prisma:migrate": {
+      "cache": false
     },
     "db:seed": {
       "cache": false
+    },
+    "prisma:migrate:prod": {
+      "cache": false
+    },
+    "db:seed:prod": {
+      "cache": false
+    },
+    "prettier:format": {
+      "cache": false
+    },
+    "test": {
+      "dependsOn": ["server#build", "utils#build"]
+    },
+    "test:watch": {
+      "dependsOn": ["server#build", "utils#build"],
+      "persistent": true
     }
   }
 }

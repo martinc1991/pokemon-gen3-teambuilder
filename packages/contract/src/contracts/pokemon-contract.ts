@@ -1,50 +1,42 @@
-import { Ability, Move } from '@prisma/client';
-import { ClientInferResponseBody, initContract } from '@ts-rest/core';
+import { initContract } from '@ts-rest/core';
 import { z } from 'zod';
-import { CompletePokemon, MoveModel } from '../prisma/zod';
-import { ArrayElementType } from '../utils/types/array-element-type';
+import { PaginationParamsSchema, SortOrderParamsSchema } from '../common';
+import { PokemonWithAbilitiesAndLearnsetSchema, PokemonWithAbilitiesSchema } from '../types';
 
 const c = initContract();
 
-const queryParamsSchema = z.object({
-  take: z.number().optional(),
-  skip: z.number().optional(),
-  orderBy: z.string().optional(),
-  sortOrder: z.string().optional(),
+const TypesParamsSchema = z.object({
+  typeOne: z.string().optional(),
+  typeTwo: z.string().optional(),
 });
 
-type GetAllPokemonResponse = Omit<CompletePokemon, 'typeOne' | 'typeTwo' | 'slot' | 'abilities' | 'learnset'> & { abilities: Ability[] };
-const getAllPokemonResponseSchema = z.custom<GetAllPokemonResponse>();
+// Params schemas
+const GetAllPokemonQueryParamsSchema = PaginationParamsSchema.merge(SortOrderParamsSchema).merge(TypesParamsSchema);
 
-type GetOnePokemonResponse = Omit<CompletePokemon, 'typeOne' | 'typeTwo' | 'slot' | 'abilities' | 'learnset'> & { abilities: Ability[] } & {
-  learnset: Move[];
-};
-const getOnePokemonResponseSchema = z.custom<GetOnePokemonResponse>();
+// Response schemas
+const GetOnePokemonResponseSchema = PokemonWithAbilitiesAndLearnsetSchema;
+const GetAllPokemonResponseSchema = z.array(PokemonWithAbilitiesSchema);
 
 export const pokemonContract = c.router({
   getAll: {
     method: 'GET',
     path: '/pokemon',
     responses: {
-      200: z.array(getAllPokemonResponseSchema),
+      200: GetAllPokemonResponseSchema,
     },
-    query: queryParamsSchema,
+    query: GetAllPokemonQueryParamsSchema,
     summary: 'Get all pokemon',
   },
   getOne: {
     method: 'GET',
     path: `/pokemon/:nationalDexNumber`,
     responses: {
-      200: getOnePokemonResponseSchema,
+      200: GetOnePokemonResponseSchema,
     },
     summary: 'Get a pokemon by national pokedex number',
   },
 });
 
-// Contract type
+// Contract types
 export type IPokemonContract = typeof pokemonContract;
-export type IPokemonGetAllQueryParams = z.infer<Required<typeof queryParamsSchema>>;
-
-// Responses types
-export type IPokemonGetAllResponse = ClientInferResponseBody<typeof pokemonContract.getAll, 200>;
-export type IPokemonGetAllResponseElement = ArrayElementType<IPokemonGetAllResponse>;
+export type IPokemonGetAllQueryParams = z.infer<Required<typeof GetAllPokemonQueryParamsSchema>>;

@@ -1,44 +1,51 @@
 import { NotFoundException } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
+import { PrismaService } from '@providers/prisma/prisma.service';
+import { CompleteTeam, Team } from 'contract';
+import { packSlots } from 'utils';
 import { TeamService } from '../team.service';
 import {
   createTeamDtoStub,
   editTeamDtoStub,
+  teamDescriptionStub,
   teamIdStub,
   teamNameStub,
+  teamUserNameStub,
 } from './stubs/createTeamDto.stub';
 import { paginationStub } from './stubs/pagination.stub';
-import { PrismaService } from '@providers/prisma/prisma.service';
 
-const mockedTeam = { name: teamNameStub, id: teamIdStub };
+const mockedTeam: Team = {
+  name: teamNameStub,
+  id: teamIdStub,
+  description: teamDescriptionStub,
+  userName: teamUserNameStub,
+  isPublic: true,
+  isSample: true,
+  slots: '[]',
+};
+const mockedCompleteTeam: CompleteTeam = {
+  ...mockedTeam,
+  slots: [],
+};
 
 const mockedPrismaService = {
   team: {
-    findMany: jest.fn(),
+    findMany: jest.fn().mockResolvedValue([]),
     findUnique: jest.fn(),
     create: jest.fn().mockResolvedValue(mockedTeam),
     delete: jest.fn(),
     update: jest.fn(),
   },
-  slot: {
-    createMany: jest.fn(),
-    deleteMany: jest.fn(),
-  },
-  $transaction: jest
-    .fn()
-    .mockImplementation((callback) => callback(mockedPrismaService)),
+  $transaction: jest.fn().mockImplementation((callback) => callback(mockedPrismaService)),
 };
 
-describe('Team controller', () => {
+describe('Team service', () => {
   let prismaService: PrismaService;
   let service: TeamService;
 
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
-      providers: [
-        TeamService,
-        { provide: PrismaService, useValue: mockedPrismaService },
-      ],
+      providers: [TeamService, { provide: PrismaService, useValue: mockedPrismaService }],
     }).compile();
 
     service = moduleRef.get<TeamService>(TeamService);
@@ -46,17 +53,8 @@ describe('Team controller', () => {
   });
 
   describe('getAll method', () => {
-    it('should call prisma team service findMany method with the correct configuration passing pagination params', async () => {
+    it('should call prisma service team.findMany method with the correct configuration passing pagination params', async () => {
       const expectedParams = {
-        include: {
-          slots: {
-            select: {
-              name: true,
-              order: true,
-              pokemon: { select: { name: true } },
-            },
-          },
-        },
         skip: paginationStub().skip,
         take: paginationStub().take,
       };
@@ -65,22 +63,28 @@ describe('Team controller', () => {
     });
   });
 
+  describe('getSampleTeams method', () => {
+    it('should call prisma team service findMany method with the correct configuration passing pagination params', async () => {
+      const expectedParams = {
+        where: {
+          isSample: true,
+        },
+        skip: paginationStub().skip,
+        take: paginationStub().take,
+      };
+      await service.getSampleTeams(paginationStub());
+      expect(prismaService.team.findMany).toHaveBeenCalledWith(expectedParams);
+    });
+  });
+
   describe('getOneById method', () => {
     it('should call prisma team service getOneById method passing teamId param', async () => {
       const expectedParams = {
         where: { id: teamIdStub },
-        include: {
-          slots: {
-            include: {
-              pokemon: true,
-            },
-          },
-        },
       };
 
-      jest
-        .spyOn(prismaService.team, 'findUnique')
-        .mockResolvedValueOnce(mockedTeam);
+      jest.spyOn(prismaService.team, 'findUnique').mockResolvedValueOnce(mockedTeam);
+      jest.spyOn(service, 'getCompleteTeamFromJson').mockResolvedValueOnce(mockedCompleteTeam);
 
       await service.getOneById(teamIdStub);
       expect(prismaService.team.findUnique).toBeCalledWith(expectedParams);
@@ -89,9 +93,7 @@ describe('Team controller', () => {
     it('should throw a not found exception if no team is found', async () => {
       jest.spyOn(prismaService.team, 'findUnique').mockResolvedValueOnce(null);
 
-      await expect(service.getOneById(teamIdStub)).rejects.toThrow(
-        NotFoundException,
-      );
+      await expect(service.getOneById(teamIdStub)).rejects.toThrow(NotFoundException);
     });
   });
 
@@ -101,7 +103,11 @@ describe('Team controller', () => {
       const expectedCreateParams = {
         data: {
           name: dto.name,
-          slots: {},
+          description: dto.description,
+          userName: dto.userName,
+          slots: packSlots(dto.slots),
+          isPublic: dto.isPublic,
+          isSample: dto.isSample,
         },
         select: {
           id: true,
@@ -112,23 +118,6 @@ describe('Team controller', () => {
       await service.create(dto);
 
       expect(prismaService.team.create).toBeCalledWith(expectedCreateParams);
-    });
-
-    it('if slots are provided, should call prisma slot service createMany method passing slots dto', async () => {
-      const dto = createTeamDtoStub(2);
-      const expectedCreateManyParams = {
-        data: dto.slots.map((slot, i) => ({
-          ...slot,
-          teamId: teamIdStub,
-          order: i,
-        })),
-      };
-
-      await service.create(dto);
-
-      expect(prismaService.slot.createMany).toBeCalledWith(
-        expectedCreateManyParams,
-      );
     });
   });
 
@@ -145,52 +134,6 @@ describe('Team controller', () => {
   });
 
   describe('edit method', () => {
-    it('if slots are provided, should delete existing slots and create new ones', async () => {
-      const dto = editTeamDtoStub(2);
-      const expectedDeleteManyParams = {
-        where: { teamId: dto.id },
-      };
-      const expectedCreateManyParams = {
-        data: dto.slots.map((slot, i) => ({
-          ...slot,
-          teamId: dto.id,
-          order: i,
-        })),
-      };
-
-      await service.edit(dto);
-
-      expect(prismaService.slot.deleteMany).toBeCalledWith(
-        expectedDeleteManyParams,
-      );
-      expect(prismaService.slot.createMany).toBeCalledWith(
-        expectedCreateManyParams,
-      );
-    });
-
-    it("if slots is an empty array, should delete existing slots but shouldn't create new ones", async () => {
-      const dto = editTeamDtoStub(0);
-      const expectedDeleteManyParams = {
-        where: { teamId: dto.id },
-      };
-
-      await service.edit(dto);
-
-      expect(prismaService.slot.deleteMany).toBeCalledWith(
-        expectedDeleteManyParams,
-      );
-      expect(prismaService.slot.createMany).not.toBeCalled();
-    });
-
-    it("if slots are not provided, shouldn't delete existing slots or create new ones", async () => {
-      const dto = editTeamDtoStub(0, true);
-
-      await service.edit(dto);
-
-      expect(prismaService.slot.deleteMany).not.toBeCalled();
-      expect(prismaService.slot.createMany).not.toBeCalled();
-    });
-
     it('should call prisma team service update method passing edit team dto', async () => {
       const dto = editTeamDtoStub(2);
       const expectedUpdateParams = {

@@ -1,0 +1,13 @@
+version: '3.8'
+name: pg3t-dev
+services:
+  dev-db:
+    image: postgres:15.4
+    ports:
+      - 5434:5432
+    env_file:
+      - .env.dev
+    networks:
+      - pg3t-dev-network
+networks:
+  pg3t-dev-network:

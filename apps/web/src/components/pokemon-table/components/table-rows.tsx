@@ -1,6 +1,6 @@
 import type { Row } from '@tanstack/react-table';
 import { flexRender } from '@tanstack/react-table';
-import type { IPokemonGetAllResponseElement } from 'contract';
+import type { PokemonWithAbilities } from 'contract';
 import { TableCell, TableRow, Typography } from 'ui';
 import TABLE_COLUMNS from '../columns';
 import type { ColumnID } from '../columns/constants';
@@ -9,7 +9,7 @@ import { columnsConfig } from '../columns/constants';
 export const TABLE_ROW_HEIGHT = 50;
 
 interface PokemonRowProps {
-  row: Row<IPokemonGetAllResponseElement>;
+  row: Row<PokemonWithAbilities>;
   start: number;
 }
 
@@ -29,6 +29,7 @@ export function PokemonTableRow({ row, start }: PokemonRowProps): JSX.Element {
         width: '100%',
         display: 'flex',
         alignItems: 'center',
+        overflowX: 'hidden',
       }}
     >
       {row.getVisibleCells().map((cell) => {

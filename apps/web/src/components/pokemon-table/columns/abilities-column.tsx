@@ -1,13 +1,13 @@
 'use client';
 
 import { type ColumnDef } from '@tanstack/react-table';
-import { replaceHyphensWithSpaces } from '@utils/common';
-import type { Ability, IPokemonGetAllResponseElement } from 'contract';
+import type { Ability, PokemonWithAbilities } from 'contract';
+import { replaceHyphensWithSpaces } from 'utils';
 import TableAbilities from '../components/table-abilities';
 import { ColumnID } from './constants';
 import { columnHelper } from './get-column-helper';
 
-export const abilitiesColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor((row) => row.abilities, {
+export const abilitiesColumn: ColumnDef<PokemonWithAbilities> = columnHelper.accessor((row) => row.abilities, {
   id: ColumnID.ABILITIES,
   header: () => {
     return <div>Abilities</div>;

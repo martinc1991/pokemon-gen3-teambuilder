@@ -11,7 +11,7 @@ export default function PageHeader({ title, description }: PageHeaderProps): JSX
   return (
     <div className='flex flex-col items-center' style={{ height: PAGE_HEADER_HEIGHT }}>
       <Typography.H1>{title}</Typography.H1>
-      {description ? <Typography.P>{description}</Typography.P> : null}
+      {description ? <Typography.P className='text-center'>{description}</Typography.P> : null}
     </div>
   );
 }

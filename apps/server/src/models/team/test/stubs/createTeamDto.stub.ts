@@ -1,13 +1,20 @@
 import { Gender, NatureNames } from '@prisma/client';
-import { CreateTeamDto, EditTeamDto, TeamSlotDto } from '../../dto';
+import { JSONSlot } from 'contract';
+import { CreateTeamDto, EditTeamDto } from '../../dto';
 
 export const teamIdStub = 'fake-team-id';
 export const teamNameStub = 'fake-team-id';
+export const teamDescriptionStub = 'fake-team-description';
+export const teamUserNameStub = 'fake-team-username';
 
 export function createTeamDtoStub(num = 1, skipSlots = false): CreateTeamDto {
-  const dto = {
+  const dto: CreateTeamDto = {
     name: teamNameStub,
     slots: slotArr.slice(0, num),
+    description: teamDescriptionStub,
+    userName: teamUserNameStub,
+    isPublic: false,
+    isSample: false,
   };
 
   if (skipSlots) {
@@ -30,52 +37,26 @@ export function editTeamDtoStub(num = 1, skipSlots = false): EditTeamDto {
   return dto;
 }
 
-const genericSlot: TeamSlotDto = {
-  nationalPokedexNumber: 1,
-  name: 'generic-name',
+const genericSlot: Omit<JSONSlot, 'nationalPokedexNumber'> = {
+  species: 'generic-species',
+  nickname: 'generic-name',
   abilityName: 'generic-abilityName',
   natureName: NatureNames.careful,
-  evHp: 0,
-  evAttack: 0,
-  evDefense: 0,
-  evSpAttack: 0,
-  evSpDefense: 0,
-  evSpeed: 0,
+  evs: { hp: 0, atk: 0, def: 0, spa: 0, spd: 0, spe: 0 },
+  ivs: { hp: 31, atk: 31, def: 31, spa: 31, spd: 31, spe: 31 },
   itemName: 'generic-itemName',
   shiny: false,
   gender: Gender.male,
-  moveOneName: 'tackle',
+  moves: ['tackle'],
+  level: 100,
+  happiness: 100,
 };
 
-const slotArr: TeamSlotDto[] = [
-  {
-    ...genericSlot,
-    name: 'bulbasaur',
-    nationalPokedexNumber: 1,
-  },
-  {
-    ...genericSlot,
-    name: 'ivysaur',
-    nationalPokedexNumber: 2,
-  },
-  {
-    ...genericSlot,
-    name: 'venusaur',
-    nationalPokedexNumber: 3,
-  },
-  {
-    ...genericSlot,
-    name: 'charmander',
-    nationalPokedexNumber: 4,
-  },
-  {
-    ...genericSlot,
-    name: 'charmeleon',
-    nationalPokedexNumber: 5,
-  },
-  {
-    ...genericSlot,
-    name: 'charizard',
-    nationalPokedexNumber: 6,
-  },
+const slotArr: JSONSlot[] = [
+  { ...genericSlot, nationalPokedexNumber: 1 },
+  { ...genericSlot, nationalPokedexNumber: 2 },
+  { ...genericSlot, nationalPokedexNumber: 3 },
+  { ...genericSlot, nationalPokedexNumber: 4 },
+  { ...genericSlot, nationalPokedexNumber: 5 },
+  { ...genericSlot, nationalPokedexNumber: 6 },
 ];

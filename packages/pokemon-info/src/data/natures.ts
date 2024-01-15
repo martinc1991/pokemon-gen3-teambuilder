@@ -1,108 +1,153 @@
-import { INature, NatureNames, StatName } from 'contract';
+import { Nature, NatureNames, StatName } from 'contract';
 
 // There are 25 natures, 5 neutral (https://bulbapedia.bulbagarden.net/wiki/Nature)
-export const NATURES: INature[] = [
+export const NATURES: Nature[] = [
   {
+    id: `nature-${NatureNames.sassy}`,
     name: NatureNames.sassy,
     increased: StatName.spdefense,
     decreased: StatName.speed,
   },
   {
+    id: `nature-${NatureNames.brave}`,
     name: NatureNames.brave,
     increased: StatName.attack,
     decreased: StatName.speed,
   },
   {
+    id: `nature-${NatureNames.quiet}`,
     name: NatureNames.quiet,
     increased: StatName.spattack,
     decreased: StatName.speed,
   },
   {
+    id: `nature-${NatureNames.relaxed}`,
     name: NatureNames.relaxed,
     increased: StatName.defense,
     decreased: StatName.speed,
   },
-  { name: NatureNames.serious, increased: null, decreased: null },
-  { name: NatureNames.hardy, increased: null, decreased: null },
   {
+    id: `nature-${NatureNames.serious}`,
+    name: NatureNames.serious,
+    increased: null,
+    decreased: null,
+  },
+  {
+    id: `nature-${NatureNames.hardy}`,
+    name: NatureNames.hardy,
+    increased: null,
+    decreased: null,
+  },
+  {
+    id: `nature-${NatureNames.bold}`,
     name: NatureNames.bold,
     increased: StatName.defense,
     decreased: StatName.attack,
   },
   {
+    id: `nature-${NatureNames.modest}`,
     name: NatureNames.modest,
     increased: StatName.spattack,
     decreased: StatName.attack,
   },
   {
+    id: `nature-${NatureNames.calm}`,
     name: NatureNames.calm,
     increased: StatName.spdefense,
     decreased: StatName.attack,
   },
   {
+    id: `nature-${NatureNames.timid}`,
     name: NatureNames.timid,
     increased: StatName.speed,
     decreased: StatName.attack,
   },
   {
+    id: `nature-${NatureNames.lonely}`,
     name: NatureNames.lonely,
     increased: StatName.attack,
     decreased: StatName.defense,
   },
-  { name: NatureNames.docile, increased: null, decreased: null },
   {
+    id: `nature-${NatureNames.docile}`,
+    name: NatureNames.docile,
+    increased: null,
+    decreased: null,
+  },
+  {
+    id: `nature-${NatureNames.mild}`,
     name: NatureNames.mild,
     increased: StatName.spattack,
     decreased: StatName.defense,
   },
   {
+    id: `nature-${NatureNames.gentle}`,
     name: NatureNames.gentle,
     increased: StatName.spdefense,
     decreased: StatName.defense,
   },
   {
+    id: `nature-${NatureNames.hasty}`,
     name: NatureNames.hasty,
     increased: StatName.speed,
     decreased: StatName.defense,
   },
   {
+    id: `nature-${NatureNames.adamant}`,
     name: NatureNames.adamant,
     increased: StatName.attack,
     decreased: StatName.spattack,
   },
-  { name: NatureNames.bashful, increased: null, decreased: null },
   {
+    id: `nature-${NatureNames.bashful}`,
+    name: NatureNames.bashful,
+    increased: null,
+    decreased: null,
+  },
+  {
+    id: `nature-${NatureNames.careful}`,
     name: NatureNames.careful,
     increased: StatName.spdefense,
     decreased: StatName.spattack,
   },
   {
+    id: `nature-${NatureNames.rash}`,
     name: NatureNames.rash,
     increased: StatName.spattack,
     decreased: StatName.spdefense,
   },
   {
+    id: `nature-${NatureNames.jolly}`,
     name: NatureNames.jolly,
     increased: StatName.speed,
     decreased: StatName.spattack,
   },
   {
+    id: `nature-${NatureNames.naughty}`,
     name: NatureNames.naughty,
     increased: StatName.attack,
     decreased: StatName.spdefense,
   },
-  { name: NatureNames.quirky, increased: null, decreased: null },
   {
+    id: `nature-${NatureNames.quirky}`,
+    name: NatureNames.quirky,
+    increased: null,
+    decreased: null,
+  },
+  {
+    id: `nature-${NatureNames.naive}`,
     name: NatureNames.naive,
     increased: StatName.speed,
     decreased: StatName.spdefense,
   },
   {
+    id: `nature-${NatureNames.impish}`,
     name: NatureNames.impish,
     increased: StatName.defense,
     decreased: StatName.spattack,
   },
   {
+    id: `nature-${NatureNames.lax}`,
     name: NatureNames.lax,
     increased: StatName.defense,
     decreased: StatName.spdefense,

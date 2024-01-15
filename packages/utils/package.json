@@ -1,0 +1,26 @@
+{
+  "name": "utils",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "author": "MartinC",
+  "license": "ISC",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": " tsc --watch",
+    "lint": "tsc --noEmit --skipLibCheck",
+    "test": "vitest --run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest --coverage"
+  },
+  "dependencies": {
+    "contract": "workspace:*",
+    "pokemon-info": "workspace:*"
+  },
+  "devDependencies": {
+    "@vitest/coverage-v8": "^1.1.1",
+    "vitest": "^1.1.1"
+  }
+}

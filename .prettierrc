@@ -1,0 +1,8 @@
+{
+  "enableDebugLogs": true,
+  "endOfLine": "auto",
+  "jsxSingleQuote": true,
+  "printWidth": 140,
+  "singleQuote": true,
+  "trailingComma": "all"
+}

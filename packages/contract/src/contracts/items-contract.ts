@@ -1,16 +1,19 @@
-import { ClientInferResponseBody, initContract } from '@ts-rest/core';
+import { initContract } from '@ts-rest/core';
 import { z } from 'zod';
-import { ItemModel } from '../prisma/zod';
-import { ArrayElementType } from '../utils/types/array-element-type';
+import { ItemSchema } from '../prisma/zod';
 
 const c = initContract();
+
+// Zod schemas
+const GetOneItemResponseSchema = ItemSchema;
+const GetAllItemsResponseSchema = z.array(ItemSchema);
 
 export const itemsContract = c.router({
   getAll: {
     method: 'GET',
     path: '/items',
     responses: {
-      200: z.array(ItemModel),
+      200: GetAllItemsResponseSchema,
     },
     summary: 'Get all items',
   },
@@ -18,13 +21,11 @@ export const itemsContract = c.router({
     method: 'GET',
     path: `/items/:itemName`,
     responses: {
-      200: ItemModel,
+      200: GetOneItemResponseSchema,
     },
     summary: 'Get a item by name',
   },
 });
 
+// Contract types
 export type IItemsContract = typeof itemsContract;
-
-export type IItemGetAllResponse = ClientInferResponseBody<typeof itemsContract.getAll, 200>;
-export type IItemGetAllResponseElement = ArrayElementType<IItemGetAllResponse>;

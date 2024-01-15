@@ -1,15 +1,15 @@
 import { client } from '@rq-client/index';
-import { FilledSlot } from '@state/team/helpers';
-import { CalculateStatProps, calculateStat } from '@utils/pokemon';
+import { LocalSlot, PokemonWithAbilities } from 'contract';
 import { Typography } from 'ui';
+import { CalculateStatProps, calculateStat } from 'utils';
 
 interface PokemonCardStatsProps {
-  slot: FilledSlot;
+  slot: LocalSlot;
+  pokemon: PokemonWithAbilities;
 }
 
-export default function PokemonCardStats({ slot }: PokemonCardStatsProps): JSX.Element {
+export default function PokemonCardStats({ slot, pokemon }: PokemonCardStatsProps): JSX.Element {
   const { data, error, isLoading } = client.natures.getAll.useQuery(['all-natures']);
-  const { pokemon } = slot;
 
   if (isLoading) return <EmptyPokemonCardStats filler='-' />;
   if (error) return <EmptyPokemonCardStats filler='error' />;
@@ -32,19 +32,19 @@ export default function PokemonCardStats({ slot }: PokemonCardStatsProps): JSX.E
         <div className='flex items-center justify-between gap-1'>
           <Typography.Muted>HP: </Typography.Muted>
           <Typography.Small>
-            {calculateStat({ ...basicArguments, statName: 'hp', base: pokemon.baseHp, ev: slot.evHp, iv: slot.ivHp })}
+            {calculateStat({ ...basicArguments, statName: 'hp', base: pokemon.baseHp, ev: slot.evs.hp, iv: slot.ivs.hp })}
           </Typography.Small>
         </div>
         <div className='flex justify-between gap-1'>
           <Typography.Muted>Atk: </Typography.Muted>
           <Typography.Small>
-            {calculateStat({ ...basicArguments, statName: 'attack', base: pokemon.baseAttack, ev: slot.evAttack, iv: slot.ivAttack })}
+            {calculateStat({ ...basicArguments, statName: 'attack', base: pokemon.baseAttack, ev: slot.evs.atk, iv: slot.ivs.atk })}
           </Typography.Small>
         </div>
         <div className='flex justify-between gap-1'>
           <Typography.Muted>Def: </Typography.Muted>
           <Typography.Small>
-            {calculateStat({ ...basicArguments, statName: 'defense', base: pokemon.baseDefense, ev: slot.evDefense, iv: slot.ivDefense })}
+            {calculateStat({ ...basicArguments, statName: 'defense', base: pokemon.baseDefense, ev: slot.evs.def, iv: slot.ivs.def })}
           </Typography.Small>
         </div>
         <div className='flex justify-between gap-1'>
@@ -54,8 +54,8 @@ export default function PokemonCardStats({ slot }: PokemonCardStatsProps): JSX.E
               ...basicArguments,
               statName: 'spattack',
               base: pokemon.baseSpattack,
-              ev: slot.evSpAttack,
-              iv: slot.ivSpAttack,
+              ev: slot.evs.spa,
+              iv: slot.ivs.spa,
             })}
           </Typography.Small>
         </div>
@@ -66,15 +66,15 @@ export default function PokemonCardStats({ slot }: PokemonCardStatsProps): JSX.E
               ...basicArguments,
               statName: 'spdefense',
               base: pokemon.baseSpdefense,
-              ev: slot.evSpDefense,
-              iv: slot.ivSpDefense,
+              ev: slot.evs.spd,
+              iv: slot.ivs.spd,
             })}
           </Typography.Small>
         </div>
         <div className='flex justify-between gap-1'>
           <Typography.Muted>Spe: </Typography.Muted>
           <Typography.Small>
-            {calculateStat({ ...basicArguments, statName: 'speed', base: pokemon.baseSpeed, ev: slot.evSpeed, iv: slot.ivSpeed })}
+            {calculateStat({ ...basicArguments, statName: 'speed', base: pokemon.baseSpeed, ev: slot.evs.spe, iv: slot.ivs.spe })}
           </Typography.Small>
         </div>
       </div>

@@ -1,16 +1,19 @@
-import { ClientInferResponseBody, initContract } from '@ts-rest/core';
+import { initContract } from '@ts-rest/core';
 import { z } from 'zod';
-import { NatureModel } from '../prisma/zod';
-import { ArrayElementType } from '../utils/types/array-element-type';
+import { NatureSchema } from '../prisma/zod';
 
 const c = initContract();
+
+// Responses types
+const GetOneNatureResponseSchema = NatureSchema;
+const GetAllNaturesResponseSchema = z.array(NatureSchema);
 
 export const naturesContract = c.router({
   getAll: {
     method: 'GET',
     path: '/natures',
     responses: {
-      200: z.array(NatureModel),
+      200: GetAllNaturesResponseSchema,
     },
     summary: 'Get all natures',
   },
@@ -18,15 +21,11 @@ export const naturesContract = c.router({
     method: 'GET',
     path: `/natures/:natureName`,
     responses: {
-      200: NatureModel,
+      200: GetOneNatureResponseSchema,
     },
     summary: 'Get a nature by name',
   },
 });
 
-// Contract type
+// Contract types
 export type INaturesContract = typeof naturesContract;
-
-// Responses types
-export type INatureGetAllResponse = ClientInferResponseBody<typeof naturesContract.getAll, 200>;
-export type INatureGetAllResponseElement = ArrayElementType<INatureGetAllResponse>;

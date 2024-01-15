@@ -1,15 +1,36 @@
 import { client } from '@rq-client/index';
 import { useTeamStore } from '@state/team';
-import { FilledSlot } from '@state/team/helpers';
 import clsx from 'clsx';
+import { LocalSlot } from 'contract';
 import { useEffect, useMemo, useState } from 'react';
 import { FormField, Separator, TypeBadge, Typography } from 'ui';
 
 export const MOVES_TAB_NAME = 'moves';
 
 interface TabProps {
-  slot: FilledSlot;
+  slot: LocalSlot;
 }
+
+function replaceElementInArray<T>(arr: T[], elem: T, index: number): T[] {
+  const newArr = [...arr];
+  newArr[index] = elem;
+  return newArr;
+}
+
+function getMoveSlotIndex(nameField: MovesNameFields): MoveSlotIndex {
+  switch (nameField) {
+    case MovesNameFields.ONE:
+      return 0;
+    case MovesNameFields.TWO:
+      return 1;
+    case MovesNameFields.THREE:
+      return 2;
+    case MovesNameFields.FOUR:
+      return 3;
+  }
+}
+
+type MoveSlotIndex = 0 | 1 | 2 | 3;
 
 const enum MovesNameFields {
   ONE = 'moveOneName',
@@ -20,7 +41,7 @@ const enum MovesNameFields {
 
 export function MovesTab({ slot }: TabProps): JSX.Element {
   const [filter, setFilter] = useState('');
-  const [selectedMoveField, setSelectedMoveField] = useState<MovesNameFields>(MovesNameFields.ONE);
+  const [selectedMoveIndex, setSelectedMoveIndex] = useState<MoveSlotIndex>(0);
   const [setSlotFieldValue] = useTeamStore((state) => [state.setSlotFieldValue]);
 
   const [moveOneName, setMoveOneName] = useState('');
@@ -28,52 +49,59 @@ export function MovesTab({ slot }: TabProps): JSX.Element {
   const [moveThreeName, setMoveThreeName] = useState('');
   const [moveFourName, setMoveFourName] = useState('');
 
-  const selectedMovesNames = [slot.moveOneName, slot.moveTwoName, slot.moveThreeName, slot.moveFourName];
+  const selectedMovesNames = [slot.moves[0] || '', slot.moves[1] || '', slot.moves[2] || '', slot.moves[3] || ''];
 
   useEffect(() => {
-    setMoveOneName(slot.moveOneName || '');
-    setMoveTwoName(slot.moveTwoName || '');
-    setMoveThreeName(slot.moveThreeName || '');
-    setMoveFourName(slot.moveFourName || '');
+    setMoveOneName(slot.moves[0] || '');
+    setMoveTwoName(slot.moves[1] || '');
+    setMoveThreeName(slot.moves[2] || '');
+    setMoveFourName(slot.moves[3] || '');
   }, []);
 
-  const { isError, isLoading, data } = client.pokemon.getOne.useQuery([`load-${slot.pokemon.name}-learnset`], {
+  const { isError, isLoading, data } = client.pokemon.getOne.useQuery([`get-one-pokemon-${slot.species}`], {
     params: { nationalDexNumber: slot.nationalPokedexNumber.toString() },
   });
 
-  const movesNames = useMemo(() => data?.body.learnset.map((move) => move.name), [data?.body]) || [];
+  // Learnset
+  const learnsetMovesNames = useMemo(() => data?.body.learnset.map((move) => move.name), [data?.body]) || [];
 
   function handleFilter(e: React.ChangeEvent<HTMLInputElement>): void {
     setFilter(e.target.value.toLowerCase());
 
-    if (movesNames.includes(e.target.value.toLowerCase())) {
-      setSlotFieldValue(slot, selectedMoveField, e.target.value.toLowerCase());
+    if (learnsetMovesNames.includes(e.target.value.toLowerCase())) {
+      // CASE: the move belongs to this pokemon learnset
+      const newMoves = replaceElementInArray(slot.moves, e.target.value.toLowerCase(), selectedMoveIndex);
+      setSlotFieldValue(slot.meta.id, 'moves', newMoves);
     } else {
-      setSlotFieldValue(slot, selectedMoveField, '');
+      const newMoves = replaceElementInArray(slot.moves, '', selectedMoveIndex);
+      setSlotFieldValue(slot.meta.id, 'moves', newMoves);
     }
   }
 
-  function handleAddMove(moveFieldName: MovesNameFields, moveName: string): void {
-    setSlotFieldValue(slot, moveFieldName, moveName);
-    if (selectedMoveField === MovesNameFields.ONE) {
+  function handleAddMove(moveFieldName: MoveSlotIndex, moveName: string): void {
+    const newMoves = replaceElementInArray(slot.moves, moveName, moveFieldName);
+
+    setSlotFieldValue(slot.meta.id, 'moves', newMoves);
+    if (selectedMoveIndex === 0) {
       setMoveOneName(moveName);
       document.getElementById(MovesNameFields.TWO)?.focus();
     }
-    if (selectedMoveField === MovesNameFields.TWO) {
+    if (selectedMoveIndex === 1) {
       setMoveTwoName(moveName);
       document.getElementById(MovesNameFields.THREE)?.focus();
     }
-    if (selectedMoveField === MovesNameFields.THREE) {
+    if (selectedMoveIndex === 2) {
       setMoveThreeName(moveName);
       document.getElementById(MovesNameFields.FOUR)?.focus();
     }
-    if (selectedMoveField === MovesNameFields.FOUR) {
+    if (selectedMoveIndex === 3) {
       setMoveFourName(moveName);
     }
   }
 
   function handleFocus(e: React.FocusEvent<HTMLInputElement>): void {
-    setSelectedMoveField(e.target.id as MovesNameFields);
+    const a = getMoveSlotIndex(e.target.id as MovesNameFields);
+    setSelectedMoveIndex(a);
   }
 
   if (isError) return <div>Error</div>;
@@ -165,11 +193,11 @@ export function MovesTab({ slot }: TabProps): JSX.Element {
                   aria-hidden='true'
                   className={clsx(
                     'flex gap-4 min-h-[40px] px-2 items-center rounded-md mr-2',
-                    selectedMovesNames.includes(move.name) ? 'bg-green-800' : 'hover:bg-green-600 hover:cursor-pointer'
+                    selectedMovesNames.includes(move.name) ? 'bg-green-800' : 'hover:bg-green-600 hover:cursor-pointer',
                   )}
                   key={`${move.id}`}
                   onClick={() => {
-                    if (!selectedMovesNames.includes(move.name)) handleAddMove(selectedMoveField, move.name);
+                    if (!selectedMovesNames.includes(move.name)) handleAddMove(selectedMoveIndex, move.name);
                     setFilter('');
                   }}
                 >

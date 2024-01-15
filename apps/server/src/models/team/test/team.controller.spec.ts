@@ -1,15 +1,12 @@
 import { Test } from '@nestjs/testing';
 import { TeamController } from '../team.controller';
 import { TeamService } from '../team.service';
-import {
-  createTeamDtoStub,
-  editTeamDtoStub,
-  teamIdStub,
-} from './stubs/createTeamDto.stub';
+import { createTeamDtoStub, editTeamDtoStub, teamIdStub } from './stubs/createTeamDto.stub';
 import { paginationStub } from './stubs/pagination.stub';
 
 const mockedTeamService = {
   getAll: jest.fn(),
+  getSampleTeams: jest.fn(),
   getOneById: jest.fn(),
   create: jest.fn(),
   delete: jest.fn(),
@@ -34,6 +31,13 @@ describe('Team controller', () => {
     it('should call service getAll method passing pagination params', async () => {
       await controller.getAll(paginationStub());
       expect(service.getAll).toHaveBeenCalledWith(paginationStub());
+    });
+  });
+
+  describe('getSampleTeams method', () => {
+    it('should call service getSampleTeams method passing pagination params', async () => {
+      await controller.getSampleTeams(paginationStub());
+      expect(service.getSampleTeams).toHaveBeenCalledWith(paginationStub());
     });
   });
 

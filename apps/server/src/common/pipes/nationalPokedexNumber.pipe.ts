@@ -1,15 +1,13 @@
 import { BadRequestException, Injectable, PipeTransform } from '@nestjs/common';
+import { isValidNationalPokedexNumber } from 'utils';
 import { ERROR_MESSAGES } from '../constants/errorMessages';
-import { isValidNationalPokedexInteger } from '../helpers/pokemon.helper';
 
 @Injectable()
-export class NationalPokedexNumberPipe
-  implements PipeTransform<string, number>
-{
+export class NationalPokedexNumberPipe implements PipeTransform<string, number> {
   transform(value: string): number {
     const id = parseFloat(value);
 
-    if (!isValidNationalPokedexInteger(id)) {
+    if (!isValidNationalPokedexNumber(id)) {
       throw new BadRequestException(ERROR_MESSAGES.NOT_VALID_POKEDEX_NUMBER);
     }
 

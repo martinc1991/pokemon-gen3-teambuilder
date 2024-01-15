@@ -1,0 +1,217 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator zod {
+  provider                         = "zod-prisma-types"
+  output                           = "../../src/prisma/zod" // (default) the directory where generated zod schemas will be saved
+  useMultipleFiles                 = true // default is false
+  writeBarrelFiles                 = true // default is true
+  createInputTypes                 = false // default is true INFO: important this to be false, being true generates a BUNCH of files
+  createOptionalDefaultValuesTypes = false
+  createPartialTypes               = false // default is false // INFO: will be useful when creating teams
+  addInputTypeValidation           = false // default is true
+  addIncludeType                   = false // default is true
+  addSelectType                    = false // default is true
+  validateWhereUniqueInput         = false // default is true
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// -----------------------------------------------------------------------------------------
+
+// Enums
+enum StatName {
+  hp
+  attack
+  defense
+  spattack
+  spdefense
+  speed
+}
+
+enum NatureNames {
+  adamant
+  bashful
+  bold
+  brave
+  calm
+  careful
+  docile
+  gentle
+  hardy
+  hasty
+  impish
+  jolly
+  lax
+  lonely
+  mild
+  modest
+  naive
+  naughty
+  quiet
+  quirky
+  rash
+  relaxed
+  sassy
+  serious
+  timid
+}
+
+enum TypeNames {
+  normal
+  ice
+  ghost
+  dark
+  grass
+  electric
+  steel
+  ground
+  fighting
+  bug
+  poison
+  rock
+  water
+  flying
+  fire
+  dragon
+  psychic
+  empty
+}
+
+enum DamageClass {
+  physical
+  special
+  status
+}
+
+enum MoveTarget {
+  selectedPokemon
+  user
+  allOpponents
+  userAndAllies
+  specificMove
+  allOtherPokemon
+  entireField
+  ally
+  usersField
+  randomOpponent
+  allPokemon
+  opponentsField
+}
+
+enum Gender {
+  male
+  female
+  genderless
+}
+
+enum Tier {
+  lc
+  nfe
+  nu
+  ou
+  pu
+  publ
+  uber
+  uu
+  uubl
+}
+
+// Enums
+
+// Basic entities (types, abilities, moves, items)
+model Type {
+  id               String      @id @default(uuid())
+  name             TypeNames   @unique
+  damageClass      DamageClass
+  noDamageTo       TypeNames[]
+  halfDamageTo     TypeNames[]
+  doubleDamageTo   TypeNames[]
+  noDamageFrom     TypeNames[]
+  halfDamageFrom   TypeNames[]
+  doubleDamageFrom TypeNames[]
+  pokemonTypeOne   Pokemon[]   @relation("TypeToPokemonTypeOne")
+  pokemonTypeTwo   Pokemon[]   @relation("TypeToPokemonTypeTwo")
+}
+
+model Ability {
+  id               String    @id @default(uuid())
+  name             String    @unique
+  shortDescription String
+  longDescription  String
+  Pokemon          Pokemon[]
+}
+
+model Nature {
+  id        String      @id @default(uuid())
+  name      NatureNames @unique
+  increased StatName?
+  decreased StatName?
+}
+
+model Item {
+  id          String  @id @default(uuid())
+  name        String  @unique
+  effect      String
+  flingEffect String?
+  flingPower  Int?
+  sprite      String
+  // slot        Slot[]
+}
+
+// Pokemons
+model Pokemon {
+  id                    String    @id @default(uuid())
+  name                  String    @unique
+  nationalPokedexNumber Int       @unique
+  sprite                String
+  icon                  String
+  height                Int
+  weight                Int
+  typeOne               Type      @relation("TypeToPokemonTypeOne", fields: [typeOneName], references: [name])
+  typeOneName           TypeNames
+  // TODO: make typeTwo field required
+  typeTwo               Type?     @relation("TypeToPokemonTypeTwo", fields: [typeTwoName], references: [name])
+  typeTwoName           TypeNames
+  abilities             Ability[]
+  genders               Gender[]
+  tier                  Tier      @default(lc)
+  baseHp                Int
+  baseAttack            Int
+  baseDefense           Int
+  baseSpattack          Int
+  baseSpdefense         Int
+  baseSpeed             Int
+  learnset              Move[]
+}
+
+// Teams
+model Team {
+  id          String  @id @default(uuid())
+  name        String  @default("")
+  description String  @default("")
+  userName    String  @default("") // INFO: just for now, User model not made yet
+  slots       String // INFO: see PackedTeam type on contract
+  isSample    Boolean @default(false)
+  isPublic    Boolean @default(false)
+}
+
+model Move {
+  id          String      @id @default(uuid())
+  name        String      @unique
+  accuracy    Int
+  damageClass DamageClass
+  description String
+  power       Int
+  pp          Int
+  target      MoveTarget
+  type        TypeNames
+  pokemon     Pokemon[]
+}

@@ -42,9 +42,7 @@ describe('Pokemon controller', () => {
     it('should call service getOne method passing nationalDexNumber param', async () => {
       await controller.getOne(pokemonStub().nationalPokedexNumber);
 
-      expect(service.getOne).toHaveBeenCalledWith(
-        pokemonStub().nationalPokedexNumber,
-      );
+      expect(service.getOne).toHaveBeenCalledWith(pokemonStub().nationalPokedexNumber);
     });
   });
 });

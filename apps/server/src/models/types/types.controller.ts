@@ -1,10 +1,6 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { TypeNames } from '@prisma/client';
-import {
-  NestControllerInterface,
-  TsRest,
-  nestControllerContract,
-} from '@ts-rest/nest';
+import { NestControllerInterface, TsRest, nestControllerContract } from '@ts-rest/nest';
 import { ITypesContract, typesContract } from 'contract';
 import { TypesService } from './types.service';
 

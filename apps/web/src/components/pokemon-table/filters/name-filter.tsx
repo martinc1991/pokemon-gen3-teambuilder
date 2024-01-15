@@ -1,14 +1,14 @@
 'use client';
 
 import type { Table } from '@tanstack/react-table';
-import type { IPokemonGetAllResponseElement } from 'contract';
+import type { PokemonWithAbilities } from 'contract';
 import { useEffect, useState, type ChangeEvent } from 'react';
 import { Input } from 'ui';
 import { useDebounce } from 'usehooks-ts';
 import { ColumnID } from '../columns/constants';
 
 interface NameAbilityFilterProps {
-  table: Table<IPokemonGetAllResponseElement>;
+  table: Table<PokemonWithAbilities>;
 }
 
 export function NameFilter({ table }: NameAbilityFilterProps): JSX.Element {

@@ -1,18 +1,23 @@
 'use client';
 
+import LoadingState from '@components/loading-state';
 import PageHeader from '@components/page-header';
-import PokemonCard from '@components/slots/cards';
+import { EmptyPokemonCard, FilledPokemonCard } from '@components/slots/cards';
 import SlotConfigModal from '@components/slots/config-modal';
-import { useTeamStore } from '@state/team';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Dialog, DialogTrigger } from 'ui';
+import { queryClient } from '@rq-client/index';
+import withTeamStore, { WithTeamStoreProps } from '@state/team/with-team-store';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { MAX_TEAM_MEMBERS } from 'contract';
+import Link from 'next/link';
+import { Button, Dialog, DialogTrigger, Typography } from 'ui';
 
-const queryClient = new QueryClient();
+interface BuilderProps extends WithTeamStoreProps {}
 
-export default function Builder(): JSX.Element {
-  const [slots, setSelectedSlotIndex] = useTeamStore((state) => [state.slots, state.setSelectedSlotIndex]);
+function Builder({ teamStore }: BuilderProps): JSX.Element {
+  const { slots, setSelectedSlotIndex } = teamStore;
 
   const areThereSlots = slots.length > 0;
+  const emptySlots = MAX_TEAM_MEMBERS - slots.length;
 
   function handleSetSelectedSlotIndex(index: number): void {
     setSelectedSlotIndex(index);
@@ -25,24 +30,49 @@ export default function Builder(): JSX.Element {
           description='Your current team. Click on one card to edit. When you are done, copy it from the right sidebar.'
           title='Team'
         />
-        <div className='flex flex-wrap justify-center w-11/12 gap-6'>
-          {areThereSlots
-            ? slots.map((slot) => {
-                return (
-                  <DialogTrigger
-                    key={slot.id}
-                    onClick={() => {
-                      handleSetSelectedSlotIndex(slot.order);
-                    }}
-                  >
-                    <PokemonCard slot={slot} />
-                  </DialogTrigger>
-                );
-              })
-            : null}
-        </div>
+        {areThereSlots ? (
+          <div className='flex flex-wrap justify-center gap-6'>
+            {slots.map((slot, order) => {
+              return (
+                <DialogTrigger
+                  key={slot.meta.id}
+                  onClick={() => {
+                    // FIX: este handler esta generando un bug al abrir el config modal
+                    // de un pokemon diferente al del index que esta seleccionado
+                    handleSetSelectedSlotIndex(order);
+                  }}
+                >
+                  <FilledPokemonCard slot={slot} order={order} />
+                </DialogTrigger>
+              );
+            })}
+            {Array(emptySlots)
+              .fill(null)
+              .map((_, i) => {
+                return <EmptyPokemonCard key={i} />;
+              })}
+          </div>
+        ) : (
+          <EmptyState />
+        )}
+
         {areThereSlots ? <SlotConfigModal /> : null}
       </Dialog>
     </QueryClientProvider>
   );
 }
+
+function EmptyState(): JSX.Element {
+  return (
+    <div className='flex flex-1 w-full justify-center items-center'>
+      <Typography.Muted>No pokemon selected yet.</Typography.Muted>
+      <Link href={`/pokemon`}>
+        <Button className='px-2' variant='link'>
+          Add some.
+        </Button>
+      </Link>
+    </div>
+  );
+}
+
+export default withTeamStore(Builder, <LoadingState />);

@@ -1,12 +1,12 @@
 'use client';
 
 import { type ColumnDef } from '@tanstack/react-table';
-import { type IPokemonGetAllResponseElement } from 'contract';
+import { type PokemonWithAbilities } from 'contract';
 import { Typography } from 'ui';
 import { ColumnID } from './constants';
 import { columnHelper } from './get-column-helper';
 
-export const weightColumn: ColumnDef<IPokemonGetAllResponseElement> = columnHelper.accessor((row) => row.weight / 10, {
+export const weightColumn: ColumnDef<PokemonWithAbilities> = columnHelper.accessor((row) => row.weight / 10, {
   id: ColumnID.WEIGHT,
   header: () => {
     return <div>Weight</div>;

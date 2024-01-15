@@ -1,19 +1,26 @@
 import { DotsHorizontalIcon } from '@radix-ui/react-icons';
 import { useTeamStore } from '@state/team';
-import { MAX_TEAM_MEMBERS, type IPokemon } from 'contract';
+import { MAX_TEAM_MEMBERS, type PokemonWithAbilities } from 'contract';
+import Link from 'next/link';
 import { Button, DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from 'ui';
 
 interface RowDropdownMenuProps {
-  pokemon: IPokemon;
+  pokemon: PokemonWithAbilities;
 }
 
 export default function RowDropdownMenu(props: RowDropdownMenuProps): JSX.Element {
-  const [slots, addPokemon] = useTeamStore((state) => [state.slots, state.addSlot]);
+  const [slots, addSlot] = useTeamStore((state) => [state.slots, state.addSlot]);
 
   const addPokemonDisabled = slots.length >= MAX_TEAM_MEMBERS;
 
   function handleClick(): void {
-    if (!addPokemonDisabled) addPokemon(props.pokemon);
+    if (!addPokemonDisabled)
+      addSlot({
+        abilityName: props.pokemon.abilities[0].name,
+        gender: props.pokemon.genders[0],
+        nationalPokedexNumber: props.pokemon.nationalPokedexNumber,
+        species: props.pokemon.name,
+      });
   }
 
   return (
@@ -29,6 +36,9 @@ export default function RowDropdownMenu(props: RowDropdownMenuProps): JSX.Elemen
           <DropdownMenuItem disabled={addPokemonDisabled} onClick={handleClick}>
             Add to team
           </DropdownMenuItem>
+          <Link href={`/pokemon/${props.pokemon.name}`}>
+            <DropdownMenuItem>Details</DropdownMenuItem>
+          </Link>
         </DropdownMenuContent>
       </DropdownMenu>
     </div>

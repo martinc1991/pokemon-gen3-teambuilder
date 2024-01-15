@@ -9,7 +9,7 @@ const Avatar = React.forwardRef<React.ElementRef<typeof AvatarPrimitive.Root>, R
       className={cn('relative flex justify-center items-center h-12 w-12 shrink-0 overflow-hidden rounded-full', className)}
       {...props}
     />
-  )
+  ),
 );
 Avatar.displayName = AvatarPrimitive.Root.displayName;
 
