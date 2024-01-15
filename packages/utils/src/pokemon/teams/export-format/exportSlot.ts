@@ -1,7 +1,7 @@
-import { ExportTeam, MAX_HAPPINESS, type JSONSlot, type StatName, MAX_LEVEL, MAX_INDIVIDUAL_IV, StatID, StatsTable } from 'contract';
+import { ExportTeam, MAX_HAPPINESS, MAX_INDIVIDUAL_IV, MAX_LEVEL, type JSONSlot } from 'contract';
 import { capitalize, formatString } from '../../../common';
-import { getShortStatName } from '../../stats';
 import { calculateHiddenPowerType } from '../../types';
+import { getStatsText } from './stats';
 
 /**
  * Transforms a slot **from JSON to export** format.
@@ -48,46 +48,23 @@ export function exportSlot(slot: JSONSlot): ExportTeam {
     out += `Happiness: ${slot.happiness}  \n`;
   }
 
-  // TODO: is this neccesary?
-  // if (slot.hpType) {
-  //   out += `Hidden Power: ${calculateHiddenPowerType(slot)}  \n`;
-  // }
-
   // evs
   if (slot.evs.hp || slot.evs.atk || slot.evs.def || slot.evs.spa || slot.evs.spd || slot.evs.spe) {
-    const statNameArray: StatID[] = ['hp', 'atk', 'def', 'spa', 'spd', 'spe'];
-
-    const stats = statNameArray.map((stat) => (slot.evs[stat] ? `${slot.evs[stat]} ${getShortStatName(stat)}` : ``)).filter(Boolean);
-
-    if (stats.length) {
-      out += `EVs: ${stats.join(' / ')}  \n`;
-    }
+    out += getStatsText(slot.evs, 'ev');
   }
 
-  // if (slot.natureName) {
   out += `${capitalize(slot.natureName)} Nature  \n`;
-  // }
 
   // ivs
-  if (slot.ivs.hp || slot.ivs.atk || slot.ivs.def || slot.ivs.spa || slot.ivs.spd || slot.ivs.spe) {
-    const ivs: Record<StatName, number> = {
-      hp: slot.ivs.hp,
-      attack: slot.ivs.atk,
-      defense: slot.ivs.def,
-      spattack: slot.ivs.spa,
-      spdefense: slot.ivs.spd,
-      speed: slot.ivs.spe,
-    };
-
-    const stats = ['hp', 'attack', 'defense', 'spattack', 'spdefense', 'speed']
-      .map((stat) =>
-        ivs[stat] !== MAX_INDIVIDUAL_IV && ivs[stat] !== undefined ? `${ivs[stat] || 0} ${getShortStatName(stat as StatName)}` : ``,
-      )
-      .filter(Boolean);
-
-    if (stats.length) {
-      out += `IVs: ${stats.join(' / ')}  \n`;
-    }
+  if (
+    slot.ivs.hp !== MAX_INDIVIDUAL_IV ||
+    slot.ivs.atk !== MAX_INDIVIDUAL_IV ||
+    slot.ivs.def !== MAX_INDIVIDUAL_IV ||
+    slot.ivs.spa !== MAX_INDIVIDUAL_IV ||
+    slot.ivs.spd !== MAX_INDIVIDUAL_IV ||
+    slot.ivs.spe !== MAX_INDIVIDUAL_IV
+  ) {
+    out += getStatsText(slot.ivs, 'iv');
   }
 
   for (let move of slot.moves) {

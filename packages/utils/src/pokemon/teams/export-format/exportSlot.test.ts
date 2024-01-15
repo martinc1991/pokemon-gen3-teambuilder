@@ -2,11 +2,12 @@ import { DEFAULT_EVS, DEFAULT_IVS, JSONSlot, MAX_HAPPINESS, MAX_LEVEL } from 'co
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 import { exportSlot } from '.';
 import { formatString } from '../../../common';
+import { getStatsText } from './stats';
 
-vi.mock('../../../common', () => {
+vi.mock('../../../common', async (importOriginal) => {
+  const mod = await importOriginal<typeof import('../../../common')>();
   return {
-    capitalize: vi.fn(),
-    formatString: vi.fn(),
+    ...mod,
   };
 });
 
@@ -22,14 +23,20 @@ vi.mock('../../types', () => {
   };
 });
 
+vi.mock('./stats', () => {
+  return {
+    getStatsText: vi.fn(),
+  };
+});
+
 const completeJsonSlot: JSONSlot = {
   nickname: 'nickname',
   species: 'species',
   moves: ['surf', 'rest', 'tackle', 'curse'],
-  abilityName: 'abilityName',
+  abilityName: 'ability-name',
   gender: 'female',
   happiness: MAX_HAPPINESS,
-  itemName: 'itemName',
+  itemName: 'item-name',
   level: MAX_LEVEL,
   nationalPokedexNumber: 123,
   natureName: 'adamant',
@@ -38,16 +45,15 @@ const completeJsonSlot: JSONSlot = {
   evs: DEFAULT_EVS,
 };
 
-// const statNameArray: StatID[] = ['hp', 'atk', 'def', 'spa', 'spd', 'spe'];
-
 function hyphenCount(str: string) {
   return str.split('-').length - 1;
 }
 
-describe('exportSlot', () => {
+describe.only('exportSlot', () => {
   let slot: JSONSlot;
+
   beforeEach(() => {
-    slot = { ...completeJsonSlot };
+    slot = JSON.parse(JSON.stringify(completeJsonSlot)); // This method creates a new object without references to original, even nested ones (spred operator keeps references on nested objects)
     vi.clearAllMocks();
   });
 
@@ -76,66 +82,75 @@ describe('exportSlot', () => {
   });
   test('should add item only if provided', () => {
     const itemString = completeJsonSlot.itemName as string;
+    const itemTag = '@';
+
     const withItem = exportSlot(slot);
     expect(withItem).toContain(formatString(itemString));
+    expect(withItem).toContain(itemTag);
 
     slot.itemName = '';
 
     const withoutItem = exportSlot(slot);
     expect(withoutItem).not.toContain(itemString);
+    expect(withoutItem).not.toContain(itemTag);
   });
   test('should add level only if different from 100', () => {
-    const levelString = 'Level:';
+    const levelTag = 'Level:';
 
     const withoutLevel = exportSlot(slot);
-    expect(withoutLevel).not.toContain(levelString);
+    expect(withoutLevel).not.toContain(levelTag);
 
     slot.level = 85;
     const withLevel = exportSlot(slot);
-    expect(withLevel).toContain(levelString);
+    expect(withLevel).toContain(levelTag);
     expect(withLevel).toContain(slot.level);
   });
   test('should add shiny only if shiny is true', () => {
-    const shinyString = 'Shiny: Yes';
+    const shinyTag = 'Shiny: Yes';
 
     const notShiny = exportSlot(slot);
-    expect(notShiny).not.toContain(shinyString);
+    expect(notShiny).not.toContain(shinyTag);
 
     slot.shiny = true;
     const shiny = exportSlot(slot);
-    expect(shiny).toContain(shinyString);
+    expect(shiny).toContain(shinyTag);
   });
   test('should add happiness only if different from 255', () => {
-    const happinessString = 'Happiness:';
+    const happinessTag = 'Happiness:';
 
     const withoutHappiness = exportSlot(slot);
-    expect(withoutHappiness).not.toContain(happinessString);
+    expect(withoutHappiness).not.toContain(happinessTag);
 
     slot.happiness = 85;
     const withHappiness = exportSlot(slot);
-    expect(withHappiness).toContain(happinessString);
+    expect(withHappiness).toContain(happinessTag);
     expect(withHappiness).toContain(slot.happiness);
   });
-  test('should only add evs if any ev stat is different from 0', () => {
-    const evsString = 'EVs:';
-
-    const withoutEvs = exportSlot(slot);
-    expect(withoutEvs).not.toContain(evsString);
+  test('should not call getStatsText if every ev stat is 0 and every iv is 31', () => {
+    exportSlot(slot);
+    expect(getStatsText).not.toHaveBeenCalled();
+  });
+  test('if any ev is different from 0, should call getStatsText function with provided evs', () => {
+    vi.mocked(getStatsText).mockResolvedValueOnce('');
 
     slot.evs.hp = 10;
-    const withEvs = exportSlot(slot);
-    expect(withEvs).toContain(evsString);
+
+    exportSlot(slot);
+
+    expect(getStatsText).toHaveBeenCalledWith(slot.evs, 'ev');
+    expect(getStatsText).toHaveBeenCalledOnce();
   });
-  test('should only add evs for %s if provided value is different from 0', (stat) => {
-    // TODO: extract this functionality into own function
-  });
-  test('should only add ivs for stats different from 31', () => {
-    // TODO: extract this functionality into own function
+  test('if any iv is different from 31, should call getStatsText function with provided ivs', () => {
+    slot.ivs.hp = 10;
+    exportSlot(slot);
+    expect(getStatsText).toHaveBeenCalledWith(slot.ivs, 'iv');
+    expect(getStatsText).toHaveBeenCalledOnce();
   });
   test('should add as many lines of moves as moves are provided', () => {
     while (slot.moves.length > 0) {
       const withMoves = exportSlot(slot);
       const count = hyphenCount(withMoves);
+
       expect(count).toBe(slot.moves.length);
       slot.moves.pop();
     }
