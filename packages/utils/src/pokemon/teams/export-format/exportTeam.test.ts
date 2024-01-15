@@ -18,6 +18,7 @@ describe('exportTeam', () => {
     expect(exportTeam([])).toBe('');
   });
   test('Should not call exportSlot if no slots are provided', () => {
+    exportTeam([]);
     expect(exportSlot).toHaveBeenCalledTimes(0);
   });
   test('Should call exportSlot as many times as slots a team has', () => {
