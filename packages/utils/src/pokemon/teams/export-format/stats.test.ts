@@ -24,7 +24,7 @@ vi.mock('../../stats', () => {
   };
 });
 
-describe.only('getStatsText', () => {
+describe('getStatsText', () => {
   let evs: StatsTable;
   let ivs: StatsTable;
 

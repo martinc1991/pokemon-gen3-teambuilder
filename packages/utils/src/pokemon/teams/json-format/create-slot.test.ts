@@ -21,7 +21,7 @@ const createSlotParams: CreateSlotParams = {
   species: 'pikachu',
 };
 
-describe.only('createSlot', () => {
+describe('createSlot', () => {
   let params: CreateSlotParams;
 
   beforeEach(() => {
