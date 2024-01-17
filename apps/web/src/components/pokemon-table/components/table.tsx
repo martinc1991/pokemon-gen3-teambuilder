@@ -36,7 +36,7 @@ export function TableContent(): JSX.Element {
 
   return (
     <div className='w-full flex flex-col'>
-      <div className='mb-4'>
+      <div>
         <Filters table={table} />
       </div>
       <PokemonTableHeader table={table} />

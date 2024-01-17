@@ -2,6 +2,7 @@
 
 import LoadingState from '@components/loading-state';
 import PageHeader from '@components/page-header';
+import { PageContent } from '@components/pages/page-content';
 import { EmptyPokemonCard, FilledPokemonCard } from '@components/slots/cards';
 import SlotConfigModal from '@components/slots/config-modal';
 import { queryClient } from '@rq-client/index';
@@ -30,33 +31,35 @@ function Builder({ teamStore }: BuilderProps): JSX.Element {
           description='Your current team. Click on one card to edit. When you are done, copy it from the right sidebar.'
           title='Team'
         />
-        {areThereSlots ? (
-          <div className='flex flex-wrap justify-center gap-6'>
-            {slots.map((slot, order) => {
-              return (
-                <DialogTrigger
-                  key={slot.meta.id}
-                  onClick={() => {
-                    // FIX: este handler esta generando un bug al abrir el config modal
-                    // de un pokemon diferente al del index que esta seleccionado
-                    handleSetSelectedSlotIndex(order);
-                  }}
-                >
-                  <FilledPokemonCard slot={slot} order={order} />
-                </DialogTrigger>
-              );
-            })}
-            {Array(emptySlots)
-              .fill(null)
-              .map((_, i) => {
-                return <EmptyPokemonCard key={i} />;
+        <PageContent>
+          {areThereSlots ? (
+            <div className='flex flex-wrap justify-center gap-6'>
+              {slots.map((slot, order) => {
+                return (
+                  <DialogTrigger
+                    key={slot.meta.id}
+                    onClick={() => {
+                      // FIX: este handler esta generando un bug al abrir el config modal
+                      // de un pokemon diferente al del index que esta seleccionado
+                      handleSetSelectedSlotIndex(order);
+                    }}
+                  >
+                    <FilledPokemonCard slot={slot} order={order} />
+                  </DialogTrigger>
+                );
               })}
-          </div>
-        ) : (
-          <EmptyState />
-        )}
+              {Array(emptySlots)
+                .fill(null)
+                .map((_, i) => {
+                  return <EmptyPokemonCard key={i} />;
+                })}
+            </div>
+          ) : (
+            <EmptyState />
+          )}
 
-        {areThereSlots ? <SlotConfigModal /> : null}
+          {areThereSlots ? <SlotConfigModal /> : null}
+        </PageContent>
       </Dialog>
     </QueryClientProvider>
   );

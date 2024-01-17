@@ -18,7 +18,7 @@ export function TypeChartTable({ types }: TypeChartTableProps): JSX.Element {
   const biggerThan1200 = width > 1200;
 
   return (
-    <div className={clsx('pb-8', biggerThan1200 ? 'grid grid-cols-[50px_1fr] grid-rows-[50px_1fr]' : 'mt-4')}>
+    <div className={clsx('', biggerThan1200 ? 'grid grid-cols-[50px_1fr] grid-rows-[50px_1fr]' : 'mt-4')}>
       {biggerThan1200 && <div></div>}
       {biggerThan1200 && (
         <div className='flex justify-center items-center'>
