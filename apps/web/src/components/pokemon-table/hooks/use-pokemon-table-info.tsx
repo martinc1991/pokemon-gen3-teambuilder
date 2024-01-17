@@ -1,5 +1,3 @@
-'use client';
-
 import { client } from '@rq-client/index';
 import type { IPokemonGetAllQueryParams } from 'contract';
 import { useEffect } from 'react';

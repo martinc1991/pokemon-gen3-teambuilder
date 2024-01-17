@@ -1,5 +1,3 @@
-'use client';
-
 import LoadingState from '@components/loading-state';
 import TeamCard from '@components/teams/card';
 import { client } from '@rq-client/index';

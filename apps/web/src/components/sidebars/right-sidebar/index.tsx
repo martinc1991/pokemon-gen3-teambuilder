@@ -1,5 +1,3 @@
-'use client';
-
 import { Typography } from 'ui';
 import BasicSidebar from '../basic-sidebar';
 import RightSidebarContent from './content';

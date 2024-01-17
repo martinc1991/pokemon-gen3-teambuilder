@@ -1,5 +1,3 @@
-'use client';
-
 import { type ColumnDef } from '@tanstack/react-table';
 import type { Ability, PokemonWithAbilities } from 'contract';
 import { replaceHyphensWithSpaces } from 'utils';

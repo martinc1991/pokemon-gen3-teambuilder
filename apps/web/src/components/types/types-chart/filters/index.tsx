@@ -1,11 +1,9 @@
-'use client';
-
+import clsx from 'clsx';
+import { Type } from 'contract';
 import { Separator } from 'ui';
+import { useWindowSize } from 'usehooks-ts';
 import { AttackingFilters } from './attacking';
 import { DefendingFilters } from './defending';
-import { Type } from 'contract';
-import clsx from 'clsx';
-import { useWindowSize } from 'usehooks-ts';
 
 interface FiltersProps {
   types: Type[];

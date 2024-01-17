@@ -1,5 +1,3 @@
-'use client';
-
 import { TrashIcon } from '@radix-ui/react-icons';
 import { useTeamStore } from '@state/team';
 import { useTrashBinStore } from '@state/trashBin';

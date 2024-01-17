@@ -1,5 +1,3 @@
-'use client';
-
 import { useTeamStore } from '@state/team';
 import { useTrashBinStore } from '@state/trashBin';
 import { Button, Typography, useToast } from 'ui';

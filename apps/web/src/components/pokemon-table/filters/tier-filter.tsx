@@ -1,5 +1,3 @@
-'use client';
-
 import type { Table } from '@tanstack/react-table';
 import type { PokemonWithAbilities, Tier } from 'contract';
 import { SORTED_TIERS } from 'pokemon-info';

@@ -1,12 +1,10 @@
-'use client';
-
 import { useTypeChartStore } from '@state/type-chart';
 import { useSelectedDefendingTypesNames } from '@state/type-chart/use-selected-defending-types-names';
 import clsx from 'clsx';
 import { Type } from 'contract';
 import { Tooltip, TooltipContent, TooltipTrigger, TypeBadge, Typography } from 'ui';
-import { getDamageMultiplier, getTooltipText, sortEmptyTypeFirst } from './../helpers';
 import { useWindowSize } from 'usehooks-ts';
+import { getDamageMultiplier, getTooltipText, sortEmptyTypeFirst } from './../helpers';
 
 interface TypeChartTableProps {
   types: Type[];

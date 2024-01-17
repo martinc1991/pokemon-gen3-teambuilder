@@ -1,5 +1,3 @@
-'use client';
-
 import type { ColumnDef, Row } from '@tanstack/react-table';
 import type { PokemonWithAbilities } from 'contract';
 import { getValues } from 'utils';

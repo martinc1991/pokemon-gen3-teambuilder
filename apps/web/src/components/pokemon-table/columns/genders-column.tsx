@@ -1,5 +1,3 @@
-'use client';
-
 import { type ColumnDef } from '@tanstack/react-table';
 import { type PokemonWithAbilities } from 'contract';
 import { GendersText } from '../components/genders-text';

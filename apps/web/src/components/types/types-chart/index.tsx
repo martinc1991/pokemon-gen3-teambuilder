@@ -1,12 +1,10 @@
-'use client';
-
 import LoadingState from '@components/loading-state';
 import { client } from '@rq-client/index';
+import clsx from 'clsx';
 import { Typography } from 'ui';
+import { useWindowSize } from 'usehooks-ts';
 import { Filters } from './filters';
 import { TypeChartTable } from './table';
-import { useWindowSize } from 'usehooks-ts';
-import clsx from 'clsx';
 
 export function TypesChart(): JSX.Element {
   const { width } = useWindowSize();

@@ -1,5 +1,3 @@
-'use client';
-
 import LoadingState from '@components/loading-state';
 import { TypesFilter } from '@components/pokemon-table/filters/types-filter';
 import { client } from '@rq-client/index';
@@ -7,9 +5,9 @@ import { useTeamStore } from '@state/team';
 import { useTypeChartStore } from '@state/type-chart';
 import { MAX_TEAM_MEMBERS, PokemonWithAbilities, Type } from 'contract';
 import { ComboboxItem, PokemonAvatar, Typography } from 'ui';
+import { capitalize } from 'utils';
 import { getTypeCombinationDefensiveDamageInfo } from '../helpers';
 import { Typeinfo } from './type-info';
-import { capitalize } from 'utils';
 
 export function DefendingFilters({ types }: { types: Type[] }): JSX.Element {
   const { defendingTypes, addDefendingType, clearDefendingTypes, removeDefendingType } = useTypeChartStore((state) => state);
