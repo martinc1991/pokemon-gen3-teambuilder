@@ -19,8 +19,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }):
       <body className='flex flex-row'>
         <TooltipProvider>
           <LeftSidebar />
-          <main className='flex justify-center flex-1 pb-8'>
-            <div className='flex flex-col items-center min-h-screen w-11/12 '>{children}</div>
+          <main className='flex justify-center flex-1'>
+            <div className='flex flex-col items-center min-h-screen w-11/12'>{children}</div>
           </main>
           <RightSidebar />
           <Toaster />
