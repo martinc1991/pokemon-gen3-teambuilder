@@ -3,8 +3,8 @@ import { useSelectedDefendingTypesNames } from '@state/type-chart/use-selected-d
 import clsx from 'clsx';
 import { Type } from 'contract';
 import { Tooltip, TooltipContent, TooltipTrigger, TypeBadge, Typography } from 'ui';
-import { getDamageMultiplier, getTooltipText, sortEmptyTypeFirst } from './../helpers';
 import { useWindowSize } from 'usehooks-ts';
+import { getDamageMultiplier, getTooltipText, sortEmptyTypeFirst } from './../helpers';
 
 interface TypeChartTableProps {
   types: Type[];

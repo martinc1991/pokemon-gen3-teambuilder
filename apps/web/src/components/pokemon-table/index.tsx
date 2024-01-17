@@ -3,11 +3,11 @@ import { useVirtualizer } from '@tanstack/react-virtual';
 import { useRef } from 'react';
 import { Table, TableBody, Typography } from 'ui';
 import { PokemonTableHeader } from './components/table-header';
-import { TABLE_ROW_HEIGHT, PokemonTableRow, EmptyRow } from './components/table-rows';
+import { EmptyRow, PokemonTableRow, TABLE_ROW_HEIGHT } from './components/table-rows';
+import { Filters } from './filters';
 import { usePokemonTableConfig } from './hooks/use-pokemon-table-config';
 import { usePokemonTableHeight } from './hooks/use-pokemon-table-height';
 import { usePokemonTableInfo } from './hooks/use-pokemon-table-info';
-import { Filters } from './filters';
 
 export function PokemonTable(): JSX.Element {
   const tableContainerRef = useRef(null);
