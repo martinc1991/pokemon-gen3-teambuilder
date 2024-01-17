@@ -2,6 +2,8 @@
 
 import LeftSidebar from '@components/sidebars/left-siderbar';
 import RightSidebar from '@components/sidebars/right-sidebar';
+import { queryClient } from '@rq-client/index';
+import { QueryClientProvider } from '@tanstack/react-query';
 import type { Metadata } from 'next';
 import 'tailwind-config/global.css';
 import { Toaster, TooltipProvider } from 'ui';
@@ -17,14 +19,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }):
   return (
     <html className='bg-zinc-900' lang='en'>
       <body className='flex flex-row'>
-        <TooltipProvider>
-          <LeftSidebar />
-          <main className='flex justify-center flex-1'>
-            <div className='flex flex-col items-center min-h-screen w-11/12'>{children}</div>
-          </main>
-          <RightSidebar />
-          <Toaster />
-        </TooltipProvider>
+        <QueryClientProvider client={queryClient}>
+          <TooltipProvider>
+            <LeftSidebar />
+            <main className='flex justify-center flex-1'>
+              <div className='flex flex-col items-center min-h-screen w-11/12'>{children}</div>
+            </main>
+            <RightSidebar />
+            <Toaster />
+          </TooltipProvider>
+        </QueryClientProvider>
       </body>
     </html>
   );

@@ -5,9 +5,7 @@ import PageHeader from '@components/page-header';
 import { PageContent } from '@components/pages/page-content';
 import { EmptyPokemonCard, FilledPokemonCard } from '@components/slots/cards';
 import SlotConfigModal from '@components/slots/config-modal';
-import { queryClient } from '@rq-client/index';
 import withTeamStore, { WithTeamStoreProps } from '@state/team/with-team-store';
-import { QueryClientProvider } from '@tanstack/react-query';
 import { MAX_TEAM_MEMBERS } from 'contract';
 import Link from 'next/link';
 import { Button, Dialog, DialogTrigger, Typography } from 'ui';
@@ -25,7 +23,7 @@ function Builder({ teamStore }: BuilderProps): JSX.Element {
   }
 
   return (
-    <QueryClientProvider client={queryClient}>
+    <>
       <Dialog>
         <PageHeader
           description='Your current team. Click on one card to edit. When you are done, copy it from the right sidebar.'
@@ -61,7 +59,7 @@ function Builder({ teamStore }: BuilderProps): JSX.Element {
           {areThereSlots ? <SlotConfigModal /> : null}
         </PageContent>
       </Dialog>
-    </QueryClientProvider>
+    </>
   );
 }
 
