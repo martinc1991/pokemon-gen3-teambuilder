@@ -1,5 +1,3 @@
-'use client';
-
 import { TypesFilter } from '@components/pokemon-table/filters/types-filter';
 import { useTypeChartStore } from '@state/type-chart';
 import { Type } from 'contract';

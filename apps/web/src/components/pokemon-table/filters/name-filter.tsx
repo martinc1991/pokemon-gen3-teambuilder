@@ -1,5 +1,3 @@
-'use client';
-
 import type { Table } from '@tanstack/react-table';
 import type { PokemonWithAbilities } from 'contract';
 import { useEffect, useState, type ChangeEvent } from 'react';

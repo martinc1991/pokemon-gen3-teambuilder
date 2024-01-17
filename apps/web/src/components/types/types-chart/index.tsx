@@ -1,5 +1,3 @@
-'use client';
-
 import LoadingState from '@components/loading-state';
 import { client } from '@rq-client/index';
 import { Typography } from 'ui';

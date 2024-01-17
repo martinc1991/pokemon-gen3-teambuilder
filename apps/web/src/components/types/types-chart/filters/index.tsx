@@ -1,5 +1,3 @@
-'use client';
-
 import { Separator } from 'ui';
 import { AttackingFilters } from './attacking';
 import { DefendingFilters } from './defending';

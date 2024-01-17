@@ -1,5 +1,3 @@
-'use client';
-
 import { useTypeChartStore } from '@state/type-chart';
 import { useSelectedDefendingTypesNames } from '@state/type-chart/use-selected-defending-types-names';
 import clsx from 'clsx';

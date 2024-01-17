@@ -1,5 +1,3 @@
-'use client';
-
 import { CheckIcon, CopyIcon } from '@radix-ui/react-icons';
 import { JSONSlot } from 'contract';
 import { useState } from 'react';

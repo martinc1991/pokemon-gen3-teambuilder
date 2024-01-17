@@ -1,5 +1,3 @@
-'use client';
-
 import { TypeNames } from 'contract';
 import { TypeBadge, Typography } from 'ui';
 

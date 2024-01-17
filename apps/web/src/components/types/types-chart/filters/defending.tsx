@@ -1,5 +1,3 @@
-'use client';
-
 import LoadingState from '@components/loading-state';
 import { TypesFilter } from '@components/pokemon-table/filters/types-filter';
 import { client } from '@rq-client/index';
