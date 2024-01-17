@@ -12,7 +12,7 @@ import { Button, Dialog, DialogTrigger, Typography } from 'ui';
 
 interface BuilderProps extends WithTeamStoreProps {}
 
-function Builder({ teamStore }: BuilderProps): JSX.Element {
+function Team({ teamStore }: BuilderProps): JSX.Element {
   const { slots, setSelectedSlotIndex } = teamStore;
 
   const areThereSlots = slots.length > 0;
@@ -76,4 +76,4 @@ function EmptyState(): JSX.Element {
   );
 }
 
-export default withTeamStore(Builder, <LoadingState />);
+export default withTeamStore(Team, <LoadingState />);
