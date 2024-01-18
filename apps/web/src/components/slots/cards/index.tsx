@@ -3,7 +3,8 @@ import { GendersText } from '@components/pokemon-table/components/genders-text';
 import { client } from '@rq-client/index';
 import { LocalSlot } from 'contract';
 import Link from 'next/link';
-import { Button, Card, CardContent, CardHeader, PokemonSprite, TypeBadge, Typography } from 'ui';
+import { MouseEventHandler } from 'react';
+import { Button, Card, CardContent, CardFooter, CardHeader, DialogTrigger, PokemonSprite, TypeBadge, Typography } from 'ui';
 import { calculateHiddenPowerType, getPokemonSpriteUrl } from 'utils';
 import PokemonCardMoves from './components/card-moves';
 import PokemonCardStats from './components/card-stats';
@@ -13,11 +14,13 @@ import { getCardTitleName } from './utils/get-card-title';
 interface PokemonCardProps {
   slot: LocalSlot;
   order: number;
+  onEditClick?: MouseEventHandler<HTMLButtonElement>;
+  // onRemoveClick?: (slot: LocalSlot, order: number) => void;
 }
 
-export function FilledPokemonCard({ slot, order }: PokemonCardProps): JSX.Element {
-  const { isError, isLoading, data, refetch } = client.pokemon.getOne.useQuery([`get-one-pokemon-${slot.nationalPokedexNumber}`], {
-    params: { nationalDexNumber: slot.nationalPokedexNumber.toString() },
+export function FilledPokemonCard(props: PokemonCardProps): JSX.Element {
+  const { isError, isLoading, data, refetch } = client.pokemon.getOne.useQuery([`get-one-pokemon-${props.slot.nationalPokedexNumber}`], {
+    params: { nationalDexNumber: props.slot.nationalPokedexNumber.toString() },
   });
 
   if (isLoading) return <LoadingCard />;
@@ -29,7 +32,7 @@ export function FilledPokemonCard({ slot, order }: PokemonCardProps): JSX.Elemen
     <Card className='w-[500px]'>
       <CardHeader>
         <div className='flex items-center justify-between gap-5'>
-          <Typography.H3 className='truncate'>{getCardTitleName(slot, order)}</Typography.H3>
+          <Typography.H3 className='truncate'>{getCardTitleName(props.slot, props.order)}</Typography.H3>
           <div className='flex gap-2'>
             {pokemon && <TypeBadge type={pokemon.typeOneName} />}
             {pokemon && pokemon.typeTwoName !== 'empty' && <TypeBadge type={pokemon.typeTwoName} />}
@@ -39,31 +42,47 @@ export function FilledPokemonCard({ slot, order }: PokemonCardProps): JSX.Elemen
 
       <CardContent className='flex gap-7'>
         {/* First column (img) */}
-        <PokemonSprite url={getPokemonSpriteUrl(slot.nationalPokedexNumber)} alt={slot.species} />
+        <PokemonSprite url={getPokemonSpriteUrl(props.slot.nationalPokedexNumber)} alt={props.slot.species} />
 
         {/* Second column (level - gender - happiness - shiny) */}
         <div className='flex flex-col min-w-[150px] gap-1' style={{ border: '1px solid transparent' }}>
-          <CardInfoField fieldName='Lv'>{slot.level}</CardInfoField>
+          <CardInfoField fieldName='Lv'>{props.slot.level}</CardInfoField>
           <CardInfoField fieldName='Gender'>
-            <GendersText genders={[slot.gender]} />
+            <GendersText genders={[props.slot.gender]} />
           </CardInfoField>
-          <CardInfoField fieldName='Happiness'>{slot.happiness}</CardInfoField>
-          <CardInfoField fieldName='Shiny'>{slot.shiny ? 'Yes' : 'No'}</CardInfoField>
+          <CardInfoField fieldName='Happiness'>{props.slot.happiness}</CardInfoField>
+          <CardInfoField fieldName='Shiny'>{props.slot.shiny ? 'Yes' : 'No'}</CardInfoField>
         </div>
 
         {/* Third column (ability - item - nature - hp type) */}
         <div className='flex flex-col flex-1 gap-1'>
-          <CardInfoField fieldName='Ability'>{slot.abilityName.replace('-', ' ')}</CardInfoField>
-          <CardInfoField fieldName='Item'>{slot.itemName?.replace('-', ' ') || '-'}</CardInfoField>
-          <CardInfoField fieldName='Nature'>{slot.natureName}</CardInfoField>
-          <CardInfoField fieldName='HP type'>{calculateHiddenPowerType(slot.ivs)}</CardInfoField>
+          <CardInfoField fieldName='Ability'>{props.slot.abilityName.replace('-', ' ')}</CardInfoField>
+          <CardInfoField fieldName='Item'>{props.slot.itemName?.replace('-', ' ') || '-'}</CardInfoField>
+          <CardInfoField fieldName='Nature'>{props.slot.natureName}</CardInfoField>
+          <CardInfoField fieldName='HP type'>{calculateHiddenPowerType(props.slot.ivs)}</CardInfoField>
         </div>
       </CardContent>
 
       <CardContent className='flex w-full gap-8'>
-        <PokemonCardStats slot={slot} pokemon={pokemon} />
-        <PokemonCardMoves slot={slot} />
+        <PokemonCardStats slot={props.slot} pokemon={pokemon} />
+        <PokemonCardMoves slot={props.slot} />
       </CardContent>
+
+      <CardFooter className='justify-end gap-4'>
+        <DialogTrigger key={props.slot.meta.id} onClick={props.onEditClick}>
+          <Button variant='outline'>Edit</Button>
+        </DialogTrigger>
+        {/* <Button
+          variant='destructive'
+          onClick={() => {
+            if (props.onRemoveClick) {
+              props.onRemoveClick(props.slot, props.order);
+            }
+          }}
+        >
+          Remove
+        </Button> */}
+      </CardFooter>
     </Card>
   );
 }
