@@ -58,7 +58,7 @@ export function FilledPokemonCard(props: PokemonCardProps): JSX.Element {
         </div>
       </CardHeader>
 
-      <CardContent className='flex gap-7'>
+      <CardContent className='slot-config-card-grid'>
         {/* First column (img) */}
         <PokemonSprite url={getPokemonSpriteUrl(props.slot.nationalPokedexNumber)} alt={props.slot.species} />
 
@@ -79,10 +79,10 @@ export function FilledPokemonCard(props: PokemonCardProps): JSX.Element {
           <CardInfoField fieldName='Nature'>{props.slot.natureName}</CardInfoField>
           <CardInfoField fieldName='HP type'>{calculateHiddenPowerType(props.slot.ivs)}</CardInfoField>
         </div>
-      </CardContent>
 
-      <CardContent className='flex w-full gap-8'>
+        {/* Stats */}
         <PokemonCardStats slot={props.slot} pokemon={pokemon} />
+        {/* Moves */}
         <PokemonCardMoves slot={props.slot} />
       </CardContent>
 

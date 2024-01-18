@@ -26,7 +26,7 @@ export default function PokemonCardStats({ slot, pokemon }: PokemonCardStatsProp
   };
 
   return (
-    <div className='flex flex-col flex-1 gap-1'>
+    <div className='flex flex-col flex-1 gap-1 col-span-2'>
       <div className='flex items-center justify-between gap-1'>
         <Typography.Muted>HP: </Typography.Muted>
         <Typography.Small>
