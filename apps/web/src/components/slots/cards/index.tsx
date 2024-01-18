@@ -4,7 +4,25 @@ import { client } from '@rq-client/index';
 import { LocalSlot } from 'contract';
 import Link from 'next/link';
 import { MouseEventHandler } from 'react';
-import { Button, Card, CardContent, CardFooter, CardHeader, DialogTrigger, PokemonSprite, TypeBadge, Typography } from 'ui';
+import {
+  Button,
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  PokemonSprite,
+  TypeBadge,
+  Typography,
+  toast,
+} from 'ui';
 import { calculateHiddenPowerType, getPokemonSpriteUrl } from 'utils';
 import PokemonCardMoves from './components/card-moves';
 import PokemonCardStats from './components/card-stats';
@@ -15,7 +33,7 @@ interface PokemonCardProps {
   slot: LocalSlot;
   order: number;
   onEditClick?: MouseEventHandler<HTMLButtonElement>;
-  // onRemoveClick?: (slot: LocalSlot, order: number) => void;
+  onRemoveClick?: (slot: LocalSlot, order: number) => void;
 }
 
 export function FilledPokemonCard(props: PokemonCardProps): JSX.Element {
@@ -69,21 +87,57 @@ export function FilledPokemonCard(props: PokemonCardProps): JSX.Element {
       </CardContent>
 
       <CardFooter className='justify-end gap-4'>
-        <DialogTrigger key={props.slot.meta.id} onClick={props.onEditClick}>
-          <Button variant='outline'>Edit</Button>
-        </DialogTrigger>
-        {/* <Button
-          variant='destructive'
-          onClick={() => {
-            if (props.onRemoveClick) {
-              props.onRemoveClick(props.slot, props.order);
-            }
-          }}
-        >
-          Remove
-        </Button> */}
+        {props.onEditClick && (
+          <DialogTrigger key={props.slot.meta.id} onClick={props.onEditClick}>
+            <Button variant='outline'>Edit</Button>
+          </DialogTrigger>
+        )}
+        {props.onRemoveClick && <RemovePokemonButton order={props.order} slot={props.slot} onRemoveClick={props.onRemoveClick} />}
       </CardFooter>
     </Card>
+  );
+}
+
+interface RemoveButtonProps {
+  onRemoveClick: (slot: LocalSlot, order: number) => void;
+  slot: LocalSlot;
+  order: number;
+}
+
+function RemovePokemonButton(props: RemoveButtonProps): JSX.Element {
+  const descriptionTxt = `You are about to remove ${getCardTitleName(props.slot, props.order, true)}.`;
+
+  function handleClear(): void {
+    props.onRemoveClick(props.slot, props.order);
+    toast({
+      title: `${getCardTitleName(props.slot, props.order, true)} was removed.`,
+      variant: 'destructive',
+    });
+  }
+
+  return (
+    <Dialog>
+      <DialogTrigger>
+        <Button variant='destructive'>Remove</Button>
+      </DialogTrigger>
+
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Are you sure?</DialogTitle>
+        </DialogHeader>
+        <DialogDescription>{descriptionTxt}</DialogDescription>
+        <DialogFooter>
+          <DialogClose>
+            <Button variant='outline'>Cancel</Button>
+          </DialogClose>
+          <DialogClose>
+            <Button onClick={handleClear} variant='destructive'>
+              Remove
+            </Button>
+          </DialogClose>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 }
 

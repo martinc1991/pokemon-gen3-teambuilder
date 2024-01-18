@@ -13,7 +13,7 @@ import { Button, Dialog, Typography } from 'ui';
 interface BuilderProps extends WithTeamStoreProps {}
 
 function Team({ teamStore }: BuilderProps): JSX.Element {
-  const { slots, setSelectedSlotIndex } = teamStore;
+  const { slots, setSelectedSlotIndex, removeSlot } = teamStore;
 
   const areThereSlots = slots.length > 0;
   const emptySlots = MAX_TEAM_MEMBERS - slots.length;
@@ -35,7 +35,13 @@ function Team({ teamStore }: BuilderProps): JSX.Element {
           <div className='flex flex-wrap justify-center gap-6'>
             {slots.map((slot, order) => {
               return (
-                <FilledPokemonCard key={slot.meta.id} slot={slot} order={order} onEditClick={() => handleSetSelectedSlotIndex(order)} />
+                <FilledPokemonCard
+                  key={slot.meta.id}
+                  slot={slot}
+                  order={order}
+                  onEditClick={() => handleSetSelectedSlotIndex(order)}
+                  onRemoveClick={(slot) => removeSlot(slot.meta.id)}
+                />
               );
             })}
             {Array(emptySlots)
