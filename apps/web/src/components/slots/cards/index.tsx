@@ -1,3 +1,4 @@
+import LoadingState from '@components/loading-state';
 import { GendersText } from '@components/pokemon-table/components/genders-text';
 import { client } from '@rq-client/index';
 import { LocalSlot } from 'contract';
@@ -8,7 +9,6 @@ import PokemonCardMoves from './components/card-moves';
 import PokemonCardStats from './components/card-stats';
 import CardInfoField from './components/info-field';
 import { getCardTitleName } from './utils/get-card-title';
-import LoadingState from '@components/loading-state';
 
 interface PokemonCardProps {
   slot: LocalSlot;
@@ -26,7 +26,7 @@ export function FilledPokemonCard({ slot, order }: PokemonCardProps): JSX.Elemen
   const pokemon = data.body;
 
   return (
-    <Card className='w-[500px] min-h-[332px] hover:bg-primary-foreground hover:cursor-pointer transition duration-150 ease-in-out'>
+    <Card className='w-[500px]'>
       <CardHeader>
         <div className='flex items-center justify-between gap-5'>
           <Typography.H3 className='truncate'>{getCardTitleName(slot, order)}</Typography.H3>
@@ -37,33 +37,32 @@ export function FilledPokemonCard({ slot, order }: PokemonCardProps): JSX.Elemen
         </div>
       </CardHeader>
 
-      <CardContent className='flex flex-col gap-4'>
-        <div className='flex gap-7'>
-          {/* First column (img) */}
-          <PokemonSprite url={getPokemonSpriteUrl(slot.nationalPokedexNumber)} alt={slot.species} />
+      <CardContent className='flex gap-7'>
+        {/* First column (img) */}
+        <PokemonSprite url={getPokemonSpriteUrl(slot.nationalPokedexNumber)} alt={slot.species} />
 
-          {/* Second column (level - gender - happiness - shiny) */}
-          <div className='flex flex-col min-w-[150px] gap-1' style={{ border: '1px solid transparent' }}>
-            <CardInfoField fieldName='Lv'>{slot.level}</CardInfoField>
-            <CardInfoField fieldName='Gender'>
-              <GendersText genders={[slot.gender]} />
-            </CardInfoField>
-            <CardInfoField fieldName='Happiness'>{slot.happiness}</CardInfoField>
-            <CardInfoField fieldName='Shiny'>{slot.shiny ? 'Yes' : 'No'}</CardInfoField>
-          </div>
+        {/* Second column (level - gender - happiness - shiny) */}
+        <div className='flex flex-col min-w-[150px] gap-1' style={{ border: '1px solid transparent' }}>
+          <CardInfoField fieldName='Lv'>{slot.level}</CardInfoField>
+          <CardInfoField fieldName='Gender'>
+            <GendersText genders={[slot.gender]} />
+          </CardInfoField>
+          <CardInfoField fieldName='Happiness'>{slot.happiness}</CardInfoField>
+          <CardInfoField fieldName='Shiny'>{slot.shiny ? 'Yes' : 'No'}</CardInfoField>
+        </div>
 
-          {/* Third column (ability - item - nature - hp type) */}
-          <div className='flex flex-col flex-1 gap-1'>
-            <CardInfoField fieldName='Ability'>{slot.abilityName.replace('-', ' ')}</CardInfoField>
-            <CardInfoField fieldName='Item'>{slot.itemName?.replace('-', ' ') || '-'}</CardInfoField>
-            <CardInfoField fieldName='Nature'>{slot.natureName}</CardInfoField>
-            <CardInfoField fieldName='HP type'>{calculateHiddenPowerType(slot.ivs)}</CardInfoField>
-          </div>
+        {/* Third column (ability - item - nature - hp type) */}
+        <div className='flex flex-col flex-1 gap-1'>
+          <CardInfoField fieldName='Ability'>{slot.abilityName.replace('-', ' ')}</CardInfoField>
+          <CardInfoField fieldName='Item'>{slot.itemName?.replace('-', ' ') || '-'}</CardInfoField>
+          <CardInfoField fieldName='Nature'>{slot.natureName}</CardInfoField>
+          <CardInfoField fieldName='HP type'>{calculateHiddenPowerType(slot.ivs)}</CardInfoField>
         </div>
-        <div className='flex w-full'>
-          <PokemonCardMoves slot={slot} />
-          <PokemonCardStats slot={slot} pokemon={pokemon} />
-        </div>
+      </CardContent>
+
+      <CardContent className='flex w-full gap-8'>
+        <PokemonCardStats slot={slot} pokemon={pokemon} />
+        <PokemonCardMoves slot={slot} />
       </CardContent>
     </Card>
   );
@@ -102,7 +101,7 @@ function ErrorCard({ onClick }: ErrorCardProps): JSX.Element {
   return (
     <Card className='flex flex-col gap-2 min-h-[332px] justify-center items-center w-[500px] p-6'>
       <Typography.Muted className='text-center'>Error loading pokemon.</Typography.Muted>
-      <Button onClick={handleClick} className='px-0' size='md' variant='link'>
+      <Button onClick={handleClick} className='px-0' variant='link'>
         Try again.
       </Button>
     </Card>
