@@ -10,7 +10,7 @@ import { calculateHiddenPowerType, getPokemonSpriteUrl } from 'utils';
 import PokemonCardMoves from './components/card-moves';
 import PokemonCardStats from './components/card-stats';
 import CardInfoField from './components/info-field';
-import { getCardTitleName } from './utils/get-card-title';
+import { getCardTitle } from '@utils/get-card-title';
 
 interface PokemonCardProps {
   slot: LocalSlot;
@@ -33,7 +33,7 @@ export function FilledPokemonCard(props: PokemonCardProps): JSX.Element {
     <Card className='w-[500px]'>
       <CardHeader>
         <div className='flex items-center justify-between gap-5'>
-          <Typography.H3 className='truncate'>{getCardTitleName(props.slot, props.order)}</Typography.H3>
+          <Typography.H3 className='truncate'>{getCardTitle(props.slot, props.order)}</Typography.H3>
           <div className='flex gap-2'>
             {pokemon && <TypeBadge type={pokemon.typeOneName} />}
             {pokemon && pokemon.typeTwoName !== 'empty' && <TypeBadge type={pokemon.typeTwoName} />}

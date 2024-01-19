@@ -1,4 +1,4 @@
-import { getCardTitleName } from '@components/slots/cards/utils/get-card-title';
+import { getCardTitle } from '@utils/get-card-title';
 import { LocalSlot } from 'contract';
 import {
   Button,
@@ -21,12 +21,12 @@ interface RemoveButtonProps {
 }
 
 export function RemovePokemonButton(props: RemoveButtonProps): JSX.Element {
-  const descriptionTxt = `You are about to remove ${getCardTitleName(props.slot, props.order, true)}.`;
+  const descriptionTxt = `You are about to remove ${getCardTitle(props.slot, props.order, true)}.`;
 
   function handleClear(): void {
     props.onRemoveClick(props.slot, props.order);
     toast({
-      title: `${getCardTitleName(props.slot, props.order, true)} was removed.`,
+      title: `${getCardTitle(props.slot, props.order, true)} was removed.`,
       variant: 'destructive',
     });
   }
