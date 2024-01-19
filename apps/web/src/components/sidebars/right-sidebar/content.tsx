@@ -4,6 +4,7 @@ import { PokemonAvatar, Separator } from 'ui';
 import { formatPokemonName, getPokemonIconUrl } from 'utils';
 import ClearButton from '../../clear-button';
 import CopyButton from '../../copy-button';
+import { RemovePokemonButton } from '@components/remove-pokemon-button';
 
 interface RightSidebarContentProps extends WithTeamStoreProps {}
 
@@ -19,20 +20,21 @@ function RightSidebarContent({ teamStore }: RightSidebarContentProps): JSX.Eleme
 
   return (
     <>
-      {slots.map((slot) => {
+      {slots.map((slot, order) => {
         const iconUrl = getPokemonIconUrl(slot.nationalPokedexNumber);
         const key = slot.meta.id;
         const name = formatPokemonName(slot.species);
         return (
-          <PokemonAvatar
-            iconUrl={iconUrl}
-            key={key}
-            name={name}
-            onClick={() => {
+          <RemovePokemonButton
+            onRemoveClick={() => {
               handleRemoveSlot(slot);
             }}
-            withBackground
-          />
+            slot={slot}
+            order={order}
+            key={key}
+          >
+            <PokemonAvatar iconUrl={iconUrl} name={name} onClick={() => {}} withBackground />
+          </RemovePokemonButton>
         );
       })}
       {emptySlots.map((_, i) => {

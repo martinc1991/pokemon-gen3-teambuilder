@@ -10,7 +10,7 @@ interface PokemonAvatarProps {
   withBackground?: boolean;
 }
 
-export function PokemonAvatar({ iconUrl, name = '', withBackground = false, onClick, ...props }: PokemonAvatarProps) {
+export function PokemonAvatar({ iconUrl, name = '', withBackground = false, ...props }: PokemonAvatarProps) {
   const src = iconUrl ? iconUrl : '';
 
   return (
@@ -18,9 +18,8 @@ export function PokemonAvatar({ iconUrl, name = '', withBackground = false, onCl
       className={cn('rounded-full h-12 w-12 overflow-visible group', withBackground ? 'bg-primary-foreground' : 'bg-transparent')}
       {...props}
     >
-      {onClick && (
+      {props.onClick && withBackground && (
         <TrashIcon
-          onClick={onClick}
           className={cn(
             'bg-primary-foreground rounded-full absolute text-white h-12 w-12 p-3 opacity-0 group-hover:opacity-70  transition-all ease-in-out duration-300',
             'hover:cursor-pointer',
