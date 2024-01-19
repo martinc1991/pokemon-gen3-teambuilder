@@ -1,5 +1,5 @@
 import CopyButton from '@components/copy-button';
-import { RecoverTeamButton } from '@components/recover-team-button';
+import { SetTeamAsCurrent } from '@components/recover-team-button';
 import withTeamStore, { WithTeamStoreProps } from '@state/team/with-team-store';
 import { JSONTeam } from 'contract';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, PokemonAvatar, Typography } from 'ui';
@@ -27,7 +27,7 @@ function TeamCard({ team }: TeamCardProps): JSX.Element {
           <Typography.Small>{team.userName}</Typography.Small>
         </div>
         <div className='flex gap-4'>
-          <RecoverTeamButton team={team} />
+          <SetTeamAsCurrent team={team} />
           <CopyButton slots={team.slots} teamName={team.name} />
         </div>
       </CardFooter>
