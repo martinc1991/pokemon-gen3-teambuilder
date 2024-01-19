@@ -1,6 +1,31 @@
-import { IBaseStats, StatName } from 'contract';
+import {
+  IBaseStats,
+  MAX_ATK,
+  MAX_DEF,
+  MAX_HP,
+  MAX_SPA,
+  MAX_SPD,
+  MAX_SPE,
+  MIN_ATK,
+  MIN_DEF,
+  MIN_HP,
+  MIN_SPA,
+  MIN_SPD,
+  MIN_SPE,
+  StatID,
+  StatName,
+} from 'contract';
 import { describe, expect, test } from 'vitest';
-import { CalculateStatProps, calculateStat, getShortStatName, getTotalBaseStat, getTotalEvs } from './index';
+import {
+  CalculateStatProps,
+  StatColors,
+  calculateStat,
+  getMinMaxStat,
+  getShortStatName,
+  getStatValueColor,
+  getTotalBaseStat,
+  getTotalEvs,
+} from './index';
 
 describe('getShortStatName', () => {
   test('should return the correct short stat name for every stat', () => {
@@ -100,5 +125,42 @@ describe('getTotalEvs', () => {
     };
     const expectedResult = 300;
     expect(getTotalEvs(evs)).toBe(expectedResult);
+  });
+});
+
+describe('getMinMaxStat', () => {
+  test('should return the correct max and min values for each stat', () => {
+    const stats: StatID[] = ['hp', 'atk', 'def', 'spa', 'spd', 'spe'];
+    const expectedResults: { min: number; max: number }[] = [
+      { min: MIN_HP, max: MAX_HP },
+      { min: MIN_ATK, max: MAX_ATK },
+      { min: MIN_DEF, max: MAX_DEF },
+      { min: MIN_SPA, max: MAX_SPA },
+      { min: MIN_SPD, max: MAX_SPD },
+      { min: MIN_SPE, max: MAX_SPE },
+    ];
+
+    for (let i = 0; i < stats.length; i++) {
+      expect(getMinMaxStat(stats[i])).toEqual(expectedResults[i]);
+    }
+  });
+  test('should return min and max equal to 1 if no valid stat is passed', () => {
+    // @ts-expect-error
+    expect(getMinMaxStat('not-valid')).toEqual({ min: 1, max: 1 });
+  });
+});
+
+describe('getStatValueColor', () => {
+  test('should return the correct color for each value range', () => {
+    expect(getStatValueColor(0)).toBe(StatColors.VERY_LOW);
+    expect(getStatValueColor(9)).toBe(StatColors.VERY_LOW);
+    expect(getStatValueColor(10)).toBe(StatColors.LOW);
+    expect(getStatValueColor(29)).toBe(StatColors.LOW);
+    expect(getStatValueColor(30)).toBe(StatColors.MID);
+    expect(getStatValueColor(49)).toBe(StatColors.MID);
+    expect(getStatValueColor(50)).toBe(StatColors.HIGH);
+    expect(getStatValueColor(89)).toBe(StatColors.HIGH);
+    expect(getStatValueColor(90)).toBe(StatColors.VERY_HIGH);
+    expect(getStatValueColor(100)).toBe(StatColors.VERY_HIGH);
   });
 });

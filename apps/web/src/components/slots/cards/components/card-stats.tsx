@@ -1,12 +1,24 @@
 import { client } from '@rq-client/index';
-import { LocalSlot, PokemonWithAbilities } from 'contract';
+import { LocalSlot, PokemonWithAbilities, StatID, StatName } from 'contract';
+import { useMemo } from 'react';
 import { Typography } from 'ui';
-import { CalculateStatProps, calculateStat } from 'utils';
+import { CalculateStatProps, calculateStat, getMinMaxStat, getShortStatName, getStatValueColor } from 'utils';
 
 interface PokemonCardStatsProps {
   slot: LocalSlot;
   pokemon: PokemonWithAbilities;
 }
+
+type BaseStat = 'baseHp' | 'baseAttack' | 'baseDefense' | 'baseSpattack' | 'baseSpdefense' | 'baseSpeed';
+
+const statsNames: { expanded: StatName; condensed: StatID; base: BaseStat }[] = [
+  { expanded: 'hp', condensed: 'hp', base: 'baseHp' },
+  { expanded: 'attack', condensed: 'atk', base: 'baseAttack' },
+  { expanded: 'defense', condensed: 'def', base: 'baseDefense' },
+  { expanded: 'spattack', condensed: 'spa', base: 'baseSpattack' },
+  { expanded: 'spdefense', condensed: 'spd', base: 'baseSpdefense' },
+  { expanded: 'speed', condensed: 'spe', base: 'baseSpeed' },
+];
 
 export default function PokemonCardStats({ slot, pokemon }: PokemonCardStatsProps): JSX.Element {
   const { data, error, isLoading } = client.natures.getAll.useQuery(['all-natures']);
@@ -18,7 +30,7 @@ export default function PokemonCardStats({ slot, pokemon }: PokemonCardStatsProp
     return n.name === slot.natureName;
   });
 
-  if (!nature) return <div>error</div>;
+  if (!nature) return <EmptyPokemonCardStats filler='error' />;
 
   const basicArguments: Omit<CalculateStatProps, 'statName' | 'base' | 'ev' | 'iv'> = {
     level: slot.level,
@@ -26,92 +38,58 @@ export default function PokemonCardStats({ slot, pokemon }: PokemonCardStatsProp
   };
 
   return (
-    <div className='flex flex-col items-start flex-1 gap-2'>
-      <Typography.H4>Stats</Typography.H4>
-      <div className='flex flex-col w-full gap-1'>
-        <div className='flex items-center justify-between gap-1'>
-          <Typography.Muted>HP: </Typography.Muted>
-          <Typography.Small>
-            {calculateStat({ ...basicArguments, statName: 'hp', base: pokemon.baseHp, ev: slot.evs.hp, iv: slot.ivs.hp })}
-          </Typography.Small>
-        </div>
-        <div className='flex justify-between gap-1'>
-          <Typography.Muted>Atk: </Typography.Muted>
-          <Typography.Small>
-            {calculateStat({ ...basicArguments, statName: 'attack', base: pokemon.baseAttack, ev: slot.evs.atk, iv: slot.ivs.atk })}
-          </Typography.Small>
-        </div>
-        <div className='flex justify-between gap-1'>
-          <Typography.Muted>Def: </Typography.Muted>
-          <Typography.Small>
-            {calculateStat({ ...basicArguments, statName: 'defense', base: pokemon.baseDefense, ev: slot.evs.def, iv: slot.ivs.def })}
-          </Typography.Small>
-        </div>
-        <div className='flex justify-between gap-1'>
-          <Typography.Muted>SpAtk: </Typography.Muted>
-          <Typography.Small>
-            {calculateStat({
-              ...basicArguments,
-              statName: 'spattack',
-              base: pokemon.baseSpattack,
-              ev: slot.evs.spa,
-              iv: slot.ivs.spa,
-            })}
-          </Typography.Small>
-        </div>
-        <div className='flex justify-between gap-1'>
-          <Typography.Muted>SpDef: </Typography.Muted>
-          <Typography.Small>
-            {calculateStat({
-              ...basicArguments,
-              statName: 'spdefense',
-              base: pokemon.baseSpdefense,
-              ev: slot.evs.spd,
-              iv: slot.ivs.spd,
-            })}
-          </Typography.Small>
-        </div>
-        <div className='flex justify-between gap-1'>
-          <Typography.Muted>Spe: </Typography.Muted>
-          <Typography.Small>
-            {calculateStat({ ...basicArguments, statName: 'speed', base: pokemon.baseSpeed, ev: slot.evs.spe, iv: slot.ivs.spe })}
-          </Typography.Small>
-        </div>
-      </div>
+    <div className='flex flex-col flex-1 gap-1 col-span-2'>
+      {statsNames.map(({ condensed, expanded, base }) => {
+        const value = calculateStat({
+          ...basicArguments,
+          statName: expanded,
+          base: pokemon[base],
+          ev: slot.evs[condensed],
+          iv: slot.ivs[condensed],
+        });
+        return (
+          <div key={condensed + 'stat'} className='flex items-center justify-between gap-2'>
+            <Typography.Muted className='w-7'>{getShortStatName(condensed)}:</Typography.Muted>
+            <StatColorBar statValue={value} statName={condensed} />
+            <Typography.Small>{value}</Typography.Small>
+          </div>
+        );
+      })}
     </div>
   );
 }
 
 function EmptyPokemonCardStats({ filler }: { filler: string }): JSX.Element {
   return (
-    <div className='flex flex-col items-start flex-1 gap-2'>
-      <Typography.H4>Stats</Typography.H4>
-      <div className='flex flex-col w-full gap-1'>
-        <div className='flex items-center justify-between gap-1'>
-          <Typography.Muted>HP: </Typography.Muted>
-          <Typography.Small>{filler}</Typography.Small>
-        </div>
-        <div className='flex justify-between gap-1'>
-          <Typography.Muted>Atk: </Typography.Muted>
-          <Typography.Small>{filler}</Typography.Small>
-        </div>
-        <div className='flex justify-between gap-1'>
-          <Typography.Muted>Def: </Typography.Muted>
-          <Typography.Small>{filler}</Typography.Small>
-        </div>
-        <div className='flex justify-between gap-1'>
-          <Typography.Muted>SpAtk: </Typography.Muted>
-          <Typography.Small>{filler}</Typography.Small>
-        </div>
-        <div className='flex justify-between gap-1'>
-          <Typography.Muted>SpDef: </Typography.Muted>
-          <Typography.Small>{filler}</Typography.Small>
-        </div>
-        <div className='flex justify-between gap-1'>
-          <Typography.Muted>Spe: </Typography.Muted>
-          <Typography.Small>{filler}</Typography.Small>
-        </div>
-      </div>
+    <div className='flex flex-col flex-1 gap-1 col-span-2'>
+      {statsNames.map(({ condensed }) => {
+        return (
+          <div key={condensed + 'stat'} className='flex items-center justify-between gap-2'>
+            <Typography.Muted className='w-7'>{getShortStatName(condensed)}:</Typography.Muted>
+            <StatColorBar statValue={1} statName={condensed} />
+            <Typography.Small>{filler}</Typography.Small>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+interface StatColorBarProps {
+  statValue: number;
+  statName: StatID;
+}
+
+function StatColorBar(props: StatColorBarProps): JSX.Element {
+  const { min, max } = getMinMaxStat(props.statName);
+
+  const p = useMemo(() => Math.round((props.statValue / (max - min)) * 100), [props.statName, props.statValue]);
+  const color = useMemo(() => getStatValueColor(p), [props.statName, props.statValue]);
+  const width = `${p}%`;
+
+  return (
+    <div className='flex flex-1 h-full items-center'>
+      <div className={'transition-all ease-in-out h-[70%] rounded-md'} style={{ width, backgroundColor: color }}></div>
     </div>
   );
 }

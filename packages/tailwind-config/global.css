@@ -62,3 +62,11 @@
   height: 44px;
   width: 70px;
 }
+
+.slot-config-card-grid {
+  display: grid;
+  grid-template-columns: 1fr repeat(2, 2fr);
+  grid-template-rows: repeat(2);
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+}

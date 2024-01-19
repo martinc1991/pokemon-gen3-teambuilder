@@ -65,6 +65,15 @@ export default {
         /* Genders colors */
         male: COLORS.male,
         female: COLORS.female,
+
+        /* Stats colors */
+        stats: {
+          verylow: COLORS.statverylow,
+          low: COLORS.statlow,
+          mid: COLORS.statmid,
+          high: COLORS.stathigh,
+          veryhigh: COLORS.statveryhigh,
+        },
       },
       borderRadius: {
         lg: BORDER_RADIUS.lg,

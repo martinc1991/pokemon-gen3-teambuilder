@@ -8,12 +8,12 @@ import SlotConfigModal from '@components/slots/config-modal';
 import withTeamStore, { WithTeamStoreProps } from '@state/team/with-team-store';
 import { MAX_TEAM_MEMBERS } from 'contract';
 import Link from 'next/link';
-import { Button, Dialog, DialogTrigger, Typography } from 'ui';
+import { Button, Dialog, Typography } from 'ui';
 
 interface BuilderProps extends WithTeamStoreProps {}
 
 function Team({ teamStore }: BuilderProps): JSX.Element {
-  const { slots, setSelectedSlotIndex } = teamStore;
+  const { slots, setSelectedSlotIndex, removeSlot } = teamStore;
 
   const areThereSlots = slots.length > 0;
   const emptySlots = MAX_TEAM_MEMBERS - slots.length;
@@ -21,6 +21,8 @@ function Team({ teamStore }: BuilderProps): JSX.Element {
   function handleSetSelectedSlotIndex(index: number): void {
     setSelectedSlotIndex(index);
   }
+
+  if (!areThereSlots) return <EmptyState />;
 
   return (
     <>
@@ -30,33 +32,26 @@ function Team({ teamStore }: BuilderProps): JSX.Element {
           title='Team'
         />
         <PageContent>
-          {areThereSlots ? (
-            <div className='flex flex-wrap justify-center gap-6'>
-              {slots.map((slot, order) => {
-                return (
-                  <DialogTrigger
-                    key={slot.meta.id}
-                    onClick={() => {
-                      // FIX: este handler esta generando un bug al abrir el config modal
-                      // de un pokemon diferente al del index que esta seleccionado
-                      handleSetSelectedSlotIndex(order);
-                    }}
-                  >
-                    <FilledPokemonCard slot={slot} order={order} />
-                  </DialogTrigger>
-                );
+          <div className='flex flex-wrap justify-center gap-6'>
+            {slots.map((slot, order) => {
+              return (
+                <FilledPokemonCard
+                  key={slot.meta.id}
+                  slot={slot}
+                  order={order}
+                  onEditClick={() => handleSetSelectedSlotIndex(order)}
+                  onRemoveClick={(slot) => removeSlot(slot.meta.id)}
+                />
+              );
+            })}
+            {Array(emptySlots)
+              .fill(null)
+              .map((_, i) => {
+                return <EmptyPokemonCard key={i} />;
               })}
-              {Array(emptySlots)
-                .fill(null)
-                .map((_, i) => {
-                  return <EmptyPokemonCard key={i} />;
-                })}
-            </div>
-          ) : (
-            <EmptyState />
-          )}
+          </div>
 
-          {areThereSlots ? <SlotConfigModal /> : null}
+          <SlotConfigModal />
         </PageContent>
       </Dialog>
     </>
