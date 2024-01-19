@@ -1,25 +1,8 @@
 import { client } from '@rq-client/index';
 import { clsx } from 'clsx';
-import {
-  LocalSlot,
-  MAX_ATK,
-  MAX_DEF,
-  MAX_HP,
-  MAX_SPA,
-  MAX_SPD,
-  MAX_SPE,
-  MIN_ATK,
-  MIN_DEF,
-  MIN_HP,
-  MIN_SPA,
-  MIN_SPD,
-  MIN_SPE,
-  PokemonWithAbilities,
-  StatID,
-  StatName,
-} from 'contract';
+import { LocalSlot, PokemonWithAbilities, StatID, StatName } from 'contract';
 import { Typography } from 'ui';
-import { CalculateStatProps, calculateStat, getShortStatName } from 'utils';
+import { CalculateStatProps, calculateStat, getMinMaxStat, getShortStatName, getStatValueColor } from 'utils';
 
 interface PokemonCardStatsProps {
   slot: LocalSlot;
@@ -67,7 +50,7 @@ export default function PokemonCardStats({ slot, pokemon }: PokemonCardStatsProp
         return (
           <div key={condensed + 'stat'} className='flex items-center justify-between gap-2'>
             <Typography.Muted className='w-7'>{getShortStatName(condensed)}:</Typography.Muted>
-            <StatColorBar value={value} statName={condensed} />
+            <StatColorBar statValue={value} statName={condensed} />
             <Typography.Small>{value}</Typography.Small>
           </div>
         );
@@ -77,17 +60,15 @@ export default function PokemonCardStats({ slot, pokemon }: PokemonCardStatsProp
 }
 
 interface StatColorBarProps {
-  value: number;
+  statValue: number;
   statName: StatID;
 }
 
 function StatColorBar(props: StatColorBarProps): JSX.Element {
   const { min, max } = getMinMaxStat(props.statName);
 
-  const p = Math.round((props.value / (max - min)) * 100);
-
-  const color = getStatColor(p);
-
+  const p = Math.round((props.statValue / (max - min)) * 100);
+  const color = getStatValueColor(p);
   const width = `${p}%`;
 
   return (
@@ -97,50 +78,15 @@ function StatColorBar(props: StatColorBarProps): JSX.Element {
   );
 }
 
-function getStatColor(value: number): string {
-  switch (true) {
-    case value > 90:
-      return 'stats-veryhigh';
-    case value > 60:
-      return 'stats-high';
-    case value > 30:
-      return 'stats-mid';
-    case value > 10:
-      return 'stats-low';
-    default:
-      return 'stats-verylow';
-  }
-}
-
-function getMinMaxStat(stat: StatID): { min: number; max: number } {
-  switch (stat) {
-    case 'hp':
-      return { min: MIN_HP, max: MAX_HP };
-    case 'atk':
-      return { min: MIN_ATK, max: MAX_ATK };
-    case 'def':
-      return { min: MIN_DEF, max: MAX_DEF };
-    case 'spa':
-      return { min: MIN_SPA, max: MAX_SPA };
-    case 'spd':
-      return { min: MIN_SPD, max: MAX_SPD };
-    case 'spe':
-      return { min: MIN_SPE, max: MAX_SPE };
-    default:
-      return { min: 1, max: 1 };
-  }
-}
-
 function EmptyPokemonCardStats({ filler }: { filler: string }): JSX.Element {
   return (
     <div className='flex flex-col flex-1 gap-1 col-span-2'>
       {statsNames.map(({ condensed }) => {
-        const value = filler;
         return (
           <div key={condensed + 'stat'} className='flex items-center justify-between gap-2'>
             <Typography.Muted className='w-7'>{getShortStatName(condensed)}:</Typography.Muted>
-            <StatColorBar value={1} statName={condensed} />
-            <Typography.Small>{value}</Typography.Small>
+            <StatColorBar statValue={1} statName={condensed} />
+            <Typography.Small>{filler}</Typography.Small>
           </div>
         );
       })}
