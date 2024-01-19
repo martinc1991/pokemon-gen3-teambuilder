@@ -1,6 +1,7 @@
 import { client } from '@rq-client/index';
 import { clsx } from 'clsx';
 import { LocalSlot, PokemonWithAbilities, StatID, StatName } from 'contract';
+import { useMemo } from 'react';
 import { Typography } from 'ui';
 import { CalculateStatProps, calculateStat, getMinMaxStat, getShortStatName, getStatValueColor } from 'utils';
 
@@ -59,25 +60,6 @@ export default function PokemonCardStats({ slot, pokemon }: PokemonCardStatsProp
   );
 }
 
-interface StatColorBarProps {
-  statValue: number;
-  statName: StatID;
-}
-
-function StatColorBar(props: StatColorBarProps): JSX.Element {
-  const { min, max } = getMinMaxStat(props.statName);
-
-  const p = Math.round((props.statValue / (max - min)) * 100);
-  const color = getStatValueColor(p);
-  const width = `${p}%`;
-
-  return (
-    <div className='flex flex-1 h-full items-center'>
-      <div className={clsx('transition-all ease-in-out h-[70%] rounded-md', `bg-${color}`)} style={{ width }}></div>
-    </div>
-  );
-}
-
 function EmptyPokemonCardStats({ filler }: { filler: string }): JSX.Element {
   return (
     <div className='flex flex-col flex-1 gap-1 col-span-2'>
@@ -90,6 +72,25 @@ function EmptyPokemonCardStats({ filler }: { filler: string }): JSX.Element {
           </div>
         );
       })}
+    </div>
+  );
+}
+
+interface StatColorBarProps {
+  statValue: number;
+  statName: StatID;
+}
+
+function StatColorBar(props: StatColorBarProps): JSX.Element {
+  const { min, max } = getMinMaxStat(props.statName);
+
+  const p = useMemo(() => Math.round((props.statValue / (max - min)) * 100), [props.statName, props.statValue]);
+  const color = useMemo(() => getStatValueColor(p), [props.statName, props.statValue]);
+  const width = `${p}%`;
+
+  return (
+    <div className='flex flex-1 h-full items-center'>
+      <div className={clsx('transition-all ease-in-out h-[70%] rounded-md', `bg-${color}`)} style={{ width }}></div>
     </div>
   );
 }
