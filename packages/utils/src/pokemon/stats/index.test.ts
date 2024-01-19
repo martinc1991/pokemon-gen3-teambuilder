@@ -18,6 +18,7 @@ import {
 import { describe, expect, test } from 'vitest';
 import {
   CalculateStatProps,
+  StatColors,
   calculateStat,
   getMinMaxStat,
   getShortStatName,
@@ -149,17 +150,17 @@ describe('getMinMaxStat', () => {
   });
 });
 
-describe('getStatValueColor', () => {
+describe.only('getStatValueColor', () => {
   test('should return the correct color for each value range', () => {
-    expect(getStatValueColor(0)).toBe('stats-verylow');
-    expect(getStatValueColor(9)).toBe('stats-verylow');
-    expect(getStatValueColor(10)).toBe('stats-low');
-    expect(getStatValueColor(29)).toBe('stats-low');
-    expect(getStatValueColor(30)).toBe('stats-mid');
-    expect(getStatValueColor(49)).toBe('stats-mid');
-    expect(getStatValueColor(50)).toBe('stats-high');
-    expect(getStatValueColor(89)).toBe('stats-high');
-    expect(getStatValueColor(90)).toBe('stats-veryhigh');
-    expect(getStatValueColor(100)).toBe('stats-veryhigh');
+    expect(getStatValueColor(0)).toBe(StatColors.VERY_LOW);
+    expect(getStatValueColor(9)).toBe(StatColors.VERY_LOW);
+    expect(getStatValueColor(10)).toBe(StatColors.LOW);
+    expect(getStatValueColor(29)).toBe(StatColors.LOW);
+    expect(getStatValueColor(30)).toBe(StatColors.MID);
+    expect(getStatValueColor(49)).toBe(StatColors.MID);
+    expect(getStatValueColor(50)).toBe(StatColors.HIGH);
+    expect(getStatValueColor(89)).toBe(StatColors.HIGH);
+    expect(getStatValueColor(90)).toBe(StatColors.VERY_HIGH);
+    expect(getStatValueColor(100)).toBe(StatColors.VERY_HIGH);
   });
 });

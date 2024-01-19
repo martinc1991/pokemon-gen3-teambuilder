@@ -1,5 +1,4 @@
 import { client } from '@rq-client/index';
-import { clsx } from 'clsx';
 import { LocalSlot, PokemonWithAbilities, StatID, StatName } from 'contract';
 import { useMemo } from 'react';
 import { Typography } from 'ui';
@@ -90,7 +89,7 @@ function StatColorBar(props: StatColorBarProps): JSX.Element {
 
   return (
     <div className='flex flex-1 h-full items-center'>
-      <div className={clsx('transition-all ease-in-out h-[70%] rounded-md', `bg-${color}`)} style={{ width }}></div>
+      <div className={'transition-all ease-in-out h-[70%] rounded-md'} style={{ width, backgroundColor: color }}></div>
     </div>
   );
 }
