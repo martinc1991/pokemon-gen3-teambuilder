@@ -47,7 +47,7 @@ export default function PokemonCardStats({ slot, pokemon }: PokemonCardStatsProp
     return n.name === slot.natureName;
   });
 
-  if (!nature) return <div>error</div>;
+  if (!nature) return <EmptyPokemonCardStats filler='error' />;
 
   const basicArguments: Omit<CalculateStatProps, 'statName' | 'base' | 'ev' | 'iv'> = {
     level: slot.level,
@@ -131,37 +131,19 @@ function getMinMaxStat(stat: StatID): { min: number; max: number } {
   }
 }
 
-// TODO: adaptar esto al nuevo diseño de cards
 function EmptyPokemonCardStats({ filler }: { filler: string }): JSX.Element {
   return (
-    <div className='flex flex-col items-start flex-1 gap-2'>
-      <Typography.H4>Stats</Typography.H4>
-      <div className='flex flex-col w-full gap-1'>
-        <div className='flex items-center justify-between gap-1'>
-          <Typography.Muted>HP:</Typography.Muted>
-          <Typography.Small>{filler}</Typography.Small>
-        </div>
-        <div className='flex justify-between gap-1'>
-          <Typography.Muted>Atk:</Typography.Muted>
-          <Typography.Small>{filler}</Typography.Small>
-        </div>
-        <div className='flex justify-between gap-1'>
-          <Typography.Muted>Def:</Typography.Muted>
-          <Typography.Small>{filler}</Typography.Small>
-        </div>
-        <div className='flex justify-between gap-1'>
-          <Typography.Muted>SpAtk:</Typography.Muted>
-          <Typography.Small>{filler}</Typography.Small>
-        </div>
-        <div className='flex justify-between gap-1'>
-          <Typography.Muted>SpDef:</Typography.Muted>
-          <Typography.Small>{filler}</Typography.Small>
-        </div>
-        <div className='flex justify-between gap-1'>
-          <Typography.Muted>Spe:</Typography.Muted>
-          <Typography.Small>{filler}</Typography.Small>
-        </div>
-      </div>
+    <div className='flex flex-col flex-1 gap-1 col-span-2'>
+      {statsNames.map(({ condensed }) => {
+        const value = filler;
+        return (
+          <div key={condensed + 'stat'} className='flex items-center justify-between gap-2'>
+            <Typography.Muted className='w-7'>{getShortStatName(condensed)}:</Typography.Muted>
+            <StatColorBar value={1} statName={condensed} />
+            <Typography.Small>{value}</Typography.Small>
+          </div>
+        );
+      })}
     </div>
   );
 }
