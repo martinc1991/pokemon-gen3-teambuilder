@@ -4,11 +4,7 @@ import { formatPokemonName } from 'utils';
 /**
  * @param order - zero based
  */
-export function getCardTitleName(
-  { species, nickname }: Pick<LocalSlot, 'species' | 'nickname'>,
-  order: number,
-  hideNumber = false,
-): string {
+export function getCardTitle({ species, nickname }: Pick<LocalSlot, 'species' | 'nickname'>, order: number, hideNumber = false): string {
   const num = order + 1;
   let out = ``;
 

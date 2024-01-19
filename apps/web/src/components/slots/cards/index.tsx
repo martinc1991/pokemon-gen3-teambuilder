@@ -1,33 +1,16 @@
 import LoadingState from '@components/loading-state';
 import { GendersText } from '@components/pokemon-table/components/genders-text';
+import { RemovePokemonButton } from '@components/remove-pokemon-button';
 import { client } from '@rq-client/index';
 import { LocalSlot } from 'contract';
 import Link from 'next/link';
 import { MouseEventHandler } from 'react';
-import {
-  Button,
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-  PokemonSprite,
-  TypeBadge,
-  Typography,
-  toast,
-} from 'ui';
+import { Button, Card, CardContent, CardFooter, CardHeader, DialogTrigger, PokemonSprite, TypeBadge, Typography } from 'ui';
 import { calculateHiddenPowerType, getPokemonSpriteUrl } from 'utils';
 import PokemonCardMoves from './components/card-moves';
 import PokemonCardStats from './components/card-stats';
 import CardInfoField from './components/info-field';
-import { getCardTitleName } from './utils/get-card-title';
+import { getCardTitle } from '@utils/get-card-title';
 
 interface PokemonCardProps {
   slot: LocalSlot;
@@ -50,7 +33,7 @@ export function FilledPokemonCard(props: PokemonCardProps): JSX.Element {
     <Card className='w-[500px]'>
       <CardHeader>
         <div className='flex items-center justify-between gap-5'>
-          <Typography.H3 className='truncate'>{getCardTitleName(props.slot, props.order)}</Typography.H3>
+          <Typography.H3 className='truncate'>{getCardTitle(props.slot, props.order)}</Typography.H3>
           <div className='flex gap-2'>
             {pokemon && <TypeBadge type={pokemon.typeOneName} />}
             {pokemon && pokemon.typeTwoName !== 'empty' && <TypeBadge type={pokemon.typeTwoName} />}
@@ -92,52 +75,13 @@ export function FilledPokemonCard(props: PokemonCardProps): JSX.Element {
             <Button variant='outline'>Edit</Button>
           </DialogTrigger>
         )}
-        {props.onRemoveClick && <RemovePokemonButton order={props.order} slot={props.slot} onRemoveClick={props.onRemoveClick} />}
+        {props.onRemoveClick && (
+          <RemovePokemonButton order={props.order} slot={props.slot} onRemoveClick={props.onRemoveClick}>
+            <Button variant='destructive'>Remove</Button>
+          </RemovePokemonButton>
+        )}
       </CardFooter>
     </Card>
-  );
-}
-
-interface RemoveButtonProps {
-  onRemoveClick: (slot: LocalSlot, order: number) => void;
-  slot: LocalSlot;
-  order: number;
-}
-
-function RemovePokemonButton(props: RemoveButtonProps): JSX.Element {
-  const descriptionTxt = `You are about to remove ${getCardTitleName(props.slot, props.order, true)}.`;
-
-  function handleClear(): void {
-    props.onRemoveClick(props.slot, props.order);
-    toast({
-      title: `${getCardTitleName(props.slot, props.order, true)} was removed.`,
-      variant: 'destructive',
-    });
-  }
-
-  return (
-    <Dialog>
-      <DialogTrigger>
-        <Button variant='destructive'>Remove</Button>
-      </DialogTrigger>
-
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Are you sure?</DialogTitle>
-        </DialogHeader>
-        <DialogDescription>{descriptionTxt}</DialogDescription>
-        <DialogFooter>
-          <DialogClose>
-            <Button variant='outline'>Cancel</Button>
-          </DialogClose>
-          <DialogClose>
-            <Button onClick={handleClear} variant='destructive'>
-              Remove
-            </Button>
-          </DialogClose>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
   );
 }
 

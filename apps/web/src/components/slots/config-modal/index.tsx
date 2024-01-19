@@ -16,9 +16,9 @@ import {
   Typography,
 } from 'ui';
 import { getPokemonSpriteUrl } from 'utils';
-import { getCardTitleName } from '../cards/utils/get-card-title';
 import { BASIC_TAB_NAME, BasicTab } from './tabs/basic-tab';
 import { MOVES_TAB_NAME, MovesTab } from './tabs/moves-tab';
+import { getCardTitle } from '@utils/get-card-title';
 
 interface SlotConfigModalProps extends WithTeamStoreProps {}
 
@@ -56,7 +56,7 @@ function ModalContent(props: ModalContentProps): JSX.Element {
         <PokemonSprite url={getPokemonSpriteUrl(props.slot.nationalPokedexNumber)} />
         <DialogHeader className='overflow-auto flex-1'>
           <div className='flex items-center justify-between gap-5'>
-            <Typography.H3 className='truncate'>{getCardTitleName({ ...props.slot }, 0)}</Typography.H3>
+            <Typography.H3 className='truncate'>{getCardTitle({ ...props.slot }, 0)}</Typography.H3>
             <div className='flex gap-2 mr-5'>
               <TypeBadge type={pokemon.typeOneName} />
               {pokemon.typeTwoName !== 'empty' && <TypeBadge type={pokemon.typeTwoName} />}
