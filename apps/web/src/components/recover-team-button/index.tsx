@@ -20,14 +20,17 @@ interface RecoverTeamButtonProps {
   team: JSONTeam;
 }
 
-export function RecoverTeamButton({ team }: RecoverTeamButtonProps): JSX.Element {
+export function SetTeamAsCurrent({ team }: RecoverTeamButtonProps): JSX.Element {
   const [slots, recoverFromTrash] = useTeamStore((state) => [state.slots, state.recoverFromTrash]);
 
   const { toast } = useToast();
 
   function recoverTeam(): void {
     recoverFromTrash(team);
-    toast({ title: team.name ? `${team.name} set as current` : 'Copied to clipboard', description: <ToastContent /> });
+    toast({
+      title: `${team.name || 'Team'} set as current`,
+      description: <ToastContent />,
+    });
   }
 
   return (
