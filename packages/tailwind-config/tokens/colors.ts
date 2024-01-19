@@ -42,3 +42,10 @@ export const water = 'hsl(217, 49%, 54%)';
 /* Genders colors */
 export const male = 'hsl(194, 60%, 68%)';
 export const female = 'rgb(253, 180, 191)';
+
+/* Stats colors */
+export const statverylow = 'rgb(178,34,34)';
+export const statlow = 'rgb(255,140,0)';
+export const statmid = 'rgb(255,255,0)';
+export const stathigh = 'rgb(50,205,50)';
+export const statveryhigh = 'rgb(0,250,154)';

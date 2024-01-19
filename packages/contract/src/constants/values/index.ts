@@ -30,6 +30,19 @@ export const DEFAULT_IVS: StatsTable = {
 export const MIN_HAPPINESS = 0;
 export const MAX_HAPPINESS = 255;
 
+export const MIN_HP = 1; // shedinja
+export const MAX_HP = 714;
+export const MIN_ATK = 5;
+export const MAX_ATK = 504;
+export const MIN_DEF = 5;
+export const MAX_DEF = 614;
+export const MIN_SPA = 10;
+export const MAX_SPA = 504;
+export const MIN_SPD = 20;
+export const MAX_SPD = 614;
+export const MIN_SPE = 5;
+export const MAX_SPE = 504;
+
 export const MIN_LEVEL = 1;
 export const MAX_LEVEL = 100;
 
