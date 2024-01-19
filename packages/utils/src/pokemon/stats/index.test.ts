@@ -150,7 +150,7 @@ describe('getMinMaxStat', () => {
   });
 });
 
-describe.only('getStatValueColor', () => {
+describe('getStatValueColor', () => {
   test('should return the correct color for each value range', () => {
     expect(getStatValueColor(0)).toBe(StatColors.VERY_LOW);
     expect(getStatValueColor(9)).toBe(StatColors.VERY_LOW);
