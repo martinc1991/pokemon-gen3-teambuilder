@@ -130,7 +130,7 @@ export function getMinMaxStat(stat: StatID): { min: number; max: number } {
 
 // TODO: these colors should not be here
 // INFO: in sync with packages/tailwind-config/tokens/colors.ts
-export const enum StatColors {
+export const enum StatsColors {
   VERY_LOW = 'rgb(178,34,34)',
   LOW = 'rgb(255,140,0)',
   MID = 'rgb(255,255,0)',
@@ -140,19 +140,21 @@ export const enum StatColors {
 
 /**
  * Returns the color for a given percentage in RGB format.
+ * @param percentage - the percentage value to get the color for.
  * @see tailwind.config.ts
  */
-export function getStatValueColor(value: number): StatColors {
+export function getStatValueColor(percentage: number): StatsColors {
+  const logvalue = Math.log10(percentage / 10) * 100;
   switch (true) {
-    case value >= 90:
-      return StatColors.VERY_HIGH;
-    case value >= 50:
-      return StatColors.HIGH;
-    case value >= 30:
-      return StatColors.MID;
-    case value >= 10:
-      return StatColors.LOW;
+    case logvalue >= 95:
+      return StatsColors.VERY_HIGH;
+    case logvalue >= 70:
+      return StatsColors.HIGH;
+    case logvalue >= 40:
+      return StatsColors.MID;
+    case logvalue >= 20:
+      return StatsColors.LOW;
     default:
-      return StatColors.VERY_LOW;
+      return StatsColors.VERY_LOW;
   }
 }
