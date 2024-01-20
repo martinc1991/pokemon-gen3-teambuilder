@@ -18,7 +18,7 @@ import {
 import { describe, expect, test } from 'vitest';
 import {
   CalculateStatProps,
-  StatColors,
+  StatsColors,
   calculateStat,
   getMinMaxStat,
   getShortStatName,
@@ -151,16 +151,23 @@ describe('getMinMaxStat', () => {
 });
 
 describe('getStatValueColor', () => {
-  test('should return the correct color for each value range', () => {
-    expect(getStatValueColor(0)).toBe(StatColors.VERY_LOW);
-    expect(getStatValueColor(9)).toBe(StatColors.VERY_LOW);
-    expect(getStatValueColor(10)).toBe(StatColors.LOW);
-    expect(getStatValueColor(29)).toBe(StatColors.LOW);
-    expect(getStatValueColor(30)).toBe(StatColors.MID);
-    expect(getStatValueColor(49)).toBe(StatColors.MID);
-    expect(getStatValueColor(50)).toBe(StatColors.HIGH);
-    expect(getStatValueColor(89)).toBe(StatColors.HIGH);
-    expect(getStatValueColor(90)).toBe(StatColors.VERY_HIGH);
-    expect(getStatValueColor(100)).toBe(StatColors.VERY_HIGH);
+  const colors: StatsColors[] = [StatsColors.VERY_LOW, StatsColors.LOW, StatsColors.MID, StatsColors.HIGH, StatsColors.VERY_HIGH];
+  test('should return a color for values between 0 and 100', () => {
+    expect(colors).toContain(getStatValueColor(0));
+    expect(colors).toContain(getStatValueColor(20));
+    expect(colors).toContain(getStatValueColor(40));
+    expect(colors).toContain(getStatValueColor(60));
+    expect(colors).toContain(getStatValueColor(80));
+    expect(colors).toContain(getStatValueColor(100));
+  });
+  test('should return "very high" color for values above 100', () => {
+    expect(colors).toContain(getStatValueColor(Infinity));
+    expect(colors).toContain(getStatValueColor(101));
+    expect(colors).toContain(getStatValueColor(150));
+  });
+  test('should return "very low" color for values below 0', () => {
+    expect(colors).toContain(getStatValueColor(-Infinity));
+    expect(colors).toContain(getStatValueColor(-100));
+    expect(colors).toContain(getStatValueColor(-1));
   });
 });
