@@ -1,6 +1,7 @@
 import LoadingState from '@components/loading-state';
 import { client } from '@rq-client/index';
 import withTeamStore, { WithTeamStoreProps } from '@state/team/with-team-store';
+import { getCardTitle } from '@utils/get-card-title';
 import { LocalSlot } from 'contract';
 import React from 'react';
 import {
@@ -18,7 +19,6 @@ import {
 import { getPokemonSpriteUrl } from 'utils';
 import { BASIC_TAB_NAME, BasicTab } from './tabs/basic-tab';
 import { MOVES_TAB_NAME, MovesTab } from './tabs/moves-tab';
-import { getCardTitle } from '@utils/get-card-title';
 
 interface SlotConfigModalProps extends WithTeamStoreProps {}
 
@@ -53,7 +53,7 @@ function ModalContent(props: ModalContentProps): JSX.Element {
   return (
     <>
       <div className='flex flex-row gap-4'>
-        <PokemonSprite url={getPokemonSpriteUrl(props.slot.nationalPokedexNumber)} />
+        <PokemonSprite url={getPokemonSpriteUrl(props.slot.nationalPokedexNumber, props.slot.shiny)} />
         <DialogHeader className='overflow-auto flex-1'>
           <div className='flex items-center justify-between gap-5'>
             <Typography.H3 className='truncate'>{getCardTitle({ ...props.slot }, 0)}</Typography.H3>

@@ -101,10 +101,32 @@ describe('getPokemonSpriteUrl', () => {
     expect(response_start.status).toBe(200);
     expect(response_end.status).toBe(200);
   });
+  test.each([
+    [1, 9],
+    [10, 99],
+    [100, 389],
+  ])('should return a valid url for shiny versions of a valid input between %i and %i', async (start, end) => {
+    const response_start = await fetch(getPokemonSpriteUrl(start, true));
+    const response_end = await fetch(getPokemonSpriteUrl(end, true));
+
+    expect(response_start.status).toBe(200);
+    expect(response_end.status).toBe(200);
+  });
   test('should return a valid url for every deoxys variation', async () => {
     const responses = await Promise.all(
       [386, 387, 388, 389].map((npn) => {
         return fetch(getPokemonSpriteUrl(npn));
+      }),
+    );
+
+    responses.forEach((response) => {
+      expect(response.status).toBe(200);
+    });
+  });
+  test('should return a valid url for every shiny deoxys variation', async () => {
+    const responses = await Promise.all(
+      [386, 387, 388, 389].map((npn) => {
+        return fetch(getPokemonSpriteUrl(npn, true));
       }),
     );
 
