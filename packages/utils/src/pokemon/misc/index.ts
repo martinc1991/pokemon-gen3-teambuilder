@@ -45,18 +45,21 @@ export function getPokemonIconUrl(nationalPokedexNumber: number): string {
 /**
  * Return the sprite url from the nationalPokedexNumber.
  */
-export function getPokemonSpriteUrl(nationalPokedexNumber: number): string {
+export function getPokemonSpriteUrl(nationalPokedexNumber: number, shiny = false): string {
   if (!isValidNationalPokedexNumber(nationalPokedexNumber)) return '';
 
   const base = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/';
+
+  const shinyString = shiny ? '/shiny' : '';
+
   switch (true) {
     case nationalPokedexNumber === 387:
-      return `${base}firered-leafgreen/386-attack.png`;
+      return `${base}firered-leafgreen${shinyString}/386-attack.png`;
     case nationalPokedexNumber === 388:
-      return `${base}firered-leafgreen/386-defense.png`;
+      return `${base}firered-leafgreen${shinyString}/386-defense.png`;
     case nationalPokedexNumber === 389:
-      return `${base}emerald/386-speed.png`;
+      return `${base}emerald${shinyString}/386-speed.png`;
     default:
-      return `${base}emerald/${nationalPokedexNumber}.png`;
+      return `${base}emerald${shinyString}/${nationalPokedexNumber}.png`;
   }
 }

@@ -2,6 +2,7 @@ import LoadingState from '@components/loading-state';
 import { GendersText } from '@components/pokemon-table/components/genders-text';
 import { RemovePokemonButton } from '@components/remove-pokemon-button';
 import { client } from '@rq-client/index';
+import { getCardTitle } from '@utils/get-card-title';
 import { LocalSlot } from 'contract';
 import Link from 'next/link';
 import { MouseEventHandler } from 'react';
@@ -10,7 +11,6 @@ import { calculateHiddenPowerType, getPokemonSpriteUrl } from 'utils';
 import PokemonCardMoves from './components/card-moves';
 import PokemonCardStats from './components/card-stats';
 import CardInfoField from './components/info-field';
-import { getCardTitle } from '@utils/get-card-title';
 
 interface PokemonCardProps {
   slot: LocalSlot;
@@ -43,7 +43,7 @@ export function FilledPokemonCard(props: PokemonCardProps): JSX.Element {
 
       <CardContent className='slot-config-card-grid'>
         {/* First column (img) */}
-        <PokemonSprite url={getPokemonSpriteUrl(props.slot.nationalPokedexNumber)} alt={props.slot.species} />
+        <PokemonSprite url={getPokemonSpriteUrl(props.slot.nationalPokedexNumber, props.slot.shiny)} alt={props.slot.species} />
 
         {/* Second column (level - gender - happiness - shiny) */}
         <div className='flex flex-col min-w-[150px] gap-1' style={{ border: '1px solid transparent' }}>
